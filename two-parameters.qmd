@@ -6,38 +6,28 @@
 #| echo: false
 #| warning: false
 library(gt)
-library(gtsummary)
-library(tidyverse)
 ```
+
+
 
 
 <!-- Two parameter chapter is missing the math. -->
 
 
-@sec-models used models with just one parameter: $\rho$, the votes for Biden divided by total votes. The model was binomial, and there was only one unknown parameter, $\rho$. In this chapter, we have two unknown parameters: the mean $\mu$ height in the US and the standard deviation, $\sigma$, of the normally distributed error term.
+@sec-models used a logistic regression model, an appropriate approach when the outcome variable takes on just two possible values, generally recoded as `0` or `1`. In this chapter, we will a linear regression model because our outcome variable, `height`, is continuous.
 
 The reason for making models is not, primarily, that making models is fun -- although it is! The reason is that the world confronts us. Make decisions we must. We must decide between options X or Y. We must choose from actions A, B and C. Confronted by a choice, we need to make a model of the world to help us choose wisely.
 
-The real world is complex. Any substantive decision problem includes a great deal of complexity and requires even more context. We do not have the time to get into that level of detail now. So, we simplify. We are going to create a model of height for adult men. We will then use that model to answer three questions:
+The real world is complex. Any substantive decision problem includes a great deal of complexity and requires even more context. We do not have the time to get into that level of detail now. So, we simplify. We are going to create a model of height for adults. We will then use that model to answer:
 
-<!-- * What is the average height of men? -->
-
-<!-- DK: Is that a good question? I guess to answer it, you would come up with a model, then fill in the Preceptor Table with 100 million rows. Take the average. Do that 1,000 times. That is your posterior. Even if that makes sense, it can't really be done. Perhaps a better question: What is the average height of 1,000 men? Also, we essentially answer that question when we look at the posterior of rho. So, for all those reasons, I delete it for now. If we add it back, need to change "three" to "four" in the sections below and above. -->
-
-* What is the probability that the next man we meet will be taller than 180 centimeters?
-
-* What is the probability that, among the next 4 men we meet, the tallest is at least 10 cm taller than the shortest?
-
-* What is our posterior probability distribution for the height of the 3rd tallest man out of the next 100 we meet?
-
-The hope for this chapter is that, by answering these three questions, we'll gain a better and more thorough understanding of how professionals do data science.
+> * How does average height differ between men and women?
 
 ```{r}
 #| echo: false
 knitr::include_graphics("two-parameters/images/learn_the ways.gif")
 ```
 
-Data science is ultimately a moral act, so we will use the four [Cardinal Virtues](https://en.wikipedia.org/wiki/Cardinal_virtues) --- Wisdom, Justice, Courage and Temperance --- to organize our approach.  
+Data science is ultimately a moral act, so we will use the four [Cardinal Virtues](https://en.wikipedia.org/wiki/Cardinal_virtues) --- Wisdom, Justice, Courage and Temperance --- to guide our approach.  
 
 ## Wisdom
 
@@ -52,42 +42,50 @@ Wisdom begins with the Preceptor Table. What data would we, ideally, require to 
 
 Which rows and columns of data do you need such that, if you had them all, the calculation of the quantity of interest would be trivial? The steps we usually take to construct the Preceptor Table include:
 
-*Units*: All the men in the world, one row per man.
+*Units*: All the adults in the world, one row per person.
 
-*Outcome*: This is the variable which we are trying to explain/understand/predict. This is *not* the same thing as the answer to the question we have been asked. The question might, as above, be about the height of the 3rd tallest man we meet out of the next 100. But the concepts of 3rd or 100 do not appear in the Preceptor Table. Instead, height is our outcome variable. But, if we can build a model which explains/understands/predicts height, we can use that model to answer our questions.
+*Outcome*: This is the variable which we are trying to explain/understand/predict. This is *not* the same thing as the answer to the question we have been asked. Our question is aboit *average* height, but the height of each *individual* is our outcome variable. If we can build a model which explains/understands/predicts individual height, we can use that model to answer our questions about average height.
 
-*Treatment*: There are not treatment variables.
+*Treatment*: There are no treatment variables.
 
 *Causal or predictive model*: We have only one outcome, so the model is predictive.
 
-*Covariates*: There are no (explicit) covariates in this model, although we will need to make use of variables like `age` and `sex` to construct our sample data. 
+*Covariates*: Since our question asks about the difference between men and women, at least one of our covariates must be sex.
 
 *Moment in Time*: This is often implicit in the question itself. One of our key roles as data scientists is to clarify the questions which we are asked. In this case, it seems clear that the questions refer to now, the present moment.
 
 Predictive models care nothing about causation. Causal models are often also concerned with prediction, if only as a means of measuring the quality of the model. Here, we are looking at *prediction*. 
 
-So, what does our Preceptor Table look like? Assuming we are predicting height for every adult male on Earth at this moment in time, we would have height data for every male at least 18 years of age. This means that we would have about 4 billion rows, one for each male, along with a column for each individual's height.
+So, what does our Preceptor Table look like? Assuming we are predicting height for every adult on Earth at this moment in time, we would have height data for every person at least 18 years of age. This means that we would have about 8 billion rows, one for each adult, along with a column for each individual's height and sex.
 
 Here are some rows from our Preceptor Table: 
 
 
-
 ```{r}
 #| echo: false
-# First, we create a tibble with the values we want for the table
 
+dplyr::tibble(ID = c("1", "2", "...", "10", "11", "...", "N"),
+       height = c("150", "172", "...", "160", "142", "...", "190"),
+       sex = c("M", "F", "...", "F", "F", "...", "M")) |>
 
-tibble(ID = c("Person 1", "Person 2", "...", "Person 45,000", "Person 45,001", "..."),
-       height = c("150", "172", "...", "160", "142", "...")) |>
-  
-  # Then, we use the gt function to make it pretty
-  
   gt() |>
+  tab_header(title = "Preceptor Table") |>
   cols_label(ID = md("ID"),
-                height = "Height (cm)") 
+             height = md("Height"),
+             sex = md("Sex")) |>
+  tab_style(cell_borders(sides = "right"),
+            location = cells_body(columns = c(ID))) |>
+  tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"),
+            locations = cells_column_labels(columns = c(ID))) |>
+  cols_align(align = "center", columns = everything()) |>
+  cols_align(align = "left", columns = c(ID)) |>
+  fmt_markdown(columns = everything()) |>
+  tab_spanner(label = "Outcome", columns = c(height)) |>
+  tab_spanner(label = "Covariate", columns = c(sex))
+
 ```
 
-This table would extend all the way until person 4 billion-and-something. If we had this table, all of our questions could be answered with simple math and/or simulations. No inference is necessary if we have a Preceptor Table. But what does our actual data look like? 
+This table would extend all the way until person 8 billion-and-something. We don't know the number of rows, so we use `N`. If we had this table, all of our questions could be answered with simple math. No inference is necessary if we have a Preceptor Table. But what does our actual data look like? 
 
 ### EDA
 
@@ -142,57 +140,57 @@ nhanes |>
   skim()
 ```
 
-Interesting! There are `r sum(is.na(nhanes$height))` missing values of height in our subset of data. Just using `glimpse()` does not show us that.  Let's filter out the NA's using `drop_na()`. This will delete the rows in which the value of any variable is missing. Because we want to examine height in men (not boys, nor females), let's limit our data to only include adult males. 
+Interesting! There are `r sum(is.na(nhanes$height))` missing values of height in our subset of data. Just using `glimpse()` does not show us that.  Let's filter out the NA's using `drop_na()`. This will delete the rows in which the value of any variable is missing. To make the statistical inference a bit more interesting, we will just use 50 observations from the data. Of course, in a real problem, we would use all the data we have.
 
 ```{r}
 #| code-fold: false
-ch5 <- nhanes |> 
-  filter(sex == "Male", age >= 18) |> 
-  select(height) |> 
-  drop_na()
+
+# We use set.seed() to ensure that anyone running this code will get the same
+# set of observations in their tibble. See ?set.seed for details.
+
+set.seed(10)
+
+x <- nhanes |> 
+  filter(age >= 18) |> 
+  select(height, sex) |> 
+  drop_na() |> 
+  slice_sample(n = 50)
 ```
 
 Let's plot this data using `geom_histogram()`. 
 
 
-<!-- The original version of this plot used to have a geom_density() overlay, but that stopped working for some reason. We could leave this plot as simple. After all, this is a section about EDA and we usually use simple plots on EDA. Or, we could make this plot more complex, by including a density plot. That might serve two purposes. First, we should make plots in these chapters more complex so that we have occasion to teach more plotting tricks. Second, we could use a density to teach/discuss things like 95% confidence intervals and posterior predictions. For now, I keep it simple. -->
-
 
 ```{r}
-ch5 |>
-  ggplot(aes(x = height)) + 
-    geom_histogram(bins = 50) +
-    labs(title = "Male Adult Height in the US in 2010",
+x |>
+  ggplot(aes(x = height, fill = sex)) + 
+    geom_histogram(position = "dodge") +
+    labs(title = "Adult Height in the US in 2010",
+         y = "Number of Observations",
          x = "Height (cm)",
-         y = "Count",
          caption = "Source: National Health and Nutrition Examination Survey"
-         ) +
-    theme_classic()
+         ) 
 ```
 
 
-Will the data we have --- which is only for a sample of adult American men more than a decade ago --- allow us to answer our questions, however roughly? Only if the assumption of *validity* makes sense.
+Will the data we have --- which is only for a sample of adult Americans more than a decade ago --- allow us to answer our questions, however roughly? Only if the assumption of *validity* makes sense.
 
 ### Validity
 
-Validity involves our columns. More specifically, whether our columns mean the same thing. Does "height" in our Preceptor Table mean the same thing as "height" in NHANES? Almost certainly. Of course, we need to be careful about mistakes like measurement units, like centimeters in one and inches in the other. And there can be issues like: Are measurements taken with shoes on or shoes off? But, for the most part, the "height" variable in NHANES in 2010 is a *valid* proxy for the "height" of individuals today. We can stack the two data sets together and consider them to have come from the same population. 
+Validity involves our columns. More specifically, whether our columns mean the same thing. Does "height" in our Preceptor Table mean the same thing as "height" in NHANES? Almost certainly. Of course, we need to be careful about mistakes like measurement units, like centimeters in one and inches in the other. And there can be issues like: Are measurements taken with shoes on or shoes off? But, for the most part, the "height" variable in NHANES in 2010 is a *valid* proxy for the "height" of individuals today. We can stack the two data sets together and consider them to have come from the same population. The same applies to sex.
 
 Since validity holds, we can combine the Preceptor Table and our data into a Population Table.
 
 
 ### Population
 
-<!-- Spend more time here? -->
-
-One of the most important components of Wisdom is the concept of the “population.” 
-
 The population is not the set of people for which we have data --- the participants in the CDC's Health and Nutrition Examination Survey conducted from 2009 to 2011. This is the data set. Nor is it the set of all the individuals about whom we would like to have data. Those are the rows in the Preceptor Table. The population is the larger — potentially much larger — set of individuals which include both the data we *have* and the data we *want*. Generally, **the population will be much larger than either the data we have or the data we want.** In fact, there is almost always a time dimension to consider. We generally want to make inferences about right now or about the future. By definition, the data we have is always from the past.
 
-In this case, we want to estimate average height for males *today*, not for people in 2009 -- 2011. We also want to estimate height for males outside the United States, a group that is excluded from our data set. Is it reasonable to generate conclusions for the world from this group? Maybe? We have limited data to work with and we have to determine how far we are willing to generalize to other groups.
+In this case, we want to estimate average height for adults *today*, not for people in 2009 -- 2011. We also want to estimate height for adults outside the United States, a group that is excluded from our data set. Is it reasonable to generate conclusions for the world from this group? Maybe? We have limited data to work with and we have to determine how far we are willing to generalize to other groups.
 
 It is a judgment call, a matter of Wisdom, as to whether or not we may assume that the data we have and the data we want to have (i.e., the Preceptor Table) are drawn from the same population.
 
-In the social sciences, *there is never a perfect relationship between the data you have and the question you are trying to answer.* Data for American males in the past is not the same thing as data for American males today. Nor is it the same as the data for men in France or Mexico. Yet, this data is relevant. Right? It is certainly better than nothing. 
+In the social sciences, *there is never a perfect relationship between the data you have and the question you are trying to answer.* Data for American adults in the past is not the same thing as data for American adults today. Nor is it the same as the data for adults in France or Mexico. Yet, this data is relevant. Right? It is certainly better than nothing. 
 
 *Using not-perfect data is generally better than using no data at all.*
 
@@ -206,39 +204,29 @@ Is not-perfect data *always* better? No! If your problem is estimating the media
 knitr::include_graphics("other/images/Justice.jpg")
 ```
 
-Having looked at our data and decided that it is "close enough" to our questions that creating a model will help us come up with better answers, we move on to Justice. 
-
-Justice emphasizes a few key concepts:
-
-* The *Population Table*, a structure which includes a row for every unit in the population. We generally break the rows in the Population Table into three categories: the data for units we want to have (the Preceptor Table), the data for units which we actually have (our actual data), and the data for units we do not care about (the rest of the population, not included in the data or the Preceptor Table).
-
-* *Stability* means that the relationship between the columns in the Population Table is the same for three categories of rows: the data, the Preceptor Table, and the larger population from which both are drawn. 
-
-* *Representativeness*, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows. The second is between our data and the other rows. Ideally, we would like both the Preceptor Table and our data to be random samples from the population. Sadly, this is almost never the case. 
-
-* *Unconfoundedness* means that the treatment assignment is independent of the potential outcomes, when we condition on pre-treatment covariates. This assumption is only relevant for causal models. We write that a model is “confounded” if this is not true. The easiest way to ensure unconfoundedness is to randonly assign treatment.
-
-* The mathematical structure of the *Data Generating Mechanism*. Models require math, so we need to create a mathematical formula which connects our outcome to our covariates.
+> Justice concerns four topics: the Population Table, stability, representativeness, and unconfoundedness.
 
 ### The Population Table
 
+> The Population Table includes a row for each unit/time combination in the underlying population from which both the Preceptor Table and the data are drawn. 
+
 The Population Table shows rows from three sources: the **Preceptor Table**, the **actual data**, and the **population** (outside of the data).
 
-Our **Preceptor Table** rows contain the information that we would *want* to know in order to answer our questions. These rows contain entries for our covariates (sex and year) but they do not contain any outcome results (height). We are trying to answer questions about the male population in 2024, so our sex entries for these rows will read "Male" and our year entries of these rows will read "2024". 
+Our **Preceptor Table** rows contain the information that we would *want* to know in order to answer our questions. These rows contain entries for our covariate, `sex`, but they do not contain any outcome results. 
 
 Our **actual data** rows contain the information that we *do* know. These rows contain entries for both our covariates *and* the outcomes. In this case, the actual data comes from a study conducted on males in 2009-2011, so our sex entries for these rows will read "Male" and our year entries of these rows will either read "2009", "2010", or "2011".
 
 Our **other** rows contain no data. These are subjects which fall under our desired population, but for which we have no data. As such, all outcomes and covariates are missing. (A subtle point is that, even for other data, we "know" the ID and the Year for each subject. Of course, we don't *really* know these things, but, conceptually, we are defining the meaning of those rows on the basis of those variables.)
 
-<!-- GP: I changed everything but the explanation for the **population** rows. I am confused; shouldn't the population rows still contain "Male" in the sex column? Because this entire chapter, we've exclusively been discussing the male population, so at least that much should be known, no? -->
+<!-- DK: Need to standardize the creation of the Population Table, include ID/time column. -->
 
 ```{r}
 #| echo: false
 tibble(source = c("Preceptor Table", "Preceptor Table", "...",
                   "Actual Data", "Actual Data", "Actual Data", "...", 
                   "Other", "Other", "Other"),
-       sex = c("Male", "Male", "...",
-                  "Male", "Male", "Male", "...",
+       sex = c("Male", "Female", "...",
+                  "Male", "Female", "Male", "...",
                   "?", "?", "?"),
        year = c("2024", "2024", "...",
                 "2009", "2011", "2010", "...",
@@ -263,21 +251,20 @@ tibble(source = c("Preceptor Table", "Preceptor Table", "...",
   fmt_markdown(columns = everything())  
 ```
 
+### Stability
+
+> Stability means that the relationship between the columns in the Population Table is the same for three categories of rows: the data, the Preceptor Table, and the larger population from which both are drawn. 
+
 ### Representativeness
 
-*Representativeness involves the rows of the Population Table.* More specifically, are the rows that we *do* have data for representative of the rows for which we *do not* have data? Ideally, the data we have is a random, unbiased selection from our population, and so the answer to our question is yes.
+> Representativeness, or the lack thereof, concerns two relationships among the rows in the Population Table. The first is between the data and the other rows. The second is between the other rows and the Preceptor Table. 
 
+The population includes adults in the entire world. Is US data from 2010 representative of the entire world? No! Or, at least, not perfectly. People in the US are systematically different than people outside the US, both in terms of their nature and their nurture. 
 
+### Unconfoundedness
 
-For our `nhanes` data, is this the case? It is time to investigate.
+> Unconfoundedness means that the treatment assignment is independent of the potential outcomes, when we condition on pre-treatment covariates. A model is *confounded* if this is not true.
 
-According to the CDC, individuals are invited to participate in NHANES based on a randomized process. First, the United States is divided into a number of geographical groups (to ensure counties from all areas). From each of these groups, counties are randomly selected to participate. After a county has been randomly selected, members of the households in that county are notified of the upcoming survey, and must volunteer their time to participate. 
-It is clear that this process goes through several layers of randomization (promising!). That being said, many counties are excluded by the end of the process. It is also possible for certain groups or communities to be less representative of the greater population, though we cannot know that for certain. 
-
-There is also the fact that participation is voluntary. Perhaps certain individuals (immobile, elderly, anxious) are less likely to participate. Perhaps individuals that are hospitalized do not get the opportunity to participate. This impacts our data! 
-
- 
-<!-- DK: Insert conclusion for this section. -->
 
 ## Courage
 
@@ -292,15 +279,15 @@ Justice gave us the Population Table. Courage selects the data generating mechan
 
 We use a simple linear model:
 
-$$ y_i =  \mu + \epsilon_i $$
+$$ y_i =  \beta_0 + \beta_1 sexMale + \epsilon_i $$
 
-with $\epsilon_i \sim N(0, \sigma^2)$. $y_i$ is the height of male $i$. $\mu$ is the average height of all males in the population. $\epsilon_i$ is the "error term," the difference between the height of male $i$ and the average height of all males.
+with $\epsilon_i \sim N(0, \sigma^2)$. $y_i$ is the height of adult $i$. ... $\epsilon_i$ is the "error term," the difference between the height of male $i$ and the average height of all males.
 
-$\epsilon_i$ is normally distributed with a mean of 0 and a standard deviation of $\sigma$. The mean being 0 relates to our concept of **accuracy**; we are assuming that our data is representative enough to be accurate, and so we can expect our average error to be 0. The standard deviation, on the other hand, relates to our concept of **precision**; the smaller $\sigma$ is, the more precise our data is, and the larger $\sigma$ is, the less precise our data is. 
+$\epsilon_i$ is normally distributed with a mean of 0 and a standard deviation of $\sigma$. 
 
-This is the simplest model we can construct. Note: 
+Note: 
 
-* The model has two unknown parameters: $\mu$ and $\sigma$. Before we can do anything else we need to estimate the values of these parameters. Can we ever know their exact value? No! Perfection lies only in God's own R code. But, by using a Bayesian approach similar to what we used in Chapters @sec-probability and @sec-models, we will be able to create a *posterior probability distribution* for each parameter.
+* The model has three unknown parameters: $\beta_0$, $\beta_1$, and $\sigma$. Before we can do anything else we need to estimate the values of these parameters. Can we ever know their exact value? No! Perfection lies only in God's own R code. But, by using an approach similar to what we used in Chapters @sec-probability and @sec-models, we will be able to create a *posterior probability distribution* for each parameter.
 
 <!-- Add Dr. Box quote. All models are wrong, some are useful. And a photo. -->
 
@@ -308,96 +295,92 @@ This is the simplest model we can construct. Note:
 
 * The parameter we most care about is $\mu$. That is the parameter with a substantively meaningful interpretation. Not only is the meaning of $\sigma$ difficult to describe, we also don't particular care about its value. Parameters like $\sigma$ in this context are *nuisance* or *auxiliary* parameters. We still estimate their posterior distributions, but we don't really care what those posteriors look like.
 
-* $\mu$ is not the average height of the men in the sample. We can calculate that directly. It is `r mean(ch5$height)`. No estimation required! Instead, $\mu$ is the average height of men in the *population*. Recall from the discussions in @sec-models that the population is the universe of people/units/whatever about which we seek to draw conclusions. On some level, this seems simple. On a deeper level, it is very subtle. For example, if we are walking around Copenhagen, then the population we really care about, in order to answer our three questions, is the set of adult men which we might meet today. This is not the same as the population of adult men in the US in 2010. But is it close enough? Is it better than nothing? We want to assume that both men from `nhanes` (the data we have) and men we meet in Copenhagen today (the data we want to have) are drawn from the same *population*. Each case is a different and the details matter.
+* $\mu$ is not the average height of the men in the sample. We can calculate that directly. It is `r mean(x$height)`. No estimation required! Instead, $\mu$ is the average height of men in the *population*. Recall from the discussions in @sec-models that the population is the universe of people/units/whatever about which we seek to draw conclusions. On some level, this seems simple. On a deeper level, it is very subtle. For example, if we are walking around Copenhagen, then the population we really care about, in order to answer our three questions, is the set of adult men which we might meet today. This is not the same as the population of adult men in the US in 2010. But is it close enough? Is it better than nothing? We want to assume that both men from `nhanes` (the data we have) and men we meet in Copenhagen today (the data we want to have) are drawn from the same *population*. Each case is a different and the details matter.
 
 * $\sigma$ is an estimate for the standard deviation of the errors,  i.e., variability in height after accounting for the mean.
 
 ### Models
 
-Let's estimate a simple version of the model. First, we need to load the **brms** and **tidybayes** packages.
+Let's estimate a simple version of the model. Load the **tidymodels** package.
 
 ```{r}
 #| code-fold: false
 #| message: false
-library(brms)
-library(tidybayes)
+library(tidymodels)
 ```
 
 Because we are estimating a linear model, we begin with:
-
 
 ```{r, cache = TRUE}
 #| code-fold: false
 #| message: false
 
-fit_1 <- brm(formula = height ~ 1,
-             data = ch5,
-             family = gaussian(),
-             silent = 2,
-             refresh = 0,
-             seed = 12)
+fit_1 <- linear_reg() |> 
+  set_engine("lm") |> 
+  fit(height ~ 1 + sex, data = x)
+
+fit_1
 ```
 
-Note:
+```{r}
+library(equatiomatic)
 
-* There is a direct connection between the mathematical form of the model created under Justice and the code we use to fit the model under Courage. `height ~ 1` is the code equivalent of $y_i =  \mu$. 
+extract_eq(fit_1$fit, intercept = "beta")
+```
 
-* Setting `family = gaussian()` implies that $\epsilon_i \sim N(0, \sigma^2)$, just as we assumed. That is not a coincidence! If $\epsilon_i$ had a different distribution, we would need to use a different statistical family. 
+```{r}
+extract_eq(fit_1$fit, 
+           intercept = "beta", 
+           use_coefs = TRUE, 
+           coef_digits = 0)
+```
 
-* There are several ways to examine the fitted model. The simplest is to print it. Recall that just typing `x` at the prompt is the same as writing `print(x)`.
+
+
+There is a direct connection between the mathematical form of the model created under Justice and the code we use to fit the model under Courage. `height ~ 1 + sex` is the code equivalent of $y_i =  \beta_0 + \beta_1 sexMale$. 
+
+There are several ways to examine the fitted model. The simplest is to print it. Recall that just typing `x` at the prompt is the same as writing `print(x)`.
 
 ```{r}
 #| code-fold: false
 fit_1
 ```
 
-Note:
+The (Intercept) is the same thing as $\beta_0$ in the mathematical description of the model. In other words, we are speaking three languages here: English ("Intercept"), math (\$beta_0$), and code (`~ 1`). But all three languages are referring to the same underlying concept. 
 
-* We will be looking at this print out many times in the rest of the *Primer*. You will get used to it. The header information about Family, Links and so on just confirms what we already know. Still, you want to check this to make sure you did not make a mistake in the call to `brm()`.
+The intercept (`1`) is automatically included in R regression models by default, so we can leave it out. In other words, `height ~ 1 + sex` is the same model as `height ~ sex`.
 
-* The key parameter is the "Intercept," which is the same thing as $\mu$ in the mathematical description of the model and the same thing as `1` when we set `formula = height ~ 1`. In other words, we are speaking three languages here: English ("Intercept"), math (\$mu$), and code (`height ~ 1`). But all three languages are referring to the same underlying concept.
-
-* The "Estimate" of 175.87 makes sense. After all, the simple mean of the `height` in the data is:
+Load the **broom** package to examine the fitted model with the `tidy()` function.
 
 ```{r}
 #| code-fold: false
-mean(ch5$height)
+#| message: false
+library(broom)
+
+tidy(fit_1, conf.int = TRUE)
+```
+
+<!-- DK: Insert interpretions of the parameters. perhaps equixomatic? -->
+
+
+```{r}
+#| code-fold: false
+x |> 
+  summarise(avg_heigh = mean(height), .by = sex)
 ```
 
 * The estimated error ("Est.Error") also makes sense. This is the standard error and can be calculated by hand as the standard deviation of the data divided by the squart root of the number of observations:
 
 ```{r}
 #| code-fold: false
-sd(ch5$height) / sqrt(3658)
+sd(x$height) / sqrt(3658)
 ```
 
 * The end points of the confidence intervals are simply the estimate $\pm$ two times the standard error. 
 
 * We don't really care about the values associated with sigma, which has no physical meaning. Parameters like this are often referred to as "nuisance" parameters because, although they are necessary to constructing the fitted model, we don't really care about them outside that context. The Intercept, on the other hand, is the mean of our posterior distribution for the unknown parameter $\mu$, the average height of an adult male.
 
-<!-- DK: Run tidy(fit_1)? -->
 
-Consider the posterior distribution of $\mu$.
-
-```{r}
-#| code-fold: false
-
-fit_1 |> 
-  add_epred_draws(newdata = tibble(.rows = 1)) |> 
-  ggplot(aes(x = .epred)) + 
-    geom_histogram(aes(y = after_stat(count/sum(count))),
-                   bins = 50) + 
-    labs(title = expression(paste("Posterior Probability Distribution of ", mu)),
-         subtitle = "Distribution is centered at 175.9 cm",
-         x = expression(paste("Mean, ", mu, ", height of adult men")),
-         y = "Probability") + 
-  
-    scale_x_continuous(labels = scales::number_format()) +
-    scale_y_continuous(labels = scales::percent_format()) +
-    theme_classic()
-```
-
-This is almost exactly the same code as we used in @sec-modeling. It is the same code which we will use in the future.
 
 ### Data Generating Mechanism
 
@@ -413,7 +396,7 @@ with $\epsilon_i \sim N(0, 0.75^2)$.
 Before excepting `fit_1` as our data generating mechanism, we should perform a posterior predictive check.
 
 ```{r}
-brms::pp_check(fit_1)
+## tidymodels::pp_check(fit_1)
 ```
 
 Note how similar our actual data, $y$, is to the 10 versions of the replicated data, $y_rep$. They are close enough that we are happy to use `fit_1`. However, the match is not perfect! The actual data is slightly more "peaked" and also features some weird bumps in the tails, especially around 200 cm. It would be possible, but not easy, to modify our model to match the actual data more closely. For now, we will just accept `fit_1` as our data generating mechanism.
@@ -444,8 +427,8 @@ With expected values or averages, we can ignore the $\epsilon_i$ term in this fo
 
 ```{r}
 #| code-fold: false
-fit_1 |> 
-  add_predicted_draws(newdata = tibble(.rows = 1))
+# fit_1 |> 
+#   add_predicted_draws(newdata = tibble(.rows = 1))
 ```
 
 
@@ -453,19 +436,19 @@ As before, it is straightforward to turn draws from the posterior probability di
 
 ```{r}
 #| code-fold: false
-fit_1 |> 
-  add_predicted_draws(newdata = tibble(.rows = 1)) |> 
-  ggplot(aes(x = .prediction)) +
-    geom_histogram(aes(y = after_stat(count/sum(count))),
-                   bins = 100) +
-    labs(title = "Posterior for Height of Random Male",
-         subtitle = "Uncertainty for a single individual is much greater than for the expected value",
-         x = "Height (cm)",
-         y = "Probability",
-         caption = "Data source: NHANES") + 
-    scale_x_continuous(labels = scales::number_format()) +
-    scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
-    theme_classic()
+# fit_1 |> 
+#   add_predicted_draws(newdata = tibble(.rows = 1)) |> 
+#   ggplot(aes(x = .prediction)) +
+#     geom_histogram(aes(y = after_stat(count/sum(count))),
+#                    bins = 100) +
+#     labs(title = "Posterior for Height of Random Male",
+#          subtitle = "Uncertainty for a single individual is much greater than for the expected value",
+#          x = "Height (cm)",
+#          y = "Probability",
+#          caption = "Data source: NHANES") + 
+#     scale_x_continuous(labels = scales::number_format()) +
+#     scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+#     theme_classic()
 ```
 
 Note:
@@ -477,10 +460,10 @@ Note:
 
 ```{r}
 #| code-fold: false
-fit_1 |> 
-  add_predicted_draws(newdata = tibble(.rows = 1)) |> 
-  mutate(tall = if_else(.prediction > 180, TRUE, FALSE)) |> 
-  summarize(odds = mean(tall))
+# fit_1 |> 
+#   add_predicted_draws(newdata = tibble(.rows = 1)) |> 
+#   mutate(tall = if_else(.prediction > 180, TRUE, FALSE)) |> 
+#   summarize(odds = mean(tall))
 ```
 
 If 30% or so of the draws from the posterior probability distribution are greater than 180 cm, then there is about a 30% chance that the next individual will be taller than 180 cm.
@@ -494,10 +477,10 @@ Bayesian models are beautiful because, via the magic of simulation, we can answe
 
 ```{r}
 #| code-fold: false
-fit_1 |> 
-  add_predicted_draws(newdata = tibble(.rows = 4)) |>
-  select(.row, .draw, .prediction) |> 
-  pivot_wider(values_from = .prediction, names_from = .row)
+# fit_1 |> 
+#   add_predicted_draws(newdata = tibble(.rows = 4)) |>
+#   select(.row, .draw, .prediction) |> 
+#   pivot_wider(values_from = .prediction, names_from = .row)
 ```
 
 Again, we have the subtle issue. In the same way that light is both a wave and a particle, these columns are both posteriors and draws from those posteriors, when considered row by row. In each row, we are running an experiment in which we meet 4 men. We measure their heights, we determine if the tallest is more than 10 centimeters taller than the shortest. We then do the same thing is row 2, row 3 and so on. The functions `row_wise()` and `c_across()` make this (mostly) simple.
@@ -505,14 +488,14 @@ Again, we have the subtle issue. In the same way that light is both a wave and a
 
 ```{r}
 #| code-fold: false
-draws <- fit_1 |> 
-  add_predicted_draws(newdata = tibble(.rows = 4)) |>
-  select(.row, .draw, .prediction) |> 
-  pivot_wider(values_from = .prediction, names_from = .row) |> 
-  rowwise() %>%
-  mutate(diff = max(c_across(`1`:`4`)) - min(c_across(`1`:`4`)))
-
-draws
+# draws <- fit_1 |> 
+#   add_predicted_draws(newdata = tibble(.rows = 4)) |>
+#   select(.row, .draw, .prediction) |> 
+#   pivot_wider(values_from = .prediction, names_from = .row) |> 
+#   rowwise() %>%
+#   mutate(diff = max(c_across(`1`:`4`)) - min(c_across(`1`:`4`)))
+# 
+# draws
 ```
 
 Unfortunately, this code can take a while to run, so we save the results in a permanent tibble named `draws`. This will be a common approach, just as we have saved the fitted model object as `fit_1`, or whatever, rather than recreating it each time.
@@ -527,26 +510,26 @@ Once we have random draws from the posterior distribution we care about, graphin
 
 
 ```{r}
-draws %>%
-  mutate(diff = max(c_across(`1`:`4`)) - min(c_across(`1`:`4`))) |> 
-  ggplot(aes(x = diff)) +
-    geom_histogram(aes(y = after_stat(count/sum(count))),
-                   bins = 100) +
-    labs(title = "Posterior for Max Height Difference Among Four Men",
-         subtitle = "The expected value for this difference would be much more narrow",
-         x = "Height Difference in Centimeters",
-         y = "Probability",
-         caption = "Data source: NHANES") + 
-    scale_x_continuous(breaks = seq(0, 50, 10),
-                       labels = scales::number_format()) +
-    scale_y_continuous(labels = scales::percent_format()) 
+# draws %>%
+#   mutate(diff = max(c_across(`1`:`4`)) - min(c_across(`1`:`4`))) |> 
+#   ggplot(aes(x = diff)) +
+#     geom_histogram(aes(y = after_stat(count/sum(count))),
+#                    bins = 100) +
+#     labs(title = "Posterior for Max Height Difference Among Four Men",
+#          subtitle = "The expected value for this difference would be much more narrow",
+#          x = "Height Difference in Centimeters",
+#          y = "Probability",
+#          caption = "Data source: NHANES") + 
+#     scale_x_continuous(breaks = seq(0, 50, 10),
+#                        labels = scales::number_format()) +
+#     scale_y_continuous(labels = scales::percent_format()) 
 ```
 
-There is about an `r round(100 * sum(draws$diff > 10) / length(draws$diff))`% chance that, when meeting 4 random men, the tallest will be at least 10 cm taller than the shortest. Exact calculation:
+There is about an `r # round(100 * sum(draws$diff > 10) / length(draws$diff))`% chance that, when meeting 4 random men, the tallest will be at least 10 cm taller than the shortest. Exact calculation:
 
 ```{r}
 #| code-fold: false
-sum(draws$diff > 10) / length(draws$diff)
+# sum(draws$diff > 10) / length(draws$diff)
 ```
 
 <!-- DK: I am concerned that we are not providing uncertainty estimates when we answer these questions. The best answer is 77%. Fine. But how much uncertainty is there in this estimate? This strikes me as a hard question! -->
@@ -558,10 +541,10 @@ The same approach will work for almost any question.
 
 ```{r}
 #| code-fold: false
-fit_1 |> 
-  add_predicted_draws(newdata = tibble(.rows = 100)) |>
-  select(.row, .draw, .prediction) |> 
-  pivot_wider(values_from = .prediction, names_from = .row)
+# fit_1 |> 
+#   add_predicted_draws(newdata = tibble(.rows = 100)) |>
+#   select(.row, .draw, .prediction) |> 
+#   pivot_wider(values_from = .prediction, names_from = .row)
 ```
 
 Again, we have 100 (identical) posteriors, each representing the height of a random adult male. Each column is a posterior. (In later models, the columns will represent different posteriors, but we keep things simple for now.) Each row can then be viewed as an experiment. Instead of just meeting one random man, however, we meet 100. Draws from a posterior are the same thing as one random unit from the underlying population.
@@ -571,26 +554,26 @@ The magic of `rowwise()`and `c_across()` allows us to easily determine the heigh
 
 ```{r}
 #| code-fold: false
-draws <- fit_1 |> 
-  add_predicted_draws(newdata = tibble(.rows = 100)) |>
-  select(.row, .draw, .prediction) |> 
-  pivot_wider(values_from = .prediction, names_from = .row) |> 
-  rowwise() %>%
-  mutate(third_tallest = sort(c_across(`1`:`100`))[98])
+# draws <- fit_1 |> 
+#   add_predicted_draws(newdata = tibble(.rows = 100)) |>
+#   select(.row, .draw, .prediction) |> 
+#   pivot_wider(values_from = .prediction, names_from = .row) |> 
+#   rowwise() %>%
+#   mutate(third_tallest = sort(c_across(`1`:`100`))[98])
 ```
 
 
 ```{r}
-draws |> 
-  ggplot(aes(x = third_tallest, y = after_stat(count / sum(count)))) +
-    geom_histogram(bins = 100) +
-    labs(title = "Posterior for Height of 3rd Tallest Man from Next 100",
-         subtitle = "Should we have more or less certainty about behavior in the tails?",
-         x = "Height (cm)",
-         y = "Probability",
-         caption = "Data source: NHANES") + 
-    scale_x_continuous(labels = scales::number_format()) +
-    scale_y_continuous(labels = scales::percent_format(accuracy = 1)) 
+# draws |> 
+#   ggplot(aes(x = third_tallest, y = after_stat(count / sum(count)))) +
+#     geom_histogram(bins = 100) +
+#     labs(title = "Posterior for Height of 3rd Tallest Man from Next 100",
+#          subtitle = "Should we have more or less certainty about behavior in the tails?",
+#          x = "Height (cm)",
+#          y = "Probability",
+#          caption = "Data source: NHANES") + 
+#     scale_x_continuous(labels = scales::number_format()) +
+#     scale_y_continuous(labels = scales::percent_format(accuracy = 1)) 
     
 ```
 

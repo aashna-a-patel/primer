@@ -1,5 +1,14 @@
 # Priorities
 
+
+linear_reg
+logistic_reg
+multinom_reg
+
+equatiomatic
+
+Need to standardize the creation of the Population Table, include ID/time column.
+
 https://discord.com/channels/1066524559240597595/1066524726278762608/1266378902646034432
 
 Claim that the percentages in the Probability 2 Models example are inconsistent with the graphic. 99% versus 1% or 50/50.

@@ -251,12 +251,6 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cardinal-virtues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Cardinal Virtues</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./set-up.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Set Up for Working on PPBDS Projects</span></a>
   </div>
@@ -294,7 +288,9 @@ window.Quarto = {
 <a href="#justice" id="toc-justice" class="nav-link" data-scroll-target="#justice"><span class="header-section-number">5.2</span> Justice</a>
   <ul class="collapse">
 <li><a href="#the-population-table" id="toc-the-population-table" class="nav-link" data-scroll-target="#the-population-table"><span class="header-section-number">5.2.1</span> The Population Table</a></li>
-  <li><a href="#representativeness" id="toc-representativeness" class="nav-link" data-scroll-target="#representativeness"><span class="header-section-number">5.2.2</span> Representativeness</a></li>
+  <li><a href="#stability" id="toc-stability" class="nav-link" data-scroll-target="#stability"><span class="header-section-number">5.2.2</span> Stability</a></li>
+  <li><a href="#representativeness" id="toc-representativeness" class="nav-link" data-scroll-target="#representativeness"><span class="header-section-number">5.2.3</span> Representativeness</a></li>
+  <li><a href="#unconfoundedness" id="toc-unconfoundedness" class="nav-link" data-scroll-target="#unconfoundedness"><span class="header-section-number">5.2.4</span> Unconfoundedness</a></li>
   </ul>
 </li>
   <li>
@@ -330,17 +326,14 @@ window.Quarto = {
   
 
 
-</header><!-- Two parameter chapter is missing the math. --><p><a href="models.html" class="quarto-xref"><span>Chapter 4</span></a> used models with just one parameter: <span class="math inline">\(\rho\)</span>, the votes for Biden divided by total votes. The model was binomial, and there was only one unknown parameter, <span class="math inline">\(\rho\)</span>. In this chapter, we have two unknown parameters: the mean <span class="math inline">\(\mu\)</span> height in the US and the standard deviation, <span class="math inline">\(\sigma\)</span>, of the normally distributed error term.</p>
+</header><!-- Two parameter chapter is missing the math. --><p><a href="models.html" class="quarto-xref"><span>Chapter 4</span></a> used a logistic regression model, an appropriate approach when the outcome variable takes on just two possible values, generally recoded as <code>0</code> or <code>1</code>. In this chapter, we will a linear regression model because our outcome variable, <code>height</code>, is continuous.</p>
 <p>The reason for making models is not, primarily, that making models is fun – although it is! The reason is that the world confronts us. Make decisions we must. We must decide between options X or Y. We must choose from actions A, B and C. Confronted by a choice, we need to make a model of the world to help us choose wisely.</p>
-<p>The real world is complex. Any substantive decision problem includes a great deal of complexity and requires even more context. We do not have the time to get into that level of detail now. So, we simplify. We are going to create a model of height for adult men. We will then use that model to answer three questions:</p>
-<!-- * What is the average height of men? -->
-<!-- DK: Is that a good question? I guess to answer it, you would come up with a model, then fill in the Preceptor Table with 100 million rows. Take the average. Do that 1,000 times. That is your posterior. Even if that makes sense, it can't really be done. Perhaps a better question: What is the average height of 1,000 men? Also, we essentially answer that question when we look at the posterior of rho. So, for all those reasons, I delete it for now. If we add it back, need to change "three" to "four" in the sections below and above. -->
+<p>The real world is complex. Any substantive decision problem includes a great deal of complexity and requires even more context. We do not have the time to get into that level of detail now. So, we simplify. We are going to create a model of height for adults. We will then use that model to answer:</p>
+<blockquote class="blockquote">
 <ul>
-<li><p>What is the probability that the next man we meet will be taller than 180 centimeters?</p></li>
-<li><p>What is the probability that, among the next 4 men we meet, the tallest is at least 10 cm taller than the shortest?</p></li>
-<li><p>What is our posterior probability distribution for the height of the 3rd tallest man out of the next 100 we meet?</p></li>
+<li>How does average height differ between men and women?</li>
 </ul>
-<p>The hope for this chapter is that, by answering these three questions, we’ll gain a better and more thorough understanding of how professionals do data science.</p>
+</blockquote>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -349,7 +342,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Data science is ultimately a moral act, so we will use the four <a href="https://en.wikipedia.org/wiki/Cardinal_virtues">Cardinal Virtues</a> — Wisdom, Justice, Courage and Temperance — to organize our approach.</p>
+<p>Data science is ultimately a moral act, so we will use the four <a href="https://en.wikipedia.org/wiki/Cardinal_virtues">Cardinal Virtues</a> — Wisdom, Justice, Courage and Temperance — to guide our approach.</p>
 <section id="wisdom" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="wisdom">
 <span class="header-section-number">5.1</span> Wisdom</h2>
 <div class="cell">
@@ -364,35 +357,35 @@ window.Quarto = {
 <section id="preceptor-table" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="preceptor-table">
 <span class="header-section-number">5.1.1</span> Preceptor Table</h3>
 <p>Which rows and columns of data do you need such that, if you had them all, the calculation of the quantity of interest would be trivial? The steps we usually take to construct the Preceptor Table include:</p>
-<p><em>Units</em>: All the men in the world, one row per man.</p>
-<p><em>Outcome</em>: This is the variable which we are trying to explain/understand/predict. This is <em>not</em> the same thing as the answer to the question we have been asked. The question might, as above, be about the height of the 3rd tallest man we meet out of the next 100. But the concepts of 3rd or 100 do not appear in the Preceptor Table. Instead, height is our outcome variable. But, if we can build a model which explains/understands/predicts height, we can use that model to answer our questions.</p>
-<p><em>Treatment</em>: There are not treatment variables.</p>
+<p><em>Units</em>: All the adults in the world, one row per person.</p>
+<p><em>Outcome</em>: This is the variable which we are trying to explain/understand/predict. This is <em>not</em> the same thing as the answer to the question we have been asked. Our question is aboit <em>average</em> height, but the height of each <em>individual</em> is our outcome variable. If we can build a model which explains/understands/predicts individual height, we can use that model to answer our questions about average height.</p>
+<p><em>Treatment</em>: There are no treatment variables.</p>
 <p><em>Causal or predictive model</em>: We have only one outcome, so the model is predictive.</p>
-<p><em>Covariates</em>: There are no (explicit) covariates in this model, although we will need to make use of variables like <code>age</code> and <code>sex</code> to construct our sample data.</p>
+<p><em>Covariates</em>: Since our question asks about the difference between men and women, at least one of our covariates must be sex.</p>
 <p><em>Moment in Time</em>: This is often implicit in the question itself. One of our key roles as data scientists is to clarify the questions which we are asked. In this case, it seems clear that the questions refer to now, the present moment.</p>
 <p>Predictive models care nothing about causation. Causal models are often also concerned with prediction, if only as a means of measuring the quality of the model. Here, we are looking at <em>prediction</em>.</p>
-<p>So, what does our Preceptor Table look like? Assuming we are predicting height for every adult male on Earth at this moment in time, we would have height data for every male at least 18 years of age. This means that we would have about 4 billion rows, one for each male, along with a column for each individual’s height.</p>
+<p>So, what does our Preceptor Table look like? Assuming we are predicting height for every adult on Earth at this moment in time, we would have height data for every person at least 18 years of age. This means that we would have about 8 billion rows, one for each adult, along with a column for each individual’s height and sex.</p>
 <p>Here are some rows from our Preceptor Table:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="bchzcsvtdb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bchzcsvtdb table {
+<div id="ccmcmdeizt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ccmcmdeizt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bchzcsvtdb thead, #bchzcsvtdb tbody, #bchzcsvtdb tfoot, #bchzcsvtdb tr, #bchzcsvtdb td, #bchzcsvtdb th {
+#ccmcmdeizt thead, #ccmcmdeizt tbody, #ccmcmdeizt tfoot, #ccmcmdeizt tr, #ccmcmdeizt td, #ccmcmdeizt th {
   border-style: none;
 }
 
-#bchzcsvtdb p {
+#ccmcmdeizt p {
   margin: 0;
   padding: 0;
 }
 
-#bchzcsvtdb .gt_table {
+#ccmcmdeizt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -418,12 +411,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#bchzcsvtdb .gt_caption {
+#ccmcmdeizt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bchzcsvtdb .gt_title {
+#ccmcmdeizt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -435,7 +428,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#bchzcsvtdb .gt_subtitle {
+#ccmcmdeizt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -447,7 +440,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#bchzcsvtdb .gt_heading {
+#ccmcmdeizt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -459,13 +452,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bchzcsvtdb .gt_bottom_border {
+#ccmcmdeizt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bchzcsvtdb .gt_col_headings {
+#ccmcmdeizt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -480,7 +473,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bchzcsvtdb .gt_col_heading {
+#ccmcmdeizt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -500,7 +493,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#bchzcsvtdb .gt_column_spanner_outer {
+#ccmcmdeizt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -512,15 +505,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#bchzcsvtdb .gt_column_spanner_outer:first-child {
+#ccmcmdeizt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bchzcsvtdb .gt_column_spanner_outer:last-child {
+#ccmcmdeizt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bchzcsvtdb .gt_column_spanner {
+#ccmcmdeizt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -532,11 +525,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#bchzcsvtdb .gt_spanner_row {
+#ccmcmdeizt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bchzcsvtdb .gt_group_heading {
+#ccmcmdeizt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -562,7 +555,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#bchzcsvtdb .gt_empty_group_heading {
+#ccmcmdeizt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -577,15 +570,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#bchzcsvtdb .gt_from_md > :first-child {
+#ccmcmdeizt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bchzcsvtdb .gt_from_md > :last-child {
+#ccmcmdeizt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bchzcsvtdb .gt_row {
+#ccmcmdeizt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -604,7 +597,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#bchzcsvtdb .gt_stub {
+#ccmcmdeizt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -617,7 +610,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bchzcsvtdb .gt_stub_row_group {
+#ccmcmdeizt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -631,15 +624,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#bchzcsvtdb .gt_row_group_first td {
+#ccmcmdeizt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bchzcsvtdb .gt_row_group_first th {
+#ccmcmdeizt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bchzcsvtdb .gt_summary_row {
+#ccmcmdeizt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -649,16 +642,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bchzcsvtdb .gt_first_summary_row {
+#ccmcmdeizt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bchzcsvtdb .gt_first_summary_row.thick {
+#ccmcmdeizt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bchzcsvtdb .gt_last_summary_row {
+#ccmcmdeizt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -668,7 +661,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bchzcsvtdb .gt_grand_summary_row {
+#ccmcmdeizt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -678,7 +671,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bchzcsvtdb .gt_first_grand_summary_row {
+#ccmcmdeizt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -688,7 +681,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#bchzcsvtdb .gt_last_grand_summary_row_top {
+#ccmcmdeizt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -698,11 +691,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bchzcsvtdb .gt_striped {
+#ccmcmdeizt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bchzcsvtdb .gt_table_body {
+#ccmcmdeizt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -711,7 +704,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bchzcsvtdb .gt_footnotes {
+#ccmcmdeizt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -725,7 +718,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bchzcsvtdb .gt_footnote {
+#ccmcmdeizt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -734,7 +727,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bchzcsvtdb .gt_sourcenotes {
+#ccmcmdeizt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -748,7 +741,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bchzcsvtdb .gt_sourcenote {
+#ccmcmdeizt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -756,95 +749,121 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bchzcsvtdb .gt_left {
+#ccmcmdeizt .gt_left {
   text-align: left;
 }
 
-#bchzcsvtdb .gt_center {
+#ccmcmdeizt .gt_center {
   text-align: center;
 }
 
-#bchzcsvtdb .gt_right {
+#ccmcmdeizt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bchzcsvtdb .gt_font_normal {
+#ccmcmdeizt .gt_font_normal {
   font-weight: normal;
 }
 
-#bchzcsvtdb .gt_font_bold {
+#ccmcmdeizt .gt_font_bold {
   font-weight: bold;
 }
 
-#bchzcsvtdb .gt_font_italic {
+#ccmcmdeizt .gt_font_italic {
   font-style: italic;
 }
 
-#bchzcsvtdb .gt_super {
+#ccmcmdeizt .gt_super {
   font-size: 65%;
 }
 
-#bchzcsvtdb .gt_footnote_marks {
+#ccmcmdeizt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bchzcsvtdb .gt_asterisk {
+#ccmcmdeizt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bchzcsvtdb .gt_indent_1 {
+#ccmcmdeizt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bchzcsvtdb .gt_indent_2 {
+#ccmcmdeizt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bchzcsvtdb .gt_indent_3 {
+#ccmcmdeizt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bchzcsvtdb .gt_indent_4 {
+#ccmcmdeizt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bchzcsvtdb .gt_indent_5 {
+#ccmcmdeizt .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="header gt_col_headings">
-<th id="ID" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">ID</th>
-<th id="Height (cm)" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Height (cm)</th>
-</tr></thead>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header gt_heading">
+<th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border">Preceptor Table</th>
+</tr>
+<tr class="odd gt_col_headings gt_spanner_row">
+<th rowspan="2" id="ID" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="text-align: left; font-size: large; vertical-align: middle;" scope="col">ID</th>
+<th id="Outcome" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><span class="gt_column_spanner">Outcome</span></th>
+<th id="Covariate" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><span class="gt_column_spanner">Covariate</span></th>
+</tr>
+<tr class="header gt_col_headings">
+<th id="Height" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Height</th>
+<th id="Sex" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Sex</th>
+</tr>
+</thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="ID">Person 1</td>
-<td class="gt_row gt_right" headers="height">150</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>1</p></td>
+<td class="gt_row gt_center" headers="height"><p>150</p></td>
+<td class="gt_row gt_center" headers="sex"><p>M</p></td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="ID">Person 2</td>
-<td class="gt_row gt_right" headers="height">172</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>2</p></td>
+<td class="gt_row gt_center" headers="height"><p>172</p></td>
+<td class="gt_row gt_center" headers="sex"><p>F</p></td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="ID">...</td>
-<td class="gt_row gt_right" headers="height">...</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
+<td class="gt_row gt_center" headers="height"><p>…</p></td>
+<td class="gt_row gt_center" headers="sex"><p>…</p></td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="ID">Person 45,000</td>
-<td class="gt_row gt_right" headers="height">160</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>10</p></td>
+<td class="gt_row gt_center" headers="height"><p>160</p></td>
+<td class="gt_row gt_center" headers="sex"><p>F</p></td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="ID">Person 45,001</td>
-<td class="gt_row gt_right" headers="height">142</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>11</p></td>
+<td class="gt_row gt_center" headers="height"><p>142</p></td>
+<td class="gt_row gt_center" headers="sex"><p>F</p></td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="ID">...</td>
-<td class="gt_row gt_right" headers="height">...</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
+<td class="gt_row gt_center" headers="height"><p>…</p></td>
+<td class="gt_row gt_center" headers="sex"><p>…</p></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>N</p></td>
+<td class="gt_row gt_center" headers="height"><p>190</p></td>
+<td class="gt_row gt_center" headers="sex"><p>M</p></td>
 </tr>
 </tbody>
 </table>
@@ -852,7 +871,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>This table would extend all the way until person 4 billion-and-something. If we had this table, all of our questions could be answered with simple math and/or simulations. No inference is necessary if we have a Preceptor Table. But what does our actual data look like?</p>
+<p>This table would extend all the way until person 8 billion-and-something. We don’t know the number of rows, so we use <code>N</code>. If we had this table, all of our questions could be answered with simple math. No inference is necessary if we have a Preceptor Table. But what does our actual data look like?</p>
 </section><section id="eda" class="level3" data-number="5.1.2"><h3 data-number="5.1.2" class="anchored" data-anchor-id="eda">
 <span class="header-section-number">5.1.2</span> EDA</h3>
 <p>Consider the <code>nhanes</code> data set from the National Health and Nutrition Examination Survey conducted from 2009 to 2011 by the Centers for Disease Control and Prevention.</p>
@@ -911,11 +930,11 @@ $ sleep          &lt;int&gt; 4, 4, 4, NA, 8, NA, NA, 8, 8, 8, 7, 5, 4, NA, 5, 7,
 <pre><code># A tibble: 5 × 3
     age sex    height
   &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;
-1     8 Male     139.
-2    29 Female   164.
-3    23 Female   167.
-4     8 Female   128.
-5    80 Female   159.</code></pre>
+1    24 Female   175.
+2    27 Male     190.
+3    69 Female   156.
+4    40 Male     187 
+5    11 Female   155.</code></pre>
 </div>
 </div>
 <p>We think of both <code>age</code> and <code>height</code> as numbers. And they are numbers! But R distinguishes between “integers” and “doubles,” only the second of which allow for decimal values. In the <code>nhanes</code> data, <code>age</code> is an integer and <code>height</code> is a double.</p>
@@ -1072,45 +1091,50 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 </table>
 </div>
 </div>
-<p>Interesting! There are 353 missing values of height in our subset of data. Just using <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code> does not show us that. Let’s filter out the NA’s using <code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code>. This will delete the rows in which the value of any variable is missing. Because we want to examine height in men (not boys, nor females), let’s limit our data to only include adult males.</p>
+<p>Interesting! There are 353 missing values of height in our subset of data. Just using <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code> does not show us that. Let’s filter out the NA’s using <code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code>. This will delete the rows in which the value of any variable is missing. To make the statistical inference a bit more interesting, we will just use 50 observations from the data. Of course, in a real problem, we would use all the data we have.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ch5</span> <span class="op">&lt;-</span> <span class="va">nhanes</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"Male"</span>, <span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">18</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># We use set.seed() to ensure that anyone running this code will get the same</span></span>
+<span><span class="co"># set of observations in their tibble. See ?set.seed for details.</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">nhanes</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">18</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">height</span>, <span class="va">sex</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s plot this data using <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code>.</p>
-<!-- The original version of this plot used to have a geom_density() overlay, but that stopped working for some reason. We could leave this plot as simple. After all, this is a section about EDA and we usually use simple plots on EDA. Or, we could make this plot more complex, by including a density plot. That might serve two purposes. First, we should make plots in these chapters more complex so that we have occasion to teach more plotting tricks. Second, we could use a density to teach/discuss things like 95% confidence intervals and posterior predictions. For now, I keep it simple. -->
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ch5</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Male Adult Height in the US in 2010"</span>,</span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span>, fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Adult Height in the US in 2010"</span>,</span>
+<span>         y <span class="op">=</span> <span class="st">"Number of Observations"</span>,</span>
 <span>         x <span class="op">=</span> <span class="st">"Height (cm)"</span>,</span>
-<span>         y <span class="op">=</span> <span class="st">"Count"</span>,</span>
 <span>         caption <span class="op">=</span> <span class="st">"Source: National Health and Nutrition Examination Survey"</span></span>
-<span>         <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<span>         <span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Will the data we have — which is only for a sample of adult American men more than a decade ago — allow us to answer our questions, however roughly? Only if the assumption of <em>validity</em> makes sense.</p>
+<p>Will the data we have — which is only for a sample of adult Americans more than a decade ago — allow us to answer our questions, however roughly? Only if the assumption of <em>validity</em> makes sense.</p>
 </section><section id="validity" class="level3" data-number="5.1.3"><h3 data-number="5.1.3" class="anchored" data-anchor-id="validity">
 <span class="header-section-number">5.1.3</span> Validity</h3>
-<p>Validity involves our columns. More specifically, whether our columns mean the same thing. Does “height” in our Preceptor Table mean the same thing as “height” in NHANES? Almost certainly. Of course, we need to be careful about mistakes like measurement units, like centimeters in one and inches in the other. And there can be issues like: Are measurements taken with shoes on or shoes off? But, for the most part, the “height” variable in NHANES in 2010 is a <em>valid</em> proxy for the “height” of individuals today. We can stack the two data sets together and consider them to have come from the same population.</p>
+<p>Validity involves our columns. More specifically, whether our columns mean the same thing. Does “height” in our Preceptor Table mean the same thing as “height” in NHANES? Almost certainly. Of course, we need to be careful about mistakes like measurement units, like centimeters in one and inches in the other. And there can be issues like: Are measurements taken with shoes on or shoes off? But, for the most part, the “height” variable in NHANES in 2010 is a <em>valid</em> proxy for the “height” of individuals today. We can stack the two data sets together and consider them to have come from the same population. The same applies to sex.</p>
 <p>Since validity holds, we can combine the Preceptor Table and our data into a Population Table.</p>
 </section><section id="population" class="level3" data-number="5.1.4"><h3 data-number="5.1.4" class="anchored" data-anchor-id="population">
 <span class="header-section-number">5.1.4</span> Population</h3>
-<!-- Spend more time here? -->
-<p>One of the most important components of Wisdom is the concept of the “population.”</p>
 <p>The population is not the set of people for which we have data — the participants in the CDC’s Health and Nutrition Examination Survey conducted from 2009 to 2011. This is the data set. Nor is it the set of all the individuals about whom we would like to have data. Those are the rows in the Preceptor Table. The population is the larger — potentially much larger — set of individuals which include both the data we <em>have</em> and the data we <em>want</em>. Generally, <strong>the population will be much larger than either the data we have or the data we want.</strong> In fact, there is almost always a time dimension to consider. We generally want to make inferences about right now or about the future. By definition, the data we have is always from the past.</p>
-<p>In this case, we want to estimate average height for males <em>today</em>, not for people in 2009 – 2011. We also want to estimate height for males outside the United States, a group that is excluded from our data set. Is it reasonable to generate conclusions for the world from this group? Maybe? We have limited data to work with and we have to determine how far we are willing to generalize to other groups.</p>
+<p>In this case, we want to estimate average height for adults <em>today</em>, not for people in 2009 – 2011. We also want to estimate height for adults outside the United States, a group that is excluded from our data set. Is it reasonable to generate conclusions for the world from this group? Maybe? We have limited data to work with and we have to determine how far we are willing to generalize to other groups.</p>
 <p>It is a judgment call, a matter of Wisdom, as to whether or not we may assume that the data we have and the data we want to have (i.e., the Preceptor Table) are drawn from the same population.</p>
-<p>In the social sciences, <em>there is never a perfect relationship between the data you have and the question you are trying to answer.</em> Data for American males in the past is not the same thing as data for American males today. Nor is it the same as the data for men in France or Mexico. Yet, this data is relevant. Right? It is certainly better than nothing.</p>
+<p>In the social sciences, <em>there is never a perfect relationship between the data you have and the question you are trying to answer.</em> Data for American adults in the past is not the same thing as data for American adults today. Nor is it the same as the data for adults in France or Mexico. Yet, this data is relevant. Right? It is certainly better than nothing.</p>
 <p><em>Using not-perfect data is generally better than using no data at all.</em></p>
 <p>Is not-perfect data <em>always</em> better? No! If your problem is estimating the median height of 5th grade girls in Tokyo, we doubt that our data is at all relevant. Wisdom recognizes the danger of using non-relevant data to build a model and then mistakenly using that model in a way which will only make the situation worse. If the data won’t help, don’t use the data, don’t build a model. Better to just use your common sense and experience. Or find better data.</p>
 </section></section><section id="justice" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="justice">
@@ -1123,42 +1147,39 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 </div>
 </div>
 </div>
-<p>Having looked at our data and decided that it is “close enough” to our questions that creating a model will help us come up with better answers, we move on to Justice.</p>
-<p>Justice emphasizes a few key concepts:</p>
-<ul>
-<li><p>The <em>Population Table</em>, a structure which includes a row for every unit in the population. We generally break the rows in the Population Table into three categories: the data for units we want to have (the Preceptor Table), the data for units which we actually have (our actual data), and the data for units we do not care about (the rest of the population, not included in the data or the Preceptor Table).</p></li>
-<li><p><em>Stability</em> means that the relationship between the columns in the Population Table is the same for three categories of rows: the data, the Preceptor Table, and the larger population from which both are drawn.</p></li>
-<li><p><em>Representativeness</em>, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows. The second is between our data and the other rows. Ideally, we would like both the Preceptor Table and our data to be random samples from the population. Sadly, this is almost never the case.</p></li>
-<li><p><em>Unconfoundedness</em> means that the treatment assignment is independent of the potential outcomes, when we condition on pre-treatment covariates. This assumption is only relevant for causal models. We write that a model is “confounded” if this is not true. The easiest way to ensure unconfoundedness is to randonly assign treatment.</p></li>
-<li><p>The mathematical structure of the <em>Data Generating Mechanism</em>. Models require math, so we need to create a mathematical formula which connects our outcome to our covariates.</p></li>
-</ul>
+<blockquote class="blockquote">
+<p>Justice concerns four topics: the Population Table, stability, representativeness, and unconfoundedness.</p>
+</blockquote>
 <section id="the-population-table" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="the-population-table">
 <span class="header-section-number">5.2.1</span> The Population Table</h3>
+<blockquote class="blockquote">
+<p>The Population Table includes a row for each unit/time combination in the underlying population from which both the Preceptor Table and the data are drawn.</p>
+</blockquote>
 <p>The Population Table shows rows from three sources: the <strong>Preceptor Table</strong>, the <strong>actual data</strong>, and the <strong>population</strong> (outside of the data).</p>
-<p>Our <strong>Preceptor Table</strong> rows contain the information that we would <em>want</em> to know in order to answer our questions. These rows contain entries for our covariates (sex and year) but they do not contain any outcome results (height). We are trying to answer questions about the male population in 2024, so our sex entries for these rows will read “Male” and our year entries of these rows will read “2024”.</p>
+<p>Our <strong>Preceptor Table</strong> rows contain the information that we would <em>want</em> to know in order to answer our questions. These rows contain entries for our covariate, <code>sex</code>, but they do not contain any outcome results.</p>
 <p>Our <strong>actual data</strong> rows contain the information that we <em>do</em> know. These rows contain entries for both our covariates <em>and</em> the outcomes. In this case, the actual data comes from a study conducted on males in 2009-2011, so our sex entries for these rows will read “Male” and our year entries of these rows will either read “2009”, “2010”, or “2011”.</p>
 <p>Our <strong>other</strong> rows contain no data. These are subjects which fall under our desired population, but for which we have no data. As such, all outcomes and covariates are missing. (A subtle point is that, even for other data, we “know” the ID and the Year for each subject. Of course, we don’t <em>really</em> know these things, but, conceptually, we are defining the meaning of those rows on the basis of those variables.)</p>
-<!-- GP: I changed everything but the explanation for the **population** rows. I am confused; shouldn't the population rows still contain "Male" in the sex column? Because this entire chapter, we've exclusively been discussing the male population, so at least that much should be known, no? -->
+<!-- DK: Need to standardize the creation of the Population Table, include ID/time column. -->
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="klrqxbtxce" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#klrqxbtxce table {
+<div id="jnmaiyhpuz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jnmaiyhpuz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#klrqxbtxce thead, #klrqxbtxce tbody, #klrqxbtxce tfoot, #klrqxbtxce tr, #klrqxbtxce td, #klrqxbtxce th {
+#jnmaiyhpuz thead, #jnmaiyhpuz tbody, #jnmaiyhpuz tfoot, #jnmaiyhpuz tr, #jnmaiyhpuz td, #jnmaiyhpuz th {
   border-style: none;
 }
 
-#klrqxbtxce p {
+#jnmaiyhpuz p {
   margin: 0;
   padding: 0;
 }
 
-#klrqxbtxce .gt_table {
+#jnmaiyhpuz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1184,12 +1205,12 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-left-color: #D3D3D3;
 }
 
-#klrqxbtxce .gt_caption {
+#jnmaiyhpuz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#klrqxbtxce .gt_title {
+#jnmaiyhpuz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1201,7 +1222,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-bottom-width: 0;
 }
 
-#klrqxbtxce .gt_subtitle {
+#jnmaiyhpuz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1213,7 +1234,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-top-width: 0;
 }
 
-#klrqxbtxce .gt_heading {
+#jnmaiyhpuz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1225,13 +1246,13 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-right-color: #D3D3D3;
 }
 
-#klrqxbtxce .gt_bottom_border {
+#jnmaiyhpuz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#klrqxbtxce .gt_col_headings {
+#jnmaiyhpuz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1246,7 +1267,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-right-color: #D3D3D3;
 }
 
-#klrqxbtxce .gt_col_heading {
+#jnmaiyhpuz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1266,7 +1287,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   overflow-x: hidden;
 }
 
-#klrqxbtxce .gt_column_spanner_outer {
+#jnmaiyhpuz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1278,15 +1299,15 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 4px;
 }
 
-#klrqxbtxce .gt_column_spanner_outer:first-child {
+#jnmaiyhpuz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#klrqxbtxce .gt_column_spanner_outer:last-child {
+#jnmaiyhpuz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#klrqxbtxce .gt_column_spanner {
+#jnmaiyhpuz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1298,11 +1319,11 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   width: 100%;
 }
 
-#klrqxbtxce .gt_spanner_row {
+#jnmaiyhpuz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#klrqxbtxce .gt_group_heading {
+#jnmaiyhpuz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1328,7 +1349,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   text-align: left;
 }
 
-#klrqxbtxce .gt_empty_group_heading {
+#jnmaiyhpuz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1343,15 +1364,15 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   vertical-align: middle;
 }
 
-#klrqxbtxce .gt_from_md > :first-child {
+#jnmaiyhpuz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#klrqxbtxce .gt_from_md > :last-child {
+#jnmaiyhpuz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#klrqxbtxce .gt_row {
+#jnmaiyhpuz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1370,7 +1391,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   overflow-x: hidden;
 }
 
-#klrqxbtxce .gt_stub {
+#jnmaiyhpuz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1383,7 +1404,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 5px;
 }
 
-#klrqxbtxce .gt_stub_row_group {
+#jnmaiyhpuz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1397,15 +1418,15 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   vertical-align: top;
 }
 
-#klrqxbtxce .gt_row_group_first td {
+#jnmaiyhpuz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#klrqxbtxce .gt_row_group_first th {
+#jnmaiyhpuz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#klrqxbtxce .gt_summary_row {
+#jnmaiyhpuz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1415,16 +1436,16 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 5px;
 }
 
-#klrqxbtxce .gt_first_summary_row {
+#jnmaiyhpuz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#klrqxbtxce .gt_first_summary_row.thick {
+#jnmaiyhpuz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#klrqxbtxce .gt_last_summary_row {
+#jnmaiyhpuz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1434,7 +1455,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-bottom-color: #D3D3D3;
 }
 
-#klrqxbtxce .gt_grand_summary_row {
+#jnmaiyhpuz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1444,7 +1465,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 5px;
 }
 
-#klrqxbtxce .gt_first_grand_summary_row {
+#jnmaiyhpuz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1454,7 +1475,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-top-color: #D3D3D3;
 }
 
-#klrqxbtxce .gt_last_grand_summary_row_top {
+#jnmaiyhpuz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1464,11 +1485,11 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-bottom-color: #D3D3D3;
 }
 
-#klrqxbtxce .gt_striped {
+#jnmaiyhpuz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#klrqxbtxce .gt_table_body {
+#jnmaiyhpuz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1477,7 +1498,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-bottom-color: #D3D3D3;
 }
 
-#klrqxbtxce .gt_footnotes {
+#jnmaiyhpuz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1491,7 +1512,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-right-color: #D3D3D3;
 }
 
-#klrqxbtxce .gt_footnote {
+#jnmaiyhpuz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1500,7 +1521,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 5px;
 }
 
-#klrqxbtxce .gt_sourcenotes {
+#jnmaiyhpuz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1514,7 +1535,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-right-color: #D3D3D3;
 }
 
-#klrqxbtxce .gt_sourcenote {
+#jnmaiyhpuz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1522,63 +1543,63 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 5px;
 }
 
-#klrqxbtxce .gt_left {
+#jnmaiyhpuz .gt_left {
   text-align: left;
 }
 
-#klrqxbtxce .gt_center {
+#jnmaiyhpuz .gt_center {
   text-align: center;
 }
 
-#klrqxbtxce .gt_right {
+#jnmaiyhpuz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#klrqxbtxce .gt_font_normal {
+#jnmaiyhpuz .gt_font_normal {
   font-weight: normal;
 }
 
-#klrqxbtxce .gt_font_bold {
+#jnmaiyhpuz .gt_font_bold {
   font-weight: bold;
 }
 
-#klrqxbtxce .gt_font_italic {
+#jnmaiyhpuz .gt_font_italic {
   font-style: italic;
 }
 
-#klrqxbtxce .gt_super {
+#jnmaiyhpuz .gt_super {
   font-size: 65%;
 }
 
-#klrqxbtxce .gt_footnote_marks {
+#jnmaiyhpuz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#klrqxbtxce .gt_asterisk {
+#jnmaiyhpuz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#klrqxbtxce .gt_indent_1 {
+#jnmaiyhpuz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#klrqxbtxce .gt_indent_2 {
+#jnmaiyhpuz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#klrqxbtxce .gt_indent_3 {
+#jnmaiyhpuz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#klrqxbtxce .gt_indent_4 {
+#jnmaiyhpuz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#klrqxbtxce .gt_indent_5 {
+#jnmaiyhpuz .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1604,7 +1625,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Preceptor Table</p></td>
-<td class="gt_row gt_center" headers="sex"><p>Male</p></td>
+<td class="gt_row gt_center" headers="sex"><p>Female</p></td>
 <td class="gt_row gt_center" headers="year"><p>2024</p></td>
 <td class="gt_row gt_center" headers="height"><p>?</p></td>
 </tr>
@@ -1622,7 +1643,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Actual Data</p></td>
-<td class="gt_row gt_center" headers="sex"><p>Male</p></td>
+<td class="gt_row gt_center" headers="sex"><p>Female</p></td>
 <td class="gt_row gt_center" headers="year"><p>2011</p></td>
 <td class="gt_row gt_center" headers="height"><p>160</p></td>
 </tr>
@@ -1662,13 +1683,22 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 </div>
 </div>
 </div>
-</section><section id="representativeness" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="representativeness">
-<span class="header-section-number">5.2.2</span> Representativeness</h3>
-<p><em>Representativeness involves the rows of the Population Table.</em> More specifically, are the rows that we <em>do</em> have data for representative of the rows for which we <em>do not</em> have data? Ideally, the data we have is a random, unbiased selection from our population, and so the answer to our question is yes.</p>
-<p>For our <code>nhanes</code> data, is this the case? It is time to investigate.</p>
-<p>According to the CDC, individuals are invited to participate in NHANES based on a randomized process. First, the United States is divided into a number of geographical groups (to ensure counties from all areas). From each of these groups, counties are randomly selected to participate. After a county has been randomly selected, members of the households in that county are notified of the upcoming survey, and must volunteer their time to participate. It is clear that this process goes through several layers of randomization (promising!). That being said, many counties are excluded by the end of the process. It is also possible for certain groups or communities to be less representative of the greater population, though we cannot know that for certain.</p>
-<p>There is also the fact that participation is voluntary. Perhaps certain individuals (immobile, elderly, anxious) are less likely to participate. Perhaps individuals that are hospitalized do not get the opportunity to participate. This impacts our data!</p>
-<!-- DK: Insert conclusion for this section. -->
+</section><section id="stability" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="stability">
+<span class="header-section-number">5.2.2</span> Stability</h3>
+<blockquote class="blockquote">
+<p>Stability means that the relationship between the columns in the Population Table is the same for three categories of rows: the data, the Preceptor Table, and the larger population from which both are drawn.</p>
+</blockquote>
+</section><section id="representativeness" class="level3" data-number="5.2.3"><h3 data-number="5.2.3" class="anchored" data-anchor-id="representativeness">
+<span class="header-section-number">5.2.3</span> Representativeness</h3>
+<blockquote class="blockquote">
+<p>Representativeness, or the lack thereof, concerns two relationships among the rows in the Population Table. The first is between the data and the other rows. The second is between the other rows and the Preceptor Table.</p>
+</blockquote>
+<p>The population includes adults in the entire world. Is US data from 2010 representative of the entire world? No! Or, at least, not perfectly. People in the US are systematically different than people outside the US, both in terms of their nature and their nurture.</p>
+</section><section id="unconfoundedness" class="level3" data-number="5.2.4"><h3 data-number="5.2.4" class="anchored" data-anchor-id="unconfoundedness">
+<span class="header-section-number">5.2.4</span> Unconfoundedness</h3>
+<blockquote class="blockquote">
+<p>Unconfoundedness means that the treatment assignment is independent of the potential outcomes, when we condition on pre-treatment covariates. A model is <em>confounded</em> if this is not true.</p>
+</blockquote>
 </section></section><section id="courage" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="courage">
 <span class="header-section-number">5.3</span> Courage</h2>
 <div class="cell">
@@ -1682,113 +1712,129 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 <p>In data science, <em>we deal with words, math, and code, but the most important of these is code.</em> We need Courage to create the model, to take the leap of faith that we can make our ideas real.</p>
 <p>Justice gave us the Population Table. Courage selects the data generating mechanism. We first specify the mathematical formula which connects the outcome variable we are interested in with the other data that we have. We explore different models. We need to decide which variables to include and to estimate the values of unknown parameters. We check our models for consistency with the data we have. We avoid hypothesis tests. We select one model.</p>
 <p>We use a simple linear model:</p>
-<p><span class="math display">\[ y_i =  \mu + \epsilon_i \]</span></p>
-<p>with <span class="math inline">\(\epsilon_i \sim N(0, \sigma^2)\)</span>. <span class="math inline">\(y_i\)</span> is the height of male <span class="math inline">\(i\)</span>. <span class="math inline">\(\mu\)</span> is the average height of all males in the population. <span class="math inline">\(\epsilon_i\)</span> is the “error term,” the difference between the height of male <span class="math inline">\(i\)</span> and the average height of all males.</p>
-<p><span class="math inline">\(\epsilon_i\)</span> is normally distributed with a mean of 0 and a standard deviation of <span class="math inline">\(\sigma\)</span>. The mean being 0 relates to our concept of <strong>accuracy</strong>; we are assuming that our data is representative enough to be accurate, and so we can expect our average error to be 0. The standard deviation, on the other hand, relates to our concept of <strong>precision</strong>; the smaller <span class="math inline">\(\sigma\)</span> is, the more precise our data is, and the larger <span class="math inline">\(\sigma\)</span> is, the less precise our data is.</p>
-<p>This is the simplest model we can construct. Note:</p>
+<p><span class="math display">\[ y_i =  \beta_0 + \beta_1 sexMale + \epsilon_i \]</span></p>
+<p>with <span class="math inline">\(\epsilon_i \sim N(0, \sigma^2)\)</span>. <span class="math inline">\(y_i\)</span> is the height of adult <span class="math inline">\(i\)</span>. … <span class="math inline">\(\epsilon_i\)</span> is the “error term,” the difference between the height of male <span class="math inline">\(i\)</span> and the average height of all males.</p>
+<p><span class="math inline">\(\epsilon_i\)</span> is normally distributed with a mean of 0 and a standard deviation of <span class="math inline">\(\sigma\)</span>.</p>
+<p>Note:</p>
 <ul>
-<li>The model has two unknown parameters: <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>. Before we can do anything else we need to estimate the values of these parameters. Can we ever know their exact value? No! Perfection lies only in God’s own R code. But, by using a Bayesian approach similar to what we used in Chapters <a href="probability.html" class="quarto-xref"><span>Chapter 2</span></a> and <a href="models.html" class="quarto-xref"><span>Chapter 4</span></a>, we will be able to create a <em>posterior probability distribution</em> for each parameter.</li>
+<li>The model has three unknown parameters: <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, and <span class="math inline">\(\sigma\)</span>. Before we can do anything else we need to estimate the values of these parameters. Can we ever know their exact value? No! Perfection lies only in God’s own R code. But, by using an approach similar to what we used in Chapters <a href="probability.html" class="quarto-xref"><span>Chapter 2</span></a> and <a href="models.html" class="quarto-xref"><span>Chapter 4</span></a>, we will be able to create a <em>posterior probability distribution</em> for each parameter.</li>
 </ul>
 <!-- Add Dr. Box quote. All models are wrong, some are useful. And a photo. --><ul>
 <li><p>The model is wrong, as are all models.</p></li>
 <li><p>The parameter we most care about is <span class="math inline">\(\mu\)</span>. That is the parameter with a substantively meaningful interpretation. Not only is the meaning of <span class="math inline">\(\sigma\)</span> difficult to describe, we also don’t particular care about its value. Parameters like <span class="math inline">\(\sigma\)</span> in this context are <em>nuisance</em> or <em>auxiliary</em> parameters. We still estimate their posterior distributions, but we don’t really care what those posteriors look like.</p></li>
-<li><p><span class="math inline">\(\mu\)</span> is not the average height of the men in the sample. We can calculate that directly. It is 175.870667. No estimation required! Instead, <span class="math inline">\(\mu\)</span> is the average height of men in the <em>population</em>. Recall from the discussions in <a href="models.html" class="quarto-xref"><span>Chapter 4</span></a> that the population is the universe of people/units/whatever about which we seek to draw conclusions. On some level, this seems simple. On a deeper level, it is very subtle. For example, if we are walking around Copenhagen, then the population we really care about, in order to answer our three questions, is the set of adult men which we might meet today. This is not the same as the population of adult men in the US in 2010. But is it close enough? Is it better than nothing? We want to assume that both men from <code>nhanes</code> (the data we have) and men we meet in Copenhagen today (the data we want to have) are drawn from the same <em>population</em>. Each case is a different and the details matter.</p></li>
+<li><p><span class="math inline">\(\mu\)</span> is not the average height of the men in the sample. We can calculate that directly. It is 169.142. No estimation required! Instead, <span class="math inline">\(\mu\)</span> is the average height of men in the <em>population</em>. Recall from the discussions in <a href="models.html" class="quarto-xref"><span>Chapter 4</span></a> that the population is the universe of people/units/whatever about which we seek to draw conclusions. On some level, this seems simple. On a deeper level, it is very subtle. For example, if we are walking around Copenhagen, then the population we really care about, in order to answer our three questions, is the set of adult men which we might meet today. This is not the same as the population of adult men in the US in 2010. But is it close enough? Is it better than nothing? We want to assume that both men from <code>nhanes</code> (the data we have) and men we meet in Copenhagen today (the data we want to have) are drawn from the same <em>population</em>. Each case is a different and the details matter.</p></li>
 <li><p><span class="math inline">\(\sigma\)</span> is an estimate for the standard deviation of the errors, i.e., variability in height after accounting for the mean.</p></li>
 </ul>
 <section id="models" class="level3" data-number="5.3.1"><h3 data-number="5.3.1" class="anchored" data-anchor-id="models">
 <span class="header-section-number">5.3.1</span> Models</h3>
-<p>Let’s estimate a simple version of the model. First, we need to load the <strong>brms</strong> and <strong>tidybayes</strong> packages.</p>
+<p>Let’s estimate a simple version of the model. Load the <strong>tidymodels</strong> package.</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/paul-buerkner/brms">brms</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mjskay.github.io/tidybayes/">tidybayes</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Because we are estimating a linear model, we begin with:</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">height</span> <span class="op">~</span> <span class="fl">1</span>,</span>
-<span>             data <span class="op">=</span> <span class="va">ch5</span>,</span>
-<span>             family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">gaussian</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>             silent <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>             refresh <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>             seed <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Note:</p>
-<ul>
-<li><p>There is a direct connection between the mathematical form of the model created under Justice and the code we use to fit the model under Courage. <code>height ~ 1</code> is the code equivalent of <span class="math inline">\(y_i =  \mu\)</span>.</p></li>
-<li><p>Setting <code>family = gaussian()</code> implies that <span class="math inline">\(\epsilon_i \sim N(0, \sigma^2)\)</span>, just as we assumed. That is not a coincidence! If <span class="math inline">\(\epsilon_i\)</span> had a different distribution, we would need to use a different statistical family.</p></li>
-<li><p>There are several ways to examine the fitted model. The simplest is to print it. Recall that just typing <code>x</code> at the prompt is the same as writing <code>print(x)</code>.</p></li>
-</ul>
-<div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_1</span> <span class="op">&lt;-</span> <span class="fu">linear_reg</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">set_engine</span><span class="op">(</span><span class="st">"lm"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">fit</span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit_1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> Family: gaussian 
-  Links: mu = identity; sigma = identity 
-Formula: height ~ 1 
-   Data: ch5 (Number of observations: 3658) 
-  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
-         total post-warmup draws = 4000
+<pre><code>parsnip model object
 
-Regression Coefficients:
-          Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept   175.87      0.12   175.63   176.11 1.00     3788     2818
 
-Further Distributional Parameters:
-      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-sigma     7.48      0.09     7.31     7.65 1.00     3893     2633
+Call:
+stats::lm(formula = height ~ 1 + sex, data = data)
 
-Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
-and Tail_ESS are effective sample size measures, and Rhat is the potential
-scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+Coefficients:
+(Intercept)      sexMale  
+     164.74         9.56  </code></pre>
 </div>
 </div>
-<p>Note:</p>
-<ul>
-<li><p>We will be looking at this print out many times in the rest of the <em>Primer</em>. You will get used to it. The header information about Family, Links and so on just confirms what we already know. Still, you want to check this to make sure you did not make a mistake in the call to <code><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm()</a></code>.</p></li>
-<li><p>The key parameter is the “Intercept,” which is the same thing as <span class="math inline">\(\mu\)</span> in the mathematical description of the model and the same thing as <code>1</code> when we set <code>formula = height ~ 1</code>. In other words, we are speaking three languages here: English (“Intercept”), math ($mu$), and code (<code>height ~ 1</code>). But all three languages are referring to the same underlying concept.</p></li>
-<li><p>The “Estimate” of 175.87 makes sense. After all, the simple mean of the <code>height</code> in the data is:</p></li>
-</ul>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ch5</span><span class="op">$</span><span class="va">height</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/datalorax/equatiomatic">equatiomatic</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'equatiomatic'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:modeldata':
+
+    penguins</code></pre>
+</div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://datalorax.github.io/equatiomatic/reference/extract_eq.html">extract_eq</a></span><span class="op">(</span><span class="va">fit_1</span><span class="op">$</span><span class="va">fit</span>, intercept <span class="op">=</span> <span class="st">"beta"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><span class="math display">\[
+\operatorname{height} = \beta_{0} + \beta_{1}(\operatorname{sex}_{\operatorname{Male}}) + \epsilon
+\]</span></p>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://datalorax.github.io/equatiomatic/reference/extract_eq.html">extract_eq</a></span><span class="op">(</span><span class="va">fit_1</span><span class="op">$</span><span class="va">fit</span>, </span>
+<span>           intercept <span class="op">=</span> <span class="st">"beta"</span>, </span>
+<span>           use_coefs <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>           coef_digits <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><span class="math display">\[
+\operatorname{\widehat{height}} = 165 + 10(\operatorname{sex}_{\operatorname{Male}})
+\]</span></p>
+</div>
+</div>
+<p>There is a direct connection between the mathematical form of the model created under Justice and the code we use to fit the model under Courage. <code>height ~ 1 + sex</code> is the code equivalent of <span class="math inline">\(y_i =  \beta_0 + \beta_1 sexMale\)</span>.</p>
+<p>There are several ways to examine the fitted model. The simplest is to print it. Recall that just typing <code>x</code> at the prompt is the same as writing <code>print(x)</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 175.8707</code></pre>
+<pre><code>parsnip model object
+
+
+Call:
+stats::lm(formula = height ~ 1 + sex, data = data)
+
+Coefficients:
+(Intercept)      sexMale  
+     164.74         9.56  </code></pre>
+</div>
+</div>
+<p>The (Intercept) is the same thing as <span class="math inline">\(\beta_0\)</span> in the mathematical description of the model. In other words, we are speaking three languages here: English (“Intercept”), math ($beta_0$), and code (<code>~ 1</code>). But all three languages are referring to the same underlying concept.</p>
+<p>The intercept (<code>1</code>) is automatically included in R regression models by default, so we can leave it out. In other words, <code>height ~ 1 + sex</code> is the same model as <code>height ~ sex</code>.</p>
+<p>Load the <strong>broom</strong> package to examine the fitted model with the <code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code> function.</p>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">fit_1</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 7
+  term        estimate std.error statistic  p.value conf.low conf.high
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)   165.        1.10    149.   1.10e-65   163.       167. 
+2 sexMale         9.56      1.63      5.87 3.91e- 7     6.29      12.8</code></pre>
+</div>
+</div>
+<!-- DK: Insert interpretions of the parameters. perhaps equixomatic? -->
+<div class="cell">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>avg_heigh <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, .by <span class="op">=</span> <span class="va">sex</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  sex    avg_heigh
+  &lt;chr&gt;      &lt;dbl&gt;
+1 Male        174.
+2 Female      165.</code></pre>
 </div>
 </div>
 <ul>
 <li>The estimated error (“Est.Error”) also makes sense. This is the standard error and can be calculated by hand as the standard deviation of the data divided by the squart root of the number of observations:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">ch5</span><span class="op">$</span><span class="va">height</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">3658</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">height</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">3658</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1237131</code></pre>
+<pre><code>[1] 0.1230646</code></pre>
 </div>
 </div>
 <ul>
 <li><p>The end points of the confidence intervals are simply the estimate <span class="math inline">\(\pm\)</span> two times the standard error.</p></li>
 <li><p>We don’t really care about the values associated with sigma, which has no physical meaning. Parameters like this are often referred to as “nuisance” parameters because, although they are necessary to constructing the fitted model, we don’t really care about them outside that context. The Intercept, on the other hand, is the mean of our posterior distribution for the unknown parameter <span class="math inline">\(\mu\)</span>, the average height of an adult male.</p></li>
-</ul>
-<!-- DK: Run tidy(fit_1)? --><p>Consider the posterior distribution of <span class="math inline">\(\mu\)</span>.</p>
-<div class="cell">
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_1</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.epred</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">count</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                   bins <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Posterior Probability Distribution of "</span>, <span class="va">mu</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>         subtitle <span class="op">=</span> <span class="st">"Distribution is centered at 175.9 cm"</span>,</span>
-<span>         x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Mean, "</span>, <span class="va">mu</span>, <span class="st">", height of adult men"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>         y <span class="op">=</span> <span class="st">"Probability"</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/comma.html">number_format</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>This is almost exactly the same code as we used in <span class="quarto-unresolved-ref">?sec-modeling</span>. It is the same code which we will use in the future.</p>
-</section><section id="data-generating-mechanism" class="level3" data-number="5.3.2"><h3 data-number="5.3.2" class="anchored" data-anchor-id="data-generating-mechanism">
+</ul></section><section id="data-generating-mechanism" class="level3" data-number="5.3.2"><h3 data-number="5.3.2" class="anchored" data-anchor-id="data-generating-mechanism">
 <span class="header-section-number">5.3.2</span> Data Generating Mechanism</h3>
 <p>We modeled <code>height</code>, a continuous variable measured in centimeters, as a linear function of a constant term. The average adult male height in the US was around 176 cm. Mathematically:</p>
 <p><span class="math display">\[ height_i =  176 + \epsilon_i \]</span></p>
@@ -1797,16 +1843,8 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span class="header-section-number">5.3.3</span> Tests</h3>
 <p>Before excepting <code>fit_1</code> as our data generating mechanism, we should perform a posterior predictive check.</p>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">brms</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">fit_1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stderr">
-<pre><code>Using 10 posterior draws for ppc type 'dens_overlay' by default.</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## tidymodels::pp_check(fit_1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Note how similar our actual data, <span class="math inline">\(y\)</span>, is to the 10 versions of the replicated data, <span class="math inline">\(y_rep\)</span>. They are close enough that we are happy to use <code>fit_1</code>. However, the match is not perfect! The actual data is slightly more “peaked” and also features some weird bumps in the tails, especially around 200 cm. It would be possible, but not easy, to modify our model to match the actual data more closely. For now, we will just accept <code>fit_1</code> as our data generating mechanism.</p>
 </section></section><section id="temperance" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="temperance">
@@ -1824,52 +1862,29 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <ul>
 <li>What is the probability that the next adult male we meet will be taller than 180 centimeters?</li>
 </ul>
-<p>There are two fundamentally different kinds of unknowns which we care about: <em>expected values</em> and <em>predicted values</em>. With the former, we are not interested in any specific individual. The individual value is irrelevant. With predicted values, we care, not about the average, but about this specific person. With the former, we use <code><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code>. With the latter, the relevant function is <code><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws()</a></code>. Both functions return draws from a posterior probability distribution, but the unknown number which underlies the posterior are very different.</p>
+<p>There are two fundamentally different kinds of unknowns which we care about: <em>expected values</em> and <em>predicted values</em>. With the former, we are not interested in any specific individual. The individual value is irrelevant. With predicted values, we care, not about the average, but about this specific person. With the former, we use <code>add_epred_draws()</code>. With the latter, the relevant function is <code>add_predicted_draws()</code>. Both functions return draws from a posterior probability distribution, but the unknown number which underlies the posterior are very different.</p>
 <p>Recall the mathematics:</p>
 <p><span class="math display">\[ y_i =  \mu + \epsilon_i \]</span></p>
 <p>With expected values or averages, we can ignore the <span class="math inline">\(\epsilon_i\)</span> term in this formula. The expected value of <span class="math inline">\(\epsilon_i\)</span> is zero since, by assumption, <span class="math inline">\(\epsilon_i \sim N(0, \sigma^2)\)</span>. However, we can’t ignore <span class="math inline">\(\epsilon_i\)</span> when predicting the height for a single individual.</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_1</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4,000 × 5
-# Groups:   .row [1]
-    .row .chain .iteration .draw .prediction
-   &lt;int&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt;       &lt;dbl&gt;
- 1     1     NA         NA     1        170.
- 2     1     NA         NA     2        180.
- 3     1     NA         NA     3        185.
- 4     1     NA         NA     4        177.
- 5     1     NA         NA     5        190.
- 6     1     NA         NA     6        168.
- 7     1     NA         NA     7        179.
- 8     1     NA         NA     8        177.
- 9     1     NA         NA     9        176.
-10     1     NA         NA    10        182.
-# ℹ 3,990 more rows</code></pre>
-</div>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># fit_1 |&gt; </span></span>
+<span><span class="co">#   add_predicted_draws(newdata = tibble(.rows = 1))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As before, it is straightforward to turn draws from the posterior probability distribution into a graphic:</p>
 <div class="cell">
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_1</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.prediction</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">count</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                   bins <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Posterior for Height of Random Male"</span>,</span>
-<span>         subtitle <span class="op">=</span> <span class="st">"Uncertainty for a single individual is much greater than for the expected value"</span>,</span>
-<span>         x <span class="op">=</span> <span class="st">"Height (cm)"</span>,</span>
-<span>         y <span class="op">=</span> <span class="st">"Probability"</span>,</span>
-<span>         caption <span class="op">=</span> <span class="st">"Data source: NHANES"</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/comma.html">number_format</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># fit_1 |&gt; </span></span>
+<span><span class="co">#   add_predicted_draws(newdata = tibble(.rows = 1)) |&gt; </span></span>
+<span><span class="co">#   ggplot(aes(x = .prediction)) +</span></span>
+<span><span class="co">#     geom_histogram(aes(y = after_stat(count/sum(count))),</span></span>
+<span><span class="co">#                    bins = 100) +</span></span>
+<span><span class="co">#     labs(title = "Posterior for Height of Random Male",</span></span>
+<span><span class="co">#          subtitle = "Uncertainty for a single individual is much greater than for the expected value",</span></span>
+<span><span class="co">#          x = "Height (cm)",</span></span>
+<span><span class="co">#          y = "Probability",</span></span>
+<span><span class="co">#          caption = "Data source: NHANES") + </span></span>
+<span><span class="co">#     scale_x_continuous(labels = scales::number_format()) +</span></span>
+<span><span class="co">#     scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +</span></span>
+<span><span class="co">#     theme_classic()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note:</p>
 <ul>
@@ -1878,72 +1893,33 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <li><p>We can calculate the exact probability by manipulating the tibble of draws directly.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_1</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>tall <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">.prediction</span> <span class="op">&gt;</span> <span class="fl">180</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>odds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">tall</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 2
-   .row  odds
-  &lt;int&gt; &lt;dbl&gt;
-1     1 0.283</code></pre>
-</div>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># fit_1 |&gt; </span></span>
+<span><span class="co">#   add_predicted_draws(newdata = tibble(.rows = 1)) |&gt; </span></span>
+<span><span class="co">#   mutate(tall = if_else(.prediction &gt; 180, TRUE, FALSE)) |&gt; </span></span>
+<span><span class="co">#   summarize(odds = mean(tall))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If 30% or so of the draws from the posterior probability distribution are greater than 180 cm, then there is about a 30% chance that the next individual will be taller than 180 cm.</p>
 <p>Again, the key conceptual difficulty is the population. The problem we actually have involves walking around London, or wherever, today. The data we have involve America in 2010. Those are not the same things! But they are not totally different. Knowing whether the data we have is “close enough” to the problem we want to solve is at the heart of Wisdom. Yet that was the decision we made at the start of the process, the decision to create a model in the first place. Now that we have created a model, we look to the virtue of Temperance for guidance in using that model. The data we have is never a perfect match for the world we face. We need to temper our confidence and act with humility. Our forecasts will never be as good as a naive use of the model might suggest. Reality will surprise us. We need to take the model’s claims with a family-sized portion of salt.</p>
 <ul>
 <li>What is the probability that, among the next 4 men we meet, the tallest is at least 10 cm taller than the shortest?</li>
 </ul>
-<p>Bayesian models are beautiful because, via the magic of simulation, we can answer (almost!) any question. Because the question is about four random individuals, we need <code><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws()</a></code> to give us four sets of draws from four identical posterior probability distributions. All we need to do is to change 1 to 4 in our previous code and then widen the data. If you need to predict X individuals, then you need a tibble with X rows, regardless of whether or not those rows are otherwise identical.</p>
+<p>Bayesian models are beautiful because, via the magic of simulation, we can answer (almost!) any question. Because the question is about four random individuals, we need <code>add_predicted_draws()</code> to give us four sets of draws from four identical posterior probability distributions. All we need to do is to change 1 to 4 in our previous code and then widen the data. If you need to predict X individuals, then you need a tibble with X rows, regardless of whether or not those rows are otherwise identical.</p>
 <div class="cell">
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_1</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">.row</span>, <span class="va">.draw</span>, <span class="va">.prediction</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>values_from <span class="op">=</span> <span class="va">.prediction</span>, names_from <span class="op">=</span> <span class="va">.row</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4,000 × 5
-   .draw   `1`   `2`   `3`   `4`
-   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1     1  176.  177.  176.  176.
- 2     2  177.  186.  180.  187.
- 3     3  186.  181.  165.  187.
- 4     4  180.  177.  168.  175.
- 5     5  185.  186.  175.  180.
- 6     6  160.  177.  162.  189.
- 7     7  189.  176.  177.  187.
- 8     8  175.  178.  161.  153.
- 9     9  177.  168.  177.  178.
-10    10  170.  169.  167.  172.
-# ℹ 3,990 more rows</code></pre>
-</div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># fit_1 |&gt; </span></span>
+<span><span class="co">#   add_predicted_draws(newdata = tibble(.rows = 4)) |&gt;</span></span>
+<span><span class="co">#   select(.row, .draw, .prediction) |&gt; </span></span>
+<span><span class="co">#   pivot_wider(values_from = .prediction, names_from = .row)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Again, we have the subtle issue. In the same way that light is both a wave and a particle, these columns are both posteriors and draws from those posteriors, when considered row by row. In each row, we are running an experiment in which we meet 4 men. We measure their heights, we determine if the tallest is more than 10 centimeters taller than the shortest. We then do the same thing is row 2, row 3 and so on. The functions <code>row_wise()</code> and <code><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across()</a></code> make this (mostly) simple.</p>
 <div class="cell">
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">draws</span> <span class="op">&lt;-</span> <span class="va">fit_1</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">.row</span>, <span class="va">.draw</span>, <span class="va">.prediction</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>values_from <span class="op">=</span> <span class="va">.prediction</span>, names_from <span class="op">=</span> <span class="va">.row</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>diff <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across</a></span><span class="op">(</span><span class="va">`1`</span><span class="op">:</span><span class="va">`4`</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across</a></span><span class="op">(</span><span class="va">`1`</span><span class="op">:</span><span class="va">`4`</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">draws</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4,000 × 6
-# Rowwise: 
-   .draw   `1`   `2`   `3`   `4`  diff
-   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1     1  183.  174.  171.  178. 12.4 
- 2     2  179.  186.  174.  173. 12.3 
- 3     3  177.  184.  177.  179.  6.59
- 4     4  180.  173.  170.  179. 10.8 
- 5     5  173.  177.  176.  166. 11.6 
- 6     6  170.  173.  182.  181. 11.9 
- 7     7  176.  182.  183.  179.  6.37
- 8     8  173.  176.  159.  164. 16.4 
- 9     9  179.  180.  174.  189. 15.4 
-10    10  185.  172.  164.  194. 29.8 
-# ℹ 3,990 more rows</code></pre>
-</div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># draws &lt;- fit_1 |&gt; </span></span>
+<span><span class="co">#   add_predicted_draws(newdata = tibble(.rows = 4)) |&gt;</span></span>
+<span><span class="co">#   select(.row, .draw, .prediction) |&gt; </span></span>
+<span><span class="co">#   pivot_wider(values_from = .prediction, names_from = .row) |&gt; </span></span>
+<span><span class="co">#   rowwise() %&gt;%</span></span>
+<span><span class="co">#   mutate(diff = max(c_across(`1`:`4`)) - min(c_across(`1`:`4`)))</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># draws</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Unfortunately, this code can take a while to run, so we save the results in a permanent tibble named <code>draws</code>. This will be a common approach, just as we have saved the fitted model object as <code>fit_1</code>, or whatever, rather than recreating it each time.</p>
 <p>The next step is to calculate the number of interest. We can not, directly, draw the height of the tallest or shortest out of 4 random men. However, having drawn 4 random men, we can calculate those numbers, and the difference between them.</p>
@@ -1951,32 +1927,24 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <p><em>Give us enough random draws, and a tibble in which to store them, and we can estimate the world.</em></p>
 <p>Once we have random draws from the posterior distribution we care about, graphing the posterior probability distribution is the same-old, same-old.</p>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">draws</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>diff <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across</a></span><span class="op">(</span><span class="va">`1`</span><span class="op">:</span><span class="va">`4`</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across</a></span><span class="op">(</span><span class="va">`1`</span><span class="op">:</span><span class="va">`4`</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">diff</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">count</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                   bins <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Posterior for Max Height Difference Among Four Men"</span>,</span>
-<span>         subtitle <span class="op">=</span> <span class="st">"The expected value for this difference would be much more narrow"</span>,</span>
-<span>         x <span class="op">=</span> <span class="st">"Height Difference in Centimeters"</span>,</span>
-<span>         y <span class="op">=</span> <span class="st">"Probability"</span>,</span>
-<span>         caption <span class="op">=</span> <span class="st">"Data source: NHANES"</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">10</span><span class="op">)</span>,</span>
-<span>                       labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/comma.html">number_format</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># draws %&gt;%</span></span>
+<span><span class="co">#   mutate(diff = max(c_across(`1`:`4`)) - min(c_across(`1`:`4`))) |&gt; </span></span>
+<span><span class="co">#   ggplot(aes(x = diff)) +</span></span>
+<span><span class="co">#     geom_histogram(aes(y = after_stat(count/sum(count))),</span></span>
+<span><span class="co">#                    bins = 100) +</span></span>
+<span><span class="co">#     labs(title = "Posterior for Max Height Difference Among Four Men",</span></span>
+<span><span class="co">#          subtitle = "The expected value for this difference would be much more narrow",</span></span>
+<span><span class="co">#          x = "Height Difference in Centimeters",</span></span>
+<span><span class="co">#          y = "Probability",</span></span>
+<span><span class="co">#          caption = "Data source: NHANES") + </span></span>
+<span><span class="co">#     scale_x_continuous(breaks = seq(0, 50, 10),</span></span>
+<span><span class="co">#                        labels = scales::number_format()) +</span></span>
+<span><span class="co">#     scale_y_continuous(labels = scales::percent_format()) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-</div>
-</div>
-<p>There is about an 78% chance that, when meeting 4 random men, the tallest will be at least 10 cm taller than the shortest. Exact calculation:</p>
+<p>There is about an % chance that, when meeting 4 random men, the tallest will be at least 10 cm taller than the shortest. Exact calculation:</p>
 <div class="cell">
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">draws</span><span class="op">$</span><span class="va">diff</span> <span class="op">&gt;</span> <span class="fl">10</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">draws</span><span class="op">$</span><span class="va">diff</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.77725</code></pre>
-</div>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># sum(draws$diff &gt; 10) / length(draws$diff)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- DK: I am concerned that we are not providing uncertainty estimates when we answer these questions. The best answer is 77%. Fine. But how much uncertainty is there in this estimate? This strikes me as a hard question! -->
 <ul>
@@ -1984,60 +1952,33 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </ul>
 <p>The same approach will work for almost any question.</p>
 <div class="cell">
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_1</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">.row</span>, <span class="va">.draw</span>, <span class="va">.prediction</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>values_from <span class="op">=</span> <span class="va">.prediction</span>, names_from <span class="op">=</span> <span class="va">.row</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4,000 × 101
-   .draw   `1`   `2`   `3`   `4`   `5`   `6`   `7`   `8`   `9`  `10`  `11`  `12`
-   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1     1  178.  176.  176.  179.  176.  179.  184.  175.  185.  179.  185.  163.
- 2     2  172.  171.  176.  175.  163.  175.  177.  173.  182.  175.  163.  176.
- 3     3  177.  184.  175.  182.  176.  180.  175.  174.  162.  165.  175.  162.
- 4     4  183.  178.  190.  165.  173.  185.  177.  179.  174.  179.  187.  178.
- 5     5  168.  173.  187.  171.  177.  179.  190.  186.  187.  155.  185.  190.
- 6     6  184.  169.  162.  186.  160.  169.  172.  171.  163.  171.  175.  178.
- 7     7  170.  178.  166.  172.  170.  185.  167.  180.  189.  173.  186.  187.
- 8     8  171.  171.  174.  172.  171.  175.  186.  164.  183.  174.  175.  176.
- 9     9  173.  182.  172.  182.  181.  168.  175.  197.  168.  168.  187.  173.
-10    10  185.  173.  184.  181.  166.  178.  173.  167.  184.  171.  176.  178.
-# ℹ 3,990 more rows
-# ℹ 88 more variables: `13` &lt;dbl&gt;, `14` &lt;dbl&gt;, `15` &lt;dbl&gt;, `16` &lt;dbl&gt;,
-#   `17` &lt;dbl&gt;, `18` &lt;dbl&gt;, `19` &lt;dbl&gt;, `20` &lt;dbl&gt;, `21` &lt;dbl&gt;, `22` &lt;dbl&gt;,
-#   `23` &lt;dbl&gt;, `24` &lt;dbl&gt;, `25` &lt;dbl&gt;, `26` &lt;dbl&gt;, `27` &lt;dbl&gt;, `28` &lt;dbl&gt;,
-#   `29` &lt;dbl&gt;, `30` &lt;dbl&gt;, `31` &lt;dbl&gt;, `32` &lt;dbl&gt;, `33` &lt;dbl&gt;, `34` &lt;dbl&gt;,
-#   `35` &lt;dbl&gt;, `36` &lt;dbl&gt;, `37` &lt;dbl&gt;, `38` &lt;dbl&gt;, `39` &lt;dbl&gt;, `40` &lt;dbl&gt;,
-#   `41` &lt;dbl&gt;, `42` &lt;dbl&gt;, `43` &lt;dbl&gt;, `44` &lt;dbl&gt;, `45` &lt;dbl&gt;, `46` &lt;dbl&gt;, …</code></pre>
-</div>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># fit_1 |&gt; </span></span>
+<span><span class="co">#   add_predicted_draws(newdata = tibble(.rows = 100)) |&gt;</span></span>
+<span><span class="co">#   select(.row, .draw, .prediction) |&gt; </span></span>
+<span><span class="co">#   pivot_wider(values_from = .prediction, names_from = .row)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Again, we have 100 (identical) posteriors, each representing the height of a random adult male. Each column is a posterior. (In later models, the columns will represent different posteriors, but we keep things simple for now.) Each row can then be viewed as an experiment. Instead of just meeting one random man, however, we meet 100. Draws from a posterior are the same thing as one random unit from the underlying population.</p>
 <p>The magic of <code><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise()</a></code>and <code><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across()</a></code> allows us to easily determine the height of the tallest man out of 100.</p>
 <div class="cell">
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">draws</span> <span class="op">&lt;-</span> <span class="va">fit_1</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">.row</span>, <span class="va">.draw</span>, <span class="va">.prediction</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>values_from <span class="op">=</span> <span class="va">.prediction</span>, names_from <span class="op">=</span> <span class="va">.row</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>third_tallest <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across</a></span><span class="op">(</span><span class="va">`1`</span><span class="op">:</span><span class="va">`100`</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">98</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># draws &lt;- fit_1 |&gt; </span></span>
+<span><span class="co">#   add_predicted_draws(newdata = tibble(.rows = 100)) |&gt;</span></span>
+<span><span class="co">#   select(.row, .draw, .prediction) |&gt; </span></span>
+<span><span class="co">#   pivot_wider(values_from = .prediction, names_from = .row) |&gt; </span></span>
+<span><span class="co">#   rowwise() %&gt;%</span></span>
+<span><span class="co">#   mutate(third_tallest = sort(c_across(`1`:`100`))[98])</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">draws</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">third_tallest</span>, y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">count</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Posterior for Height of 3rd Tallest Man from Next 100"</span>,</span>
-<span>         subtitle <span class="op">=</span> <span class="st">"Should we have more or less certainty about behavior in the tails?"</span>,</span>
-<span>         x <span class="op">=</span> <span class="st">"Height (cm)"</span>,</span>
-<span>         y <span class="op">=</span> <span class="st">"Probability"</span>,</span>
-<span>         caption <span class="op">=</span> <span class="st">"Data source: NHANES"</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/comma.html">number_format</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># draws |&gt; </span></span>
+<span><span class="co">#   ggplot(aes(x = third_tallest, y = after_stat(count / sum(count)))) +</span></span>
+<span><span class="co">#     geom_histogram(bins = 100) +</span></span>
+<span><span class="co">#     labs(title = "Posterior for Height of 3rd Tallest Man from Next 100",</span></span>
+<span><span class="co">#          subtitle = "Should we have more or less certainty about behavior in the tails?",</span></span>
+<span><span class="co">#          x = "Height (cm)",</span></span>
+<span><span class="co">#          y = "Probability",</span></span>
+<span><span class="co">#          caption = "Data source: NHANES") + </span></span>
+<span><span class="co">#     scale_x_continuous(labels = scales::number_format()) +</span></span>
+<span><span class="co">#     scale_y_continuous(labels = scales::percent_format(accuracy = 1)) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section><section id="humility" class="level3" data-number="5.4.2"><h3 data-number="5.4.2" class="anchored" data-anchor-id="humility">
 <span class="header-section-number">5.4.2</span> Humility</h3>
