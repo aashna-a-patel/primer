@@ -54,7 +54,7 @@
     "href": "getting-started.html#summary",
     "title": "Getting Started",
     "section": "Summary",
-    "text": "Summary\nYou should have done the following:\n\nInstalled the latest versions of R and RStudio.\nInstalled, from CRAN, the remotes, tutorial.helpers and tidyverse packages:\n\n\noptions(\"pkgType\" = \"binary\")\ninstall.packages(\"remotes\")\ninstall.packages(\"tutorial.helpers\")\ninstall.packages(\"tidyverse\")\n\n\nInstalled, from Github, the r4ds.tutorials and primer.tutorials packages:\n\n\nremotes::install_github(\"PPBDS/r4ds.tutorials\")\nremotes::install_github(\"PPBDS/primer.tutorials\")\n\n\nCompleted the “Getting Started with Tutorials” tutorial from the tutorial.helpers package.\n\nLet’s get started.",
+    "text": "Summary\nYou should have done the following:\n\nInstalled the latest versions of R and RStudio.\nInstalled, from CRAN, the remotes, tutorial.helpers and tidyverse packages:\n\n\n# Only run this options() line if NOT on Posit Cloud\n# options(\"pkgType\" = \"binary\"). \ninstall.packages(\"remotes\")\ninstall.packages(\"tutorial.helpers\")\ninstall.packages(\"tidyverse\")\n\n\nInstalled, from Github, the r4ds.tutorials and primer.tutorials packages:\n\n\nremotes::install_github(\"PPBDS/r4ds.tutorials\")\nremotes::install_github(\"PPBDS/primer.tutorials\")\n\n\nCompleted the “Getting Started with Tutorials” tutorial from the tutorial.helpers package.\n\nLet’s get started.",
     "crumbs": [
       "Getting Started"
     ]

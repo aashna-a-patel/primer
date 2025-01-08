@@ -320,7 +320,8 @@ You should have done the following:
 ```{r}
 #| eval: false
 #| code-fold: false
-options("pkgType" = "binary")
+# Only run this options() line if NOT on Posit Cloud
+# options("pkgType" = "binary"). 
 install.packages("remotes")
 install.packages("tutorial.helpers")
 install.packages("tidyverse")
