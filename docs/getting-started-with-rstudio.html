@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.6.39">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Getting Started – Preceptor’s Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference</title>
+<title>Getting Started with RStudio – Preceptor’s Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -105,7 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./getting-started-with-rstudio.html">Getting Started</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./getting-started-with-rstudio.html">Getting Started with RStudio</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -161,13 +161,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./getting-started-with-rstudio.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Getting Started</span></a>
+ <span class="menu-text">Getting Started with RStudio</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./getting-started-with-positron.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Getting Started</span></a>
+ <span class="menu-text">Getting Started with Positron</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -269,7 +269,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">Getting Started</h1>
+<h1 class="title">Getting Started with RStudio</h1>
 </div>
 
 
@@ -286,9 +286,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header><p><em>You can never look at the data too much.</em> – Mark Engerman</p>
 <p>The world confronts us. Make decisions we must.</p>
 <section id="installing-r-and-rstudio" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="installing-r-and-rstudio">Installing R and RStudio</h3>
-<!-- Be careful! If you install tutorial.helpers from CRAN, and then, when you install r4ds.tutorials, don't update all packages, you won't get the PPBDS version of tutorial.helpers, which we need because of show_file(). -->
-<!-- Update all the images. -->
-<!-- Change the graphic so that the words are the top are: "R is like a car's engine." and "RStudio is like a car's dashboard." -->
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -304,7 +301,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><a href="https://cloud.r-project.org/">Download and install R</a>. If you are using a Mac, make sure to use the correct installation, depending on whether you are using newer Apple silicon “M1-3 Macs” (first option) or older “Intel Macs” (second option). You can look up the chip used in your Mac by checking “About This Mac” under the Apple menu.</p></li>
 <li><p><a href="https://rstudio.com/products/rstudio/download/#download">Download and install RStudio Desktop</a> (the free version).</p></li>
 </ol>
-<!-- DK: Sure would be nice if this was not necessary. Maybe R-universe would make it so? --><p>If you are using Windows, you must first install RTools. Download the latest version from <a href="https://cran.r-project.org/bin/windows/Rtools/">here</a>. Currently, the Rtools44 installer is what you want. The link is in the seventh paragraph of <a href="https://cran.r-project.org/bin/windows/Rtools/rtools44/rtools.html">this page</a>.</p>
+<!-- DK: Sure would be nice if this was not necessary. Maybe R-universe would make it so? --><p>If you are using Windows, you must also install RTools. Download the latest version from <a href="https://cran.r-project.org/bin/windows/Rtools/">here</a>. Currently, the Rtools44 installer is what you want. The link is in the seventh paragraph of <a href="https://cran.r-project.org/bin/windows/Rtools/rtools44/rtools.html">this page</a>.</p>
 <p>If you are using a Chromebook, follow <a href="https://levente.littvay.hu/chromebook/">this advice</a>.</p>
 <p>If you are having trouble, just sign up for a free account on <a href="https://posit.cloud/">Posit Cloud</a>. (See <a href="https://ppbds.github.io/tutorial.helpers/articles/cloud.html">here for our instructions</a>.) This will give you 25 hours of usage, which should be enough to get started.</p>
 <!-- DK: Could text like this be in a "More Detail" box which only appears when clicked?  If you want a slower introduction, check out the short (free) book, [*Getting Used to R, RStudio, and R Markdown*](https://rbasics.netlify.com/). @usedtor2016 include screencast recordings that you can follow along and pause as you learn. -->
@@ -533,7 +530,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"PPBDS/primer.tutorials"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li>Completed the “Getting Started with Tutorials” tutorial from the <strong>tutorial.helpers</strong> package.</li>
+<li>Completed the “Tutorials in RStudio” tutorial from the <strong>tutorial.helpers</strong> package.</li>
 </ul>
 <p>Let’s get started.</p>
 <div class="cell">
@@ -968,8 +965,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./getting-started-with-positron.html" class="pagination-link" aria-label="Getting Started">
-        <span class="nav-page-text">Getting Started</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./getting-started-with-positron.html" class="pagination-link" aria-label="Getting Started with Positron">
+        <span class="nav-page-text">Getting Started with Positron</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
