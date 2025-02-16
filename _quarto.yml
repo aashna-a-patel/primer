@@ -30,7 +30,8 @@ book:
   chapters:
     - index.qmd
     - preamble.qmd
-    - getting-started.qmd
+    - getting-started-with-rstudio.qmd
+    - getting-started-with-positron.qmd
     - rubin-causal-model.qmd
     - probability.qmd
     - sampling.qmd

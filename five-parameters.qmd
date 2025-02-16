@@ -704,7 +704,7 @@ Our graph in the darker blue represents our actual data. As we can see with the 
 
 ### Data Generating Mechanism
 
-Recall the parallel slopes model that we created in @sec-four-parameters. Another visualization we can create, one that also uses slopes and intercepts for our model, is the interaction model. In this model, the slopes for our two groups **are different**, creating a non-parallel visualization. 
+Recall the parallel slopes model. Another visualization we can create, one that also uses slopes and intercepts for our model, is the interaction model. In this model, the slopes for our two groups **are different**, creating a non-parallel visualization. 
 
 The process for creating the interaction model is similar to creating the parallel slopes model. Let us begin the same way --- by tidying our data and inspecting it. 
 
@@ -719,7 +719,7 @@ tidy <- fit_all |>
 tidy
 ```
 
-After tidying our data, we will extract values and assign sensible names for later use. Note that this is identical to the process from @sec-four-parameters, with the addition of a fourth term (the interaction term):
+After tidying our data, we will extract values and assign sensible names for later use. 
 
 ```{r}
 # Extract and name the columns of our tidy object. By calling tidy$estimate[1],

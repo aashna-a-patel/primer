@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.6.39">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Preceptor’s Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference - 2&nbsp; Probability</title>
+<title>2&nbsp; Probability – Preceptor's Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,10 +87,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-a08d9001fe0711adfabc365c1b400f34.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -116,7 +116,7 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -147,13 +147,13 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -165,17 +165,17 @@ window.Quarto = {
         <div class="sidebar-tools-main">
     <a href="https://github.com/PPBDS/primer/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
 <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Preceptor-s-Primer-for-Bayesian-Data-Science--Using-the-Cardinal-Virtues-for-Inference.pdf">
-              <i class="bi bi-bi-file-pdf pe-1"></i>
+              <i class="bi bi-file-pdf pe-1"></i>
             Download PDF
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Preceptor-s-Primer-for-Bayesian-Data-Science--Using-the-Cardinal-Virtues-for-Inference.epub">
-              <i class="bi bi-bi-journal pe-1"></i>
+              <i class="bi bi-journal pe-1"></i>
             Download ePub
             </a>
           </li>
@@ -205,7 +205,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./getting-started.html" class="sidebar-item-text sidebar-link">
+  <a href="./getting-started-with-rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting Started</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting-started-with-positron.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started</span></a>
   </div>
 </li>
@@ -392,24 +398,23 @@ window.Quarto = {
 <p>There are other ways of storing the data in this vector. Instead of reporting every observation, we could record the number of times each value appears or the percentage of the total which this number accounts for.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<div id="plmxlhiupc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#plmxlhiupc table {
+<div id="dkcuoavgqb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dkcuoavgqb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#plmxlhiupc thead, #plmxlhiupc tbody, #plmxlhiupc tfoot, #plmxlhiupc tr, #plmxlhiupc td, #plmxlhiupc th {
+#dkcuoavgqb thead, #dkcuoavgqb tbody, #dkcuoavgqb tfoot, #dkcuoavgqb tr, #dkcuoavgqb td, #dkcuoavgqb th {
   border-style: none;
 }
 
-#plmxlhiupc p {
+#dkcuoavgqb p {
   margin: 0;
   padding: 0;
 }
 
-#plmxlhiupc .gt_table {
+#dkcuoavgqb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -435,12 +440,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#plmxlhiupc .gt_caption {
+#dkcuoavgqb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#plmxlhiupc .gt_title {
+#dkcuoavgqb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -452,7 +457,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#plmxlhiupc .gt_subtitle {
+#dkcuoavgqb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -464,7 +469,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#plmxlhiupc .gt_heading {
+#dkcuoavgqb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -476,13 +481,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#plmxlhiupc .gt_bottom_border {
+#dkcuoavgqb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#plmxlhiupc .gt_col_headings {
+#dkcuoavgqb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -497,7 +502,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#plmxlhiupc .gt_col_heading {
+#dkcuoavgqb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -517,7 +522,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#plmxlhiupc .gt_column_spanner_outer {
+#dkcuoavgqb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -529,15 +534,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#plmxlhiupc .gt_column_spanner_outer:first-child {
+#dkcuoavgqb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#plmxlhiupc .gt_column_spanner_outer:last-child {
+#dkcuoavgqb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#plmxlhiupc .gt_column_spanner {
+#dkcuoavgqb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -549,11 +554,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#plmxlhiupc .gt_spanner_row {
+#dkcuoavgqb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#plmxlhiupc .gt_group_heading {
+#dkcuoavgqb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -579,7 +584,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#plmxlhiupc .gt_empty_group_heading {
+#dkcuoavgqb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -594,15 +599,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#plmxlhiupc .gt_from_md > :first-child {
+#dkcuoavgqb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#plmxlhiupc .gt_from_md > :last-child {
+#dkcuoavgqb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#plmxlhiupc .gt_row {
+#dkcuoavgqb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -621,7 +626,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#plmxlhiupc .gt_stub {
+#dkcuoavgqb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -634,7 +639,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#plmxlhiupc .gt_stub_row_group {
+#dkcuoavgqb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -648,15 +653,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#plmxlhiupc .gt_row_group_first td {
+#dkcuoavgqb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#plmxlhiupc .gt_row_group_first th {
+#dkcuoavgqb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#plmxlhiupc .gt_summary_row {
+#dkcuoavgqb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -666,16 +671,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#plmxlhiupc .gt_first_summary_row {
+#dkcuoavgqb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#plmxlhiupc .gt_first_summary_row.thick {
+#dkcuoavgqb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#plmxlhiupc .gt_last_summary_row {
+#dkcuoavgqb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -685,7 +690,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#plmxlhiupc .gt_grand_summary_row {
+#dkcuoavgqb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -695,7 +700,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#plmxlhiupc .gt_first_grand_summary_row {
+#dkcuoavgqb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -705,7 +710,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#plmxlhiupc .gt_last_grand_summary_row_top {
+#dkcuoavgqb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -715,11 +720,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#plmxlhiupc .gt_striped {
+#dkcuoavgqb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#plmxlhiupc .gt_table_body {
+#dkcuoavgqb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -728,7 +733,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#plmxlhiupc .gt_footnotes {
+#dkcuoavgqb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -742,7 +747,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#plmxlhiupc .gt_footnote {
+#dkcuoavgqb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -751,7 +756,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#plmxlhiupc .gt_sourcenotes {
+#dkcuoavgqb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -765,7 +770,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#plmxlhiupc .gt_sourcenote {
+#dkcuoavgqb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -773,78 +778,87 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#plmxlhiupc .gt_left {
+#dkcuoavgqb .gt_left {
   text-align: left;
 }
 
-#plmxlhiupc .gt_center {
+#dkcuoavgqb .gt_center {
   text-align: center;
 }
 
-#plmxlhiupc .gt_right {
+#dkcuoavgqb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#plmxlhiupc .gt_font_normal {
+#dkcuoavgqb .gt_font_normal {
   font-weight: normal;
 }
 
-#plmxlhiupc .gt_font_bold {
+#dkcuoavgqb .gt_font_bold {
   font-weight: bold;
 }
 
-#plmxlhiupc .gt_font_italic {
+#dkcuoavgqb .gt_font_italic {
   font-style: italic;
 }
 
-#plmxlhiupc .gt_super {
+#dkcuoavgqb .gt_super {
   font-size: 65%;
 }
 
-#plmxlhiupc .gt_footnote_marks {
+#dkcuoavgqb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#plmxlhiupc .gt_asterisk {
+#dkcuoavgqb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#plmxlhiupc .gt_indent_1 {
+#dkcuoavgqb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#plmxlhiupc .gt_indent_2 {
+#dkcuoavgqb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#plmxlhiupc .gt_indent_3 {
+#dkcuoavgqb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#plmxlhiupc .gt_indent_4 {
+#dkcuoavgqb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#plmxlhiupc .gt_indent_5 {
+#dkcuoavgqb .gt_indent_5 {
   text-indent: 25px;
 }
+
+#dkcuoavgqb .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#dkcuoavgqb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="3" class="gt_heading gt_title gt_font_normal">Distribution of Ten Rolls of a Fair Dice</th>
 </tr>
-<tr class="odd gt_heading">
+<tr class="gt_heading even">
 <th colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Counts and percentages reflect the same information</th>
 </tr>
-<tr class="header gt_col_headings">
-<th id="Outcome" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Outcome</th>
-<th id="Count" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Count</th>
-<th id="Percentage" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Percentage</th>
+<tr class="gt_col_headings header">
+<th id="outcome" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Outcome</th>
+<th id="n" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Count</th>
+<th id="portion" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Percentage</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -878,11 +892,9 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
 <p>In this case, with only 10 values, it is actually less efficient to store the data like this. But what happens when we have 1,000 rolls?</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div id="qvuxyhcywz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#qvuxyhcywz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -1322,19 +1334,28 @@ window.Quarto = {
 #qvuxyhcywz .gt_indent_5 {
   text-indent: 25px;
 }
+
+#qvuxyhcywz .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qvuxyhcywz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="3" class="gt_heading gt_title gt_font_normal">Distribution of One Thousand Rolls of a Fair Dice</th>
 </tr>
-<tr class="odd gt_heading">
+<tr class="gt_heading even">
 <th colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Counts and percentages reflect the same information</th>
 </tr>
-<tr class="header gt_col_headings">
-<th id="Outcome" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Outcome</th>
-<th id="Count" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Count</th>
-<th id="Percentage" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Percentage</th>
+<tr class="gt_col_headings header">
+<th id="outcome" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Outcome</th>
+<th id="n" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Count</th>
+<th id="portion" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Percentage</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -1370,7 +1391,6 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
 </div>
@@ -2732,18 +2752,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -2775,7 +2784,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -2783,7 +2812,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -2880,7 +2909,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

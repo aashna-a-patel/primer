@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.6.39">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Preceptor’s Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference - 8&nbsp; Four Parameters: Categorical</title>
+<title>8&nbsp; Four Parameters: Categorical – Preceptor's Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -67,10 +67,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-a08d9001fe0711adfabc365c1b400f34.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -96,7 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -127,13 +127,13 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./four-parameters-categorical.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Four Parameters: Categorical</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -145,17 +145,17 @@ window.Quarto = {
         <div class="sidebar-tools-main">
     <a href="https://github.com/PPBDS/primer/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
 <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Preceptor-s-Primer-for-Bayesian-Data-Science--Using-the-Cardinal-Virtues-for-Inference.pdf">
-              <i class="bi bi-bi-file-pdf pe-1"></i>
+              <i class="bi bi-file-pdf pe-1"></i>
             Download PDF
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Preceptor-s-Primer-for-Bayesian-Data-Science--Using-the-Cardinal-Virtues-for-Inference.epub">
-              <i class="bi bi-bi-journal pe-1"></i>
+              <i class="bi bi-journal pe-1"></i>
             Download ePub
             </a>
           </li>
@@ -185,7 +185,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./getting-started.html" class="sidebar-item-text sidebar-link">
+  <a href="./getting-started-with-rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting Started</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting-started-with-positron.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started</span></a>
   </div>
 </li>
@@ -353,24 +359,23 @@ window.Quarto = {
 <p><em>Moment in Time</em>: The Preceptor Table refers to the election season in the fall of 1992. We make no claims about other US presidential elections, not least because few feature a third party candidate as popular as Perot. Our purpose here is historical. We want to better understand what happened in this election, not make claims about other time periods. The moment in time is, however, longer than just Election Day itself since mail-in votes were cast in the weeks proceeding the election.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<div id="tllnhqamcj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tllnhqamcj table {
+<div id="zvyiuujqrk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zvyiuujqrk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tllnhqamcj thead, #tllnhqamcj tbody, #tllnhqamcj tfoot, #tllnhqamcj tr, #tllnhqamcj td, #tllnhqamcj th {
+#zvyiuujqrk thead, #zvyiuujqrk tbody, #zvyiuujqrk tfoot, #zvyiuujqrk tr, #zvyiuujqrk td, #zvyiuujqrk th {
   border-style: none;
 }
 
-#tllnhqamcj p {
+#zvyiuujqrk p {
   margin: 0;
   padding: 0;
 }
 
-#tllnhqamcj .gt_table {
+#zvyiuujqrk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -396,12 +401,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#tllnhqamcj .gt_caption {
+#zvyiuujqrk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tllnhqamcj .gt_title {
+#zvyiuujqrk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -413,7 +418,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#tllnhqamcj .gt_subtitle {
+#zvyiuujqrk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -425,7 +430,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#tllnhqamcj .gt_heading {
+#zvyiuujqrk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -437,13 +442,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tllnhqamcj .gt_bottom_border {
+#zvyiuujqrk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tllnhqamcj .gt_col_headings {
+#zvyiuujqrk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -458,7 +463,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tllnhqamcj .gt_col_heading {
+#zvyiuujqrk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -478,7 +483,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#tllnhqamcj .gt_column_spanner_outer {
+#zvyiuujqrk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -490,15 +495,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#tllnhqamcj .gt_column_spanner_outer:first-child {
+#zvyiuujqrk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tllnhqamcj .gt_column_spanner_outer:last-child {
+#zvyiuujqrk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tllnhqamcj .gt_column_spanner {
+#zvyiuujqrk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -510,11 +515,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#tllnhqamcj .gt_spanner_row {
+#zvyiuujqrk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tllnhqamcj .gt_group_heading {
+#zvyiuujqrk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -540,7 +545,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#tllnhqamcj .gt_empty_group_heading {
+#zvyiuujqrk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -555,15 +560,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#tllnhqamcj .gt_from_md > :first-child {
+#zvyiuujqrk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tllnhqamcj .gt_from_md > :last-child {
+#zvyiuujqrk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tllnhqamcj .gt_row {
+#zvyiuujqrk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -582,7 +587,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#tllnhqamcj .gt_stub {
+#zvyiuujqrk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -595,7 +600,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tllnhqamcj .gt_stub_row_group {
+#zvyiuujqrk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -609,15 +614,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#tllnhqamcj .gt_row_group_first td {
+#zvyiuujqrk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tllnhqamcj .gt_row_group_first th {
+#zvyiuujqrk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tllnhqamcj .gt_summary_row {
+#zvyiuujqrk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -627,16 +632,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tllnhqamcj .gt_first_summary_row {
+#zvyiuujqrk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tllnhqamcj .gt_first_summary_row.thick {
+#zvyiuujqrk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tllnhqamcj .gt_last_summary_row {
+#zvyiuujqrk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -646,7 +651,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#tllnhqamcj .gt_grand_summary_row {
+#zvyiuujqrk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -656,7 +661,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tllnhqamcj .gt_first_grand_summary_row {
+#zvyiuujqrk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -666,7 +671,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#tllnhqamcj .gt_last_grand_summary_row_top {
+#zvyiuujqrk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -676,11 +681,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#tllnhqamcj .gt_striped {
+#zvyiuujqrk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tllnhqamcj .gt_table_body {
+#zvyiuujqrk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -689,7 +694,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#tllnhqamcj .gt_footnotes {
+#zvyiuujqrk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -703,7 +708,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tllnhqamcj .gt_footnote {
+#zvyiuujqrk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -712,7 +717,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tllnhqamcj .gt_sourcenotes {
+#zvyiuujqrk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -726,7 +731,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tllnhqamcj .gt_sourcenote {
+#zvyiuujqrk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -734,125 +739,137 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tllnhqamcj .gt_left {
+#zvyiuujqrk .gt_left {
   text-align: left;
 }
 
-#tllnhqamcj .gt_center {
+#zvyiuujqrk .gt_center {
   text-align: center;
 }
 
-#tllnhqamcj .gt_right {
+#zvyiuujqrk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tllnhqamcj .gt_font_normal {
+#zvyiuujqrk .gt_font_normal {
   font-weight: normal;
 }
 
-#tllnhqamcj .gt_font_bold {
+#zvyiuujqrk .gt_font_bold {
   font-weight: bold;
 }
 
-#tllnhqamcj .gt_font_italic {
+#zvyiuujqrk .gt_font_italic {
   font-style: italic;
 }
 
-#tllnhqamcj .gt_super {
+#zvyiuujqrk .gt_super {
   font-size: 65%;
 }
 
-#tllnhqamcj .gt_footnote_marks {
+#zvyiuujqrk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tllnhqamcj .gt_asterisk {
+#zvyiuujqrk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tllnhqamcj .gt_indent_1 {
+#zvyiuujqrk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tllnhqamcj .gt_indent_2 {
+#zvyiuujqrk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tllnhqamcj .gt_indent_3 {
+#zvyiuujqrk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tllnhqamcj .gt_indent_4 {
+#zvyiuujqrk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tllnhqamcj .gt_indent_5 {
+#zvyiuujqrk .gt_indent_5 {
   text-indent: 25px;
 }
+
+#zvyiuujqrk .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#zvyiuujqrk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 33%">
 <col style="width: 33%">
 <col style="width: 33%">
 </colgroup>
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border">Preceptor Table</th>
 </tr>
-<tr class="odd gt_col_headings gt_spanner_row">
+<tr class="gt_col_headings gt_spanner_row even">
 <th rowspan="2" id="ID" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="text-align: left; font-size: large; vertical-align: middle;" scope="col">ID</th>
-<th id="Outcome" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><span class="gt_column_spanner">Outcome</span></th>
-<th id="Covariate" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><span class="gt_column_spanner">Covariate</span></th>
+<th id="Outcome" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><div class="gt_column_spanner">
+Outcome
+</div></th>
+<th id="Covariate" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><div class="gt_column_spanner">
+Covariate
+</div></th>
 </tr>
-<tr class="header gt_col_headings">
-<th id="Vote" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Vote</th>
-<th id="Sex" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Sex</th>
+<tr class="gt_col_headings header">
+<th id="vote" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Vote</th>
+<th id="sex" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Sex</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>1</p></td>
-<td class="gt_row gt_center" headers="vote"><p>Democrat</p></td>
-<td class="gt_row gt_center" headers="sex"><p>M</p></td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">1</td>
+<td class="gt_row gt_center" headers="vote">Democrat</td>
+<td class="gt_row gt_center" headers="sex">M</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>2</p></td>
-<td class="gt_row gt_center" headers="vote"><p>Third Party</p></td>
-<td class="gt_row gt_center" headers="sex"><p>F</p></td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">2</td>
+<td class="gt_row gt_center" headers="vote">Third Party</td>
+<td class="gt_row gt_center" headers="sex">F</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="vote"><p>…</p></td>
-<td class="gt_row gt_center" headers="sex"><p>…</p></td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="vote">…</td>
+<td class="gt_row gt_center" headers="sex">…</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>10</p></td>
-<td class="gt_row gt_center" headers="vote"><p>Republican</p></td>
-<td class="gt_row gt_center" headers="sex"><p>F</p></td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">10</td>
+<td class="gt_row gt_center" headers="vote">Republican</td>
+<td class="gt_row gt_center" headers="sex">F</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>11</p></td>
-<td class="gt_row gt_center" headers="vote"><p>Democrat</p></td>
-<td class="gt_row gt_center" headers="sex"><p>F</p></td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">11</td>
+<td class="gt_row gt_center" headers="vote">Democrat</td>
+<td class="gt_row gt_center" headers="sex">F</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="vote"><p>…</p></td>
-<td class="gt_row gt_center" headers="sex"><p>…</p></td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="vote">…</td>
+<td class="gt_row gt_center" headers="sex">…</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>103,754,865</p></td>
-<td class="gt_row gt_center" headers="vote"><p>Republican</p></td>
-<td class="gt_row gt_center" headers="sex"><p>M</p></td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">103,754,865</td>
+<td class="gt_row gt_center" headers="vote">Republican</td>
+<td class="gt_row gt_center" headers="sex">M</td>
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
 </div>
@@ -949,24 +966,23 @@ window.Quarto = {
 <p>Because this project is historical, the Population Table has the same number of rows as the Preceptor Table.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<div id="pzsoabgmsr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pzsoabgmsr table {
+<div id="zmnmcikphm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zmnmcikphm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pzsoabgmsr thead, #pzsoabgmsr tbody, #pzsoabgmsr tfoot, #pzsoabgmsr tr, #pzsoabgmsr td, #pzsoabgmsr th {
+#zmnmcikphm thead, #zmnmcikphm tbody, #zmnmcikphm tfoot, #zmnmcikphm tr, #zmnmcikphm td, #zmnmcikphm th {
   border-style: none;
 }
 
-#pzsoabgmsr p {
+#zmnmcikphm p {
   margin: 0;
   padding: 0;
 }
 
-#pzsoabgmsr .gt_table {
+#zmnmcikphm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -992,12 +1008,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#pzsoabgmsr .gt_caption {
+#zmnmcikphm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pzsoabgmsr .gt_title {
+#zmnmcikphm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1009,7 +1025,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#pzsoabgmsr .gt_subtitle {
+#zmnmcikphm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1021,7 +1037,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#pzsoabgmsr .gt_heading {
+#zmnmcikphm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1033,13 +1049,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pzsoabgmsr .gt_bottom_border {
+#zmnmcikphm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pzsoabgmsr .gt_col_headings {
+#zmnmcikphm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1054,7 +1070,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pzsoabgmsr .gt_col_heading {
+#zmnmcikphm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1074,7 +1090,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#pzsoabgmsr .gt_column_spanner_outer {
+#zmnmcikphm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1086,15 +1102,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#pzsoabgmsr .gt_column_spanner_outer:first-child {
+#zmnmcikphm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pzsoabgmsr .gt_column_spanner_outer:last-child {
+#zmnmcikphm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pzsoabgmsr .gt_column_spanner {
+#zmnmcikphm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1106,11 +1122,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#pzsoabgmsr .gt_spanner_row {
+#zmnmcikphm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pzsoabgmsr .gt_group_heading {
+#zmnmcikphm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1136,7 +1152,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#pzsoabgmsr .gt_empty_group_heading {
+#zmnmcikphm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1151,15 +1167,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#pzsoabgmsr .gt_from_md > :first-child {
+#zmnmcikphm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pzsoabgmsr .gt_from_md > :last-child {
+#zmnmcikphm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pzsoabgmsr .gt_row {
+#zmnmcikphm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1178,7 +1194,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#pzsoabgmsr .gt_stub {
+#zmnmcikphm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1191,7 +1207,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pzsoabgmsr .gt_stub_row_group {
+#zmnmcikphm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1205,15 +1221,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#pzsoabgmsr .gt_row_group_first td {
+#zmnmcikphm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pzsoabgmsr .gt_row_group_first th {
+#zmnmcikphm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pzsoabgmsr .gt_summary_row {
+#zmnmcikphm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1223,16 +1239,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pzsoabgmsr .gt_first_summary_row {
+#zmnmcikphm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pzsoabgmsr .gt_first_summary_row.thick {
+#zmnmcikphm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pzsoabgmsr .gt_last_summary_row {
+#zmnmcikphm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1242,7 +1258,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#pzsoabgmsr .gt_grand_summary_row {
+#zmnmcikphm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1252,7 +1268,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pzsoabgmsr .gt_first_grand_summary_row {
+#zmnmcikphm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1262,7 +1278,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#pzsoabgmsr .gt_last_grand_summary_row_top {
+#zmnmcikphm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1272,11 +1288,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#pzsoabgmsr .gt_striped {
+#zmnmcikphm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pzsoabgmsr .gt_table_body {
+#zmnmcikphm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1285,7 +1301,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#pzsoabgmsr .gt_footnotes {
+#zmnmcikphm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1299,7 +1315,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pzsoabgmsr .gt_footnote {
+#zmnmcikphm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1308,7 +1324,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pzsoabgmsr .gt_sourcenotes {
+#zmnmcikphm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1322,7 +1338,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pzsoabgmsr .gt_sourcenote {
+#zmnmcikphm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1330,67 +1346,76 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pzsoabgmsr .gt_left {
+#zmnmcikphm .gt_left {
   text-align: left;
 }
 
-#pzsoabgmsr .gt_center {
+#zmnmcikphm .gt_center {
   text-align: center;
 }
 
-#pzsoabgmsr .gt_right {
+#zmnmcikphm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pzsoabgmsr .gt_font_normal {
+#zmnmcikphm .gt_font_normal {
   font-weight: normal;
 }
 
-#pzsoabgmsr .gt_font_bold {
+#zmnmcikphm .gt_font_bold {
   font-weight: bold;
 }
 
-#pzsoabgmsr .gt_font_italic {
+#zmnmcikphm .gt_font_italic {
   font-style: italic;
 }
 
-#pzsoabgmsr .gt_super {
+#zmnmcikphm .gt_super {
   font-size: 65%;
 }
 
-#pzsoabgmsr .gt_footnote_marks {
+#zmnmcikphm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pzsoabgmsr .gt_asterisk {
+#zmnmcikphm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pzsoabgmsr .gt_indent_1 {
+#zmnmcikphm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pzsoabgmsr .gt_indent_2 {
+#zmnmcikphm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pzsoabgmsr .gt_indent_3 {
+#zmnmcikphm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pzsoabgmsr .gt_indent_4 {
+#zmnmcikphm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pzsoabgmsr .gt_indent_5 {
+#zmnmcikphm .gt_indent_5 {
   text-indent: 25px;
 }
+
+#zmnmcikphm .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#zmnmcikphm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
@@ -1398,102 +1423,105 @@ window.Quarto = {
 <col style="width: 25%">
 </colgroup>
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border">Population Table</th>
 </tr>
-<tr class="odd gt_col_headings gt_spanner_row">
-<th rowspan="2" id="Source" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Source</th>
+<tr class="gt_col_headings gt_spanner_row even">
+<th rowspan="2" id="source" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Source</th>
 <th rowspan="2" id="ID" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="text-align: left; font-size: large; vertical-align: middle;" scope="col">ID</th>
-<th id="Outcome" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><span class="gt_column_spanner">Outcome</span></th>
-<th id="Covariate" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><span class="gt_column_spanner">Covariate</span></th>
+<th id="Outcome" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><div class="gt_column_spanner">
+Outcome
+</div></th>
+<th id="Covariate" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><div class="gt_column_spanner">
+Covariate
+</div></th>
 </tr>
-<tr class="header gt_col_headings">
-<th id="Vote" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Vote</th>
-<th id="Sex" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Sex</th>
+<tr class="gt_col_headings header">
+<th id="vote" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Vote</th>
+<th id="sex" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Sex</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_center" headers="source"><p>PT/Data</p></td>
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>1</p></td>
-<td class="gt_row gt_center" headers="vote"><p>Democrat</p></td>
-<td class="gt_row gt_center" headers="sex"><p>M</p></td>
+<td class="gt_row gt_center" headers="source">PT/Data</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">1</td>
+<td class="gt_row gt_center" headers="vote">Democrat</td>
+<td class="gt_row gt_center" headers="sex">M</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center" headers="source"><p>PT/Data</p></td>
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>2</p></td>
-<td class="gt_row gt_center" headers="vote"><p>Third Party</p></td>
-<td class="gt_row gt_center" headers="sex"><p>F</p></td>
+<td class="gt_row gt_center" headers="source">PT/Data</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">2</td>
+<td class="gt_row gt_center" headers="vote">Third Party</td>
+<td class="gt_row gt_center" headers="sex">F</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="source"><p>PT</p></td>
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>3</p></td>
-<td class="gt_row gt_center" headers="vote"><p>Republican</p></td>
-<td class="gt_row gt_center" headers="sex"><p>M</p></td>
+<td class="gt_row gt_center" headers="source">PT</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">3</td>
+<td class="gt_row gt_center" headers="vote">Republican</td>
+<td class="gt_row gt_center" headers="sex">M</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center" headers="source"><p>PT</p></td>
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>4</p></td>
-<td class="gt_row gt_center" headers="vote"><p>Democrat</p></td>
-<td class="gt_row gt_center" headers="sex"><p>F</p></td>
+<td class="gt_row gt_center" headers="source">PT</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">4</td>
+<td class="gt_row gt_center" headers="vote">Democrat</td>
+<td class="gt_row gt_center" headers="sex">F</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="source"><p>PT</p></td>
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>5</p></td>
-<td class="gt_row gt_center" headers="vote"><p>Democrat</p></td>
-<td class="gt_row gt_center" headers="sex"><p>F</p></td>
+<td class="gt_row gt_center" headers="source">PT</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">5</td>
+<td class="gt_row gt_center" headers="vote">Democrat</td>
+<td class="gt_row gt_center" headers="sex">F</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center" headers="source"><p>PT</p></td>
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>6</p></td>
-<td class="gt_row gt_center" headers="vote"><p>Democrat</p></td>
-<td class="gt_row gt_center" headers="sex"><p>M</p></td>
+<td class="gt_row gt_center" headers="source">PT</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">6</td>
+<td class="gt_row gt_center" headers="vote">Democrat</td>
+<td class="gt_row gt_center" headers="sex">M</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="source"><p>…</p></td>
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="vote"><p>…</p></td>
-<td class="gt_row gt_center" headers="sex"><p>…</p></td>
+<td class="gt_row gt_center" headers="source">…</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="vote">…</td>
+<td class="gt_row gt_center" headers="sex">…</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center" headers="source"><p>PT/Data</p></td>
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>10</p></td>
-<td class="gt_row gt_center" headers="vote"><p>Republican</p></td>
-<td class="gt_row gt_center" headers="sex"><p>F</p></td>
+<td class="gt_row gt_center" headers="source">PT/Data</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">10</td>
+<td class="gt_row gt_center" headers="vote">Republican</td>
+<td class="gt_row gt_center" headers="sex">F</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="source"><p>PT/Data</p></td>
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>11</p></td>
-<td class="gt_row gt_center" headers="vote"><p>Democrat</p></td>
-<td class="gt_row gt_center" headers="sex"><p>F</p></td>
+<td class="gt_row gt_center" headers="source">PT/Data</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">11</td>
+<td class="gt_row gt_center" headers="vote">Democrat</td>
+<td class="gt_row gt_center" headers="sex">F</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center" headers="source"><p>PT</p></td>
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>12</p></td>
-<td class="gt_row gt_center" headers="vote"><p>Democrat</p></td>
-<td class="gt_row gt_center" headers="sex"><p>…</p></td>
+<td class="gt_row gt_center" headers="source">PT</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">12</td>
+<td class="gt_row gt_center" headers="vote">Democrat</td>
+<td class="gt_row gt_center" headers="sex">…</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="source"><p>PT</p></td>
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>13</p></td>
-<td class="gt_row gt_center" headers="vote"><p>Republican</p></td>
-<td class="gt_row gt_center" headers="sex"><p>F</p></td>
+<td class="gt_row gt_center" headers="source">PT</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">13</td>
+<td class="gt_row gt_center" headers="vote">Republican</td>
+<td class="gt_row gt_center" headers="sex">F</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center" headers="source"><p>…</p></td>
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="vote"><p>…</p></td>
-<td class="gt_row gt_center" headers="sex"><p>…</p></td>
+<td class="gt_row gt_center" headers="source">…</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="vote">…</td>
+<td class="gt_row gt_center" headers="sex">…</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="source"><p>PT/Data</p></td>
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>103,754,865</p></td>
-<td class="gt_row gt_center" headers="vote"><p>Republican</p></td>
-<td class="gt_row gt_center" headers="sex"><p>M</p></td>
+<td class="gt_row gt_center" headers="source">PT/Data</td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">103,754,865</td>
+<td class="gt_row gt_center" headers="vote">Republican</td>
+<td class="gt_row gt_center" headers="sex">M</td>
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
 </div>
@@ -1584,10 +1612,10 @@ muPerot_sexMale      0.4244909 0.14498279  0.1399061  0.71336963</code></pre>
 </div>
 </div>
 <p>The term <code>muClinton_Intercept</code> refers to <span class="math inline">\(\beta_{0, clinton}\)</span>. The term <code>muClinton_sexMale</code> refers to <span class="math inline">\(\beta_{1, clinton}\)</span>. And so on. The more complex our models become, the less interested we are in the values of any particular parameter. Also, the parameters in more complex models rarely have simple interpretations, as they sometimes do in simple linear models. So, ignore the specific values. But do note how all 4 variables have confidence intervals which exclude zero. This suggests, but does not prove, that they are all worth including in our model.</p>
-<p>We can use <code><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code> to explore the posterior distribution of the expected values of <span class="math inline">\(\rho_{clinton}\)</span>, <span class="math inline">\(\rho_{bush}\)</span>, and <span class="math inline">\(\rho_{perot}\)</span> for women.</p>
+<p>We can use <code><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code> to explore the posterior distribution of the expected values of <span class="math inline">\(\rho_{clinton}\)</span>, <span class="math inline">\(\rho_{bush}\)</span>, and <span class="math inline">\(\rho_{perot}\)</span> for women.</p>
 <div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_nes</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"Female"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"Female"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.epred</span>, fill <span class="op">=</span> <span class="va">.category</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1633,7 +1661,7 @@ muPerot_sexMale      0.4244909 0.14498279  0.1399061  0.71336963</code></pre>
 \rho_{clinton} &amp;=&amp; \frac{e^{0.45 - 0.25 male}}{1 + e^{0.45 - 0.25 male}}\\
 \rho_{perot} &amp;=&amp; \frac{e^{-0.86 + 0.42 male}}{1 + e^{-0.86 + 0.42 male}}\\
 \end{aligned}
-\]</span> This is the last time we are going to go to the trouble of combining the mathematical formula of the DGM with the specific estimated values. First, these formulas are misleading! The value of <span class="math inline">\(\beta_{0, clinton}\)</span>, for example, is not exactly 0.45. In fact, we don’t know what the value is! Being Bayesians, we calculated a posterior probability distribution for <span class="math inline">\(\beta_{0, clinton}\)</span>. We draw from that distribution when we calculate quantities of interest, as we did above with <code><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code>. Second, you probably did not even look that closely at these complex formulas. And we don’t blame you! Being a good race car driver means focussing on how to drive better, not on the physics of carburetors. Similar, being a good data scientist means focusing on the Cardinal Virtues as a method for using data to answer questions. Leave the math to the computer.</p>
+\]</span> This is the last time we are going to go to the trouble of combining the mathematical formula of the DGM with the specific estimated values. First, these formulas are misleading! The value of <span class="math inline">\(\beta_{0, clinton}\)</span>, for example, is not exactly 0.45. In fact, we don’t know what the value is! Being Bayesians, we calculated a posterior probability distribution for <span class="math inline">\(\beta_{0, clinton}\)</span>. We draw from that distribution when we calculate quantities of interest, as we did above with <code><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code>. Second, you probably did not even look that closely at these complex formulas. And we don’t blame you! Being a good race car driver means focussing on how to drive better, not on the physics of carburetors. Similar, being a good data scientist means focusing on the Cardinal Virtues as a method for using data to answer questions. Leave the math to the computer.</p>
 </section></section><section id="temperance" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="temperance">
 <span class="header-section-number">8.4</span> Temperance</h2>
 <p>Courage produced the data generating mechanism. Temperance guides us in the use of the DGM — or the “model” — we have created to answer the questions with which we began. We create posteriors for the quantities of interest. We should be modest in the claims we make. The posteriors we create are never the “truth.” The assumptions we made to create the model are never perfect. Yet decisions made with flawed posteriors are almost always better than decisions made without them.</p>
@@ -1647,7 +1675,7 @@ muPerot_sexMale      0.4244909 0.14498279  0.1399061  0.71336963</code></pre>
 <p>Often, the best answers to broad questions are graphics. Consider:</p>
 <div class="cell">
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_nes</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Female"</span>, <span class="st">"Male"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Female"</span>, <span class="st">"Male"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">sex</span>, <span class="va">.category</span>, <span class="va">.epred</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.epred</span>, fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1716,18 +1744,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1759,7 +1776,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1767,7 +1804,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1864,7 +1901,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

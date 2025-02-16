@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.6.39">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Preceptor’s Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference - 4&nbsp; Models</title>
+<title>4&nbsp; Models – Preceptor's Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -67,10 +67,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-a08d9001fe0711adfabc365c1b400f34.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -96,7 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -127,13 +127,13 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./models.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Models</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -145,17 +145,17 @@ window.Quarto = {
         <div class="sidebar-tools-main">
     <a href="https://github.com/PPBDS/primer/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
 <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Preceptor-s-Primer-for-Bayesian-Data-Science--Using-the-Cardinal-Virtues-for-Inference.pdf">
-              <i class="bi bi-bi-file-pdf pe-1"></i>
+              <i class="bi bi-file-pdf pe-1"></i>
             Download PDF
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Preceptor-s-Primer-for-Bayesian-Data-Science--Using-the-Cardinal-Virtues-for-Inference.epub">
-              <i class="bi bi-bi-journal pe-1"></i>
+              <i class="bi bi-journal pe-1"></i>
             Download ePub
             </a>
           </li>
@@ -185,7 +185,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./getting-started.html" class="sidebar-item-text sidebar-link">
+  <a href="./getting-started-with-rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting Started</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting-started-with-positron.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started</span></a>
   </div>
 </li>
@@ -364,24 +370,23 @@ window.Quarto = {
 <p><em>Moment in Time</em>: The moment in time is just after Election Day 2024.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<div id="otnlgnoayb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#otnlgnoayb table {
+<div id="nqnaxdsjvx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nqnaxdsjvx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#otnlgnoayb thead, #otnlgnoayb tbody, #otnlgnoayb tfoot, #otnlgnoayb tr, #otnlgnoayb td, #otnlgnoayb th {
+#nqnaxdsjvx thead, #nqnaxdsjvx tbody, #nqnaxdsjvx tfoot, #nqnaxdsjvx tr, #nqnaxdsjvx td, #nqnaxdsjvx th {
   border-style: none;
 }
 
-#otnlgnoayb p {
+#nqnaxdsjvx p {
   margin: 0;
   padding: 0;
 }
 
-#otnlgnoayb .gt_table {
+#nqnaxdsjvx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -407,12 +412,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#otnlgnoayb .gt_caption {
+#nqnaxdsjvx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#otnlgnoayb .gt_title {
+#nqnaxdsjvx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -424,7 +429,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#otnlgnoayb .gt_subtitle {
+#nqnaxdsjvx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -436,7 +441,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#otnlgnoayb .gt_heading {
+#nqnaxdsjvx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -448,13 +453,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#otnlgnoayb .gt_bottom_border {
+#nqnaxdsjvx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#otnlgnoayb .gt_col_headings {
+#nqnaxdsjvx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -469,7 +474,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#otnlgnoayb .gt_col_heading {
+#nqnaxdsjvx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -489,7 +494,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#otnlgnoayb .gt_column_spanner_outer {
+#nqnaxdsjvx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -501,15 +506,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#otnlgnoayb .gt_column_spanner_outer:first-child {
+#nqnaxdsjvx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#otnlgnoayb .gt_column_spanner_outer:last-child {
+#nqnaxdsjvx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#otnlgnoayb .gt_column_spanner {
+#nqnaxdsjvx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -521,11 +526,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#otnlgnoayb .gt_spanner_row {
+#nqnaxdsjvx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#otnlgnoayb .gt_group_heading {
+#nqnaxdsjvx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -551,7 +556,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#otnlgnoayb .gt_empty_group_heading {
+#nqnaxdsjvx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -566,15 +571,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#otnlgnoayb .gt_from_md > :first-child {
+#nqnaxdsjvx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#otnlgnoayb .gt_from_md > :last-child {
+#nqnaxdsjvx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#otnlgnoayb .gt_row {
+#nqnaxdsjvx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -593,7 +598,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#otnlgnoayb .gt_stub {
+#nqnaxdsjvx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -606,7 +611,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#otnlgnoayb .gt_stub_row_group {
+#nqnaxdsjvx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -620,15 +625,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#otnlgnoayb .gt_row_group_first td {
+#nqnaxdsjvx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#otnlgnoayb .gt_row_group_first th {
+#nqnaxdsjvx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#otnlgnoayb .gt_summary_row {
+#nqnaxdsjvx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -638,16 +643,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#otnlgnoayb .gt_first_summary_row {
+#nqnaxdsjvx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#otnlgnoayb .gt_first_summary_row.thick {
+#nqnaxdsjvx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#otnlgnoayb .gt_last_summary_row {
+#nqnaxdsjvx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -657,7 +662,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#otnlgnoayb .gt_grand_summary_row {
+#nqnaxdsjvx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -667,7 +672,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#otnlgnoayb .gt_first_grand_summary_row {
+#nqnaxdsjvx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -677,7 +682,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#otnlgnoayb .gt_last_grand_summary_row_top {
+#nqnaxdsjvx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -687,11 +692,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#otnlgnoayb .gt_striped {
+#nqnaxdsjvx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#otnlgnoayb .gt_table_body {
+#nqnaxdsjvx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -700,7 +705,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#otnlgnoayb .gt_footnotes {
+#nqnaxdsjvx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -714,7 +719,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#otnlgnoayb .gt_footnote {
+#nqnaxdsjvx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -723,7 +728,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#otnlgnoayb .gt_sourcenotes {
+#nqnaxdsjvx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -737,7 +742,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#otnlgnoayb .gt_sourcenote {
+#nqnaxdsjvx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -745,74 +750,83 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#otnlgnoayb .gt_left {
+#nqnaxdsjvx .gt_left {
   text-align: left;
 }
 
-#otnlgnoayb .gt_center {
+#nqnaxdsjvx .gt_center {
   text-align: center;
 }
 
-#otnlgnoayb .gt_right {
+#nqnaxdsjvx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#otnlgnoayb .gt_font_normal {
+#nqnaxdsjvx .gt_font_normal {
   font-weight: normal;
 }
 
-#otnlgnoayb .gt_font_bold {
+#nqnaxdsjvx .gt_font_bold {
   font-weight: bold;
 }
 
-#otnlgnoayb .gt_font_italic {
+#nqnaxdsjvx .gt_font_italic {
   font-style: italic;
 }
 
-#otnlgnoayb .gt_super {
+#nqnaxdsjvx .gt_super {
   font-size: 65%;
 }
 
-#otnlgnoayb .gt_footnote_marks {
+#nqnaxdsjvx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#otnlgnoayb .gt_asterisk {
+#nqnaxdsjvx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#otnlgnoayb .gt_indent_1 {
+#nqnaxdsjvx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#otnlgnoayb .gt_indent_2 {
+#nqnaxdsjvx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#otnlgnoayb .gt_indent_3 {
+#nqnaxdsjvx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#otnlgnoayb .gt_indent_4 {
+#nqnaxdsjvx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#otnlgnoayb .gt_indent_5 {
+#nqnaxdsjvx .gt_indent_5 {
   text-indent: 25px;
 }
+
+#nqnaxdsjvx .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#nqnaxdsjvx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border">Preceptor Table</th>
 </tr>
-<tr class="odd gt_col_headings">
-<th id="Voter ID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Voter ID</th>
-<th id="Voted for Biden" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Voted for Biden</th>
+<tr class="gt_col_headings even">
+<th id="voter_ID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Voter ID</th>
+<th id="biden" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Voted for Biden</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -857,7 +871,6 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
 <p>&nbsp;</p>
 <p>Once we have all the information in the Preceptor Table, it is easy to calculate the proportion of all votes which were cast for Biden.</p>
 <p>Moreover, we could use the Preceptor Table to answer other related questions. For example, assume we wanted to know the odds that the next two people we meet, just after the election, both voted for Biden.</p>
@@ -872,24 +885,23 @@ window.Quarto = {
 <p>The allowed choice are “Joe Biden,” “Donald Trump,” “Other,” “Not Sure,” and “I would not vote.” 42% of those polled indicated Joe Biden. Although rounding makes it impossible to know for sure, we will assume that 655 of the 1,559 “US adult citizens” would vote for Biden. Our data looks like:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<div id="arsddcyler" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#arsddcyler table {
+<div id="vmiswjewww" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vmiswjewww table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#arsddcyler thead, #arsddcyler tbody, #arsddcyler tfoot, #arsddcyler tr, #arsddcyler td, #arsddcyler th {
+#vmiswjewww thead, #vmiswjewww tbody, #vmiswjewww tfoot, #vmiswjewww tr, #vmiswjewww td, #vmiswjewww th {
   border-style: none;
 }
 
-#arsddcyler p {
+#vmiswjewww p {
   margin: 0;
   padding: 0;
 }
 
-#arsddcyler .gt_table {
+#vmiswjewww .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -915,12 +927,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#arsddcyler .gt_caption {
+#vmiswjewww .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#arsddcyler .gt_title {
+#vmiswjewww .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -932,7 +944,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#arsddcyler .gt_subtitle {
+#vmiswjewww .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -944,7 +956,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#arsddcyler .gt_heading {
+#vmiswjewww .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -956,13 +968,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#arsddcyler .gt_bottom_border {
+#vmiswjewww .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#arsddcyler .gt_col_headings {
+#vmiswjewww .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -977,7 +989,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#arsddcyler .gt_col_heading {
+#vmiswjewww .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -997,7 +1009,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#arsddcyler .gt_column_spanner_outer {
+#vmiswjewww .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1009,15 +1021,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#arsddcyler .gt_column_spanner_outer:first-child {
+#vmiswjewww .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#arsddcyler .gt_column_spanner_outer:last-child {
+#vmiswjewww .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#arsddcyler .gt_column_spanner {
+#vmiswjewww .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1029,11 +1041,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#arsddcyler .gt_spanner_row {
+#vmiswjewww .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#arsddcyler .gt_group_heading {
+#vmiswjewww .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1059,7 +1071,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#arsddcyler .gt_empty_group_heading {
+#vmiswjewww .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1074,15 +1086,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#arsddcyler .gt_from_md > :first-child {
+#vmiswjewww .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#arsddcyler .gt_from_md > :last-child {
+#vmiswjewww .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#arsddcyler .gt_row {
+#vmiswjewww .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1101,7 +1113,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#arsddcyler .gt_stub {
+#vmiswjewww .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1114,7 +1126,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#arsddcyler .gt_stub_row_group {
+#vmiswjewww .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1128,15 +1140,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#arsddcyler .gt_row_group_first td {
+#vmiswjewww .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#arsddcyler .gt_row_group_first th {
+#vmiswjewww .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#arsddcyler .gt_summary_row {
+#vmiswjewww .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1146,16 +1158,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#arsddcyler .gt_first_summary_row {
+#vmiswjewww .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#arsddcyler .gt_first_summary_row.thick {
+#vmiswjewww .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#arsddcyler .gt_last_summary_row {
+#vmiswjewww .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1165,7 +1177,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#arsddcyler .gt_grand_summary_row {
+#vmiswjewww .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1175,7 +1187,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#arsddcyler .gt_first_grand_summary_row {
+#vmiswjewww .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1185,7 +1197,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#arsddcyler .gt_last_grand_summary_row_top {
+#vmiswjewww .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1195,11 +1207,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#arsddcyler .gt_striped {
+#vmiswjewww .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#arsddcyler .gt_table_body {
+#vmiswjewww .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1208,7 +1220,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#arsddcyler .gt_footnotes {
+#vmiswjewww .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1222,7 +1234,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#arsddcyler .gt_footnote {
+#vmiswjewww .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1231,7 +1243,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#arsddcyler .gt_sourcenotes {
+#vmiswjewww .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1245,7 +1257,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#arsddcyler .gt_sourcenote {
+#vmiswjewww .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1253,74 +1265,83 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#arsddcyler .gt_left {
+#vmiswjewww .gt_left {
   text-align: left;
 }
 
-#arsddcyler .gt_center {
+#vmiswjewww .gt_center {
   text-align: center;
 }
 
-#arsddcyler .gt_right {
+#vmiswjewww .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#arsddcyler .gt_font_normal {
+#vmiswjewww .gt_font_normal {
   font-weight: normal;
 }
 
-#arsddcyler .gt_font_bold {
+#vmiswjewww .gt_font_bold {
   font-weight: bold;
 }
 
-#arsddcyler .gt_font_italic {
+#vmiswjewww .gt_font_italic {
   font-style: italic;
 }
 
-#arsddcyler .gt_super {
+#vmiswjewww .gt_super {
   font-size: 65%;
 }
 
-#arsddcyler .gt_footnote_marks {
+#vmiswjewww .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#arsddcyler .gt_asterisk {
+#vmiswjewww .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#arsddcyler .gt_indent_1 {
+#vmiswjewww .gt_indent_1 {
   text-indent: 5px;
 }
 
-#arsddcyler .gt_indent_2 {
+#vmiswjewww .gt_indent_2 {
   text-indent: 10px;
 }
 
-#arsddcyler .gt_indent_3 {
+#vmiswjewww .gt_indent_3 {
   text-indent: 15px;
 }
 
-#arsddcyler .gt_indent_4 {
+#vmiswjewww .gt_indent_4 {
   text-indent: 20px;
 }
 
-#arsddcyler .gt_indent_5 {
+#vmiswjewww .gt_indent_5 {
   text-indent: 25px;
 }
+
+#vmiswjewww .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#vmiswjewww div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border">Polling Data</th>
 </tr>
-<tr class="odd gt_col_headings">
-<th id="Poll ID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Poll ID</th>
-<th id="Would Vote for Biden" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Would Vote for Biden</th>
+<tr class="gt_col_headings even">
+<th id="poll_ID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Poll ID</th>
+<th id="biden" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Would Vote for Biden</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -1357,7 +1378,6 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
 <p>There are key differences between our data table and our Preceptor Table, despite their superficial similarities.</p>
 <ul>
 <li><p>Our Polling Data includes exactly 1,559 rows. We don’t know how many rows are in our Preceptor Table because we don’t know, today, how many people will vote in November 2024.</p></li>
@@ -1388,24 +1408,23 @@ window.Quarto = {
 <p>We use the <em>Population Table</em> to acknowledge the wider source from which we could have collected our data. It includes rows from three sources: the data for units we want to have (the Preceptor Table), the data for units which we have (our actual data), and the data for units we do not care about (the rest of the population, not included in the data or in the Preceptor Table). Consider:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<div id="yvivgeqxqa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#yvivgeqxqa table {
+<div id="fgwwqtyvmh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fgwwqtyvmh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yvivgeqxqa thead, #yvivgeqxqa tbody, #yvivgeqxqa tfoot, #yvivgeqxqa tr, #yvivgeqxqa td, #yvivgeqxqa th {
+#fgwwqtyvmh thead, #fgwwqtyvmh tbody, #fgwwqtyvmh tfoot, #fgwwqtyvmh tr, #fgwwqtyvmh td, #fgwwqtyvmh th {
   border-style: none;
 }
 
-#yvivgeqxqa p {
+#fgwwqtyvmh p {
   margin: 0;
   padding: 0;
 }
 
-#yvivgeqxqa .gt_table {
+#fgwwqtyvmh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1431,12 +1450,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#yvivgeqxqa .gt_caption {
+#fgwwqtyvmh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yvivgeqxqa .gt_title {
+#fgwwqtyvmh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1448,7 +1467,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#yvivgeqxqa .gt_subtitle {
+#fgwwqtyvmh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1460,7 +1479,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#yvivgeqxqa .gt_heading {
+#fgwwqtyvmh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1472,13 +1491,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#yvivgeqxqa .gt_bottom_border {
+#fgwwqtyvmh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yvivgeqxqa .gt_col_headings {
+#fgwwqtyvmh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1493,7 +1512,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#yvivgeqxqa .gt_col_heading {
+#fgwwqtyvmh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1513,7 +1532,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#yvivgeqxqa .gt_column_spanner_outer {
+#fgwwqtyvmh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1525,15 +1544,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#yvivgeqxqa .gt_column_spanner_outer:first-child {
+#fgwwqtyvmh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yvivgeqxqa .gt_column_spanner_outer:last-child {
+#fgwwqtyvmh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yvivgeqxqa .gt_column_spanner {
+#fgwwqtyvmh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1545,11 +1564,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#yvivgeqxqa .gt_spanner_row {
+#fgwwqtyvmh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yvivgeqxqa .gt_group_heading {
+#fgwwqtyvmh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1575,7 +1594,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#yvivgeqxqa .gt_empty_group_heading {
+#fgwwqtyvmh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1590,15 +1609,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#yvivgeqxqa .gt_from_md > :first-child {
+#fgwwqtyvmh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yvivgeqxqa .gt_from_md > :last-child {
+#fgwwqtyvmh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yvivgeqxqa .gt_row {
+#fgwwqtyvmh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1617,7 +1636,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#yvivgeqxqa .gt_stub {
+#fgwwqtyvmh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1630,7 +1649,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#yvivgeqxqa .gt_stub_row_group {
+#fgwwqtyvmh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1644,15 +1663,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#yvivgeqxqa .gt_row_group_first td {
+#fgwwqtyvmh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yvivgeqxqa .gt_row_group_first th {
+#fgwwqtyvmh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yvivgeqxqa .gt_summary_row {
+#fgwwqtyvmh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1662,16 +1681,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#yvivgeqxqa .gt_first_summary_row {
+#fgwwqtyvmh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yvivgeqxqa .gt_first_summary_row.thick {
+#fgwwqtyvmh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yvivgeqxqa .gt_last_summary_row {
+#fgwwqtyvmh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1681,7 +1700,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#yvivgeqxqa .gt_grand_summary_row {
+#fgwwqtyvmh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1691,7 +1710,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#yvivgeqxqa .gt_first_grand_summary_row {
+#fgwwqtyvmh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1701,7 +1720,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#yvivgeqxqa .gt_last_grand_summary_row_top {
+#fgwwqtyvmh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1711,11 +1730,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#yvivgeqxqa .gt_striped {
+#fgwwqtyvmh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yvivgeqxqa .gt_table_body {
+#fgwwqtyvmh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1724,7 +1743,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#yvivgeqxqa .gt_footnotes {
+#fgwwqtyvmh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1738,7 +1757,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#yvivgeqxqa .gt_footnote {
+#fgwwqtyvmh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1747,7 +1766,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#yvivgeqxqa .gt_sourcenotes {
+#fgwwqtyvmh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1761,7 +1780,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#yvivgeqxqa .gt_sourcenote {
+#fgwwqtyvmh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1769,203 +1788,205 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#yvivgeqxqa .gt_left {
+#fgwwqtyvmh .gt_left {
   text-align: left;
 }
 
-#yvivgeqxqa .gt_center {
+#fgwwqtyvmh .gt_center {
   text-align: center;
 }
 
-#yvivgeqxqa .gt_right {
+#fgwwqtyvmh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yvivgeqxqa .gt_font_normal {
+#fgwwqtyvmh .gt_font_normal {
   font-weight: normal;
 }
 
-#yvivgeqxqa .gt_font_bold {
+#fgwwqtyvmh .gt_font_bold {
   font-weight: bold;
 }
 
-#yvivgeqxqa .gt_font_italic {
+#fgwwqtyvmh .gt_font_italic {
   font-style: italic;
 }
 
-#yvivgeqxqa .gt_super {
+#fgwwqtyvmh .gt_super {
   font-size: 65%;
 }
 
-#yvivgeqxqa .gt_footnote_marks {
+#fgwwqtyvmh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yvivgeqxqa .gt_asterisk {
+#fgwwqtyvmh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yvivgeqxqa .gt_indent_1 {
+#fgwwqtyvmh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yvivgeqxqa .gt_indent_2 {
+#fgwwqtyvmh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yvivgeqxqa .gt_indent_3 {
+#fgwwqtyvmh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yvivgeqxqa .gt_indent_4 {
+#fgwwqtyvmh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yvivgeqxqa .gt_indent_5 {
+#fgwwqtyvmh .gt_indent_5 {
   text-indent: 25px;
 }
+
+#fgwwqtyvmh .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#fgwwqtyvmh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead><tr class="header gt_col_headings">
-<th id="Source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="text-align: left; font-size: large; vertical-align: middle;" scope="col">Source</th>
-<th id="Time" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Time</th>
-<th id="ID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">ID</th>
-<th id="Biden" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Biden</th>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
+<th id="source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="text-align: left; font-size: large; vertical-align: middle;" scope="col">Source</th>
+<th id="time" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Time</th>
+<th id="id" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">ID</th>
+<th id="biden" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Biden</th>
 </tr></thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="time"><p>February 2024</p></td>
-<td class="gt_row gt_center" headers="id"><p>1</p></td>
-<td class="gt_row gt_center" headers="biden"><p>?</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">February 2024</td>
+<td class="gt_row gt_center" headers="id">1</td>
+<td class="gt_row gt_center" headers="biden">?</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="time"><p>February 2024</p></td>
-<td class="gt_row gt_center" headers="id"><p>200</p></td>
-<td class="gt_row gt_center" headers="biden"><p>?</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">February 2024</td>
+<td class="gt_row gt_center" headers="id">200</td>
+<td class="gt_row gt_center" headers="biden">?</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="time"><p>February 2024</p></td>
-<td class="gt_row gt_center" headers="id"><p>976</p></td>
-<td class="gt_row gt_center" headers="biden"><p>?</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">February 2024</td>
+<td class="gt_row gt_center" headers="id">976</td>
+<td class="gt_row gt_center" headers="biden">?</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="time"><p>…</p></td>
-<td class="gt_row gt_center" headers="id"><p>…</p></td>
-<td class="gt_row gt_center" headers="biden"><p>…</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">…</td>
+<td class="gt_row gt_center" headers="id">…</td>
+<td class="gt_row gt_center" headers="biden">…</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Data</p></td>
-<td class="gt_row gt_center" headers="time"><p>March 2024</p></td>
-<td class="gt_row gt_center" headers="id"><p>1</p></td>
-<td class="gt_row gt_center" headers="biden"><p>0</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Data</td>
+<td class="gt_row gt_center" headers="time">March 2024</td>
+<td class="gt_row gt_center" headers="id">1</td>
+<td class="gt_row gt_center" headers="biden">0</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Data</p></td>
-<td class="gt_row gt_center" headers="time"><p>March 2024</p></td>
-<td class="gt_row gt_center" headers="id"><p>200</p></td>
-<td class="gt_row gt_center" headers="biden"><p>1</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Data</td>
+<td class="gt_row gt_center" headers="time">March 2024</td>
+<td class="gt_row gt_center" headers="id">200</td>
+<td class="gt_row gt_center" headers="biden">1</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Data</p></td>
-<td class="gt_row gt_center" headers="time"><p>March 2024</p></td>
-<td class="gt_row gt_center" headers="id"><p>…</p></td>
-<td class="gt_row gt_center" headers="biden"><p>…</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Data</td>
+<td class="gt_row gt_center" headers="time">March 2024</td>
+<td class="gt_row gt_center" headers="id">…</td>
+<td class="gt_row gt_center" headers="biden">…</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Data</p></td>
-<td class="gt_row gt_center" headers="time"><p>March 2024</p></td>
-<td class="gt_row gt_center" headers="id"><p>1559</p></td>
-<td class="gt_row gt_center" headers="biden"><p>1</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Data</td>
+<td class="gt_row gt_center" headers="time">March 2024</td>
+<td class="gt_row gt_center" headers="id">1559</td>
+<td class="gt_row gt_center" headers="biden">1</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="time"><p>…</p></td>
-<td class="gt_row gt_center" headers="id"><p>…</p></td>
-<td class="gt_row gt_center" headers="biden"><p>…</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">…</td>
+<td class="gt_row gt_center" headers="id">…</td>
+<td class="gt_row gt_center" headers="biden">…</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="time"><p>October 2024</p></td>
-<td class="gt_row gt_center" headers="id"><p>1</p></td>
-<td class="gt_row gt_center" headers="biden"><p>?</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">October 2024</td>
+<td class="gt_row gt_center" headers="id">1</td>
+<td class="gt_row gt_center" headers="biden">?</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="time"><p>October 2024</p></td>
-<td class="gt_row gt_center" headers="id"><p>200</p></td>
-<td class="gt_row gt_center" headers="biden"><p>?</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">October 2024</td>
+<td class="gt_row gt_center" headers="id">200</td>
+<td class="gt_row gt_center" headers="biden">?</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="time"><p>October 2024</p></td>
-<td class="gt_row gt_center" headers="id"><p>2025</p></td>
-<td class="gt_row gt_center" headers="biden"><p>?</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">October 2024</td>
+<td class="gt_row gt_center" headers="id">2025</td>
+<td class="gt_row gt_center" headers="biden">?</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="time"><p>…</p></td>
-<td class="gt_row gt_center" headers="id"><p>…</p></td>
-<td class="gt_row gt_center" headers="biden"><p>…</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">…</td>
+<td class="gt_row gt_center" headers="id">…</td>
+<td class="gt_row gt_center" headers="biden">…</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Preceptor Table</p></td>
-<td class="gt_row gt_center" headers="time"><p>November 2024</p></td>
-<td class="gt_row gt_center" headers="id"><p>1</p></td>
-<td class="gt_row gt_center" headers="biden"><p>1</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Preceptor Table</td>
+<td class="gt_row gt_center" headers="time">November 2024</td>
+<td class="gt_row gt_center" headers="id">1</td>
+<td class="gt_row gt_center" headers="biden">1</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Preceptor Table</p></td>
-<td class="gt_row gt_center" headers="time"><p>November 2024</p></td>
-<td class="gt_row gt_center" headers="id"><p>200</p></td>
-<td class="gt_row gt_center" headers="biden"><p>0</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Preceptor Table</td>
+<td class="gt_row gt_center" headers="time">November 2024</td>
+<td class="gt_row gt_center" headers="id">200</td>
+<td class="gt_row gt_center" headers="biden">0</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Preceptor Table</p></td>
-<td class="gt_row gt_center" headers="time"><p>November 2024</p></td>
-<td class="gt_row gt_center" headers="id"><p>2078</p></td>
-<td class="gt_row gt_center" headers="biden"><p>1</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Preceptor Table</td>
+<td class="gt_row gt_center" headers="time">November 2024</td>
+<td class="gt_row gt_center" headers="id">2078</td>
+<td class="gt_row gt_center" headers="biden">1</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="time"><p>…</p></td>
-<td class="gt_row gt_center" headers="id"><p>…</p></td>
-<td class="gt_row gt_center" headers="biden"><p>…</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">…</td>
+<td class="gt_row gt_center" headers="id">…</td>
+<td class="gt_row gt_center" headers="biden">…</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="time"><p>December 2024</p></td>
-<td class="gt_row gt_center" headers="id"><p>1</p></td>
-<td class="gt_row gt_center" headers="biden"><p>?</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">December 2024</td>
+<td class="gt_row gt_center" headers="id">1</td>
+<td class="gt_row gt_center" headers="biden">?</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="time"><p>December 2024</p></td>
-<td class="gt_row gt_center" headers="id"><p>200</p></td>
-<td class="gt_row gt_center" headers="biden"><p>?</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">December 2024</td>
+<td class="gt_row gt_center" headers="id">200</td>
+<td class="gt_row gt_center" headers="biden">?</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="time"><p>December 2024</p></td>
-<td class="gt_row gt_center" headers="id"><p>2300</p></td>
-<td class="gt_row gt_center" headers="biden"><p>?</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">December 2024</td>
+<td class="gt_row gt_center" headers="id">2300</td>
+<td class="gt_row gt_center" headers="biden">?</td>
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
 </div>
@@ -2012,16 +2033,16 @@ window.Quarto = {
 <pre><code># A tibble: 10 × 1
    biden
    &lt;dbl&gt;
- 1     1
- 2     1
- 3     0
+ 1     0
+ 2     0
+ 3     1
  4     0
  5     0
  6     0
  7     1
  8     1
  9     0
-10     1</code></pre>
+10     0</code></pre>
 </div>
 </div>
 <p>First, calculate the mean. This is our estimate of the center of the posterior distribution for <span class="math inline">\(\rho\)</span>, the unknown proportion of the voters who support Biden.</p>
@@ -2248,7 +2269,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <p>We can generate a posterior distribution for <span class="math inline">\(\rho\)</span> with:</p>
 <div class="cell">
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4,000 × 5
 # Groups:   .row [1]
@@ -2267,7 +2288,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 # ℹ 3,990 more rows</code></pre>
 </div>
 </div>
-<p>The first argument to the key function, <code><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code>, is <code>newdata</code>. We often want to examine the behavior of the model with new data sets, data which was not used in model estimation. The object passed as <code>newdata</code> is generally a tibble, with a row corresponding to each set of values for the independet variables. In this case, we have an intercept-only model, which means that there are no independent variables, other than the intercept, which does not need to be explicitly passed in. So, <code>newdata</code> is a tibble with no variables and one row.</p>
+<p>The first argument to the key function, <code><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code>, is <code>newdata</code>. We often want to examine the behavior of the model with new data sets, data which was not used in model estimation. The object passed as <code>newdata</code> is generally a tibble, with a row corresponding to each set of values for the independet variables. In this case, we have an intercept-only model, which means that there are no independent variables, other than the intercept, which does not need to be explicitly passed in. So, <code>newdata</code> is a tibble with no variables and one row.</p>
 <div class="cell">
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2277,7 +2298,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <p>The resulting tibble includes 4,000 rows, each of which is a draw from the posterior distribution of <span class="math inline">\(\rho\)</span>. (Recall that <span class="math inline">\(\rho\)</span> and <span class="math inline">\(\mu\)</span> refer to the same thing.) You can ignore that columns named <code>.row</code>, <code>.chain</code>, and <code>.iteration</code>. The <code>.draw</code> variable just keeps count of the draws. The key variable is <code>.epred</code>, which us a draw from the posterior distribution of <span class="math inline">\(\rho\)</span>. The “e” in <code>.epred</code> stands for expected value. Grahically, we have:</p>
 <div class="cell">
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.epred</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">count</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                   bins <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -2296,10 +2317,10 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
 </div>
-<p>Even more useful than posteriors of the parameters in the model are predictions we can make with the model. The key function for exploring those predictions is <code><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws()</a></code>. This function behaves similarly to <code><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code>. In both cases, we need to provide the value for the <code>newdata</code> argument, generally a tibble with a column for all the variables used in the fitted model. Again, because this is an intercept-only model, there is no need for columns in the <code>newdata</code> tibble. No variables are used in <code>fit_gauss</code>.</p>
+<p>Even more useful than posteriors of the parameters in the model are predictions we can make with the model. The key function for exploring those predictions is <code><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws()</a></code>. This function behaves similarly to <code><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code>. In both cases, we need to provide the value for the <code>newdata</code> argument, generally a tibble with a column for all the variables used in the fitted model. Again, because this is an intercept-only model, there is no need for columns in the <code>newdata</code> tibble. No variables are used in <code>fit_gauss</code>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4,000 × 5
 # Groups:   .row [1]
@@ -2318,7 +2339,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 # ℹ 3,990 more rows</code></pre>
 </div>
 </div>
-<p>The columns which result are the same as with <code><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code> except that <code>.epred</code> is replaced with <code>.prediction</code>. (The reason that all the variable names have a leading <code>.</code> is that this convention makes it less likely, but not impossible, that they will conflict with any variable names in the <code>newdata</code> tibble.)</p>
+<p>The columns which result are the same as with <code><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code> except that <code>.epred</code> is replaced with <code>.prediction</code>. (The reason that all the variable names have a leading <code>.</code> is that this convention makes it less likely, but not impossible, that they will conflict with any variable names in the <code>newdata</code> tibble.)</p>
 </section></section><section id="tests" class="level3" data-number="4.3.2"><h3 data-number="4.3.2" class="anchored" data-anchor-id="tests">
 <span class="header-section-number">4.3.2</span> Tests</h3>
 <p>A glance at the result shows the problem: <code>.prediction</code> takes on a variety of values. But that is impossible! By definition, the only possible values are 0/1. We must have made a mistake in specifying the model. Another way to see the model is to perform a “posterior predictive check,” a comparison of model predictions with your actual data. The <strong>bayesplot</strong> package includes the <code><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check()</a></code> function for that purpose.</p>
@@ -2405,7 +2426,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <p>We can create the entire posterior distribution for <span class="math inline">\(\rho\)</span> using similar code as before:</p>
 <div class="cell">
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_bern</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.epred</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">count</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                   bins <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -2426,7 +2447,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <p>If both <code>fit_gauss</code> and <code>fit_bern</code> produce the same posterior distribution for <span class="math inline">\(\rho\)</span>, then who cares which one we use? The answer is that <code>fit_bern</code> produces reasonable posterior predictions:</p>
 <div class="cell">
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_bern</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4,000 × 5
 # Groups:   .row [1]
@@ -2485,10 +2506,10 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <blockquote class="blockquote">
 <p><em>What proportion of all votes will be cast for Joe Biden in the 2024 election?</em></p>
 </blockquote>
-<p>Let’s use <code>fit_bern</code> to answer this question with the help of <code><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code>.</p>
+<p>Let’s use <code>fit_bern</code> to answer this question with the help of <code><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_bern</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
 <span>    lower_95 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">.epred</span>, <span class="fl">0.025</span><span class="op">)</span>,</span>
 <span>    median <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">.epred</span>, <span class="fl">0.5</span><span class="op">)</span>,</span>
@@ -2560,18 +2581,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -2603,7 +2613,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -2611,7 +2641,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -2708,7 +2738,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

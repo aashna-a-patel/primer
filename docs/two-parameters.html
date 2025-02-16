@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.6.39">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Preceptor’s Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference - 5&nbsp; Two Parameters</title>
+<title>5&nbsp; Two Parameters – Preceptor's Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -67,10 +67,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-a08d9001fe0711adfabc365c1b400f34.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -96,7 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -127,13 +127,13 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./two-parameters.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Two Parameters</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -145,17 +145,17 @@ window.Quarto = {
         <div class="sidebar-tools-main">
     <a href="https://github.com/PPBDS/primer/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
 <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Preceptor-s-Primer-for-Bayesian-Data-Science--Using-the-Cardinal-Virtues-for-Inference.pdf">
-              <i class="bi bi-bi-file-pdf pe-1"></i>
+              <i class="bi bi-file-pdf pe-1"></i>
             Download PDF
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Preceptor-s-Primer-for-Bayesian-Data-Science--Using-the-Cardinal-Virtues-for-Inference.epub">
-              <i class="bi bi-bi-journal pe-1"></i>
+              <i class="bi bi-journal pe-1"></i>
             Download ePub
             </a>
           </li>
@@ -185,7 +185,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./getting-started.html" class="sidebar-item-text sidebar-link">
+  <a href="./getting-started-with-rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting Started</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting-started-with-positron.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started</span></a>
   </div>
 </li>
@@ -368,24 +374,23 @@ window.Quarto = {
 <p>Here are some rows from our Preceptor Table:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<div id="ccmcmdeizt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ccmcmdeizt table {
+<div id="rspcicrzjq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rspcicrzjq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ccmcmdeizt thead, #ccmcmdeizt tbody, #ccmcmdeizt tfoot, #ccmcmdeizt tr, #ccmcmdeizt td, #ccmcmdeizt th {
+#rspcicrzjq thead, #rspcicrzjq tbody, #rspcicrzjq tfoot, #rspcicrzjq tr, #rspcicrzjq td, #rspcicrzjq th {
   border-style: none;
 }
 
-#ccmcmdeizt p {
+#rspcicrzjq p {
   margin: 0;
   padding: 0;
 }
 
-#ccmcmdeizt .gt_table {
+#rspcicrzjq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -411,12 +416,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#ccmcmdeizt .gt_caption {
+#rspcicrzjq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ccmcmdeizt .gt_title {
+#rspcicrzjq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -428,7 +433,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#ccmcmdeizt .gt_subtitle {
+#rspcicrzjq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -440,7 +445,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#ccmcmdeizt .gt_heading {
+#rspcicrzjq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -452,13 +457,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ccmcmdeizt .gt_bottom_border {
+#rspcicrzjq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ccmcmdeizt .gt_col_headings {
+#rspcicrzjq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -473,7 +478,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ccmcmdeizt .gt_col_heading {
+#rspcicrzjq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -493,7 +498,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ccmcmdeizt .gt_column_spanner_outer {
+#rspcicrzjq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -505,15 +510,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#ccmcmdeizt .gt_column_spanner_outer:first-child {
+#rspcicrzjq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ccmcmdeizt .gt_column_spanner_outer:last-child {
+#rspcicrzjq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ccmcmdeizt .gt_column_spanner {
+#rspcicrzjq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -525,11 +530,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#ccmcmdeizt .gt_spanner_row {
+#rspcicrzjq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ccmcmdeizt .gt_group_heading {
+#rspcicrzjq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -555,7 +560,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#ccmcmdeizt .gt_empty_group_heading {
+#rspcicrzjq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -570,15 +575,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#ccmcmdeizt .gt_from_md > :first-child {
+#rspcicrzjq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ccmcmdeizt .gt_from_md > :last-child {
+#rspcicrzjq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ccmcmdeizt .gt_row {
+#rspcicrzjq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -597,7 +602,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ccmcmdeizt .gt_stub {
+#rspcicrzjq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -610,7 +615,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ccmcmdeizt .gt_stub_row_group {
+#rspcicrzjq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -624,15 +629,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#ccmcmdeizt .gt_row_group_first td {
+#rspcicrzjq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ccmcmdeizt .gt_row_group_first th {
+#rspcicrzjq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ccmcmdeizt .gt_summary_row {
+#rspcicrzjq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -642,16 +647,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ccmcmdeizt .gt_first_summary_row {
+#rspcicrzjq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ccmcmdeizt .gt_first_summary_row.thick {
+#rspcicrzjq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ccmcmdeizt .gt_last_summary_row {
+#rspcicrzjq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -661,7 +666,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ccmcmdeizt .gt_grand_summary_row {
+#rspcicrzjq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -671,7 +676,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ccmcmdeizt .gt_first_grand_summary_row {
+#rspcicrzjq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -681,7 +686,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#ccmcmdeizt .gt_last_grand_summary_row_top {
+#rspcicrzjq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -691,11 +696,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ccmcmdeizt .gt_striped {
+#rspcicrzjq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ccmcmdeizt .gt_table_body {
+#rspcicrzjq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -704,7 +709,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ccmcmdeizt .gt_footnotes {
+#rspcicrzjq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -718,7 +723,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ccmcmdeizt .gt_footnote {
+#rspcicrzjq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -727,7 +732,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ccmcmdeizt .gt_sourcenotes {
+#rspcicrzjq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -741,7 +746,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ccmcmdeizt .gt_sourcenote {
+#rspcicrzjq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -749,125 +754,137 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ccmcmdeizt .gt_left {
+#rspcicrzjq .gt_left {
   text-align: left;
 }
 
-#ccmcmdeizt .gt_center {
+#rspcicrzjq .gt_center {
   text-align: center;
 }
 
-#ccmcmdeizt .gt_right {
+#rspcicrzjq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ccmcmdeizt .gt_font_normal {
+#rspcicrzjq .gt_font_normal {
   font-weight: normal;
 }
 
-#ccmcmdeizt .gt_font_bold {
+#rspcicrzjq .gt_font_bold {
   font-weight: bold;
 }
 
-#ccmcmdeizt .gt_font_italic {
+#rspcicrzjq .gt_font_italic {
   font-style: italic;
 }
 
-#ccmcmdeizt .gt_super {
+#rspcicrzjq .gt_super {
   font-size: 65%;
 }
 
-#ccmcmdeizt .gt_footnote_marks {
+#rspcicrzjq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ccmcmdeizt .gt_asterisk {
+#rspcicrzjq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ccmcmdeizt .gt_indent_1 {
+#rspcicrzjq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ccmcmdeizt .gt_indent_2 {
+#rspcicrzjq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ccmcmdeizt .gt_indent_3 {
+#rspcicrzjq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ccmcmdeizt .gt_indent_4 {
+#rspcicrzjq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ccmcmdeizt .gt_indent_5 {
+#rspcicrzjq .gt_indent_5 {
   text-indent: 25px;
 }
+
+#rspcicrzjq .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#rspcicrzjq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 33%">
 <col style="width: 33%">
 <col style="width: 33%">
 </colgroup>
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border">Preceptor Table</th>
 </tr>
-<tr class="odd gt_col_headings gt_spanner_row">
+<tr class="gt_col_headings gt_spanner_row even">
 <th rowspan="2" id="ID" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="text-align: left; font-size: large; vertical-align: middle;" scope="col">ID</th>
-<th id="Outcome" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><span class="gt_column_spanner">Outcome</span></th>
-<th id="Covariate" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><span class="gt_column_spanner">Covariate</span></th>
+<th id="Outcome" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><div class="gt_column_spanner">
+Outcome
+</div></th>
+<th id="Covariate" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><div class="gt_column_spanner">
+Covariate
+</div></th>
 </tr>
-<tr class="header gt_col_headings">
-<th id="Height" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Height</th>
-<th id="Sex" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Sex</th>
+<tr class="gt_col_headings header">
+<th id="height" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Height</th>
+<th id="sex" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Sex</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>1</p></td>
-<td class="gt_row gt_center" headers="height"><p>150</p></td>
-<td class="gt_row gt_center" headers="sex"><p>M</p></td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">1</td>
+<td class="gt_row gt_center" headers="height">150</td>
+<td class="gt_row gt_center" headers="sex">M</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>2</p></td>
-<td class="gt_row gt_center" headers="height"><p>172</p></td>
-<td class="gt_row gt_center" headers="sex"><p>F</p></td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">2</td>
+<td class="gt_row gt_center" headers="height">172</td>
+<td class="gt_row gt_center" headers="sex">F</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="height"><p>…</p></td>
-<td class="gt_row gt_center" headers="sex"><p>…</p></td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="height">…</td>
+<td class="gt_row gt_center" headers="sex">…</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>10</p></td>
-<td class="gt_row gt_center" headers="height"><p>160</p></td>
-<td class="gt_row gt_center" headers="sex"><p>F</p></td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">10</td>
+<td class="gt_row gt_center" headers="height">160</td>
+<td class="gt_row gt_center" headers="sex">F</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>11</p></td>
-<td class="gt_row gt_center" headers="height"><p>142</p></td>
-<td class="gt_row gt_center" headers="sex"><p>F</p></td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">11</td>
+<td class="gt_row gt_center" headers="height">142</td>
+<td class="gt_row gt_center" headers="sex">F</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="height"><p>…</p></td>
-<td class="gt_row gt_center" headers="sex"><p>…</p></td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="height">…</td>
+<td class="gt_row gt_center" headers="sex">…</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>N</p></td>
-<td class="gt_row gt_center" headers="height"><p>190</p></td>
-<td class="gt_row gt_center" headers="sex"><p>M</p></td>
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">N</td>
+<td class="gt_row gt_center" headers="height">190</td>
+<td class="gt_row gt_center" headers="sex">M</td>
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
 </div>
@@ -930,11 +947,11 @@ $ sleep          &lt;int&gt; 4, 4, 4, NA, 8, NA, NA, 8, 8, 8, 7, 5, 4, NA, 5, 7,
 <pre><code># A tibble: 5 × 3
     age sex    height
   &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;
-1    24 Female   175.
-2    27 Male     190.
-3    69 Female   156.
-4    40 Male     187 
-5    11 Female   155.</code></pre>
+1    26 Male     180.
+2    43 Female   169.
+3    21 Male     169.
+4    55 Male     179.
+5    24 Male     168.</code></pre>
 </div>
 </div>
 <p>We think of both <code>age</code> and <code>height</code> as numbers. And they are numbers! But R distinguishes between “integers” and “doubles,” only the second of which allow for decimal values. In the <code>nhanes</code> data, <code>age</code> is an integer and <code>height</code> is a double.</p>
@@ -958,7 +975,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">sex</span>, <span class="va">height</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <caption>Data summary</caption>
 <tbody>
 <tr class="odd">
@@ -1000,7 +1017,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 </tbody>
 </table>
 <p><strong>Variable type: character</strong></p>
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 19%">
 <col style="width: 13%">
@@ -1033,7 +1050,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 </tr></tbody>
 </table>
 <p><strong>Variable type: numeric</strong></p>
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 16%">
 <col style="width: 11%">
@@ -1162,7 +1179,6 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 <!-- DK: Need to standardize the creation of the Population Table, include ID/time column. -->
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div id="jnmaiyhpuz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#jnmaiyhpuz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -1602,84 +1618,86 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 #jnmaiyhpuz .gt_indent_5 {
   text-indent: 25px;
 }
+
+#jnmaiyhpuz .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#jnmaiyhpuz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead><tr class="header gt_col_headings">
-<th id="Source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="text-align: left; font-size: large; vertical-align: middle;" scope="col">Source</th>
-<th id="Sex" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Sex</th>
-<th id="Year" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Year</th>
-<th id="Height" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Height</th>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
+<th id="source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="text-align: left; font-size: large; vertical-align: middle;" scope="col">Source</th>
+<th id="sex" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Sex</th>
+<th id="year" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Year</th>
+<th id="height" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Height</th>
 </tr></thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Preceptor Table</p></td>
-<td class="gt_row gt_center" headers="sex"><p>Male</p></td>
-<td class="gt_row gt_center" headers="year"><p>2024</p></td>
-<td class="gt_row gt_center" headers="height"><p>?</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Preceptor Table</td>
+<td class="gt_row gt_center" headers="sex">Male</td>
+<td class="gt_row gt_center" headers="year">2024</td>
+<td class="gt_row gt_center" headers="height">?</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Preceptor Table</p></td>
-<td class="gt_row gt_center" headers="sex"><p>Female</p></td>
-<td class="gt_row gt_center" headers="year"><p>2024</p></td>
-<td class="gt_row gt_center" headers="height"><p>?</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Preceptor Table</td>
+<td class="gt_row gt_center" headers="sex">Female</td>
+<td class="gt_row gt_center" headers="year">2024</td>
+<td class="gt_row gt_center" headers="height">?</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="sex"><p>…</p></td>
-<td class="gt_row gt_center" headers="year"><p>…</p></td>
-<td class="gt_row gt_center" headers="height"><p>…</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="sex">…</td>
+<td class="gt_row gt_center" headers="year">…</td>
+<td class="gt_row gt_center" headers="height">…</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Actual Data</p></td>
-<td class="gt_row gt_center" headers="sex"><p>Male</p></td>
-<td class="gt_row gt_center" headers="year"><p>2009</p></td>
-<td class="gt_row gt_center" headers="height"><p>180</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Actual Data</td>
+<td class="gt_row gt_center" headers="sex">Male</td>
+<td class="gt_row gt_center" headers="year">2009</td>
+<td class="gt_row gt_center" headers="height">180</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Actual Data</p></td>
-<td class="gt_row gt_center" headers="sex"><p>Female</p></td>
-<td class="gt_row gt_center" headers="year"><p>2011</p></td>
-<td class="gt_row gt_center" headers="height"><p>160</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Actual Data</td>
+<td class="gt_row gt_center" headers="sex">Female</td>
+<td class="gt_row gt_center" headers="year">2011</td>
+<td class="gt_row gt_center" headers="height">160</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Actual Data</p></td>
-<td class="gt_row gt_center" headers="sex"><p>Male</p></td>
-<td class="gt_row gt_center" headers="year"><p>2010</p></td>
-<td class="gt_row gt_center" headers="height"><p>168</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Actual Data</td>
+<td class="gt_row gt_center" headers="sex">Male</td>
+<td class="gt_row gt_center" headers="year">2010</td>
+<td class="gt_row gt_center" headers="height">168</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>…</p></td>
-<td class="gt_row gt_center" headers="sex"><p>…</p></td>
-<td class="gt_row gt_center" headers="year"><p>…</p></td>
-<td class="gt_row gt_center" headers="height"><p>…</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="sex">…</td>
+<td class="gt_row gt_center" headers="year">…</td>
+<td class="gt_row gt_center" headers="height">…</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Other</p></td>
-<td class="gt_row gt_center" headers="sex"><p>?</p></td>
-<td class="gt_row gt_center" headers="year"><p>?</p></td>
-<td class="gt_row gt_center" headers="height"><p>?</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Other</td>
+<td class="gt_row gt_center" headers="sex">?</td>
+<td class="gt_row gt_center" headers="year">?</td>
+<td class="gt_row gt_center" headers="height">?</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Other</p></td>
-<td class="gt_row gt_center" headers="sex"><p>?</p></td>
-<td class="gt_row gt_center" headers="year"><p>?</p></td>
-<td class="gt_row gt_center" headers="height"><p>?</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Other</td>
+<td class="gt_row gt_center" headers="sex">?</td>
+<td class="gt_row gt_center" headers="year">?</td>
+<td class="gt_row gt_center" headers="height">?</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000"><p>Other</p></td>
-<td class="gt_row gt_center" headers="sex"><p>?</p></td>
-<td class="gt_row gt_center" headers="year"><p>?</p></td>
-<td class="gt_row gt_center" headers="height"><p>?</p></td>
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Other</td>
+<td class="gt_row gt_center" headers="sex">?</td>
+<td class="gt_row gt_center" headers="year">?</td>
+<td class="gt_row gt_center" headers="height">?</td>
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
 </div>
@@ -2031,18 +2049,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -2074,7 +2081,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -2082,7 +2109,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -2179,7 +2206,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
