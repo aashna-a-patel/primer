@@ -11,7 +11,7 @@ The world confronts us. Make decisions we must.
 
 We use [**R**](https://www.r-project.org/about.html) via [**Positron**](https://positron.posit.co). R is to Positron as a car's engine is to its dashboard.
 
-More precisely, R is a programming language that runs computations, while Positron is an *integrated development environment (IDE)* that provides an interface with many convenient features. Just as having access to a speedometer, rearview mirrors, and a navigation system makes driving much easier, using Positron's interface makes using R much easier.
+More precisely, R is a programming language that runs computations, while Positron is an *integrated development environment (IDE)* that provides an interface with many convenient features. Just as having access to a speedometer, rearview mirrors, and a navigation system makes driving much easier, using Positron's interface makes working with R much easier.
 
 Download and install R and Positron on your computer.
 
@@ -27,7 +27,7 @@ If you are using Windows, you must also install RTools. Download the latest vers
 
 ### Using R and Positron {.unnumbered}
 
-Much as we don't drive a car by interacting directly with the engine but rather by interacting with elements on the car's dashboard, we won't be using R directly. Instead, we will work through Positron's interface. After you install R and Positron on your computer, you'll have two new *programs* (also called *applications*) you can open. Always work in Positron and not directly in the R application.
+Much as we don't drive a car by interacting directly with the engine but rather by interacting with elements of the car's dashboard, we won't be using R directly. Instead, we will work through Positron's interface. After you install R and Positron on your computer, you'll have two new *programs* (also called *applications*) you can open. Always work in Positron and not directly in the R application.
 
 Open up Positron. 
 
@@ -44,24 +44,24 @@ The right side of the Positron window is the Secondary Side Bar.
 
 ```{r}
 #| echo: false
-knitr::include_graphics("getting-started-with-positron/images/secondary-side-bar.png")
+knitr::include_graphics("getting-started-with-positron/images/positron-window-2.png")
 ```
 
-In the Session tab, there is a Variables listing fpor the current R session. There are no variables yet. Let's change that. Go to your Console and type:
+In the Session tab, there is a Variables listing for the current R session. There are no variables yet. Let's change that. Go to your Console and type:
 
 ```{r}
 #| code-fold: false
 x <- 5
 ```
 
-This code assigns the value 5 to an object, `x`. `<-` is the operator used to assign values to objects in R. Now, hit `Enter` and you should see a variable `x` equal to 5 in under Variables. You must always hit `Enter` after typing a command, otherwise Positron will not realize that you want R to execute the command.
+This code assigns the value 5 to an object, `x`. `<-` is the operator used to assign values to objects in R. Now, hit `Enter` and you should see a variable `x` equal to 5 under Values. You must always hit `Enter` after typing a command, otherwise Positron will not realize that you want R to execute the command.
 
 ```{r}
 #| echo: false
 knitr::include_graphics("getting-started-with-positron/images/x-gets-5.png")
 ```
 
-The Secomdary Side Bar is on the right side of the Positron window. By default, it contains different tabs in the top half and a display area for plots in the bottom half. 
+The Secondary Side Bar contains different tabs in the top half and a display area for plots in the bottom half. 
 
 ```{r}
 #| echo: false
@@ -107,7 +107,7 @@ knitr::include_graphics("getting-started-with-positron/images/install-versus-loa
 
 2.  *Load the package*: "Loading" a package is like opening an app on your phone. Packages are not loaded by default when you start Positron. You need to load each package you want to use every time you restart Positron.
 
-Just for this chapter, execute this command in your R Console. Do not do this if you are working in the cloud using, for example, Posit Workbench.
+Just for this chapter, execute this command in your R Console. Do **not** do this if you are working in the cloud using, for example, Posit Workbench.
 
 ```{r}
 #| eval: false
@@ -172,7 +172,15 @@ Let's install another package:
 install.packages("tutorial.helpers")
 ```
 
-This package provides infrastructure for doing tutorials, a common approach for learning R.
+This package provides infrastructure for doing tutorials, a common approach for learning R. After you install this package, run this command in the Console:
+
+```{r}
+#| eval: false
+#| code-fold: false
+tutorial.helpers::set_positron_settings()
+```
+
+`set_positron_settings()` makes some senisble changes to your Positron settings file and to your `.Rprofile`.
 
 Let's install another package:
 
@@ -190,20 +198,30 @@ This might take awhile since the "Tidyverse" includes so many [useful packages](
 
 <span style="color: red;">Error: could not find function</span>
 
-This is a different error message than the one you just saw about a package not having been installed yet. R is telling you that you are trying to use a function in a package that has not yet been loaded. R doesn't know where to "find" the function you want to use.
+This is a different error message than the one about a package not having been installed yet. R is telling you that you are trying to use a function in a package that has not yet been loaded. R doesn't know where to "find" the function you want to use.
 
-Let's install two other packages: **r4ds.tutorials** and **primer.tutorials**. Copy and paste the following to the R Console:
+Let's install three other packages: **positron.tutorials**, **r4ds.tutorials** and **primer.tutorials**. Copy and paste the following to the R Console:
 
 ```{r}
 #| eval: false
 #| code-fold: false
 library(remotes)
-install_github("PPBDS/r4ds.tutorials")
+install_github("PPBDS/positron.tutorials")
 ```
 
-This should install easily. There is a version of **r4ds.tutorials** available on CRAN, but we want to get the latest version, often called the "development" version.
+This should install easily. 
 
 Next, copy and paste the following to the R Console:
+
+```{r}
+#| eval: false
+#| code-fold: false
+remotes::install_github("PPBDS/r4ds.tutorials")
+```
+
+There is a version of **r4ds.tutorials** available on CRAN, but we want to get the latest version, often called the "development" version.
+
+Then:
 
 ```{r}
 #| eval: false
@@ -225,13 +243,11 @@ This gives the download more time to complete. Try it again.
 
 Some other new packages will be installed as well, most importantly **primer.data**, which includes most of the data we use in the *Primer*. It may take a few minutes. If something gets messed up, it is often useful to read the error messages and see if a specific package is at fault. If so, use the `remove.packages()` function to remove the problematic package and then install it again.
 
-If **primer.tutorials** does not install correctly, don't worry about it. This package is much less important than **r4ds.tutorials**.
+If **primer.tutorials** does not install correctly, don't worry about it. This package is much less important than **positron.tutorials** and **r4ds.tutorials**.
 
 ### Tutorials {.unnumbered}
 
-<!-- DK: Is this really necessary? I think that you get all the tutorials for free? That is, you don't need to load them explicitly. They are just found by the Tutorial pane. -->
-
-There are many tutorials available in the **r4ds.tutorials** and **primer.tutorials** packages. In order to access these tutorials, you should run `library(r4ds.tutorials)` or `library(primer.tutorials)` in the R Console.
+There are many tutorials available in the **positron.tutorials**, **r4ds.tutorials**, and **primer.tutorials** packages. 
 
 Because Positron is still evolving, there is no easy way to start a tutorial. Instead, we must issue a command like this from the Console:
 
@@ -246,7 +262,7 @@ You may notice that the Console will show output as the tutorial is starting up.
 
 **Your work will automatically be saved between Positron sessions**. You can complete the tutorial in multiple sittings.
 
-Complete the "Tutorials in Positron" tutorial from the **tutorial.helpers** package. 
+Complete the "Tutorials in Positron" tutorial from the **tutorial.helpers** package. When you are doing this tutorial, make sure to run the `tutorial.helpers::set_positron_settings()` function. 
 
 Once you have done so, or if you already know R, you can start to learn about data science.
 
@@ -268,16 +284,23 @@ install.packages("tidyverse")
 install.packages("tutorial.helpers")
 ```
 
-  - Installed, from Github, the **r4ds.tutorials** and **primer.tutorials** packages:
+  - Installed, from Github, the **positron.tutorials**, **r4ds.tutorials**, and **primer.tutorials** packages:
 
 ```{r}
 #| eval: false
 #| code-fold: false
+remotes::install_github("PPBDS/positron.tutorials")
 remotes::install_github("PPBDS/r4ds.tutorials")
 remotes::install_github("PPBDS/primer.tutorials")
 ```
 
-  - Completed the "Tutorials in Positron" tutorial from the **tutorial.helpers** package.
+  - Complete the "Tutorials in Positron" tutorial from the **tutorial.helpers** package, including running:
+
+```{r}
+#| eval: false
+#| code-fold: false
+tutorial.helpers::set_positron_settings()
+```
 
 Let's get started.
 
