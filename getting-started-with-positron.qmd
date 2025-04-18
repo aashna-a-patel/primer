@@ -20,7 +20,7 @@ Download and install R and Positron on your computer.
 2.  [Download and install Positron](https://positron.posit.co/download.html).
 
 
-If you are using Windows, you must also install RTools. Download the latest version from [here](https://cran.r-project.org/bin/windows/Rtools/). Currently, the Rtools44 installer is what you want. The link is in the seventh paragraph of [this page](https://cran.r-project.org/bin/windows/Rtools/rtools44/rtools.html).
+If you are using Windows, you must also install RTools. Download the latest version from [here](https://cran.r-project.org/bin/windows/Rtools/). Currently, the Rtools45 installer is what you want. The link is in the seventh paragraph of [this page](https://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html). Use your favorite AI to help determine whether to use the Rtools45 installer or 64-bit ARM Rtools45 installer. 
 
 
 <!-- Advice about Workbench? -->
@@ -262,7 +262,7 @@ You may notice that the Console will show output as the tutorial is starting up.
 
 **Your work will automatically be saved between Positron sessions**. You can complete the tutorial in multiple sittings.
 
-Complete the "Tutorials in Positron" tutorial from the **tutorial.helpers** package. When you are doing this tutorial, make sure to run the `tutorial.helpers::set_positron_settings()` function. 
+Complete the "Tutorials in Positron" tutorial from the **tutorial.helpers** package.  
 
 Once you have done so, or if you already know R, you can start to learn about data science.
 
