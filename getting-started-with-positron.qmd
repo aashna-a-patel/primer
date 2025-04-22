@@ -17,8 +17,7 @@ Download and install R and Positron on your computer.
 
 1.  [Download and install R](https://cloud.r-project.org/). If you are using a Mac, make sure to use the correct installation, depending on whether you are using newer Apple silicon "M1-3 Macs" (first option) or older "Intel Macs" (second option). You can look up the chip used in your Mac by checking "About This Mac" under the Apple menu.
 
-2.  Download and install [Positron](https://positron.posit.co/download.html). Note that the version you install must be at 2025.05.0-58, which is available [here](https://github.com/posit-dev/positron/releases/tag/2025.05.0-58). **This is important.** If you use an older version, then you won't be able to run multiple Consoles, which is necessary for completing tutorials.
-
+2.  [Download and install Positron](https://github.com/posit-dev/positron/releases). Use the latest release at the top. 
 
 If you are using Windows, you must also install RTools. Download the latest version from [here](https://cran.r-project.org/bin/windows/Rtools/). Currently, the Rtools45 installer is what you want, assuming that your installed R version is at least 4.5.0. The link is in the seventh paragraph of [this page](https://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html). Use your favorite AI to help determine whether to use the Rtools45 installer or 64-bit ARM Rtools45 installer. 
 
