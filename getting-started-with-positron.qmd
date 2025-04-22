@@ -17,7 +17,7 @@ Download and install R and Positron on your computer.
 
 1.  [Download and install R](https://cloud.r-project.org/). If you are using a Mac, make sure to use the correct installation, depending on whether you are using newer Apple silicon "M1-3 Macs" (first option) or older "Intel Macs" (second option). You can look up the chip used in your Mac by checking "About This Mac" under the Apple menu.
 
-2.  [Download and install Positron](https://positron.posit.co/download.html).
+2.  Download and install [Positron](https://positron.posit.co/download.html). Note that the version you install must be at 2025.05.0-58, which is available [here](https://github.com/posit-dev/positron/releases/tag/2025.05.0-58). **This is important.** If you use an older version, then you won't be able to run multiple Consoles, which is necessary for completing tutorials.
 
 
 If you are using Windows, you must also install RTools. Download the latest version from [here](https://cran.r-project.org/bin/windows/Rtools/). Currently, the Rtools45 installer is what you want, assuming that your installed R version is at least 4.5.0. The link is in the seventh paragraph of [this page](https://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html). Use your favorite AI to help determine whether to use the Rtools45 installer or 64-bit ARM Rtools45 installer. 
@@ -190,8 +190,6 @@ Let's install another package:
 install.packages("tidyverse")
 ```
 
-This might take awhile since the "Tidyverse" includes so many [useful packages](https://www.tidyverse.org/).
-
 ### Package use {.unnumbered}
 
 *You have to load each package you want to use every time you start Positron.* If you don't load a package before attempting to use one of its features, you will see an error message like:
@@ -259,6 +257,21 @@ learnr::run_tutorial("tutorials-in-positron", package = "tutorial.helpers")
 ```
 
 You may notice that the Console will show output as the tutorial is starting up. This is because Positron is running the code to create the tutorial.
+
+```{r}
+#| echo: false
+knitr::include_graphics("getting-started-with-positron/images/positron-tutorial-1.png")
+```
+
+Because the current Console is now being used to run the tutorial, we need to start up a new Console by pressing the "Start a New Session" button --- the `+` symbol --- on the Console menu. See the red arrow above. Choose the R option.
+
+
+```{r}
+#| echo: false
+knitr::include_graphics("getting-started-with-positron/images/positron-tutorial-2.png")
+```
+
+You now have two R sessions running. The first is maintaining the tutorial itself, recording your answers. The second allows you to run R commands. You will spend almost all your time with the second session since many tutorials require you to issue some R commands directly to the Console.
 
 **Your work will automatically be saved between Positron sessions**. You can complete the tutorial in multiple sittings.
 

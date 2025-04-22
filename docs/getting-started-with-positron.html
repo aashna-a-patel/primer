@@ -290,7 +290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Download and install R and Positron on your computer.</p>
 <ol type="1">
 <li><p><a href="https://cloud.r-project.org/">Download and install R</a>. If you are using a Mac, make sure to use the correct installation, depending on whether you are using newer Apple silicon “M1-3 Macs” (first option) or older “Intel Macs” (second option). You can look up the chip used in your Mac by checking “About This Mac” under the Apple menu.</p></li>
-<li><p><a href="https://positron.posit.co/download.html">Download and install Positron</a>.</p></li>
+<li><p>Download and install <a href="https://positron.posit.co/download.html">Positron</a>. Note that the version you install must be at 2025.05.0-58, which is available <a href="https://github.com/posit-dev/positron/releases/tag/2025.05.0-58">here</a>. <strong>This is important.</strong> If you use an older version, then you won’t be able to run multiple Consoles, which is necessary for completing tutorials.</p></li>
 </ol>
 <p>If you are using Windows, you must also install RTools. Download the latest version from <a href="https://cran.r-project.org/bin/windows/Rtools/">here</a>. Currently, the Rtools45 installer is what you want, assuming that your installed R version is at least 4.5.0. The link is in the seventh paragraph of <a href="https://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html">this page</a>. Use your favorite AI to help determine whether to use the Rtools45 installer or 64-bit ARM Rtools45 installer.</p>
 <!-- Advice about Workbench? -->
@@ -422,7 +422,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This might take awhile since the “Tidyverse” includes so many <a href="https://www.tidyverse.org/">useful packages</a>.</p>
 </section><section id="package-use" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="package-use">Package use</h3>
 <p><em>You have to load each package you want to use every time you start Positron.</em> If you don’t load a package before attempting to use one of its features, you will see an error message like:</p>
 <p><span style="color: red;">Error: could not find function</span></p>
@@ -457,6 +456,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">learnr</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/learnr/reference/run_tutorial.html">run_tutorial</a></span><span class="op">(</span><span class="st">"tutorials-in-positron"</span>, package <span class="op">=</span> <span class="st">"tutorial.helpers"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You may notice that the Console will show output as the tutorial is starting up. This is because Positron is running the code to create the tutorial.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="getting-started-with-positron/images/positron-tutorial-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Because the current Console is now being used to run the tutorial, we need to start up a new Console by pressing the “Start a New Session” button — the <code>+</code> symbol — on the Console menu. See the red arrow above. Choose the R option.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="getting-started-with-positron/images/positron-tutorial-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You now have two R sessions running. The first is maintaining the tutorial itself, recording your answers. The second allows you to run R commands. You will spend almost all your time with the second session since many tutorials require you to issue some R commands directly to the Console.</p>
 <p><strong>Your work will automatically be saved between Positron sessions</strong>. You can complete the tutorial in multiple sittings.</p>
 <p>Complete the “Tutorials in Positron” tutorial from the <strong>tutorial.helpers</strong> package.</p>
 <p>Once you have done so, or if you already know R, you can start to learn about data science.</p>
