@@ -252,7 +252,7 @@ Because Positron is still evolving, there is no easy way to start a tutorial. In
 ```{r}
 #| eval: false
 #| code-fold: false
-learnr::run_tutorial("tutorials-in-positron", package = "tutorial.helpers")
+learnr::run_tutorial("positron", package = "tutorial.helpers")
 ```
 
 You may notice that the Console will show output as the tutorial is starting up. This is because Positron is running the code to create the tutorial.
