@@ -306,7 +306,15 @@ remotes::install_github("PPBDS/r4ds.tutorials")
 remotes::install_github("PPBDS/primer.tutorials")
 ```
 
-  - Complete the "Tutorials in Positron" tutorial from the **tutorial.helpers** package, including running:
+  - Complete the "Tutorials in Positron" tutorial from the **tutorial.helpers** package:
+  
+```{r}
+#| eval: false
+#| code-fold: false
+learnr::run_tutorial("positron", package = "tutorial.helpers")
+```
+
+As part of that tutorial, you will also run:
 
 ```{r}
 #| eval: false
