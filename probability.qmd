@@ -24,7 +24,6 @@ library(rayshader)
 library(tidyverse)
 library(magick)
 library(gt)
-library(gtsummary)
 library(patchwork)
 library(primer.data)
 ```
@@ -2163,7 +2162,7 @@ What we really care about is data we haven't seen yet, mostly data from tomorrow
 
 In Temperance, the key distinction is between the *true* posterior distribution --- what we will call "Preceptor's Posterior" --- and the estimated posterior distribution. Recall our discussion from @sec-distributions. Imagine that every assumption we made in Wisdom and Justice were correct, that we correctly understand every aspect of how the world works. We still would not know the unknown value we are trying to estimate --- recall the Fundamental Problem of Causal Inference --- but the posterior we created would be perfect. That is Preceptor's Posterior. Sadly, even if our estimated posterior is, very close to Preceptor's Posterior, we can never be sure of that fact, because we can never know the truth, never be certain that all the assumptions we made are correct. 
 
-Even worse, we must always worry that our estimated posterior, despite all the work we put into creating it, is far from the truth. We, therefore, must be cautious in our use of that posterior, humble in our claims about its accuracy. Using our posterior, despite its faults, is better than not using it. Yet it is, as best, a distorted map of reality, a glass through which we must look darkly. Use your posteriors with humility.
+Even worse, we must always worry that our estimated posterior, despite all the work we put into creating it, is far from the truth. We, therefore, must be cautious in our use of that posterior, humble in our claims about its accuracy. Using our posterior, despite its faults, is better than not using it. Yet it is, at best, a distorted map of reality, a glass through which we must look darkly. Use your posteriors with humility.
 
 
 
