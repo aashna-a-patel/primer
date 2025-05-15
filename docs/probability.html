@@ -324,19 +324,12 @@ window.Quarto = {
   <li><a href="#three-models" id="toc-three-models" class="nav-link" data-scroll-target="#three-models"><span class="header-section-number">2.4</span> Three models</a></li>
   <li><a href="#sec-n-models" id="toc-sec-n-models" class="nav-link" data-scroll-target="#sec-n-models"><span class="header-section-number">2.5</span> N models</a></li>
   <li>
-<a href="#working-with-probability-distributions" id="toc-working-with-probability-distributions" class="nav-link" data-scroll-target="#working-with-probability-distributions"><span class="header-section-number">2.6</span> Working with probability distributions</a>
+<a href="#cardinal-virtues" id="toc-cardinal-virtues" class="nav-link" data-scroll-target="#cardinal-virtues"><span class="header-section-number">2.6</span> Cardinal Virtues</a>
   <ul class="collapse">
-<li><a href="#random-variables" id="toc-random-variables" class="nav-link" data-scroll-target="#random-variables"><span class="header-section-number">2.6.1</span> Random variables</a></li>
-  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics"><span class="header-section-number">2.6.2</span> Summary statistics</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#cardinal-virtues" id="toc-cardinal-virtues" class="nav-link" data-scroll-target="#cardinal-virtues"><span class="header-section-number">2.7</span> Cardinal Virtues</a>
-  <ul class="collapse">
-<li><a href="#wisdom" id="toc-wisdom" class="nav-link" data-scroll-target="#wisdom"><span class="header-section-number">2.7.1</span> Wisdom</a></li>
-  <li><a href="#justice" id="toc-justice" class="nav-link" data-scroll-target="#justice"><span class="header-section-number">2.7.2</span> Justice</a></li>
-  <li><a href="#courage" id="toc-courage" class="nav-link" data-scroll-target="#courage"><span class="header-section-number">2.7.3</span> Courage</a></li>
-  <li><a href="#temperance" id="toc-temperance" class="nav-link" data-scroll-target="#temperance"><span class="header-section-number">2.7.4</span> Temperance</a></li>
+<li><a href="#wisdom" id="toc-wisdom" class="nav-link" data-scroll-target="#wisdom"><span class="header-section-number">2.6.1</span> Wisdom</a></li>
+  <li><a href="#justice" id="toc-justice" class="nav-link" data-scroll-target="#justice"><span class="header-section-number">2.6.2</span> Justice</a></li>
+  <li><a href="#courage" id="toc-courage" class="nav-link" data-scroll-target="#courage"><span class="header-section-number">2.6.3</span> Courage</a></li>
+  <li><a href="#temperance" id="toc-temperance" class="nav-link" data-scroll-target="#temperance"><span class="header-section-number">2.6.4</span> Temperance</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/PPBDS/primer/edit/main/probability.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -357,7 +350,7 @@ window.Quarto = {
   
 
 
-</header><!-- Is the two model plot wrong, with that weird dark dot in one quadrant? --><!-- Need a clear discussion of confidence, credible, uncertainty intervals. This is needed so that the discussion of standard errors in the next chapter makes sense. This is among the most important things in statistics! It should be a main focus of the chapter. --><!-- Why bother teaching them how to calculate the probabilities by hand, with list-columns and map_* functions in the first place? After all, we are never going to do this again! (If we get rid of them, we would need to remove them from the tutorials, of course.) In the same way that we don't teach them rayshader, we just use it as a teaching tool, we could avoid teaching them map_* functions and then just use the outputs. On the other hand, aren't there some examples in later chapters in which, in fact, we do need map_* functions to answer the question? --><!-- Perhaps change the joint and conditional distribution section to use sex/height from NHANES? It is true that this is a discrete and continuous joint distribution, but that is probably fine. Certainly connects nicely with the male height example. Certainly works well with the joint and conditional together. Certainly would be nice to do the empirical/mathematical/posterior trypycht as in the first three examples. Posterior could be for a WNBA practice session. Most of the women will be tall, but the men will be of more typical height. --><!-- Shouldn't we have a question which we answer with a dgm for each distribution example, as we do with three heads in a row? --><!-- Should we discuss more the interplay of the use of data and math? For example, in the Presidential election example, we recognize that the (naive) mathematical distribution is inconsistent with the data. So, we need to change the math. And then see if the new math is more consistent with the data. Perhaps an important point worth repeating. --><!-- Need more clarity on when/whether a distribution is empirical, meaning it is a histogram of the whole population (or a sample from it), and when it is an expectation, like what we expect to happen if we sample one more person. Not even sure that this distinction is sensible . . . --><!-- Major change is that each example needs to have a simple question. Then it needs a DGM. Then we use the DGM to answer the question.  --><!-- In the list column section, is using a dot the best approach to working with map* functions and list-columns? Isn't there something new, with _ being a cool symbol for this? --><!-- Topics we don't currently address in the chapter but which we might add: population, Preceptor Table, Population Table. --><!-- How do we introduce the Question? We certainly need a question each time because, once we have the model, we have to show readers how to "work with" the distribution, and that requires a question to answer. Revisit this sentence: "All data science problems". --><!-- If A and B are independent, you can make a draw from the joint distribution of A and B --- p(A, B) --- by first taking a draw from A and combining it with a draw from B. Maybe this means discussing independence in the section of joint distributions? --><!-- The way that one does does so, is one draws 4,000 values from them, does some manipulation *row-by_row*, and then, hooray, you have you answer.  --><!-- You can consider these pdfs to be independent, so you can draw them independently and then --- this is the magic! --- you can treat a row as a draw from their joint distribution. --><!-- The joint distribution of a collection of random variables --- which we are working with by considering 4,000 draws from their pdfs --- is  . . . . the same as picking a random value from each member of the collection.  --><!-- There are two kinds of questions. The first asks for the value of a specific "real" number, like the height of the tallest person out of a 100. We answer this type of question with a posterior probability distribution. The second asks for the chances/likelihood/probability/odds of something --- like what are the chances that the tallest person will be above 200 cm. We answer this by first making a probability distribution and then calculating the appropriate area under the curve. --><!-- What would be a fun theme/gif/movie clip to start and end the chapter with, like we do in chapters 4 and 6? Something having to do with betting . . . Connected to Kant? --><!-- Add, after N models, a section on Infinite models, meaning a continuous parameter p. Note that we have a continuous distribution section now. Want to set the stage for Chapter 6, in which we are generating a posterior for p which we may think of as taking an infinite number of values. This is a key dimension on which chapter 5 and 6 need to connect. --><!-- Revisit these references and see if there is other stuff we should include. Rethinking marbles would make a nice tutorial. --><!-- Teaching Bayes' Rule: A Data-Oriented Approach by Jim Albert. --><!-- Rethinking Chapter 2. Garden of forking data is just excellent stuff. --><!-- Bayesian Workshop --><!-- Get rid of list-columns stuff? --><!-- Kant quote is OK, but not great. Would be nicer to start and end with a video, as in Chapters 4 and 6. --><!-- Consider how we might better connect the two model, three model, n model sections to the distribution sections. In all those cases, we are setting up a joint distribution and then marginalizing it (?) to create a conditional distribution, which looks a lot like a simple one dimensional distribution. --><!-- This makes the *dual nature of distributions* more clear. A distribution is the "thing" you see in this plot. A mathematical object with several different parts, including a set of possible values (1 through 6, in this case) and a record of the number of times each value appears. A distribution is *also* the simple vector of numbers we used to create this plot. --><!-- In general, we travel back-and-forth between *distribution as a thing* and *distribution as a vector of draws* from the thing, depending on what we are trying to accomplish. --><blockquote class="blockquote">
+</header><!-- Is the two model plot wrong, with that weird dark dot in one quadrant? --><!-- Need a clear discussion of confidence, credible, uncertainty intervals. This is needed so that the discussion of standard errors in the next chapter makes sense. This is among the most important things in statistics! It should be a main focus of the chapter. --><!-- Why bother teaching them how to calculate the probabilities by hand, with list-columns and map_* functions in the first place? After all, we are never going to do this again! (If we get rid of them, we would need to remove them from the tutorials, of course.) In the same way that we don't teach them rayshader, we just use it as a teaching tool, we could avoid teaching them map_* functions and then just use the outputs. On the other hand, aren't there some examples in later chapters in which, in fact, we do need map_* functions to answer the question? --><!-- Perhaps change the joint and conditional distribution section to use sex/height from NHANES? It is true that this is a discrete and continuous joint distribution, but that is probably fine. Certainly connects nicely with the male height example. Certainly works well with the joint and conditional together. Certainly would be nice to do the empirical/mathematical/posterior trypycht as in the first three examples. Posterior could be for a WNBA practice session. Most of the women will be tall, but the men will be of more typical height. --><!-- Shouldn't we have a question which we answer with a DGM for each distribution example, as we do with three heads in a row? --><!-- Should we discuss more the interplay of the use of data and math? For example, in the Presidential election example, we recognize that the (naive) mathematical distribution is inconsistent with the data. So, we need to change the math. And then see if the new math is more consistent with the data. Perhaps an important point worth repeating. --><!-- Need more clarity on when/whether a distribution is empirical, meaning it is a histogram of the whole population (or a sample from it), and when it is an expectation, like what we expect to happen if we sample one more person. Not even sure that this distinction is sensible . . . --><!-- Major change is that each example needs to have a simple question. Then it needs a DGM. Then we use the DGM to answer the question.  --><!-- In the list column section, is using a dot the best approach to working with map* functions and list-columns? Isn't there something new, with _ being a cool symbol for this? --><!-- Topics we don't currently address in the chapter but which we might add: population, Preceptor Table, Population Table. --><!-- How do we introduce the Question? We certainly need a question each time because, once we have the model, we have to show readers how to "work with" the distribution, and that requires a question to answer. Revisit this sentence: "All data science problems". --><!-- If A and B are independent, you can make a draw from the joint distribution of A and B --- p(A, B) --- by first taking a draw from A and combining it with a draw from B. Maybe this means discussing independence in the section of joint distributions? --><!-- The way that one does does so, is one draws 4,000 values from them, does some manipulation *row-by_row*, and then, hooray, you have you answer.  --><!-- You can consider these pdfs to be independent, so you can draw them independently and then --- this is the magic! --- you can treat a row as a draw from their joint distribution. --><!-- The joint distribution of a collection of random variables --- which we are working with by considering 4,000 draws from their pdfs --- is  . . . . the same as picking a random value from each member of the collection.  --><!-- There are two kinds of questions. The first asks for the value of a specific "real" number, like the height of the tallest person out of a 100. We answer this type of question with a posterior probability distribution. The second asks for the chances/likelihood/probability/odds of something --- like what are the chances that the tallest person will be above 200 cm. We answer this by first making a probability distribution and then calculating the appropriate area under the curve. --><!-- What would be a fun theme/gif/movie clip to start and end the chapter with, like we do in chapters 4 and 6? Something having to do with betting . . . Connected to Kant? --><!-- Add, after N models, a section on Infinite models, meaning a continuous parameter p. Note that we have a continuous distribution section now. Want to set the stage for Chapter 6, in which we are generating a posterior for p which we may think of as taking an infinite number of values. This is a key dimension on which chapter 5 and 6 need to connect. --><!-- Revisit these references and see if there is other stuff we should include. Rethinking marbles would make a nice tutorial. --><!-- Teaching Bayes' Rule: A Data-Oriented Approach by Jim Albert. --><!-- Rethinking Chapter 2. Garden of forking data is just excellent stuff. --><!-- Bayesian Workshop --><!-- Get rid of list-columns stuff? --><!-- Kant quote is OK, but not great. Would be nicer to start and end with a video, as in Chapters 4 and 6. --><!-- Consider how we might better connect the two model, three model, n model sections to the distribution sections. In all those cases, we are setting up a joint distribution and then marginalizing it (?) to create a conditional distribution, which looks a lot like a simple one dimensional distribution. --><!-- This makes the *dual nature of distributions* more clear. A distribution is the "thing" you see in this plot. A mathematical object with several different parts, including a set of possible values (1 through 6, in this case) and a record of the number of times each value appears. A distribution is *also* the simple vector of numbers we used to create this plot. --><!-- In general, we travel back-and-forth between *distribution as a thing* and *distribution as a vector of draws* from the thing, depending on what we are trying to accomplish. --><blockquote class="blockquote">
 <p>The usual touchstone of whether what someone asserts is mere persuasion or at least a subjective conviction, i.e., firm belief, is betting. Often someone pronounces his propositions with such confident and inflexible defiance that he seems to have entirely laid aside all concern for error. A bet disconcerts him. Sometimes he reveals that he is persuaded enough for one ducat but not for ten. For he would happily bet one, but at ten he suddenly becomes aware of what he had not previously noticed, namely that it is quite possible that he has erred. -— Immanuel Kant, <em>Critique of Pure Reason</em></p>
 </blockquote>
 <p>The central tension, and opportunity, in data science is the interplay between the <em>data</em> and the <em>science</em>, between our empirical observations and the models which we create to use them. Probability is the language we use to explore that interplay; it connects data to models, and models to inference.</p>
@@ -407,23 +400,23 @@ window.Quarto = {
 <span>               portion <span class="op">=</span> <span class="st">"Percentage"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu">fmt_percent</span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">portion</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<div id="xwbhymckgz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xwbhymckgz table {
+<div id="ksmlqnzjjo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ksmlqnzjjo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xwbhymckgz thead, #xwbhymckgz tbody, #xwbhymckgz tfoot, #xwbhymckgz tr, #xwbhymckgz td, #xwbhymckgz th {
+#ksmlqnzjjo thead, #ksmlqnzjjo tbody, #ksmlqnzjjo tfoot, #ksmlqnzjjo tr, #ksmlqnzjjo td, #ksmlqnzjjo th {
   border-style: none;
 }
 
-#xwbhymckgz p {
+#ksmlqnzjjo p {
   margin: 0;
   padding: 0;
 }
 
-#xwbhymckgz .gt_table {
+#ksmlqnzjjo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -449,12 +442,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#xwbhymckgz .gt_caption {
+#ksmlqnzjjo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xwbhymckgz .gt_title {
+#ksmlqnzjjo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -466,7 +459,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#xwbhymckgz .gt_subtitle {
+#ksmlqnzjjo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -478,7 +471,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#xwbhymckgz .gt_heading {
+#ksmlqnzjjo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -490,13 +483,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xwbhymckgz .gt_bottom_border {
+#ksmlqnzjjo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xwbhymckgz .gt_col_headings {
+#ksmlqnzjjo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -511,7 +504,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xwbhymckgz .gt_col_heading {
+#ksmlqnzjjo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -531,7 +524,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#xwbhymckgz .gt_column_spanner_outer {
+#ksmlqnzjjo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -543,15 +536,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#xwbhymckgz .gt_column_spanner_outer:first-child {
+#ksmlqnzjjo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xwbhymckgz .gt_column_spanner_outer:last-child {
+#ksmlqnzjjo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xwbhymckgz .gt_column_spanner {
+#ksmlqnzjjo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -563,11 +556,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#xwbhymckgz .gt_spanner_row {
+#ksmlqnzjjo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xwbhymckgz .gt_group_heading {
+#ksmlqnzjjo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -593,7 +586,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#xwbhymckgz .gt_empty_group_heading {
+#ksmlqnzjjo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -608,15 +601,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#xwbhymckgz .gt_from_md > :first-child {
+#ksmlqnzjjo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xwbhymckgz .gt_from_md > :last-child {
+#ksmlqnzjjo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xwbhymckgz .gt_row {
+#ksmlqnzjjo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -635,7 +628,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#xwbhymckgz .gt_stub {
+#ksmlqnzjjo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -648,7 +641,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xwbhymckgz .gt_stub_row_group {
+#ksmlqnzjjo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -662,15 +655,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#xwbhymckgz .gt_row_group_first td {
+#ksmlqnzjjo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xwbhymckgz .gt_row_group_first th {
+#ksmlqnzjjo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xwbhymckgz .gt_summary_row {
+#ksmlqnzjjo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -680,16 +673,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xwbhymckgz .gt_first_summary_row {
+#ksmlqnzjjo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xwbhymckgz .gt_first_summary_row.thick {
+#ksmlqnzjjo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xwbhymckgz .gt_last_summary_row {
+#ksmlqnzjjo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -699,7 +692,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#xwbhymckgz .gt_grand_summary_row {
+#ksmlqnzjjo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -709,7 +702,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xwbhymckgz .gt_first_grand_summary_row {
+#ksmlqnzjjo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -719,7 +712,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#xwbhymckgz .gt_last_grand_summary_row_top {
+#ksmlqnzjjo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -729,11 +722,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#xwbhymckgz .gt_striped {
+#ksmlqnzjjo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xwbhymckgz .gt_table_body {
+#ksmlqnzjjo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -742,7 +735,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#xwbhymckgz .gt_footnotes {
+#ksmlqnzjjo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -756,7 +749,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xwbhymckgz .gt_footnote {
+#ksmlqnzjjo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -765,7 +758,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xwbhymckgz .gt_sourcenotes {
+#ksmlqnzjjo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -779,7 +772,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xwbhymckgz .gt_sourcenote {
+#ksmlqnzjjo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -787,72 +780,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xwbhymckgz .gt_left {
+#ksmlqnzjjo .gt_left {
   text-align: left;
 }
 
-#xwbhymckgz .gt_center {
+#ksmlqnzjjo .gt_center {
   text-align: center;
 }
 
-#xwbhymckgz .gt_right {
+#ksmlqnzjjo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xwbhymckgz .gt_font_normal {
+#ksmlqnzjjo .gt_font_normal {
   font-weight: normal;
 }
 
-#xwbhymckgz .gt_font_bold {
+#ksmlqnzjjo .gt_font_bold {
   font-weight: bold;
 }
 
-#xwbhymckgz .gt_font_italic {
+#ksmlqnzjjo .gt_font_italic {
   font-style: italic;
 }
 
-#xwbhymckgz .gt_super {
+#ksmlqnzjjo .gt_super {
   font-size: 65%;
 }
 
-#xwbhymckgz .gt_footnote_marks {
+#ksmlqnzjjo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xwbhymckgz .gt_asterisk {
+#ksmlqnzjjo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xwbhymckgz .gt_indent_1 {
+#ksmlqnzjjo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xwbhymckgz .gt_indent_2 {
+#ksmlqnzjjo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xwbhymckgz .gt_indent_3 {
+#ksmlqnzjjo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xwbhymckgz .gt_indent_4 {
+#ksmlqnzjjo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xwbhymckgz .gt_indent_5 {
+#ksmlqnzjjo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xwbhymckgz .katex-display {
+#ksmlqnzjjo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xwbhymckgz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ksmlqnzjjo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1447,7 +1440,7 @@ window.Quarto = {
 <p>The two graphs have the exact same shape because, even though the vectors are of different lengths, the relative proportions of the outcomes are identical. In some sense, both vectors are from the same distribution. <em>Relative proportions, not the total counts, are what matter.</em></p>
 </section><section id="normalizing-distributions" class="level3" data-number="2.1.2"><h3 data-number="2.1.2" class="anchored" data-anchor-id="normalizing-distributions">
 <span class="header-section-number">2.1.2</span> Normalizing distributions</h3>
-<p>If two distributions have the same shape, then they only differ by the labels on the y-axis. There are various ways of “normalizing” distributions so as to place them all the same scale. The most common scale is one in which the area under the distribution adds to 1, e.g., 100%. For example, we can transform the above plots:</p>
+<p>If two distributions have the same shape, then they only differ by the labels on the y-axis. There are various ways of “normalizing” distributions so as to place them all on the same scale. The most common scale is one in which the area under the distribution adds to 1, e.g., 100%. For example, we can transform the above plots:</p>
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rolls_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>value <span class="op">=</span> <span class="va">ten_rolls</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1488,10 +1481,9 @@ window.Quarto = {
 <ul>
 <li><p>The <em>unknown true distribution</em> which, in reality, generates the data which we see. Outside of stylized examples in which we <em>assume</em> that a distribution follows a simple mathematical formula, we will never have access to the unknown true distribution. We can only estimate it. This unknown true distribution is often referred to as the <em>data generating mechanism</em>, or DGM. It is a function or black box or urn which produces data. We can see the data. We can’t see the urn.</p></li>
 <li><p>The <em>estimated distribution</em> which, we think, generates the data which we see. Again, we can never know the unknown true distribution. But, by making some assumptions and using the data we have, we can <em>estimate</em> a distribution. Our estimate may be very close to the true distribution. Or it may be far away. The main task of data science to to create and use these estimated distributions. Almost always, these distributions are instantiated in computer code. Just as there is a <em>true</em> data generating mechanism associated with the (unknown) <em>true</em> distribution, there is an <em>estimated</em> data generating mechanism associated with the <em>estimated</em> ditribution.</p></li>
-<li><p>A <em>vector of numbers drawn</em> from the estimated distribution. Both true and estimated distributions can be complex animals, difficult to describe accurately and in detail. But a vector of numbers drawn from a distribution is easy to understand and use. So, in general, we work with vectors of numbers. When someone — either a colleague or a piece of R code — creates a distribution which we want to use to answer a question, we don’t really want the distribution itself. Rather, we want a vectors of “draws” from that distribution. Vectors are easy to work with! Complex computer code is not.</p></li>
+<li><p>A <em>vector of numbers drawn</em> from the estimated distribution. Both true and estimated distributions can be complex animals, difficult to describe accurately and in detail. But a vector of numbers drawn from a distribution is easy to understand and use. So, in general, we work with vectors of numbers. When someone — either a colleague or a piece of R code — creates a distribution which we want to use to answer a question, we don’t really want the distribution itself. Rather, we want a vector of “draws” from that distribution. Vectors are easy to work with! Complex computer code is not.</p></li>
 </ul>
 <p>Again, people (including us!) will often be sloppy and use the same word, “distribution,” without making it clear whether they are talking about the <em>true distribution</em>, the <em>estimated distribution</em>, or a vector of <em>draws</em> from the estimated distribution. The same sloppiness applies to the use of the term <em>data generating mechanism</em>. Try not to be sloppy.</p>
-<p>Much of the rest of the <em>Primer</em> involves learning how to work with distributions, which generally means working with the draws from those distributions. Fortunately, the usual rules of arithmetic apply. You can add/subtract/multiply/divide distributions by working with draws from those distributions, just as you can add/subtract/multiply/divide regular numbers.</p>
 </section></section><section id="probability-distributions" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="probability-distributions">
 <span class="header-section-number">2.2</span> Probability distributions</h2>
 <div class="cell" data-layout-align="center">
@@ -1503,12 +1495,12 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>For the purposes of this <em>Primer</em>, a <em>probability distribution</em> is a mathematical object which maps a set of outcomes to probabilities, where each distinct outcome has a chance of occurring between 0 and 1 inclusive. The probabilities must sum to 1. The set of possible outcomes, i.e., the sample space — heads or tails for the coin, 1 through 6 for a single dice, 2 through 12 for the sum of a pair of dice — can be either discrete or continuous. Remember, discrete data can only take on certain values. Continuous data, like height and weight, can take any value within a range. The set of outcomes is the <em>domain</em> of the probability distribution. The <em>range</em> is the associated probabilities.</p>
+<p>For the purposes of this <em>Primer</em>, a <em>probability distribution</em> is a mathematical object which maps a set of outcomes to probabilities, where each distinct outcome has a chance of occurring between 0 and 1 inclusive. The probabilities must sum to 1. The set of possible outcomes, i.e., the sample space — heads and tails for the coin, 1 through 6 for a single dice, 2 through 12 for the sum of a pair of dice — can be either discrete or continuous. Discrete data can only take on certain values. Continuous data, like height and weight, can take any value within a range. The set of outcomes is the <em>domain</em> of the probability distribution. The <em>range</em> is the associated probabilities.</p>
 <p>Assume that a probability distribution is created by a <em>probability function</em>, a set function which maps outcomes to probabilities. The concept of a “probability function” is often split into two categories: probability <em>mass</em> functions (for discrete random variables) and probability <em>density</em> functions (for continuous random variables). As usual, we will be a bit sloppy, using the term probability distribution for both the mapping itself and for the function which creates the mapping.</p>
 <p>We discuss three types of probability distributions: <em>empirical</em>, <em>mathematical</em>, and <em>posterior</em>.</p>
 <p>The key difference between a <em>distribution</em>, as we have explored them in <a href="#sec-distributions" class="quarto-xref"><span>Section 2.1</span></a>, and a <em>probability</em> distribution is the requirement that the sum of the probabilities of the individual outcomes must be exactly 1. There is no such requirement for a distribution in general. But any distribution can be turned into a probability distribution by “normalizing” it. In this context, we will often refer to a distribution which is not (yet) a probability distribution as an “unnormalized” distribution.</p>
 <!-- DK: Should we be using the symbol rho and then speaking "PT"? Need to look at how we discuss things later in the book, and then set the stage for that here. -->
-<p>Pay attention to notation. Recall that when we are talking about a specific probability (represented by a single value), we will use <span class="math inline">\(\rho\)</span> (the Greek letter “rho”) with a <em>subscript</em> which specifies the exact outcome of which it is the probability. For instance, <span class="math inline">\(\rho_h = 0.5\)</span> denotes the probability of getting heads on a coin toss when the coin is fair. <span class="math inline">\(\rho_t\)</span> — spoken as “PT” or “P sub T” or “P tails” — denotes the probability of getting tails on a coin toss. However, when we are referring to the entire probability distribution over a set of outcomes, we will use <span class="math inline">\(P()\)</span>. For example, the probability distribution of a coin toss is <span class="math inline">\(P(\text{coin})\)</span>. That is, <span class="math inline">\(P(\text{coin})\)</span> is composed of the two specific probabilities (50% and 50%) mapped from the two values in the domain (Heads and Tails). Similarly, <span class="math inline">\(P(\text{sum of two dice})\)</span> is the probability distribution over the set of 11 outcomes (2 through 12) which are possible when you take the sum of two dice. <span class="math inline">\(P(\text{sum of two dice})\)</span> is made up of 11 numbers — <span class="math inline">\(\rho_2\)</span>, <span class="math inline">\(\rho_3\)</span>, …, <span class="math inline">\(\rho_{12}\)</span> — each representing the unknown probability that the sum will equal their value. That is, <span class="math inline">\(\rho_2\)</span> is the probability of rolling a 2.</p>
+<p>Pay attention to notation. Recall that when we are talking about a specific probability (represented by a single value), we will use <span class="math inline">\(\rho\)</span> (the Greek letter “rho”) with a <em>subscript</em> which specifies the exact outcome of which it is the probability. For instance, <span class="math inline">\(\rho_h = 0.5\)</span> denotes the probability of getting heads on a coin toss when the coin is fair. <span class="math inline">\(\rho_t\)</span> — spoken as “PT” or “P sub T” or “P tails” — denotes the probability of getting tails on a coin toss. However, when we are referring to the entire probability distribution over a set of outcomes, we will use <span class="math inline">\(P()\)</span>. For example, the probability distribution of a coin toss is <span class="math inline">\(P(\text{coin})\)</span>. That is, <span class="math inline">\(P(\text{coin})\)</span> is composed of the two specific probabilities (e.g., 60% and 40% for a biased coin) mapped from the two values in the domain (heads and tails). Similarly, <span class="math inline">\(P(\text{sum of two dice})\)</span> is the probability distribution over the set of 11 outcomes (2 through 12) which are possible when you take the sum of two dice. <span class="math inline">\(P(\text{sum of two dice})\)</span> is made up of 11 numbers — <span class="math inline">\(\rho_2\)</span>, <span class="math inline">\(\rho_3\)</span>, …, <span class="math inline">\(\rho_{12}\)</span> — each representing the unknown probability that the sum will equal their value. That is, <span class="math inline">\(\rho_2\)</span> is the probability of rolling a 2.</p>
 <p><em>A distribution is a function that shows the possible values of a variable and how often they occur.</em></p>
 <section id="flipping-a-coin" class="level3" data-number="2.2.1"><h3 data-number="2.2.1" class="anchored" data-anchor-id="flipping-a-coin">
 <span class="header-section-number">2.2.1</span> Flipping a coin</h3>
@@ -1577,7 +1569,7 @@ window.Quarto = {
 <p><span class="math display">\[ P(Y = y) = \begin{cases} \rho_H &amp;\text{for }y= \text{Heads}\\ \rho_T &amp;\text{for }y= \text{Tails} \end{cases}\]</span></p>
 <p>Yet, we know that, by definition, <span class="math inline">\(\rho_H + \rho_T = 1\)</span>, so we can rewrite the above as:</p>
 <p><span class="math display">\[ P(Y = y) = \begin{cases} \rho_H &amp;\text{for }y= \text{Heads}\\ 1- \rho_H &amp;\text{for }y= \text{Tails} \end{cases}\]</span></p>
-<p>Coin flipping (and related scenarios with only two possible outcomes) are such common problems, that the notation is often simplified further, with <span class="math inline">\(\rho\)</span> understood, by convention, to be the probability of heads. In that case, we can write the mathematical distribution is two canonical forms:</p>
+<p>Coin flipping (and related scenarios with only two possible outcomes) are such common problems that the notation is often simplified further, with <span class="math inline">\(\rho\)</span> understood, by convention, to be the probability of heads (or TRUE). In that case, we can write the mathematical distribution is two canonical forms:</p>
 <p><span class="math display">\[P(Y) = Bernoulli(\rho)\]</span> and</p>
 <p><span class="math display">\[y_i \sim Bernoulli(\rho)\]</span> All five of these versions mean the same thing! The first four describe the mathematical probability distribution for a fair coin. The capital <span class="math inline">\(Y\)</span> within the <span class="math inline">\(P()\)</span> indicates a random variable. The fifth highlights one “draw” from that random variable, hence the lower case <span class="math inline">\(y\)</span> and the subscript <span class="math inline">\(i\)</span>.</p>
 <p>Most probability distributions do not have special names, which is why we will use the generic symbol <span class="math inline">\(P\)</span> to refer to them. But some common probability distributions do have names, like “Bernoulli” in this case.</p>
@@ -1737,7 +1729,7 @@ window.Quarto = {
 </div>
 </div>
 <p><span class="math display">\[ P(Y = y) = \begin{cases} \dfrac{y-1}{36} &amp;\text{for }y=1,2,3,4,5,6 \\ \dfrac{13-y}{36} &amp;\text{for }y=7,8,9,10,11,12 \\ 0 &amp;\text{otherwise} \end{cases} \]</span></p>
-<p>The <em>posterior distribution</em> for rolling two dice a hundred times depends on your beliefs. If you take the dice from your Monopoly set, you have reason to believe that the assumptions underlying the mathematical distribution are true. However, if you walk into a crooked casino and a host asks you to play craps, you might be suspicious, just as in the coin flip example above. The word “suspicious” means that you suspect that the data generating mechanism for these dice is not like that for honest dice. For example, in craps, a “come-out” roll of 7 and 11 is a “natural,” resulting in a win for the “shooter” and a loss for the casino. You might expect those numbers to occur less often than they would with fair dice. Meanwhile, a come-out roll of 2, 3 or 12 is a loss for the shooter. You might also expect values like 2, 3 and 12 to occur more frequently. Your posterior distribution might look like this:</p>
+<p>The <em>posterior distribution</em> for rolling two dice depends on your beliefs. If you take the dice from your Monopoly set, you have reason to believe that the assumptions underlying the mathematical distribution are true. However, if you walk into a crooked casino and a host asks you to play craps, you might be suspicious, meaning that you suspect that the data generating mechanism for these dice is not like that for fair dice. For example, in craps, a “come-out” roll of 7 and 11 is a “natural,” resulting in a win for the “shooter” and, therefore, a loss for the casino. You might expect those numbers to occur less often than they would with fair dice. Meanwhile, a come-out roll of 2, 3 or 12 is a loss for the shooter. You might also expect values like 2, 3 and 12 to occur more frequently. Your posterior distribution might look like this:</p>
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Hard code our posterior about the crooked casino.</span></span>
 <span></span>
@@ -1794,7 +1786,7 @@ window.Quarto = {
 4      2      6      8 FALSE  </code></pre>
 </div>
 </div>
-<p>This code is another <em>data generating mechanism</em> or <em>dgm</em>. It allows us to simulate the distribution of the results from rolling a pair of fair dice. To answer our question, we simply increase the number of rolls and calculate the proportion of rolls which result in a 7 or 11.</p>
+<p>This code is another <em>data generating mechanism</em> or <em>DGM</em>. It allows us to simulate the distribution of the results from rolling a pair of fair dice. To answer our question, we simply increase the number of rolls and calculate the proportion of rolls which result in a 7 or 11.</p>
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rolls</span> <span class="op">&lt;-</span> <span class="fl">100000</span></span>
 <span></span>
@@ -1820,15 +1812,15 @@ window.Quarto = {
 <p><em>What is the probability that the Democratic candidate will win the Presidential election?</em></p>
 <p>Consider the probability distribution for a political event, like a presidential election. We want to know the probability that Democratic candidate wins X electoral votes, where X comes from the range of possible outcomes: 0 to 538. (The total number of electoral votes in US elections since 1964 is 538.)</p>
 <!-- DK: Need to discuss why we are using data since 1964 but not before? -->
-<p>The <em>empirical distribution</em> in this case would involve counting the number of electoral votes that the Democratic candidate won in each of the Presidential elections in the last 50 years or so. For the empirical distribution, we create a tibble with electoral vote results from past elections. Looking at elections since 1964, we can observe that the number of electoral votes that the Democratic candidate received in each election is different.</p>
+<p>The <em>empirical distribution</em> in this case would involve counting the number of electoral votes that the Democratic candidate won in each of the Presidential elections in the last 50 years or so. Looking at elections since 1964, we can observe that the number of electoral votes that the Democratic candidate received in each election is different.</p>
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Votes are since 1964, for Democratic candidate</span></span>
 <span></span>
 <span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>electoral_votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">486</span>, <span class="fl">191</span>,  <span class="fl">17</span>, <span class="fl">297</span>, <span class="fl">49</span>, <span class="fl">13</span>, <span class="fl">111</span>, </span>
 <span>                                     <span class="fl">370</span>, <span class="fl">379</span>, <span class="fl">266</span>, <span class="fl">251</span>, <span class="fl">365</span>, <span class="fl">332</span>, </span>
-<span>                                     <span class="fl">227</span>, <span class="fl">306</span><span class="op">)</span><span class="op">)</span></span>
+<span>                                     <span class="fl">227</span>, <span class="fl">306</span>, <span class="fl">226</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># 306 is electoral votes for Joe Biden in 2020 presidential election.</span></span>
+<span><span class="co"># 226 is electoral votes for Joe Biden in 2024 presidential election.</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">electoral_votes</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">count</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
@@ -1893,7 +1885,7 @@ window.Quarto = {
 </div>
 </div>
 <p>If our assumptions about this mathematical distribution are correct — they are not! — then, as the sample size increase, the empirical distribution should look more and more similar to our mathematical distribution.</p>
-<p>However, the data from past elections is more than enough to demonstrate that the assumptions of our mathematical probability distribution do not work for electoral votes. The model assumes that the Democrats have a 50% chance of receiving each of the 538 votes. Just looking at the mathematical probability distribution, we can observe that receiving 13 or 17 or 486 votes out of 538 would be extreme and almost impossible if the mathematical model were accurate. However, our empirical distribution shows that such extreme outcomes are quite common. Presidential elections have resulted in much bigger victories or defeats than this mathematical distribution seems to allow for, thereby demonstrating that our assumptions are false.</p>
+<p>However, the data from past elections is more than enough to demonstrate that the assumptions of our mathematical probability distribution do not work for electoral votes. The model assumes that the Democrats have a 50% chance of receiving each of the total electoral votes from the 50 states and the District of Columbia. Just looking at the mathematical probability distribution, we can observe that receiving 13 or 17 or 486 votes out of 538 would be extreme and almost impossible if the mathematical model were accurate. However, our empirical distribution shows that such extreme outcomes are quite common. Presidential elections have resulted in much bigger victories or defeats than this mathematical distribution seems to allow for, thereby demonstrating that our assumptions are false.</p>
 <p>The <em>posterior distribution</em> of electoral votes is a popular topic, and an area of strong disagreement, among data scientists. Consider this posterior from <em>FiveThirtyEight</em>.</p>
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># This data was downloaded by hand from the 538 website.</span></span>
@@ -1935,7 +1927,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Below is a posterior probability distribution from the FiveThirtyEight website for August 13, 2020. This was created using the same data as the above distribution, but is displayed differently. For each electoral result, the height of the bar represents the probability that a given event will occur. However, there are no labels on the y-axis telling us what the specific probability of each outcome is. And that is OK! The specific values are not that useful. If we removed the labels on our own y-axes, would it matter? Probably not. Anytime there are many possible outcomes — 539, in this case — we stop looking at specific outcomes and, instead, look at where most of the “mass” of the distribution lies.</p>
+<p>Below is a posterior probability distribution from the FiveThirtyEight website for August 13, 2020. This was created using the same data as the above distribution, but is displayed differently. For each electoral result, the height of the bar represents the probability that a given event will occur. However, there are no labels on the y-axis telling us what the specific probability of each outcome is. And that is OK! The specific values are not that useful. If we removed the labels on our own y-axes, would it matter? Probably not. Anytime there are many possible outcomes — over 500 in this case — we stop looking at specific outcomes and, instead, look at where most of the “mass” of the distribution lies.</p>
 <div class="cell" data-caption="FiveThirtyEight Posterior from August 13, 2020">
 <details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"probability/images/fivethirtyeight.png"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
@@ -1968,14 +1960,14 @@ window.Quarto = {
 <p>There are many questions you could explore with posterior distributions. They can relate to the past, present, or future.</p>
 <ul>
 <li>Past: How many electoral votes would Hilary Clinton have won if she had picked a different VP?</li>
-<li>Present: What are the total campaign donations from Harvard faculty?</li>
-<li>Future: How many electoral votes will the Democratic candidate for president win in 2024?</li>
+<li>Present: What are the total campaign donations from New College faculty?</li>
+<li>Future: How many electoral votes will the Democratic candidate for president win in 2036?</li>
 </ul>
-<!-- Add a question and then use a dgm to answer it. --></section><section id="height" class="level3" data-number="2.2.4"><h3 data-number="2.2.4" class="anchored" data-anchor-id="height">
+<!-- Add a question and then use a DGM to answer it. --></section><section id="height" class="level3" data-number="2.2.4"><h3 data-number="2.2.4" class="anchored" data-anchor-id="height">
 <span class="header-section-number">2.2.4</span> Height</h3>
 <!-- DK: This section is poorly written, but at least it begins with a question. Alas, we don't answer it! -->
 <p>Question: <em>What is the height of the next adult male we will meet?</em></p>
-<p>The three examples above are all <em>discrete</em> probability distributions, meaning that the outcome variable can only take on a limited set of values. A coin flip has two outcomes. The sum of a pair of dice has 11 outcomes. The total electoral votes for the Democratic candidate has 539 possible outcomes. In the limit, we can also create <em>continuous</em> probability distributions which have an <em>infinite</em> number of possible outcomes. For example, the average height for an American male could be any real number between 0 inches and 100 inches. (Of course, an average value anywhere near 0 or 100 is absurd. The point is that the average could be 68.564, 68.5643, 68.56432 68.564327, or any real number.)</p>
+<p>The three examples above are all <em>discrete</em> probability distributions, meaning that the outcome variable can only take on a limited set of values. A coin flip has two outcomes. The sum of a pair of dice has 11 outcomes. The total electoral votes for the Democratic candidate has 539 possible outcomes. In the limit, we can also create <em>continuous</em> probability distributions which have an <em>infinite</em> number of possible outcomes. For example, the average height for an American male could be any real number between 0 inches and 100 inches. (Of course, a value anywhere near 0 or 100 is absurd. The point is that the average could be 68.564, 68.5643, 68.56432 68.564327, or any real number.)</p>
 <p>All the characteristics for discrete probability distributions which we reviewed above apply just as much to continuous probability distributions. For example, we can create mathematical, empirical and posterior probability distributions for continuous outcomes just as we did for discrete outcomes.</p>
 <p>The <em>empirical distribution</em> involves using data from the National Health and Nutrition Examination Survey (NHANES).</p>
 <div class="cell">
@@ -2880,273 +2872,8 @@ window.Quarto = {
 <!-- Not really interested in that exact test except in toy scenarios. -->
 <!-- Difference between 0.04 and 0.06 is rarely significant. And is hardly ever a good reason to decide X over Y. -->
 <!-- Infinite models might be an infinite urn. What is the proportion p of red beads in the urn? Assume you are sampling 25 beads from the urn. What is posterior for p if your draw out 5 reds? Inifite models just means setting 100,000 (or some large number) possible values for p when creating the joint distribution.  -->
-</section><section id="working-with-probability-distributions" class="level2" data-number="2.6"><h2 data-number="2.6" class="anchored" data-anchor-id="working-with-probability-distributions">
-<span class="header-section-number">2.6</span> Working with probability distributions</h2>
-<!-- DK: Does this really belong here? Maybe at the end? Maybe after Height example above? -->
-<section id="random-variables" class="level3" data-number="2.6.1"><h3 data-number="2.6.1" class="anchored" data-anchor-id="random-variables">
-<span class="header-section-number">2.6.1</span> Random variables</h3>
-<section id="sample" class="level4" data-number="2.6.1.1"><h4 data-number="2.6.1.1" class="anchored" data-anchor-id="sample">
-<span class="header-section-number">2.6.1.1</span> <code>sample()</code>
-</h4>
-<p>The most common distributions you will work with are <em>empirical</em> or <em>frequency</em> distributions, the values of <code>age</code> in the <code>trains</code> tibble, the values of <code>poverty</code> in the <code>kenya</code> tibble, and so on. But we can also create our own data by making “draws” from a distribution which we have concocted.</p>
-<p>Consider the distribution of the possible values from rolling a fair die. We can use the <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> function to create draws from this distribution, meaning it will change (or sometimes stay the same) for every subsequent draw.</p>
-<div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">die</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">die</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
-</div>
-</div>
-<p>This produces one “draw” from the distribution of the possible values of one roll of fair six-sided die.</p>
-<p>Now, suppose we wanted to roll this die 10 times. One of the arguments of the <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> function is <code>replace</code>. We must specify it as <code>TRUE</code> if values can appear more than once. Since, when rolling a die 10 times, we expect that a value like 3 can appear more than once, we need to set <code>replace = TRUE</code>.</p>
-<div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb71"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">die</span>, size <span class="op">=</span> <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code> [1] 5 6 3 3 3 4 3 6 4 5</code></pre>
-</div>
-</div>
-<p>In other words, rolling a 1 on the first roll should not preclude you from rolling a 1 on a later roll.</p>
-<p>What if the die is not “fair,” meaning that some sides are more likely to appear than others? The final argument of the <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> function is the <code>prob</code> argument. It takes a vector (of the same length as the initial vector <code>x</code>) that contains all of the probabilities of selecting each one of the elements of <code>x</code>. Suppose that the probability of rolling a 1 was 0.5, and the probability of rolling any other value is 0.1. (These probabilities should sum to 1. If they don’t <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> will automatically re-scale them.)</p>
-<div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">die</span>, </span>
-<span>       size <span class="op">=</span> <span class="fl">10</span>, </span>
-<span>       replace <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>       prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code> [1] 1 1 3 1 2 1 1 6 1 1</code></pre>
-</div>
-</div>
-<!-- DK: Keep this big picture discussion? And after the plot? -->
-<p><strong>Remember: There is no real data here.</strong> We have not actually rolled a die. We have just made some assumptions about what would happen if we were to roll a die. With those assumptions we have built an urn — a <em>data generating mechanism</em> — from which we can draw as many values as we like. Let’s roll the unfair die 10,000 times.</p>
-<div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>result <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">die</span>, </span>
-<span>                       size <span class="op">=</span> <span class="fl">10000</span>, </span>
-<span>                       replace <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>                       prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">result</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Distribution of Results of an Unfair Die"</span>,</span>
-<span>         x <span class="op">=</span> <span class="st">"Result of One Roll"</span>,</span>
-<span>         y <span class="op">=</span> <span class="st">"Count"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span>,</span>
-<span>                       labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/comma.html">comma_format</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="probability_files/figure-html/unnamed-chunk-67-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> is just one of many functions for creating draws — or, more colloquially, “drawing” — from a distribution. Three of the most important functions are: <code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code>, <code><a href="https://rdrr.io/r/stats/Binomial.html">rbinom()</a></code>, and <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code>.</p>
-</section><section id="runif" class="level4" data-number="2.6.1.2"><h4 data-number="2.6.1.2" class="anchored" data-anchor-id="runif">
-<span class="header-section-number">2.6.1.2</span> <code>runif()</code>
-</h4>
-<p>Consider a “uniform” distribution. This is the case in which every outcome in the range of possible outcomes has the same chance of occurring. The function <code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code> (spoken as “r-unif”) enables us to draw from a uniform contribution. <code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code> has three arguments: <code>n</code>, <code>min</code>, and <code>max</code>. <code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code> will produce <code>n</code> draws from between <code>min</code> and <code>max</code>, with each value having an equal chance of occurring.</p>
-<div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb76"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span>, min <span class="op">=</span> <span class="fl">4</span>, max <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code> [1] 5.594800 4.981960 4.601993 5.738417 4.879622 5.155263 4.319479 5.627666
- [9] 4.800110 5.634794</code></pre>
-</div>
-</div>
-<p>Mathematically, we would notate:</p>
-<p><span class="math display">\[y_i \sim U(4, 6)\]</span></p>
-<p>This means that the each value for <span class="math inline">\(y\)</span> is drawn from a uniform distribution between four and six.</p>
-</section><section id="rbinom" class="level4" data-number="2.6.1.3"><h4 data-number="2.6.1.3" class="anchored" data-anchor-id="rbinom">
-<span class="header-section-number">2.6.1.3</span> <code>rbinom()</code>
-</h4>
-<p>Consider binomial distribution, the case in which the probability of some Boolean variable (for instance success or failure) is calculated for repeated, independent trials. One common example would be the probability of flipping a coin and landing on heads. The function <code><a href="https://rdrr.io/r/stats/Binomial.html">rbinom()</a></code> allows us to draw from a binomial distribution. This function takes three arguments, <code>n</code>, <code>size</code>, and <code>prob</code>.</p>
-<p><em><code>n</code> is the number of values we seek to draw. </em><code>size</code> is the number of trials for each <code>n</code>. *<code>prob</code> is the probability of success on each trial.</p>
-<p>Suppose we wanted to flip a fair coin one time, and let landing on heads represent success.</p>
-<div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb78"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span> , size <span class="op">=</span> <span class="fl">1</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
-</div>
-</div>
-<p>Do the same thing 100 times:</p>
-<div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb80"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>heads <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, size <span class="op">=</span> <span class="fl">1</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">heads</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Flipping a Fair Coin 100 Times"</span>,</span>
-<span>         x <span class="op">=</span> <span class="st">"Result"</span>,</span>
-<span>         y <span class="op">=</span> <span class="st">"Count"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span>                       labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tails"</span>, <span class="st">"Heads"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="probability_files/figure-html/unnamed-chunk-70-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>In our graph above, we use the function <code><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous()</a></code> because our x-axis variable is continuous, meaning it can take on any real values. The <code>breaks</code> argument to <code><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous()</a></code> converts our x-axis to having two different “tick marks”. There is a fairly even distribution of Tails and Heads. More draws would typically result in an even more equal split.</p>
-<p>Randomness creates (inevitable) tension between distribution as a “thing” and distribution as a vector of draws from that thing. In this case, the vector of draws is not balanced between Tails and Heads. Yet, we “know” that it should be since the coin is, by definition, fair. In a sense, the mathematics require an even split. Yet, randomness means that the vector of draws will rarely match the mathematically “true” result. And that is OK! First, randomness is an intrinsic property of the real world. Second, we can make the effect of randomness be as small as we want by increasing the number of draws.</p>
-<!-- DK: Could do a little example of that, showing the convergence to 50% as n increases. -->
-<p>Suppose instead we wanted to simulate an unfair coin, where the probability of landing on Heads was 0.75 instead of 0.25.</p>
-<div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb81"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>heads <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, size <span class="op">=</span> <span class="fl">1</span>, prob <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">heads</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Flipping a Fair Coin 100 Times"</span>,</span>
-<span>         x <span class="op">=</span> <span class="st">"Result"</span>,</span>
-<span>         y <span class="op">=</span> <span class="st">"Count"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span>                       labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tails"</span>, <span class="st">"Heads"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="probability_files/figure-html/unnamed-chunk-71-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>The distribution — the imaginary urn — from which we draw the results of a coin flip for a fair coin is a different distribution — a different imaginary urn — from the distribution for a biased coin. In fact, there are an infinite number of distributions. <em>Yet as long as we can draw values from a distribution, we can work with it.</em> Mathematics:</p>
-<p><span class="math display">\[y_i \sim B(n, p)\]</span></p>
-<p>Each value for <span class="math inline">\(y\)</span> is drawn from a binomial distribution with parameters <span class="math inline">\(n\)</span> for the number of trials and <span class="math inline">\(p\)</span> for the probability of success.</p>
-<p>Instead of each <code>n</code> consisting of a single trial, we could have situation in which we are, 10,000 times, flipping a coin 10 times and summing up, for each experiment, the number of heads. In that case:</p>
-<div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb82"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">9</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>heads <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10000</span>, size <span class="op">=</span> <span class="fl">10</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">heads</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Flipping a Fair Coin 10 Times"</span>,</span>
-<span>         subtitle <span class="op">=</span> <span class="st">"Extreme results are possible with enough experiments"</span>,</span>
-<span>         x <span class="op">=</span> <span class="st">"Total Number of Heads in Ten Flips"</span>,</span>
-<span>         y <span class="op">=</span> <span class="st">"Count"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="probability_files/figure-html/unnamed-chunk-72-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section><section id="sec-normal" class="level4" data-number="2.6.1.4"><h4 data-number="2.6.1.4" class="anchored" data-anchor-id="sec-normal">
-<span class="header-section-number">2.6.1.4</span> <code>rnorm()</code>
-</h4>
-<p>The most important distribution is the <em>normal distribution</em>. Mathematics:</p>
-<p><span class="math display">\[y_i \sim N(\mu, \sigma^2)\]</span></p>
-<p>Each value <span class="math inline">\(y_i\)</span> is drawn from a normal distribution with parameters <span class="math inline">\(\mu\)</span> for the mean and <span class="math inline">\(\sigma\)</span> for the standard deviation.</p>
-<p>This bell-shaped distribution is defined by two parameters: (1) the <em>mean</em> <span class="math inline">\(\mu\)</span> (spoken as “mu”) which locates the center of the distribution and (2) the <em>standard deviation</em> <span class="math inline">\(\sigma\)</span> (spoken as “sigma”) which determines the variation of values around that center. In the figure below, we plot three normal distributions where:</p>
-<ol type="1">
-<li>The solid normal curve has mean <span class="math inline">\(\mu = 5\)</span> &amp; standard deviation <span class="math inline">\(\sigma = 2\)</span>.</li>
-<li>The dotted normal curve has mean <span class="math inline">\(\mu = 5\)</span> &amp; standard deviation <span class="math inline">\(\sigma = 5\)</span>.</li>
-<li>The dashed normal curve has mean <span class="math inline">\(\mu = 15\)</span> &amp; standard deviation <span class="math inline">\(\sigma = 2\)</span>.</li>
-</ol>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="probability_files/figure-html/unnamed-chunk-73-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Three normal distributions.</figcaption></figure>
-</div>
-</div>
-</div>
-<p>Notice how the solid and dotted line normal curves have the same center due to their common mean <span class="math inline">\(\mu\)</span> = 5. However, the dotted line normal curve is wider due to its larger standard deviation of <span class="math inline">\(\sigma = 5\)</span>. On the other hand, the solid and dashed line normal curves have the same variation due to their common standard deviation <span class="math inline">\(\sigma = 2\)</span>. However, they are centered at different locations.</p>
-<p>When the mean <span class="math inline">\(\mu = 0\)</span> and the standard deviation <span class="math inline">\(\sigma = 1\)</span>, the normal distribution has a special name. It’s called the <em>standard normal distribution</em> or the <em><span class="math inline">\(z\)</span>-curve</em>.</p>
-<p>Furthermore, if a variable follows a normal curve, there are <em>three rules of thumb</em> we can use:</p>
-<ol type="1">
-<li>68% of values will lie within <span class="math inline">\(\pm\)</span> 1 standard deviation of the mean.</li>
-<li>95% of values will lie within <span class="math inline">\(\pm\)</span> 1.96 <span class="math inline">\(\approx\)</span> 2 standard deviations of the mean.</li>
-<li>99.7% of values will lie within <span class="math inline">\(\pm\)</span> 3 standard deviations of the mean.</li>
-</ol>
-<p>Let’s illustrate this on a standard normal curve. The dashed lines are at -3, -1.96, -1, 0, 1, 1.96, and 3. These 7 lines cut up the x-axis into 8 segments. The areas under the normal curve for each of the 8 segments are marked and add up to 100%. For example:</p>
-<ol type="1">
-<li>The middle two segments represent the interval -1 to 1. The shaded area above this interval represents 34% + 34% = 68% of the area under the curve. In other words, 68% of values.</li>
-<li>The middle four segments represent the interval -1.96 to 1.96. The shaded area above this interval represents 13.5% + 34% + 34% + 13.5% = 95% of the area under the curve. In other words, 95% of values.</li>
-<li>The middle six segments represent the interval -3 to 3. The shaded area above this interval represents 2.35% + 13.5% + 34% + 34% + 13.5% + 2.35% = 99.7% of the area under the curve. In other words, 99.7% of values.</li>
-</ol>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="probability_files/figure-html/unnamed-chunk-74-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Rules of thumb about areas under normal curves.</figcaption></figure>
-</div>
-</div>
-</div>
-</section></section><section id="summary-statistics" class="level3" data-number="2.6.2"><h3 data-number="2.6.2" class="anchored" data-anchor-id="summary-statistics">
-<span class="header-section-number">2.6.2</span> Summary statistics</h3>
-<p>A probability distribution is not always easy to work with. It is a complex object. And, in many contexts, we don’t really care about all that complexity. So, instead of providing the full probability distribution, we often just use a summary measure, a number or two or three which captures those aspects of the entire distribution which are relevant to the matter at hand. Let’s explore these issues using the 538 posterior probability distribution, as of August 13, 2020, for the number of electoral votes which will be won by Joe Biden. Here is a tibble with 1,000,000 draws from that distribution:</p>
-<div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb83"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">draws</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,000,000 × 2
-      ID electoral_votes
-   &lt;int&gt;           &lt;int&gt;
- 1     1             388
- 2     2             474
- 3     3             279
- 4     4             400
- 5     5             239
- 6     6             364
- 7     7             198
- 8     8             319
- 9     9             336
-10    10             294
-# ℹ 999,990 more rows</code></pre>
-</div>
-</div>
-<p><em>A distribution and a sample of draws from that distribution are different things.</em> But, if you squint, they are sort of the same thing, at least for our purposes. For example, if you want to know the mean of the distribution, then the mean of the draws will be a fairly good estimate, especially if the number of draws is large enough.</p>
-<!-- DK: Need more here. Connect to the discussion in Section 2.9 -->
-<p>Recall how we can draw randomly from specified probability distributions:</p>
-<div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb85"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code> [1]  0.95693552  0.18860245 -2.04561627  0.41344817  0.26100764  1.18315071
- [7]  0.07832782 -1.14338230 -0.98240598  1.88883159</code></pre>
-</div>
-</div>
-<div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb87"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code> [1] 0.30482858 0.08068409 0.65942947 0.86727544 0.54974073 0.20976843
- [7] 0.77876867 0.09990737 0.74968824 0.19082733</code></pre>
-</div>
-</div>
-<p>The elements of these vectors are all “draws” from the specified probability distributions. In most applied situations, our tools will produce draws rather than summary objects. Fortunately, a vector of draws is very easy to work with. Start with summary statistics:</p>
-<div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb89"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># recall mean, media, standard deviation and mad functions.</span></span>
-<span></span>
-<span><span class="va">key_stats</span> <span class="op">&lt;-</span> <span class="va">draws</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mn <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">electoral_votes</span><span class="op">)</span>,</span>
-<span>            md <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">electoral_votes</span><span class="op">)</span>,</span>
-<span>            sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">electoral_votes</span><span class="op">)</span>,</span>
-<span>            mad <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/mad.html">mad</a></span><span class="op">(</span><span class="va">electoral_votes</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">key_stats</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 4
-     mn    md    sd   mad
-  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1  325.   326  86.9  101.</code></pre>
-</div>
-</div>
-<p>Calculate a 95% interval directly:</p>
-<div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb91"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">draws</span><span class="op">$</span><span class="va">electoral_votes</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.025</span>, <span class="fl">0.975</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code> 2.5% 97.5% 
-  172   483 </code></pre>
-</div>
-</div>
-<p>Approximate the 95% interval in two ways:</p>
-<div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb93"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">key_stats</span><span class="op">$</span><span class="va">mn</span> <span class="op">-</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">key_stats</span><span class="op">$</span><span class="va">sd</span>, </span>
-<span>  <span class="va">key_stats</span><span class="op">$</span><span class="va">mn</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">key_stats</span><span class="op">$</span><span class="va">sd</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>[1] 151.5461 499.0198</code></pre>
-</div>
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb95"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">key_stats</span><span class="op">$</span><span class="va">md</span> <span class="op">-</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">key_stats</span><span class="op">$</span><span class="va">mad</span>, </span>
-<span>  <span class="va">key_stats</span><span class="op">$</span><span class="va">md</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">key_stats</span><span class="op">$</span><span class="va">mad</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>[1] 124.3664 527.6336</code></pre>
-</div>
-</div>
-<p>In this case, using the mean and standard deviation produces a 95% interval which is closer to the true interval. In other cases, the median and scaled median absolute deviation will do better. Either approximation is generally “good enough” for most work. But, if you need to know the exact 95% interval, you must use <code><a href="https://rdrr.io/r/stats/quantile.html">quantile()</a></code>.</p>
-</section></section><section id="cardinal-virtues" class="level2" data-number="2.7"><h2 data-number="2.7" class="anchored" data-anchor-id="cardinal-virtues">
-<span class="header-section-number">2.7</span> Cardinal Virtues</h2>
+</section><section id="cardinal-virtues" class="level2" data-number="2.6"><h2 data-number="2.6" class="anchored" data-anchor-id="cardinal-virtues">
+<span class="header-section-number">2.6</span> Cardinal Virtues</h2>
 <p>The four <a href="https://en.wikipedia.org/wiki/Cardinal_virtues">Cardinal Virtues</a> are Wisdom, Justice, Courage, and Temperance. Because data science is, ultimately, a moral act, we use these virtues to guide our work. Every data science project begins with a question.</p>
 <ul>
 <li><p><em>Wisdom</em> starts by creating the Preceptor Table. What data, if we had it, would allow us to answer our question easily? If the Preceptor Table has one outcome, then the model is <em>predictive</em>. If it has more than one (potential) outcome, then the model is <em>causal</em>. We then explore the data we have. You can never look too closely at your data. Key question: Are the data we have close enough to the data we want (i.e., the Preceptor Table) that we can consider both as coming from the same <em>population</em>? If not, we can’t proceed further. Key in making that decision is the assumption of <em>validity</em>. Do the columns in the Preceptor Table match the columns in the data?</p></li>
@@ -3154,8 +2881,8 @@ window.Quarto = {
 <li><p><em>Courage</em> allows us to explore different models. Justice gave us the Population Table. Courage creates the data generating mechanism. We begin with the basic mathematical structure of the model. With that structure in mind, we decide which variables to include. We estimate the values of the unknown parameters. We avoid hypothesis tests. We check our models for consistency with the data we have. We select one model.</p></li>
 <li><p><em>Temperance</em> guides us in the use of the model we have created to answer the questions with which we began. We create posteriors of <em>quantities of interest</em>. We should be modest in the claims we make. Humility is important. The posteriors we create are never the “truth.” The assumptions we made to create the model are never perfect. Yet decisions made with flawed posteriors are almost always better than decisions made without them.</p></li>
 </ul>
-<section id="wisdom" class="level3" data-number="2.7.1"><h3 data-number="2.7.1" class="anchored" data-anchor-id="wisdom">
-<span class="header-section-number">2.7.1</span> Wisdom</h3>
+<section id="wisdom" class="level3" data-number="2.6.1"><h3 data-number="2.6.1" class="anchored" data-anchor-id="wisdom">
+<span class="header-section-number">2.6.1</span> Wisdom</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -3193,8 +2920,8 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>The combination of some data and an aching desire for an answer does not ensure that a reasonable answer can be extracted from a given body of data.</p>
 </blockquote>
-</section><section id="justice" class="level3" data-number="2.7.2"><h3 data-number="2.7.2" class="anchored" data-anchor-id="justice">
-<span class="header-section-number">2.7.2</span> Justice</h3>
+</section><section id="justice" class="level3" data-number="2.6.2"><h3 data-number="2.6.2" class="anchored" data-anchor-id="justice">
+<span class="header-section-number">2.6.2</span> Justice</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -3213,8 +2940,8 @@ window.Quarto = {
 <p><strong>Representativeness</strong>, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows. The second is between our data and the other rows. Ideally, we would like both the Preceptor Table <em>and</em> our data to be random samples from the population. Sadly, this is almost never the case.</p>
 <p><em>Validity is about the columns in our Population Table. Stability and representativeness are about the rows.</em></p>
 <p><strong>Unconfoundedness</strong> means that the treatment assignment is independent of the potential outcomes, when we condition on pre-treatment covariates. This assumption is only relevant for causal models. We describe a model as “confounded” if this is not true. The easiest way to ensure unconfoundedness is to assign treatment randomly.</p>
-</section><section id="courage" class="level3" data-number="2.7.3"><h3 data-number="2.7.3" class="anchored" data-anchor-id="courage">
-<span class="header-section-number">2.7.3</span> Courage</h3>
+</section><section id="courage" class="level3" data-number="2.6.3"><h3 data-number="2.6.3" class="anchored" data-anchor-id="courage">
+<span class="header-section-number">2.6.3</span> Courage</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -3236,8 +2963,8 @@ window.Quarto = {
 <p><em>Randomness is intrinsic to this fallen world.</em></p>
 <p>Null hypothesis testing is a mistake. There is only the data, the models and the summaries therefrom.</p>
 <p>The final step of Courage is to select the final model, the Data Generating Mechanism.</p>
-</section><section id="temperance" class="level3" data-number="2.7.4"><h3 data-number="2.7.4" class="anchored" data-anchor-id="temperance">
-<span class="header-section-number">2.7.4</span> Temperance</h3>
+</section><section id="temperance" class="level3" data-number="2.6.4"><h3 data-number="2.6.4" class="anchored" data-anchor-id="temperance">
+<span class="header-section-number">2.6.4</span> Temperance</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">

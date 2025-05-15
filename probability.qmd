@@ -38,7 +38,7 @@ library(primer.data)
 
 <!-- Perhaps change the joint and conditional distribution section to use sex/height from NHANES? It is true that this is a discrete and continuous joint distribution, but that is probably fine. Certainly connects nicely with the male height example. Certainly works well with the joint and conditional together. Certainly would be nice to do the empirical/mathematical/posterior trypycht as in the first three examples. Posterior could be for a WNBA practice session. Most of the women will be tall, but the men will be of more typical height. -->
 
-<!-- Shouldn't we have a question which we answer with a dgm for each distribution example, as we do with three heads in a row? -->
+<!-- Shouldn't we have a question which we answer with a DGM for each distribution example, as we do with three heads in a row? -->
 
 <!-- Should we discuss more the interplay of the use of data and math? For example, in the Presidential election example, we recognize that the (naive) mathematical distribution is inconsistent with the data. So, we need to change the math. And then see if the new math is more consistent with the data. Perhaps an important point worth repeating. -->
 
@@ -213,7 +213,7 @@ The two graphs have the exact same shape because, even though the vectors are of
 
 ### Normalizing distributions
 
-If two distributions have the same shape, then they only differ by the labels on the y-axis. There are various ways of "normalizing" distributions so as to place them all the same scale. The most common scale is one in which the area under the distribution adds to 1, e.g.,  100%. For example, we can transform the above plots:
+If two distributions have the same shape, then they only differ by the labels on the y-axis. There are various ways of "normalizing" distributions so as to place them all on the same scale. The most common scale is one in which the area under the distribution adds to 1, e.g.,  100%. For example, we can transform the above plots:
 
 ```{r}
 rolls_p <- tibble(value = ten_rolls) |> 
@@ -257,11 +257,9 @@ Sloppiness in the usage of the word distribution is universal. However, keep thr
 
 * The *estimated distribution* which, we think, generates the data which we see. Again, we can never know the unknown true distribution. But, by making some assumptions and using the data we have, we can *estimate* a distribution. Our estimate may be very close to the true distribution. Or it may be far away. The main task of data science to to create and use these estimated distributions. Almost always, these distributions are instantiated in computer code. Just as there is a *true* data generating mechanism associated with the (unknown) *true* distribution, there is an *estimated* data generating mechanism associated with the *estimated* ditribution.
 
-* A *vector of numbers drawn* from the estimated distribution. Both true and estimated distributions can be complex animals, difficult to describe accurately and in detail. But a vector of numbers drawn from a distribution is easy to understand and use. So, in general, we work with vectors of numbers. When someone --- either a colleague or a piece of R code --- creates a distribution which we want to use to answer a question, we don't really want the distribution itself. Rather, we want a vectors of "draws" from that distribution. Vectors are easy to work with! Complex computer code is not.
+* A *vector of numbers drawn* from the estimated distribution. Both true and estimated distributions can be complex animals, difficult to describe accurately and in detail. But a vector of numbers drawn from a distribution is easy to understand and use. So, in general, we work with vectors of numbers. When someone --- either a colleague or a piece of R code --- creates a distribution which we want to use to answer a question, we don't really want the distribution itself. Rather, we want a vector of "draws" from that distribution. Vectors are easy to work with! Complex computer code is not.
 
 Again, people (including us!) will often be sloppy and use the same word, "distribution," without making it clear whether they are talking about the *true distribution*, the *estimated distribution*, or a vector of *draws* from the estimated distribution. The same sloppiness applies to the use of the term *data generating mechanism*. Try not to be sloppy.
-
-Much of the rest of the *Primer* involves learning how to work with distributions, which generally means working with the draws from those distributions. Fortunately, the usual rules of arithmetic apply. You can add/subtract/multiply/divide distributions by working with draws from those distributions, just as you can add/subtract/multiply/divide regular numbers.
 
 ## Probability distributions
 
@@ -275,7 +273,7 @@ knitr::include_graphics("probability/images/de_finetti.jpg")
 ```
 
 
-For the purposes of this *Primer*, a *probability distribution* is a mathematical object which maps a set of outcomes to probabilities, where each distinct outcome has a chance of occurring between 0 and 1 inclusive. The probabilities must sum to 1. The set of possible outcomes, i.e., the sample space --- heads or tails for the coin, 1 through 6 for a single dice, 2 through 12 for the sum of a pair of dice --- can be either discrete or continuous. Remember, discrete data can only take on certain values. Continuous data, like height and weight, can take any value within a range. The set of outcomes is the *domain* of the probability distribution. The *range* is the associated probabilities. 
+For the purposes of this *Primer*, a *probability distribution* is a mathematical object which maps a set of outcomes to probabilities, where each distinct outcome has a chance of occurring between 0 and 1 inclusive. The probabilities must sum to 1. The set of possible outcomes, i.e., the sample space --- heads and tails for the coin, 1 through 6 for a single dice, 2 through 12 for the sum of a pair of dice --- can be either discrete or continuous. Discrete data can only take on certain values. Continuous data, like height and weight, can take any value within a range. The set of outcomes is the *domain* of the probability distribution. The *range* is the associated probabilities. 
 
 Assume that a probability distribution is created by a *probability function*, a set function which maps outcomes to probabilities. The concept of a "probability function" is often split into two categories: probability *mass* functions (for discrete random variables) and probability *density* functions (for continuous random variables). As usual, we will be a bit sloppy, using the term probability distribution for both the mapping itself and for the function which creates the mapping.
 
@@ -285,7 +283,7 @@ The key difference between a *distribution*, as we have explored them in @sec-di
 
 <!-- DK: Should we be using the symbol rho and then speaking "PT"? Need to look at how we discuss things later in the book, and then set the stage for that here. -->
 
-Pay attention to notation. Recall that when we are talking about a specific probability (represented by a single value), we will use $\rho$ (the Greek letter "rho") with a *subscript* which specifies the exact outcome of which it is the probability. For instance, $\rho_h = 0.5$ denotes the probability of getting heads on a coin toss when the coin is fair. $\rho_t$ --- spoken as "PT" or "P sub T" or "P tails" --- denotes the probability of getting tails on a coin toss. However, when we are referring to the entire probability distribution over a set of outcomes, we will use $P()$. For example, the probability distribution of a coin toss is $P(\text{coin})$. That is, $P(\text{coin})$ is composed of the two specific probabilities (50% and 50%) mapped from the two values in the domain (Heads and Tails). Similarly, $P(\text{sum of two dice})$ is the probability distribution over the set of 11 outcomes (2 through 12) which are possible when you take the sum of two dice. $P(\text{sum of two dice})$ is made up of 11 numbers --- $\rho_2$,  $\rho_3$, ..., $\rho_{12}$ --- each representing the unknown probability that the sum will equal their value. That is, $\rho_2$ is the probability of rolling a 2.
+Pay attention to notation. Recall that when we are talking about a specific probability (represented by a single value), we will use $\rho$ (the Greek letter "rho") with a *subscript* which specifies the exact outcome of which it is the probability. For instance, $\rho_h = 0.5$ denotes the probability of getting heads on a coin toss when the coin is fair. $\rho_t$ --- spoken as "PT" or "P sub T" or "P tails" --- denotes the probability of getting tails on a coin toss. However, when we are referring to the entire probability distribution over a set of outcomes, we will use $P()$. For example, the probability distribution of a coin toss is $P(\text{coin})$. That is, $P(\text{coin})$ is composed of the two specific probabilities (e.g., 60% and 40% for a biased coin) mapped from the two values in the domain (heads and tails). Similarly, $P(\text{sum of two dice})$ is the probability distribution over the set of 11 outcomes (2 through 12) which are possible when you take the sum of two dice. $P(\text{sum of two dice})$ is made up of 11 numbers --- $\rho_2$,  $\rho_3$, ..., $\rho_{12}$ --- each representing the unknown probability that the sum will equal their value. That is, $\rho_2$ is the probability of rolling a 2.
 
 *A distribution is a function that shows the possible values of a variable and how often they occur.* 
 
@@ -361,7 +359,7 @@ Yet, we know that, by definition, $\rho_H + \rho_T = 1$, so we can rewrite the a
 
 $$ P(Y = y) = \begin{cases} \rho_H &\text{for }y= \text{Heads}\\ 1- \rho_H &\text{for }y= \text{Tails} \end{cases}$$
 
-Coin flipping (and related scenarios with only two possible outcomes) are such common problems, that the notation is often simplified further, with $\rho$ understood, by convention, to be the probability of heads. In that case, we can write the mathematical distribution is two canonical forms:
+Coin flipping (and related scenarios with only two possible outcomes) are such common problems that the notation is often simplified further, with $\rho$ understood, by convention, to be the probability of heads (or TRUE). In that case, we can write the mathematical distribution is two canonical forms:
 
 $$P(Y) = Bernoulli(\rho)$$
 and
@@ -510,7 +508,7 @@ $$ P(Y = y) = \begin{cases} \dfrac{y-1}{36} &\text{for }y=1,2,3,4,5,6 \\ \dfrac{
 
 
 
-The *posterior distribution* for rolling two dice a hundred times depends on your beliefs. If you take the dice from your Monopoly set, you have reason to believe that the assumptions underlying the mathematical distribution are true. However, if you walk into a crooked casino and a host asks you to play craps, you might be suspicious, just as in the coin flip example above. The word "suspicious" means that you suspect that the data generating mechanism for these dice is not like that for honest dice. For example, in craps, a "come-out" roll of 7 and 11 is a "natural," resulting in a win for the "shooter" and a loss for the casino. You might expect those numbers to occur less often than they would with fair dice. Meanwhile, a come-out roll of 2, 3 or 12 is a loss for the shooter. You might also expect values like 2, 3 and 12 to occur more frequently. Your posterior distribution might look like this:
+The *posterior distribution* for rolling two dice depends on your beliefs. If you take the dice from your Monopoly set, you have reason to believe that the assumptions underlying the mathematical distribution are true. However, if you walk into a crooked casino and a host asks you to play craps, you might be suspicious, meaning that you suspect that the data generating mechanism for these dice is not like that for fair dice. For example, in craps, a "come-out" roll of 7 and 11 is a "natural," resulting in a win for the "shooter" and, therefore, a loss for the casino. You might expect those numbers to occur less often than they would with fair dice. Meanwhile, a come-out roll of 2, 3 or 12 is a loss for the shooter. You might also expect values like 2, 3 and 12 to occur more frequently. Your posterior distribution might look like this:
 
 ```{r}
 # Hard code our posterior about the crooked casino.
@@ -560,7 +558,7 @@ tibble(dice_1 = sample(x = 1:6, size = rolls, replace = TRUE),
   
 ```
 
-This code is another *data generating mechanism* or *dgm*. It allows us to simulate the distribution of the results from rolling a pair of fair dice. To answer our question, we simply increase the number of rolls and calculate the proportion of rolls which result in a 7 or 11.
+This code is another *data generating mechanism* or *DGM*. It allows us to simulate the distribution of the results from rolling a pair of fair dice. To answer our question, we simply increase the number of rolls and calculate the proportion of rolls which result in a 7 or 11.
 
 ```{r}
 rolls <- 100000
@@ -588,17 +586,16 @@ Consider the probability distribution for a political event, like a presidential
 
 <!-- DK: Need to discuss why we are using data since 1964 but not before? -->
 
-The *empirical distribution* in this case would involve counting the number of electoral votes that the Democratic candidate won in each of the Presidential elections in the last 50 years or so. For the empirical distribution, we create a tibble with electoral vote results from past elections. Looking at elections since 1964, we can observe that the number of electoral votes that the Democratic candidate received in each election is different. 
-
+The *empirical distribution* in this case would involve counting the number of electoral votes that the Democratic candidate won in each of the Presidential elections in the last 50 years or so. Looking at elections since 1964, we can observe that the number of electoral votes that the Democratic candidate received in each election is different. 
 
 ```{r}
 # Votes are since 1964, for Democratic candidate
 
 mydata <- tibble(electoral_votes = c(486, 191,  17, 297, 49, 13, 111, 
                                      370, 379, 266, 251, 365, 332, 
-                                     227, 306))
+                                     227, 306, 226))
 
-# 306 is electoral votes for Joe Biden in 2020 presidential election.
+# 226 is electoral votes for Joe Biden in 2024 presidential election.
 
 ggplot(mydata, aes(x = electoral_votes)) +
   geom_histogram(aes(y = after_stat(count/sum(count))), 
@@ -661,7 +658,7 @@ ggplot(data = result, aes(total)) +
 
 If our assumptions about this mathematical distribution are correct --- they are not! --- then, as the sample size increase, the empirical distribution should look more and more similar to our mathematical distribution. 
 
-However, the data from past elections is more than enough to demonstrate that the assumptions of our mathematical probability distribution do not work for electoral votes. The model assumes that the Democrats have a 50% chance of receiving each of the 538 votes. Just looking at the mathematical probability distribution, we can observe that receiving 13 or 17 or 486 votes out of 538 would be extreme and almost impossible if the mathematical model were accurate. However, our empirical distribution shows that such extreme outcomes are quite common. Presidential elections have resulted in much bigger victories or defeats than this mathematical distribution seems to allow for, thereby demonstrating that our assumptions are false.
+However, the data from past elections is more than enough to demonstrate that the assumptions of our mathematical probability distribution do not work for electoral votes. The model assumes that the Democrats have a 50% chance of receiving each of the total electoral votes from the 50 states and the District of Columbia. Just looking at the mathematical probability distribution, we can observe that receiving 13 or 17 or 486 votes out of 538 would be extreme and almost impossible if the mathematical model were accurate. However, our empirical distribution shows that such extreme outcomes are quite common. Presidential elections have resulted in much bigger victories or defeats than this mathematical distribution seems to allow for, thereby demonstrating that our assumptions are false.
 
 
 The *posterior distribution* of electoral votes is a popular topic, and an area of strong disagreement, among data scientists. Consider this posterior from *FiveThirtyEight*.
@@ -703,7 +700,7 @@ read_csv("./probability/data/election-forecasts-2020/prez_1.csv",
 ```
 
 
-Below is a posterior probability distribution from the FiveThirtyEight website for August 13, 2020. This was created using the same data as the above distribution, but is displayed differently. For each electoral result, the height of the bar represents the probability that a given event will occur. However, there are no labels on the y-axis telling us what the specific probability of each outcome is. And that is OK! The specific values are not that useful. If we removed the labels on our own y-axes, would it matter? Probably not. Anytime there are many possible outcomes --- 539, in this case --- we stop looking at specific outcomes and, instead, look at where most of the "mass" of the distribution lies.
+Below is a posterior probability distribution from the FiveThirtyEight website for August 13, 2020. This was created using the same data as the above distribution, but is displayed differently. For each electoral result, the height of the bar represents the probability that a given event will occur. However, there are no labels on the y-axis telling us what the specific probability of each outcome is. And that is OK! The specific values are not that useful. If we removed the labels on our own y-axes, would it matter? Probably not. Anytime there are many possible outcomes --- over 500 in this case --- we stop looking at specific outcomes and, instead, look at where most of the "mass" of the distribution lies.
 
 ```{r}
 #| caption: FiveThirtyEight Posterior from August 13, 2020
@@ -732,10 +729,10 @@ knitr::include_graphics("probability/images/538_versus_Economist.png")
 There are many questions you could explore with posterior distributions. They can relate to the past, present, or future.
 
 * Past: How many electoral votes would Hilary Clinton have won if she had picked a different VP?
-* Present: What are the total campaign donations from Harvard faculty?
-* Future: How many electoral votes will the Democratic candidate for president win in 2024?
+* Present: What are the total campaign donations from New College faculty?
+* Future: How many electoral votes will the Democratic candidate for president win in 2036?
 
-<!-- Add a question and then use a dgm to answer it. -->
+<!-- Add a question and then use a DGM to answer it. -->
 
 
 ### Height
@@ -744,7 +741,7 @@ There are many questions you could explore with posterior distributions. They ca
 
 Question: *What is the height of the next adult male we will meet?*
 
-The three examples above are all *discrete* probability distributions, meaning that the outcome variable can only take on a limited set of values. A coin flip has two outcomes. The sum of a pair of dice has 11 outcomes. The total electoral votes for the Democratic candidate has 539 possible outcomes. In the limit, we can also create *continuous* probability distributions which have an *infinite* number of possible outcomes. For example, the average height for an American male could be any real number between 0 inches and 100 inches. (Of course, an average value anywhere near 0 or 100 is absurd. The point is that the average could be 68.564, 68.5643, 68.56432 68.564327, or any real number.)
+The three examples above are all *discrete* probability distributions, meaning that the outcome variable can only take on a limited set of values. A coin flip has two outcomes. The sum of a pair of dice has 11 outcomes. The total electoral votes for the Democratic candidate has 539 possible outcomes. In the limit, we can also create *continuous* probability distributions which have an *infinite* number of possible outcomes. For example, the average height for an American male could be any real number between 0 inches and 100 inches. (Of course, a value anywhere near 0 or 100 is absurd. The point is that the average could be 68.564, 68.5643, 68.56432 68.564327, or any real number.)
 
 All the characteristics for discrete probability distributions which we reviewed above apply just as much to continuous probability distributions. For example, we can create mathematical, empirical and posterior probability distributions for continuous outcomes just as we did for discrete outcomes.
 
@@ -1618,370 +1615,6 @@ As you may have noticed, if you calculated the value using the first method, you
 <!-- Difference between 0.04 and 0.06 is rarely significant. And is hardly ever a good reason to decide X over Y. -->
 
 <!-- Infinite models might be an infinite urn. What is the proportion p of red beads in the urn? Assume you are sampling 25 beads from the urn. What is posterior for p if your draw out 5 reds? Inifite models just means setting 100,000 (or some large number) possible values for p when creating the joint distribution.  -->
-
-## Working with probability distributions
-
-
-<!-- DK: Does this really belong here? Maybe at the end? Maybe after Height example above? -->
-
-### Random variables {#random-variables}
-
-#### `sample()`
-
-The most common distributions you will work with are *empirical* or *frequency* distributions, the values of `age` in the `trains` tibble, the values of `poverty` in the `kenya` tibble, and so on. But we can also create our own data by making "draws" from a distribution which we have concocted. 
-
-Consider the distribution of the possible values from rolling a fair die. We can use the `sample()` function to create draws from this distribution, meaning it will change (or sometimes stay the same) for every subsequent draw.
-
-```{r}
-#| echo: false
-set.seed(9)
-```
-
-
-```{r}
-die <- c(1, 2, 3, 4, 5, 6)
-
-sample(x = die, size = 1)
-```
-
-This produces one "draw" from the distribution of the possible values of one roll of fair six-sided die.
-
-Now, suppose we wanted to roll this die 10 times. One of the arguments of the `sample()` function is `replace`. We must specify it as `TRUE` if values can appear more than once. Since, when rolling a die 10 times, we expect that a value like 3 can appear more than once, we need to set `replace = TRUE`. 
-
-```{r}
-sample(x = die, size = 10, replace = TRUE)
-```
-
-In other words, rolling a 1 on the first roll should not preclude you from rolling a 1 on a later roll. 
-
-What if the die is not "fair," meaning that some sides are more likely to appear than others? The final argument of the `sample()` function is the `prob` argument. It takes a vector (of the same length as the initial vector `x`) that contains all of the probabilities of selecting each one of the elements of `x`. Suppose that the probability of rolling a 1 was 0.5, and the probability of rolling any other value is 0.1. (These probabilities should sum to 1. If they don't `sample()` will automatically re-scale them.) 
-
-```{r}
-sample(x = die, 
-       size = 10, 
-       replace = TRUE, 
-       prob = c(0.5, 0.1, 0.1, 0.1, 0.1, 0.1))
-```
-
-<!-- DK: Keep this big picture discussion? And after the plot? -->
-
-**Remember: There is no real data here.** We have not actually rolled a die. We have just made some assumptions about what would happen if we were to roll a die. With those assumptions we have built an urn --- a *data generating mechanism* --- from which we can draw as many values as we like. Let's roll the unfair die 10,000 times.
-
-```{r}
-tibble(result = sample(x = die, 
-                       size = 10000, 
-                       replace = TRUE, 
-                       prob = c(0.5, rep(0.1, 5)))) |> 
-  ggplot(aes(x = result)) +
-    geom_bar() +
-    labs(title = "Distribution of Results of an Unfair Die",
-         x = "Result of One Roll",
-         y = "Count") +
-    scale_x_continuous(breaks = 1:6,
-                       labels = as.character(1:6)) +
-    scale_y_continuous(labels = scales::comma_format())
-```
-
-
-
-`sample()` is just one of many functions for creating draws --- or, more colloquially, "drawing" --- from a distribution. Three of the most important functions are: `runif()`, `rbinom()`, and `rnorm()`.
-
-#### `runif()`
-
-Consider a "uniform" distribution. This is the case in which every outcome in the range of possible outcomes has the same chance of occurring.  The function `runif()` (spoken as "r-unif") enables us to draw from a uniform contribution. `runif()` has three arguments: `n`, `min`, and `max`. `runif()` will produce `n` draws from between `min` and `max`, with each value having an equal chance of occurring.
-
-```{r}
-runif(n = 10, min = 4, max = 6)
-```
-
-Mathematically, we would notate:
-
-$$y_i \sim U(4, 6)$$
-
-This means that the each value for $y$ is drawn from a uniform distribution between four and six.
-
-#### `rbinom()`
-
-Consider binomial distribution, the case in which the probability of some Boolean variable (for instance success or failure) is calculated for repeated, independent trials. One common example would be the probability of flipping a coin and landing on heads. The function `rbinom()` allows us to draw from a binomial distribution. This function takes three arguments, `n`, `size`, and `prob`. 
-
-*`n` is the number of values we seek to draw. 
-*`size` is the number of trials for each `n`. 
-*`prob` is the probability of success on each trial. 
-
-Suppose we wanted to flip a fair coin one time, and let landing on heads represent success. 
-
-```{r}
-rbinom(n = 1 , size = 1, prob = 0.5)
-```
-
-Do the same thing 100 times:
-
-```{r}
-tibble(heads = rbinom(n = 100, size = 1, prob = 0.5)) |> 
-  ggplot(aes(x = heads)) +
-    geom_bar() +
-    labs(title = "Flipping a Fair Coin 100 Times",
-         x = "Result",
-         y = "Count") +
-    scale_x_continuous(breaks = c(0, 1),
-                       labels = c("Tails", "Heads"))
-```
-
-In our graph above, we use the function `scale_x_continuous()` because our x-axis variable is continuous, meaning it can take on any real values. The `breaks` argument to `scale_x_continuous()` converts our x-axis to having two different "tick marks". There is a fairly even distribution of Tails and Heads. More draws would typically result in an even more equal split. 
-
-Randomness creates (inevitable) tension between distribution as a "thing" and distribution as a vector of draws from that thing. In this case, the vector of draws is not balanced between Tails and Heads. Yet, we "know" that it should be since the coin is, by definition, fair. In a sense, the mathematics require an even split. Yet, randomness means that the vector of draws will rarely match the mathematically "true" result. And that is OK! First, randomness is an intrinsic property of the real world. Second, we can make the effect of randomness be as small as we want by increasing the number of draws. 
-
-<!-- DK: Could do a little example of that, showing the convergence to 50% as n increases. -->
-
-
-Suppose instead we wanted to simulate an unfair coin, where the probability of landing on Heads was 0.75 instead of 0.25. 
-
-```{r}
-tibble(heads = rbinom(n = 100, size = 1, prob = 0.75)) |> 
-  ggplot(aes(x = heads)) +
-    geom_bar() +
-    labs(title = "Flipping a Fair Coin 100 Times",
-         x = "Result",
-         y = "Count") +
-    scale_x_continuous(breaks = c(0, 1),
-                       labels = c("Tails", "Heads"))
-```
-
-The distribution --- the imaginary urn --- from which we draw the results of a coin flip for a fair coin is a different distribution --- a different imaginary urn --- from the distribution for a biased coin. In fact, there are an infinite number of distributions. *Yet as long as we can draw values from a distribution, we can work with it.* Mathematics:
-
-$$y_i \sim B(n, p)$$
-
-Each value for $y$ is drawn from a binomial distribution with parameters $n$ for the number of trials and $p$ for the probability of success. 
-
-Instead of each `n` consisting of a single trial, we could have situation in which we are, 10,000 times, flipping a coin 10 times and summing up, for each experiment, the number of heads. In that case:
-
-```{r}
-set.seed(9)
-tibble(heads = rbinom(n = 10000, size = 10, prob = 0.5)) |> 
-  ggplot(aes(x = heads)) +
-    geom_bar() +
-    labs(title = "Flipping a Fair Coin 10 Times",
-         subtitle = "Extreme results are possible with enough experiments",
-         x = "Total Number of Heads in Ten Flips",
-         y = "Count") +
-    scale_x_continuous(breaks = 0:10)
-```
-
-
-#### `rnorm()` {#sec-normal}
-
-
-The most important distribution is the *normal distribution*. Mathematics:
-
-$$y_i \sim N(\mu, \sigma^2)$$
-
-Each value $y_i$ is drawn from a normal distribution with parameters $\mu$ for the mean and $\sigma$ for the standard deviation. 
-
-
-This bell-shaped distribution is defined by two parameters: (1) the *mean* $\mu$ (spoken as "mu") which locates the center of the distribution and (2) the *standard deviation* $\sigma$ (spoken as "sigma") which determines the variation of values around that center. In the figure below, we plot three normal distributions where:
-
-1. The solid normal curve has mean $\mu = 5$ \& standard deviation $\sigma = 2$.
-1. The dotted normal curve has mean $\mu = 5$ \& standard deviation $\sigma = 5$.
-1. The dashed normal curve has mean $\mu = 15$ \& standard deviation $\sigma = 2$.
-
-```{r}
-#| echo: false
-#| fig.cap: Three normal distributions.
-
-library(ggrepel)
-
-all_points <- tibble(
-  domain = seq(from = -10, to = 25, by = 0.01),
-  `mu = 5, sigma = 2` = dnorm(x = domain, mean = 5, sd = 2),
-  `mu = 5, sigma = 5` = dnorm(x = domain, mean = 5, sd = 5),
-  `mu = 15, sigma = 2` = dnorm(x = domain, mean = 15, sd = 2)
-)  |>
-  pivot_longer(- domain, names_to = "Distribution", values_to = "value", ) |>
-  mutate(
-    Distribution = factor(
-      Distribution,
-      levels = c("mu = 5, sigma = 2",
-                 "mu = 5, sigma = 5",
-                 "mu = 15, sigma = 2")
-    )
-  )
-
-for_labels <- all_points |>
-  filter(between(domain, 3.795, 3.805) & Distribution == "mu = 5, sigma = 2" |
-           between(domain, 0.005, 0.0105) & Distribution == "mu = 5, sigma = 5" |
-           between(domain, 16.005, 16.015) & Distribution == "mu = 15, sigma = 2")
-
-all_points |>
-  ggplot(aes(x = domain, y = value, linetype = Distribution)) +
-  geom_line() +
-  geom_label_repel(data = for_labels, aes(label = Distribution),
-                            nudge_x = c(-1, -2.1, 1)) +
-  theme_light() +
-  scale_linetype_manual(values=c("solid", "dotted", "longdash")) +
-  theme(
-    axis.title.y = element_blank(),
-    axis.title.x = element_blank(),
-    axis.text.y = element_blank(),
-    axis.ticks.y = element_blank(),
-    legend.position = "none"
-  )
-```
-
-Notice how the solid and dotted line normal curves have the same center due to their common mean $\mu$ = 5. However, the dotted line normal curve is wider due to its larger standard deviation of $\sigma = 5$. On the other hand, the solid and dashed line normal curves have the same variation due to their common standard deviation $\sigma = 2$. However, they are centered at different locations. 
-
-When the mean $\mu = 0$ and the standard deviation $\sigma = 1$, the normal distribution has a special name. It's called the *standard normal distribution* or the *$z$-curve*.
-
-Furthermore, if a variable follows a normal curve, there are *three rules of thumb* we can use:
-
-1. 68% of values will lie within $\pm$ 1 standard deviation of the mean.
-1. 95% of values will lie within $\pm$ 1.96 $\approx$ 2 standard deviations of the mean.
-1. 99.7% of values will lie within $\pm$ 3 standard deviations of the mean.
-
-Let's illustrate this on a standard normal curve. The dashed lines are at -3, -1.96, -1, 0, 1, 1.96, and 3. These 7 lines cut up the x-axis into 8 segments. The areas under the normal curve for each of the 8 segments are marked and add up to 100%. For example:
-
-1. The middle two segments represent the interval -1 to 1. The shaded area above this interval represents 34% + 34% = 68% of the area under the curve. In other words, 68% of values. 
-1. The middle four segments represent the interval -1.96 to 1.96. The shaded area above this interval represents 13.5% + 34% + 34% + 13.5% = 95% of the area under the curve. In other words, 95% of values. 
-1. The middle six segments represent the interval -3 to 3. The shaded area above this interval represents 2.35% + 13.5% + 34% + 34% + 13.5% + 2.35% = 99.7% of the area under the curve. In other words, 99.7% of values. 
-
-```{r}
-#| echo: false
-#| fig.cap: Rules of thumb about areas under normal curves.
-shade_3_sd <- function(x) {
-  y <- dnorm(x, mean = 0, sd = 1)
-  y[x <= -3 | x >= 3] <- NA
-  return(y)
-}
-shade_2_sd <- function(x) {
-  y <- dnorm(x, mean = 0, sd = 1)
-  y[x <= -1.96 | x >= 1.96] <- NA
-  return(y)
-}
-shade_1_sd <- function(x) {
-  y <- dnorm(x, mean = 0, sd = 1)
-  y[x <= -1 | x >= 1] <- NA
-  return(y)
-}
-labels <- tibble(
-  x = c(-3.5, -2.5, -1.5, -0.5, 0.5, 1.5, 2.5, 3.5),
-  label = c("0.15%", "2.35%", "13.5%", "34%", "34%", "13.5%", "2.35%", "0.15%")
-) |> 
-  mutate(y = rep(0.3, times = n()))
-ggplot(data = tibble(x = c(-4, 4)), aes(x)) +
-  geom_text(data = labels, aes(y=y, label = label)) + 
-  # Trace normal curve
-  stat_function(fun = dnorm, args = list(mean = 0, sd = 1), n = 1000) + 
-  # Shade and delineate +/- 3 SD
-  stat_function(fun = shade_3_sd, geom = "area", fill = "black", alpha = 0.25, n = 1000) +
-  # annotate(geom = "segment", x = c(3, -3), xend = c(3, -3), y = 0, yend = dnorm(3, mean = 0, sd = 1)) +
-  # Shade and delineate +/- 2 SD
-  stat_function(fun = shade_2_sd, geom = "area", fill = "black", alpha = 0.25, n = 1000) +
-  # annotate(geom = "segment", x = c(1.96, -1.96), xend = c(1.96, -1.96), y = 0, yend = dnorm(1.96, mean = 0, sd = 1)) +
-  # Shade and delineate +/- 1 SD
-  stat_function(fun = shade_1_sd, geom = "area", fill = "black", alpha = 0.25, n = 1000) +
-  # annotate(geom = "segment", x = c(1, -1), xend = c(1, -1), y = 0, yend = dnorm(1, mean = 0, sd = 1)) + 
-  geom_vline(xintercept = c(-3, -1.96, -1, 0, 1, 1.96, 3), linetype = "dashed", alpha = 0.5) +
-  # Axes
-  scale_x_continuous(breaks = seq(from = -3, to = 3, by = 1)) +
-  labs(x = "z", y = "") +
-  theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank())
-```
-
-
-### Summary statistics
-
-A probability distribution is not always easy to work with. It is a complex object. And, in many contexts, we don't really care about all that complexity. So, instead of providing the full probability distribution, we often just use a summary measure, a number or two or three which captures those aspects of the entire distribution which are relevant to the matter at hand. Let's explore these issues using the 538 posterior probability distribution, as of August 13, 2020, for the number of electoral votes which will be won by Joe Biden. Here is a tibble with 1,000,000 draws from that distribution:
-
-
-```{r}
-#| echo: false
-# DK: This code is a mess! Please fix! Store this data locally so that we can
-# run it when not connected to the internet.
-
-# Have to include otherwise shows up columns specification.
-
-
-
-z <- read_csv("./probability/data/election-forecasts-2020/prez_1.csv",
-              col_types = cols(cycle = col_double(),
-                               branch = col_character(),
-                               model = col_character(),
-                               modeldate = col_character(),
-                               candidate_inc = col_character(),
-                               candidate_chal = col_character(),
-                               candidate_3rd = col_logical(),
-                               evprob_inc = col_double(),
-                               evprob_chal = col_double(),
-                               evprob_3rd = col_logical(),
-                               total_ev = col_double(),
-                               timestamp = col_character(),
-                               simulations = col_double()
-                               )) |>
-       select(evprob_chal, total_ev)  |>
-       rename(prob = evprob_chal, electoral_votes = total_ev) |>
-       mutate(obs = round(prob * 1000000))  |>
-       select(-prob) |>
-       uncount(weights = obs) |>
-       select(electoral_votes)
-
-
-
-draws <- tibble(ID = 1:1000000,
-                electoral_votes = as.integer(sample(z$electoral_votes)))
-
-```
-
-```{r}
-draws
-```
-
-*A distribution and a sample of draws from that distribution are different things.* But, if you squint, they are sort of the same thing, at least for our purposes. For example, if you want to know the mean of the distribution, then the mean of the draws will be a fairly good estimate, especially if the number of draws is large enough.
-
-<!-- DK: Need more here. Connect to the discussion in Section 2.9 -->
-
-Recall how we can draw randomly from specified probability distributions:
-
-```{r}
-rnorm(10)
-```
-
-```{r}
-runif(10)
-```
-
-The elements of these vectors are all "draws" from the specified probability distributions. In most applied situations, our tools will produce draws rather than summary objects. Fortunately, a vector of draws is very easy to work with. Start with summary statistics:
-
-
-```{r}
-# recall mean, media, standard deviation and mad functions.
-
-key_stats <- draws |> 
-  summarize(mn = mean(electoral_votes),
-            md = median(electoral_votes),
-            sd = sd(electoral_votes),
-            mad = mad(electoral_votes))
-
-key_stats
-```
-
-
-Calculate a 95% interval directly:
-
-```{r}
-quantile(draws$electoral_votes, probs = c(0.025, 0.975))
-```
-
-Approximate the 95% interval in two ways:
-
-```{r}
-c(key_stats$mn - 2 * key_stats$sd, 
-  key_stats$mn + 2 * key_stats$sd)
-c(key_stats$md - 2 * key_stats$mad, 
-  key_stats$md + 2 * key_stats$mad)
-```
-
-In this case, using the mean and standard deviation produces a 95%  interval which is closer to the true interval. In other cases, the median and scaled median absolute deviation will do better. Either approximation is generally "good enough" for most work. But, if you need to know the exact 95% interval, you must use `quantile()`.
-
-
 
 ## Cardinal Virtues
 
