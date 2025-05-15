@@ -957,7 +957,9 @@ set.seed(9)
 
 
 
-```{r, cache = TRUE}
+```{r}
+#| cache: true
+
 # Pipes generally start with tibbles, so we start with a tibble which just
 # includes an ID variable. We don't really use ID. It is just handy for getting
 # organized. We call this object `jd_disease`, where the `jd` stands for
@@ -1002,7 +1004,8 @@ jd_disease |>
 Below is a joint distribution displayed in 3D. Instead of using the "jitter" feature in R to unstack the dots, we are using a 3D plot to visualize the number of dots in each box. The number of people who correctly test negative is far greater than of the other categories. The 3D plot shows the total number of cases for each section (True positive, True negative, False positive, False negative),the 3D bar coming from those combinations. Now,pay attention to the two rows of the 3D graph, if you trying to add up the length of the 3D bar for the top two sections and the bottom two sections, they should be equal to each other, where each have 10,000 case. This is because we simulate the experience in two independent and separate world one in the have-disease world and one in the no-disease world.
 
 
-```{r, cache = TRUE}
+```{r}
+#| cache: true
 #| eval: false
 
 # Pile up the dots in one point.
@@ -1124,7 +1127,9 @@ By looking at the posterior graph we just create, we can answer this question ea
 Now let's consider the manipulation of this posterior, here is another question.
 Question : *10 people walks up to testing center, 5 of them tested negative, 5 of them tested positive, what is the probability of at least 6 people are actually healthy? *
 
-```{r, cache = TRUE}
+```{r}
+#| cache: true
+
 tibble(test = 1:100000) |>
   mutate(person1 =  map_int(test, ~ rbinom(n = 1, size = 1, p = 0.3))) |>
   mutate(person2 =  map_int(test, ~ rbinom(n = 1, size = 1, p = 0.3))) |>
@@ -1179,7 +1184,9 @@ Step 1: Simulate the data into an tibble
 
 Let's say you take a marble out of the bag, record whether it's black or white, then return it to the bag. You repeat this three times, observing the number of white marbles you see out of three trials. You could get three whites, two whites, one white, or zero whites as a result of this trial. We have three models (three different proportions of white marbles in the bag) and four possible experimental results. Let's create 3,000 draws from this joint distribution:
 
-```{r, cache = TRUE}
+```{r}
+#| cache: true
+
 # Create the joint distribution of the number of white marbles in the bag
 # (in_bag) and the number of white marbles pulled out in the sample (in_sample),
 # one-by-one. in_bag takes three possible values: 0, 1 and 2, corresponding to
@@ -1232,8 +1239,9 @@ jd_marbles |>
 
 Here is the 3D visualization:
 
-```{r, cache = TRUE}
+```{r}
 #| eval: false
+#| cache: true
 
 # Same process, first condense point plot to a single plot, then use plot_gg make it 3d and 
 # give height.
@@ -1357,7 +1365,9 @@ Question: *What is the probability of getting exactly 8 heads out of 20 tosses?*
 
 To start, it is useful to consider all the things which might happen if, for example, $\rho_h = 0.4$. Fortunately, the R functions for simulating random variables makes this easy.
 
-```{r, cache = TRUE}
+```{r}
+#| cache: true
+
 set.seed(9)
 
 sims <- 1000
@@ -1420,8 +1430,9 @@ jd_coin |>
 
 Here is the 3D version of the same plot.
 
-```{r, cache = TRUE}
+```{r}
 #| eval: false
+#| cache: true
 
 # Condese point and make rayshader plot.
 
@@ -1519,7 +1530,7 @@ There are three main ways you could go about solving this problem with simulatio
 
 The first *wrong* way to do this is assuming that $\rho_h$ is certain because we observed 8 heads after 20 tosses. We would conclude that 8/20 gives us 0.4. The big problem with this is that you are ignoring your uncertainty when estimating $\rho_h$. This would lead us to the following code.
 
-```{r, cache = TRUE}
+```{r}
 #| cache: true
 
 sims <- 10000000
@@ -2151,7 +2162,6 @@ Even worse, we must always worry that our estimated posterior, despite all the w
 
 ```{r}
 #| echo: false
-#| cache: false
 #| warning: false
 knitr::write_bib(.packages(), "packages.bib")
 ```
