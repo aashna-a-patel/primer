@@ -89,7 +89,7 @@ library(primer.data)
 
 > The usual touchstone of whether what someone asserts is mere persuasion or at least a subjective conviction, i.e., firm belief, is betting. Often someone pronounces his propositions with such confident and inflexible defiance that he seems to have entirely laid aside all concern for error. A bet disconcerts him. Sometimes he reveals that he is persuaded enough for one ducat but not for ten. For he would happily bet one, but at ten he suddenly becomes aware of what he had not previously noticed, namely that it is quite possible that he has erred. -— Immanuel Kant, *Critique of Pure Reason*
 
-The central tension, and opportunity, in data science is the interplay between the *data* and the *science*, between our empirical observations and the models which we use to understand them. Probability is the language we use to explore that interplay; it connects models to data, and data to models.
+The central tension, and opportunity, in data science is the interplay between the *data* and the *science*, between our empirical observations and the models which we create to use them. Probability is the language we use to explore that interplay; it connects data to models, and models to inference.
 
 What does it mean that Donald Trump had a *30% chance* of winning election in the fall of 2016? That there is a *90% probability* of rain tomorrow? That the dice at the casino are *fair*? 
 
@@ -116,13 +116,15 @@ A *random variable* is a function which produces a value from a sample set. A ra
 
 We usually use capital letters for random variables. So, $C$ might be our symbol for the random variable which is a coin toss and $D$ might be our symbol for the random variable which is the sum of two dice. When discussing random variables in general, or when we grow tired of coming up with new symbols, we will use $Y$. 
 
-Small letters refer to a single outcome or result from a random variable. $c$ is the outcome from one coin toss. $d$ is the result from one throw of the dice. The value of the outcome must come from the sample space. So, $c$ can only take on two possible values: heads or tails. When discussing random variables in general, we use $y$ to refer to one outcome of the random variable $Y$. If there are multiple outcomes --- if we have, for example, flipped the coin multiple times --- then we use subscripts to indicate the separate outcomes: $y_1$, $y_2$, and so on. The symbol for an arbitrary outcome is $y_i$, where $i$ ranges from 1 through $N$, the total number of events or experiments for which an outcome $y$ was produced.  
+Small letters refer to a single outcome or result from a random variable. $c$ is the outcome from one coin toss. $d$ is the result from one throw of the two dice. The value of the outcome must come from the sample space. So, $c$ can only take on two possible values: heads or tails. When discussing random variables in general, we use $y$ to refer to one outcome of the random variable $Y$. If there are multiple outcomes --- if we have, for example, flipped the coin multiple times --- then we use subscripts to indicate the separate outcomes: $y_1$, $y_2$, and so on. The symbol for an arbitrary outcome is $y_i$, where $i$ ranges from 1 through $N$, the total number of events or experiments for which an outcome $y$ was produced.  
 
 The only package we need in this chapter is **tidyverse**.
 
 ```{r}
+#| code-fold: false
 #| message: false
 #| warning: false
+#| echo: true
 library(tidyverse)
 ```
 
@@ -138,14 +140,14 @@ A variable in a tibble is a column, a vector of values. We sometimes refer to th
 Consider the vector which is the result of rolling one dice 10 times.
 
 ```{r}
+#| echo: true
+#| code-fold: false
 ten_rolls <- c(5, 5, 1, 5, 4, 2, 6, 2, 1, 5)
 ```
 
 There are other ways of storing the data in this vector. Instead of reporting every observation, we could record the number of times each value appears or the percentage of the total which this number accounts for.
 
 ```{r}
-#| echo: false
-
 tibble(outcome = ten_rolls) |> 
   summarise(n = n(), .by = outcome) |> 
   mutate(portion = n / sum(n)) |> 
@@ -163,7 +165,6 @@ tibble(outcome = ten_rolls) |>
 In this case, with only 10 values, it is actually less efficient to store the data like this. But what happens when we have 1,000 rolls?
 
 ```{r}
-#| echo: false
 set.seed(89)
 
 tibble(outcome = sample(1:6, size = 1000, replace = TRUE)) |> 
@@ -184,12 +185,13 @@ Instead of keeping around a vector of length 1,000, we can just keep 12 values -
 Two distributions can be identical even if they are of very different lengths. Let's compare our original distribution of 10 rolls of the dice with another distribution which just features 100 copies of those 10 rolls.
 
 ```{r}
+#| echo: true
+#| code-fold: false
 more_rolls <- rep(ten_rolls, 100)
 ```
 
 
 ```{r}
-#| echo: false
 rolls_p <- tibble(value = ten_rolls) |> 
   ggplot(aes(value)) +
     geom_bar() +
@@ -214,8 +216,6 @@ The two graphs have the exact same shape because, even though the vectors are of
 If two distributions have the same shape, then they only differ by the labels on the y-axis. There are various ways of "normalizing" distributions so as to place them all the same scale. The most common scale is one in which the area under the distribution adds to 1, e.g.,  100%. For example, we can transform the above plots:
 
 ```{r}
-#| echo: false
-
 rolls_p <- tibble(value = ten_rolls) |> 
   ggplot(aes(x = value)) +
     geom_bar(aes(y = after_stat(count/sum(count)))) +
@@ -263,16 +263,9 @@ Again, people (including us!) will often be sloppy and use the same word, "distr
 
 Much of the rest of the *Primer* involves learning how to work with distributions, which generally means working with the draws from those distributions. Fortunately, the usual rules of arithmetic apply. You can add/subtract/multiply/divide distributions by working with draws from those distributions, just as you can add/subtract/multiply/divide regular numbers.
 
-
-<!-- Also need to talk more about working with distributions, especially calculating areas under the curve. Maybe do this under each example below. -->
-
-
-
-
 ## Probability distributions
 
 ```{r}
-#| echo: false
 #| out.width: 60%
 #| fig.align: center
 #| fig.cap: Bruno de Finetti, an Italian statistician who wrote a famous treatise on
@@ -310,7 +303,6 @@ An *empirical distribution* is based on data. Think of this as the probability d
 In this simulation, there are 44 heads and 56 tails. The outcome will vary every time we run the simulation, but the proportion of heads to tails should not be too different if the coin is fair.
 
 ```{r}
-#| echo: false
 # We are flipping one fair coin a hundreds times. We need to get the same result
 # each time we create this graphic because we want the results to match the
 # description in the text. Using set.seed() guarantees that the random results
@@ -338,7 +330,6 @@ A *mathematical distribution* is based on a mathematical formula. Assuming that 
 
 
 ```{r}
-#| echo: false
 # The mathematical case with the expected 50/50 outcome hard-coded.
 
 tibble(results = c(rep(0, 50),
@@ -389,7 +380,6 @@ In the case of the coin toss, the posterior distribution changes depending on yo
 
 
 ```{r}
-#| echo: false
 # Hard-code the creation of the posterior.
 
 tibble(results = c(rep(0, 95),
@@ -418,6 +408,7 @@ The full terminology is mathematical (or empirical or posterior) *probability* d
 Recall the question with which we started this section: *What are the chances of getting three heads in a row when flipping a fair coin?* To answer this question, we need to use a probability distribution as our *data generating mechanism*. Fortunately, the `rbinom()` function allows us to generate the results for coin flips. For example:
 
 ```{r}
+#| echo: true
 rbinom(n = 10, size = 1, prob = 0.5)
 ```
 generates the results of 10 coin flips, where a result of heads is presented as `1` and tails as `0`. With this tool, we can generate 1,000 draws from our experiment:
@@ -461,7 +452,6 @@ Data science begins with a question:
 We get an *empirical distribution* by rolling two dice a hundred times, either by hand or with a computer simulation. The result is not identical to the mathematical distribution because of the inherent randomness of the real world and/or of simulation. 
 
 ```{r}
-#| echo: false
 # In the coin example, we create the vector ahead of time, and then assigned
 # that vector to a tibble. There was nothing wrong with that approach. And we
 # could do the same thing here. But the use of map_* functions is more powerful,
@@ -496,7 +486,6 @@ Our *mathematical distribution* tells us that, with a fair dice, the probability
 
 
 ```{r}
-#| echo: false
 tibble(sum = c(rep(c(2, 12), 1), 
                rep(c(3, 11), 2),
                rep(c(4, 10), 3), 
@@ -524,7 +513,6 @@ $$ P(Y = y) = \begin{cases} \dfrac{y-1}{36} &\text{for }y=1,2,3,4,5,6 \\ \dfrac{
 The *posterior distribution* for rolling two dice a hundred times depends on your beliefs. If you take the dice from your Monopoly set, you have reason to believe that the assumptions underlying the mathematical distribution are true. However, if you walk into a crooked casino and a host asks you to play craps, you might be suspicious, just as in the coin flip example above. The word "suspicious" means that you suspect that the data generating mechanism for these dice is not like that for honest dice. For example, in craps, a "come-out" roll of 7 and 11 is a "natural," resulting in a win for the "shooter" and a loss for the casino. You might expect those numbers to occur less often than they would with fair dice. Meanwhile, a come-out roll of 2, 3 or 12 is a loss for the shooter. You might also expect values like 2, 3 and 12 to occur more frequently. Your posterior distribution might look like this:
 
 ```{r}
-#| echo: false
 # Hard code our posterior about the crooked casino.
 
 tibble(results = c(rep(2, 15), rep(3, 15), rep(4, 7), 
@@ -604,7 +592,6 @@ The *empirical distribution* in this case would involve counting the number of e
 
 
 ```{r}
-#| echo: false
 # Votes are since 1964, for Democratic candidate
 
 mydata <- tibble(electoral_votes = c(486, 191,  17, 297, 49, 13, 111, 
@@ -634,7 +621,6 @@ Given that we only have 15 observations, it is difficult to draw conclusions or 
 We can build a *mathematical distribution* for X which assumes that the chances of the Democratic candidate winning any given state's electoral votes is 0.5 and that the results from each state are independent.
 
 ```{r}
-#| echo: false
 #| warning: false
 
 # Code currently produces a warning about missing values. Not sure why? Maybe an
@@ -681,8 +667,6 @@ However, the data from past elections is more than enough to demonstrate that th
 The *posterior distribution* of electoral votes is a popular topic, and an area of strong disagreement, among data scientists. Consider this posterior from *FiveThirtyEight*.
 
 ```{r}
-#| echo: false
-
 # This data was downloaded by hand from the 538 website.
 
 # Have to include these cols type, otherwise it will shows up this "Column
@@ -722,7 +706,6 @@ read_csv("./probability/data/election-forecasts-2020/prez_1.csv",
 Below is a posterior probability distribution from the FiveThirtyEight website for August 13, 2020. This was created using the same data as the above distribution, but is displayed differently. For each electoral result, the height of the bar represents the probability that a given event will occur. However, there are no labels on the y-axis telling us what the specific probability of each outcome is. And that is OK! The specific values are not that useful. If we removed the labels on our own y-axes, would it matter? Probably not. Anytime there are many possible outcomes --- 539, in this case --- we stop looking at specific outcomes and, instead, look at where most of the "mass" of the distribution lies.
 
 ```{r}
-#| echo: false
 #| caption: FiveThirtyEight Posterior from August 13, 2020
 knitr::include_graphics("probability/images/fivethirtyeight.png")
 ```
@@ -730,7 +713,6 @@ knitr::include_graphics("probability/images/fivethirtyeight.png")
 Below is the posterior probability distribution from *The Economist*, also from August 13, 2020. This looks confusing at first because they chose to combine the axes for Republican and Democratic electoral votes. *The Economist* was less optimistic, relative to *FiveThirtyEight*, about Trump's chances in the election.
 
 ```{r}
-#| echo: false
 #| caption: Economist Posterior from August 13, 2020
 knitr::include_graphics("probability/images/economist_aug13.png")
 ```
@@ -738,7 +720,6 @@ knitr::include_graphics("probability/images/economist_aug13.png")
 These two models, built by smart people using similar data sources, have reached fairly different conclusions. Data science is difficult! There is not one "right" answer. Real life is not a problem set. 
 
 ```{r}
-#| echo: false
 #| out.width: 100%
 #| fig.cap: Watch the makers of these two models throw shade at each other on Twitter!
 #|   Eliot Morris is one of the primary authors of the Economist model. Nate Silver is
@@ -771,7 +752,6 @@ All the characteristics for discrete probability distributions which we reviewed
 The *empirical distribution* involves using data from the National Health and Nutrition Examination Survey (NHANES). 
 
 ```{r}
-#| echo: false
 # Use nhanes data set for this exercise, filter for adult and male.
 
 nhanes |>
@@ -789,7 +769,6 @@ nhanes |>
   scale_y_continuous(labels =
                       scales::percent_format(accuracy = 1)) +
   theme_classic()
-
 ```
 
 
@@ -797,8 +776,6 @@ nhanes |>
 
 
 ```{r}
-#| echo: false
-
 # Greater the n size, the smoother the graph. Shouldn't we use geom_density?
 
 tibble(height = rnorm(1000000, mean = 175, sd = 9)) |> 
@@ -828,8 +805,6 @@ Each value $y_i$ is drawn from a Normal distribution with parameters $\mu$ for t
 The *posterior distribution* for heights depends on the context. Are we considering all the adult men in America? In that case, our posterior would probably look a lot like the empirical distribution using NHANES data. If we are being asked about the distribution of heights among players in the NBA, then our posterior might look like:
 
 ```{r}
-#| echo: false
-
 tibble(height = rnorm(100000, 200, 6)) |> 
     ggplot(aes(x = height)) +
     geom_histogram(aes(y = after_stat(count/sum(count))), 
@@ -858,10 +833,6 @@ Caveats:
 
 Don't worry about the distinctions between discrete and continuous outcomes, or between the discrete and continuous probability distributions which we will use to summarize our beliefs about those outcomes. The basic intuition is the same in both cases.
 
-
-
-
-
 ### Joint distributions
 
 <!-- DK: Should be p(A). Discuss p(A, B). Find a better example.  -->
@@ -877,7 +848,6 @@ Let's say that you are rolling two six-sided dice simultaneously. Dice 1 is weig
 <!-- # AC: I noticed in the image that the column Dice 1 rolling a 6 and Dice 2 rolling a 5 is missing in the plot -->
 
 ```{r}
-#| echo: false
 #| eval: false
 # Revisit and clean up this code.
 
@@ -978,7 +948,6 @@ For example, assume you have Probophobia. There is then a 50% chance that you te
 
 
 ```{r}
-#| echo: false
 set.seed(9)
 ```
 
@@ -1012,8 +981,6 @@ The first step is to simply create an tibble that consists of the simulated data
 Plot the joint distribution:
 
 ```{r}
-#| echo: false
-
 # Use discrete for FALSE and TRUE
 
 jd_disease |> 
@@ -1036,7 +1003,6 @@ Below is a joint distribution displayed in 3D. Instead of using the "jitter" fea
 
 
 ```{r, cache = TRUE}
-#| echo: false
 #| eval: false
 
 # Pile up the dots in one point.
@@ -1105,7 +1071,6 @@ jd_disease |>
 **Most people who test positive are infected** This is a result for common diseases like cold. We can easily create an unnormalized conditional distribution with:
 
 ```{r}
-#| echo: false
 # geom_histogram won't work because we are using non-continuous value.
 # geom_col won't work because need two aesthetic both x and y
 # geom_bar work
@@ -1129,8 +1094,6 @@ Turn this unnormalized distribution into a posterior probability distribution:
 
 
 ```{r}
-#| echo: false
-
 # Use discrete for TRUE and FALSE
 
 jd_disease |> 
@@ -1270,7 +1233,6 @@ jd_marbles |>
 Here is the 3D visualization:
 
 ```{r, cache = TRUE}
-#| echo: false
 #| eval: false
 
 # Same process, first condense point plot to a single plot, then use plot_gg make it 3d and 
@@ -1396,7 +1358,6 @@ Question: *What is the probability of getting exactly 8 heads out of 20 tosses?*
 To start, it is useful to consider all the things which might happen if, for example, $\rho_h = 0.4$. Fortunately, the R functions for simulating random variables makes this easy.
 
 ```{r, cache = TRUE}
-#| echo: false
 set.seed(9)
 
 sims <- 1000
@@ -1420,8 +1381,6 @@ x |>
 First, notice that many different things can happen! Even if we *know*, for certain, that $\rho_h = 0.4$, many outcomes are possible. Life is remarkably random. Second, the most likely result of the experiment is 8 heads, as we would expect. Third, we have transformed the raw counts of how many times each total appeared into a probability distribution. Sometimes, however, it is convenient to just keep track of the raw counts. The shape of the figure is the same in both cases.
 
 ```{r}
-#| echo: false
-
 x |>
   ggplot(aes(heads)) +
      geom_histogram(bins = 50) + 
@@ -1438,8 +1397,6 @@ Either way, the figures show what would have happened if that model --- that $\r
 We can do the same thing for all 11 possible models, calculating what would happen if each of them were true. This is somewhat counterfactual since only one of them can be true. Yet this assumption does allow us to create the *joint distribution* of *models which might be true* and of *data which our experiment might generate*. Let's simplify this as p(models, data), although you should keep the precise meaning in mind.
 
 ```{r}
-#| echo: false
-
 # sims size depends on your data size, or the number in rep().
 
 set.seed(10)
@@ -1464,7 +1421,6 @@ jd_coin |>
 Here is the 3D version of the same plot.
 
 ```{r, cache = TRUE}
-#| echo: false
 #| eval: false
 
 # Condese point and make rayshader plot.
@@ -1524,7 +1480,6 @@ This is the only part of the joint distribution that we care about. We aren't in
 As we would expect, most of the time when 8 coin tosses came up heads, the value of $p$ was 0.4. But, on numerous occasions, it was not. It is quite common for a value of $p$ like 0.3 or 0.5 to generate 8 heads. Consider:
 
 ```{r}
-#| echo: false
 jd_coin |> 
   filter(heads == 8) |> 
   ggplot(aes(p)) +
@@ -1539,7 +1494,6 @@ jd_coin |>
 Yet this is a distribution of raw counts. It is an unnormalized density. To turn it into a proper probability density (i.e., one in which the sum of the probabilities across possible outcomes sums to one) we just divide everything by the total number of observations.
 
 ```{r}
-#| echo: false
 jd_coin |> 
   filter(heads == 8) |> 
   ggplot(aes(x = p)) +
@@ -1605,7 +1559,6 @@ about 24.5%.
 The second method involves sampling the whole posterior distribution vector we previously created. This would lead to the following correct code.
 
 ```{r}
-
 p_draws <- tibble(p = rep(seq(0, 1, 0.1), 1000)) |>
   mutate(heads = map_int(p, ~ rbinom(n = 1, size = 20, p = .))) |>
   filter(heads == 8)
@@ -1615,8 +1568,6 @@ odds_2nd <- tibble(p = sample(p_draws$p, size = sims, replace = TRUE)) |>
   mutate(above_ten = if_else(heads >= 10, TRUE, FALSE)) 
 
 odds_2nd
-
-
 ```
 
 ```{r}
@@ -1633,15 +1584,15 @@ odds_2nd |>
     scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
     theme_classic()
 ```
+
 Using this Posterior distribution derived from the (right way 1st) simulated data, the probability results in 10 or more head is
 
 ```{r}
 odds_2nd |>
   summarize(success = sum(above_ten)/sims)
 ```
+
 about 32.8%
-
-
 
 As you may have noticed, if you calculated the value using the first method, you would believe that getting 10 or more heads is less likely than it really is. If you were to run a casino based on these assumptions, you will lose all your money. It is very important to be careful about the assumptions you are making. We tossed a coin 20 times and got 8 heads. However, you would be wrong to assume that $\rho_h$ = 0.4 just based on this result.
 
