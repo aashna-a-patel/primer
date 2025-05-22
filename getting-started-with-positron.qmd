@@ -247,12 +247,21 @@ There are many tutorials available in the **positron.tutorials**, **r4ds.tutoria
 
 Because Positron is still evolving, there is no easy way to start a tutorial. Instead, we must issue a command like this from the Console:
 
+```{r}
+#| eval: false
+#| code-fold: false
+learnr::run_tutorial(name = "positron", package = "tutorial.helpers")
+```
+
+The first argument to `run_tutorial()` is the `name` of the tutorial and the second is the `package` in which the tutorial is installed. We often leave out the arguments and just provide their values. Example:
 
 ```{r}
 #| eval: false
 #| code-fold: false
-learnr::run_tutorial("positron", package = "tutorial.helpers")
+learnr::run_tutorial("01-code", "positron.tutorials")
 ```
+
+This is how you will start the next tutorial you are likely to be assigned, the `01-code` tutorial from the **positron.tutorials** package.
 
 You may notice that the Console will show output as the tutorial is starting up. This is because Positron is running the code to create the tutorial.
 
