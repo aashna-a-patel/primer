@@ -8,6 +8,10 @@
 library(gt)
 ```
 
+<!-- Our current urn is 40% red. We need to adjust the commentary accordingly, since it seems to assume that the true value is between 35% and 40%. -->
+
+<!-- Stopped proof read at standard error section. -->
+
 <!-- What are the goals of this chapter? Students need to know: -->
 
 <!-- 1) Your posterior for (almost) any population parameter is normally distributed with a mean equal to the sample mean and a standard deviation equal to the standard error. And that means that your posterior has the same shape as the sampling distribution. -->
@@ -28,7 +32,6 @@ library(gt)
 
 {{< video https://www.youtube.com/embed/e3PJ3Du_zDc >}}
 
-
 *The Hunger Games* is a dystopian novel in which children are chosen via lottery to fight to the death. Primrose Everdeen is selected from the urn. Why does she have the misfortune of being selected? Or, as we data scientists say, *sampled*?
 
 In @sec-probability, we learned about probability, the framework for quantifying uncertainty. In this chapter, we will learn about *sampling*, the beginning of our journey toward inference. When we sample, we take some *units* from a *population*. With the data collected via sampling, we use inference to create statistical models. With such models, we can answer questions.
@@ -45,7 +48,7 @@ The urn below has a certain number of red and a certain number of white beads al
 knitr::include_graphics("sampling/images/sampling_bowl_1.jpg")
 ```
 
-One way to answer this question would be to perform an exhaustive count: remove each bead individually, count the number of red beads, count the number of white beads, and divide the number of red beads by the total number of beads. Call that ratio $\rho$, the proportion of red beads in the urn. However, this would be a long and tedious process. Therefore, we will use sampling! 
+One way to answer this question would be to perform an exhaustive count: remove each bead, count the number of red beads, count the number of white beads, and divide the number of red beads by the total number of beads. Call that ratio $\rho$, the proportion of red beads in the urn. However, this would be a long and tedious process. Therefore, we will use sampling! 
 
 To begin this chapter, we will look at a real sampling activity: the urn.  Then, we will simulate the urn example using R code. This will help us to understand the *standard error* and the ways in which uncertainty factors into our predictions.  
 
@@ -74,9 +77,9 @@ knitr::include_graphics("sampling/images/sampling_bowl_2.jpg")
 knitr::include_graphics("sampling/images/sampling_bowl_3_cropped.jpg")
 ```
 
-Observe that 17 of the 50 sampled beads are red and thus $17/50 = 0.34 = 34\%$ of the shovel's beads are red. We can view the proportion of beads that are red in this shovel as a guess of the proportion of beads that are red in the entire urn. While not as exact as doing an exhaustive count of all the beads in the urn, our guess of 34% took much less time and energy to make. 
+Observe that 17 of the 50 sampled beads are red and thus $17/50 = 0.34 = 34\%$ of the shovel's beads are red. We can view the proportion of beads that are red in this shovel as a guess at the proportion of beads that are red in the entire urn. While not as exact as doing an exhaustive count of all the beads in the urn, our guess of 34% took much less time and energy to make. 
 
-Recall that $\rho$ is the true value of the proportion of red beads. There is only one $\rho$. Our guesses at the proportion of red beads are known as $\hat{\rho}$ (pronounced p hat), where $\hat{\rho}$ is the estimated value of $\rho$. There are many ways to estimate $\rho$, each leading to a (potentially) different $\hat{\rho}$. The 34% value for $\hat{\rho}$ came from taking this sample. But, if we used the shovel again, we would probably come up with a different $\hat{\rho}$. There are many possible $\hat{\rho}$'s. You and I will often differ in our estimates. We each have a different $\hat{\rho}$ even though we agree that there is only one $\rho$.
+Recall that $\rho$ is the true value of the proportion of red beads. There is only one $\rho$. A guess at the proportion of red beads is known as $\hat{\rho}$ (pronounced p hat), where $\hat{\rho}$ is the estimated value of $\rho$. There are many ways to estimate $\rho$, each leading to a (potentially) different $\hat{\rho}$. The 34% value for $\hat{\rho}$ came from taking this sample. But, if we used the shovel again, we would probably come up with a different $\hat{\rho}$. There are many possible $\hat{\rho}$'s. You and I will often differ in our estimates. We might each have a different $\hat{\rho}$ even though we agree that there is only one $\rho$.
 
 Start this activity over again from the beginning, placing the 50 beads back into the urn. Would a second sample include exactly 17 red beads? Maybe, but probably not.
 
@@ -112,8 +115,8 @@ knitr::include_graphics("sampling/images/tactile_3_c.jpg")
 Observe the following details in the histogram:
 
 * At the low end, one group removed 50 beads from the urn with proportion red between 0.20 and 0.25.
-* At the high end, another group removed 50 beads from the urn with proportion between 0.45 and 0.5 red.
-* However, the most frequently occurring proportions were between 0.30 and 0.35 red, right in the middle of the distribution.
+* At the high end, another group removed 50 beads from the urn with proportion red between 0.45 and 0.5 red.
+* However, the most commonly occurring proportions were around 0.4 red, right in the middle of the distribution.
 * The distribution is somewhat bell-shaped. 
 
 `tactile_sample_urn` saves the results from our 33 groups of friends. 
@@ -145,7 +148,7 @@ tactile_sample_urn <- tibble(group = c("Ilyas, Yohan", "Ellie, Terrance", "Mark,
 tactile_sample_urn
 ```
 
-For each `group`, we are given their names, the number of `red_beads` they obtained, and the corresponding proportion out of 50 beads that were red, called `prop_red`. We also have an `group_ID` variable which gives each of the 33 groups a unique identifier. Each row can be viewed as one instance of a replicated activity: using the shovel to remove 50 beads and computing the proportion of those beads that are red. 
+For each `group`, we are given their names, the number of `red_beads` they obtained, and the corresponding proportion out of 50 beads that were red, called `prop_red`. We also have a `group_ID` variable which gives each of the 33 groups a unique identifier. Each row can be viewed as one instance of a replicated activity: using the shovel to remove 50 beads and computing the proportion of those beads that were red. 
 
 Let's visualize the distribution of these 33 proportions using `geom_histogram()` with `binwidth = 0.05`. This is a computerized and complete version of the partially completed hand-drawn histogram you saw earlier. 
 
@@ -179,7 +182,7 @@ tactile_sample_urn |>
 
 ### What did we just do?
 
-What we just demonstrated in this activity is the statistical concept of **sampling**. We want to know the proportion of red beads in the urn, with the urn being our **population**. Performing an exhaustive count of the red and white beads would be too time-consuming. Therefore, it is much more practical to extract a *sample* of 50 beads using the shovel. Using this sample of 50 beads, we estimated the proportion of the urn's beads that are red to be about 34%.
+What we just demonstrated in this activity is the statistical concept of **sampling**. We want to know the proportion of red beads in the urn, with the urn being our **population**. Performing an exhaustive count of the red and white beads would be too time consuming. Therefore, it is much more practical to extract a *sample* of 50 beads using the shovel. Using this sample of 50 beads, we estimated the proportion of the urn's beads that are red to be about 34%.
 
 Moreover, because we mixed the beads before each use of the shovel, the samples were random and independent. Because each sample was drawn at random, the samples were different from each other. This is an example of  *sampling variation*. For example, what if instead of selecting 17 beads in our first sample we had selected just 11? Does that mean that the population proportion of the beads is 11/50 or 22%? No! Because we performed 33 trials we can look to our histogram, and see that the peak of the distribution occurs when $.35 < \hat{\rho} < .4$ , so it is *likely* that the proportion of red beads in the entire population will also fall in or near this range. 
 
@@ -256,7 +259,7 @@ tibble(trial_ID = 1) |>
 
 How does this work? R evaluates if `color == red`, and treats `TRUE` values like the number `1` and `FALSE` values like the number `0`. So summing the number of `TRUE`s and `FALSE`s is equivalent to summing `1`'s and `0`'s. In the end, this operation counts the number of beads where `color` equals "red".
 
-Finally, calculate the proportion red by dividing `numb_red` (The number of red beads observed in the shovel), by the shovel size (We are using a shovel of size 50).
+Finally, calculate the proportion red by dividing `numb_red` (the number of red beads observed in the shovel) by the shovel size (which is 50 in this example).
 
 ```{r}
 tibble(trial_ID = 1) |> 
@@ -265,9 +268,9 @@ tibble(trial_ID = 1) |>
   mutate(prop_red = numb_red / 50)
 ```
 
-Careful readers will note that the `numb_red` is changing in each example above. The reason, of course, is that each block re-runs the shovel exercise, and slice_sample will return a random number of red beads. If we wanted the same number in each block, we would need to use `set.seed()` each time, always providing the same `seed` each time.
+Careful readers will note that the `numb_red` is changing in each example above. The reason, of course, is that each block re-runs the shovel exercise, and `slice_sample()` will return a random number of red beads. If we wanted the same number in each block, we would need to use the `set.seed()` function and then set the same `seed` each time.
 
-Let's now perform the virtual analog of having 33 groups of students use the sampling shovel!
+Let's now perform the virtual analog of having 33 groups of students use the sampling shovel.
 
 ### Using the virtual shovel 33 times {#shovel-33-times}
 
@@ -371,7 +374,7 @@ facet_compare <- bind_rows(virtual_samples |>
 facet_compare
 ```
 
-This visualization allows us to see how our results differed between our tactile and virtual urn results. As we can see, there is some variation between our results. This is not a cause for concern, as there is always expected sampling variation between results.
+This visualization allows us to see how our results differed between our tactile and virtual urn results. As we can see, there is some variation between our results. This is not a cause for concern, as there is always sampling variation across results.
 
 ### Using the virtual shovel 10,000 times {#shovel-1000-times}
 
@@ -381,7 +384,7 @@ This visualization allows us to see how our results differed between our tactile
 knitr::include_graphics("sampling/images/sample_bernie.png")
 ```
 
-Although we took 33 samples from the urn in the previous section, we should use so few samples. Instead, in this section we'll examine the effects of sampling from the urn 10,000 times. 
+Although we took 33 samples from the urn in the previous section, we should not use so few samples. Instead, in this section we'll examine the effects of sampling from the urn 10,000 times. 
 
 We can reuse our code from above, making sure to replace 33 trials with 10,000.
 
@@ -422,7 +425,7 @@ Now that we have a good understanding of virtual sampling, we can apply our know
 knitr::include_graphics("sampling/images/three_shovels.png")
 ```
 
-Instead of just one shovel, imagine we have three choices of shovels to extract a sample of beads with: shovels of size 25, 50, and 100. Using our newly developed tools for virtual sampling, let's unpack the effect of having different sample sizes. Start by creating a tibble with 10,000 rows, each row representing an instance of us sampling from the urn with our chosen shovel size. Then, compute the resulting 10,000 replicates of proportion red. Finally, plot the distribution using a histogram. 
+Instead of just one shovel, imagine we have three choices of shovels with which to extract a sample of beads: shovels of size 25, 50, and 100. Using our newly developed tools for virtual sampling, let's unpack the effect of having different sample sizes. Start by creating a tibble with 10,000 rows, each row representing an instance of us sampling from the urn with our chosen shovel size. Then, compute the resulting 10,000 replicates of proportion red. Finally, plot the distribution using a histogram. 
 
 ```{r, cache = TRUE}
 # Within slice_sample(), n = 25 represents our shovel of size 25. We also divide
@@ -519,7 +522,7 @@ comparing_sampling_distributions
 
 Observe that as the sample size increases, the histogram becomes taller and narrower. This is because the *variation* of the proportion red for each sample decreases. Remember: A large variation means there are a wide range of values that might occur, while smaller variations are more concentrated around the central value. 
 
-The [*Central Limit Theorem*](https://en.wikipedia.org/wiki/Central_limit_theorem) states, more or less, that when sample means are based on larger and larger sample sizes, the sampling distribution of these sample means becomes both narrower and more bell-shaped. In other words, the sampling distribution increasingly follows a *normal distribution* and the variation of this sampling distribution gets smaller, meaning smaller standard errors.
+The [*Central Limit Theorem*](https://en.wikipedia.org/wiki/Central_limit_theorem) states, more or less, that when sample means are based on larger and larger sample sizes, the sampling distribution of these sample means becomes both narrower and more bell-shaped. In other words, the sampling distribution increasingly follows a *normal distribution* and the variation of this sampling distribution gets smaller.
 
 Why does variation decrease as sample size increases? If we use a large sample size like 100 or 500, our sample is much more representative of the population. As a result, the proportion red in our sample ($\hat{\rho}$) will be closer to the true population proportion ($\rho$).  On the other hand, smaller samples have much more variation because of chance. We are much more likely to have extreme estimates that are not representative of our population when the sample size is small. 
 
@@ -634,7 +637,7 @@ expand_grid(trial_ID = c(1:10000), shovel_size = c(25, 50, 100)) |>
   
 ```
 
-This is, approximately, the same result as we saw above, but with 1 re-factored tibble instead of 3 separate ones. We can also use functions like `expand_grid()` in the future to make our code more concise.
+This is, approximately, the same result as we saw above, but with one re-factored tibble instead of three separate ones. Use functions like `expand_grid()` in the future to make your code more concise.
 
 Now that we have this framework, there's no need to limit ourselves to the sizes 25, 50, and 100.  Why not try all integers from 1 to 100? We can use the same code, except we'll now set `shovel_size = 1:100`. (We also decrease the number of replications from 10,000 to 1,000 in order to save time.)
 

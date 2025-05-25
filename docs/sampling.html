@@ -334,7 +334,7 @@ window.Quarto = {
   
 
 
-</header><!-- What are the goals of this chapter? Students need to know: --><!-- 1) Your posterior for (almost) any population parameter is normally distributed with a mean equal to the sample mean and a standard deviation equal to the standard error. And that means that your posterior has the same shape as the sampling distribution. --><!-- 2) Confidence/credible/uncertainty intervals. --><!-- Practice the Cardinal Virtues. --><!-- DK: Key question. Should our question for Cardinal Virtues be something like: "What are the chances of getting 10 red beads with a shovel of size 20?" Or should we just stick with rho? --><!-- Redo the excellent standard error knowledge pyramid. No more MAD stuff. Add "standard deviation of data" to the bottom. --><!-- Explain in a comment the reason for  fun = function(.x) 1/(2 * sqrt(.x)) in the plot. I don't know why we need the 2. We would probably use geom_function(). Maybe using geom_function with the function for a standard error will just magically work! --><!-- Do we know or not know that the urn has 1,000 beads. --><p>“The most important aspect of a statistical analysis is not what you do with the data, it’s what data you use.” – Hal Stern</p>
+</header><!-- Our current urn is 40% red. We need to adjust the commentary accordingly, since it seems to assume that the true value is between 35% and 40%. --><!-- Stopped proof read at standard error section. --><!-- What are the goals of this chapter? Students need to know: --><!-- 1) Your posterior for (almost) any population parameter is normally distributed with a mean equal to the sample mean and a standard deviation equal to the standard error. And that means that your posterior has the same shape as the sampling distribution. --><!-- 2) Confidence/credible/uncertainty intervals. --><!-- Practice the Cardinal Virtues. --><!-- DK: Key question. Should our question for Cardinal Virtues be something like: "What are the chances of getting 10 red beads with a shovel of size 20?" Or should we just stick with rho? --><!-- Redo the excellent standard error knowledge pyramid. No more MAD stuff. Add "standard deviation of data" to the bottom. --><!-- Explain in a comment the reason for  fun = function(.x) 1/(2 * sqrt(.x)) in the plot. I don't know why we need the 2. We would probably use geom_function(). Maybe using geom_function with the function for a standard error will just magically work! --><!-- Do we know or not know that the urn has 1,000 beads. --><p>“The most important aspect of a statistical analysis is not what you do with the data, it’s what data you use.” – Hal Stern</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/e3PJ3Du_zDc" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p><em>The Hunger Games</em> is a dystopian novel in which children are chosen via lottery to fight to the death. Primrose Everdeen is selected from the urn. Why does she have the misfortune of being selected? Or, as we data scientists say, <em>sampled</em>?</p>
 <p>In <a href="probability.html" class="quarto-xref"><span>Chapter 2</span></a>, we learned about probability, the framework for quantifying uncertainty. In this chapter, we will learn about <em>sampling</em>, the beginning of our journey toward inference. When we sample, we take some <em>units</em> from a <em>population</em>. With the data collected via sampling, we use inference to create statistical models. With such models, we can answer questions.</p>
@@ -350,7 +350,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>One way to answer this question would be to perform an exhaustive count: remove each bead individually, count the number of red beads, count the number of white beads, and divide the number of red beads by the total number of beads. Call that ratio <span class="math inline">\(\rho\)</span>, the proportion of red beads in the urn. However, this would be a long and tedious process. Therefore, we will use sampling!</p>
+<p>One way to answer this question would be to perform an exhaustive count: remove each bead, count the number of red beads, count the number of white beads, and divide the number of red beads by the total number of beads. Call that ratio <span class="math inline">\(\rho\)</span>, the proportion of red beads in the urn. However, this would be a long and tedious process. Therefore, we will use sampling!</p>
 <p>To begin this chapter, we will look at a real sampling activity: the urn. Then, we will simulate the urn example using R code. This will help us to understand the <em>standard error</em> and the ways in which uncertainty factors into our predictions.</p>
 <p>Use the <strong>tidyverse</strong> package.</p>
 <div class="cell">
@@ -375,8 +375,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Observe that 17 of the 50 sampled beads are red and thus <span class="math inline">\(17/50 = 0.34 = 34\%\)</span> of the shovel’s beads are red. We can view the proportion of beads that are red in this shovel as a guess of the proportion of beads that are red in the entire urn. While not as exact as doing an exhaustive count of all the beads in the urn, our guess of 34% took much less time and energy to make.</p>
-<p>Recall that <span class="math inline">\(\rho\)</span> is the true value of the proportion of red beads. There is only one <span class="math inline">\(\rho\)</span>. Our guesses at the proportion of red beads are known as <span class="math inline">\(\hat{\rho}\)</span> (pronounced p hat), where <span class="math inline">\(\hat{\rho}\)</span> is the estimated value of <span class="math inline">\(\rho\)</span>. There are many ways to estimate <span class="math inline">\(\rho\)</span>, each leading to a (potentially) different <span class="math inline">\(\hat{\rho}\)</span>. The 34% value for <span class="math inline">\(\hat{\rho}\)</span> came from taking this sample. But, if we used the shovel again, we would probably come up with a different <span class="math inline">\(\hat{\rho}\)</span>. There are many possible <span class="math inline">\(\hat{\rho}\)</span>’s. You and I will often differ in our estimates. We each have a different <span class="math inline">\(\hat{\rho}\)</span> even though we agree that there is only one <span class="math inline">\(\rho\)</span>.</p>
+<p>Observe that 17 of the 50 sampled beads are red and thus <span class="math inline">\(17/50 = 0.34 = 34\%\)</span> of the shovel’s beads are red. We can view the proportion of beads that are red in this shovel as a guess at the proportion of beads that are red in the entire urn. While not as exact as doing an exhaustive count of all the beads in the urn, our guess of 34% took much less time and energy to make.</p>
+<p>Recall that <span class="math inline">\(\rho\)</span> is the true value of the proportion of red beads. There is only one <span class="math inline">\(\rho\)</span>. A guess at the proportion of red beads is known as <span class="math inline">\(\hat{\rho}\)</span> (pronounced p hat), where <span class="math inline">\(\hat{\rho}\)</span> is the estimated value of <span class="math inline">\(\rho\)</span>. There are many ways to estimate <span class="math inline">\(\rho\)</span>, each leading to a (potentially) different <span class="math inline">\(\hat{\rho}\)</span>. The 34% value for <span class="math inline">\(\hat{\rho}\)</span> came from taking this sample. But, if we used the shovel again, we would probably come up with a different <span class="math inline">\(\hat{\rho}\)</span>. There are many possible <span class="math inline">\(\hat{\rho}\)</span>’s. You and I will often differ in our estimates. We might each have a different <span class="math inline">\(\hat{\rho}\)</span> even though we agree that there is only one <span class="math inline">\(\rho\)</span>.</p>
 <p>Start this activity over again from the beginning, placing the 50 beads back into the urn. Would a second sample include exactly 17 red beads? Maybe, but probably not.</p>
 <p>What if we repeated this activity <em>many</em> times? Would our guess at the proportion of the urn’s beads that are red, <span class="math inline">\(\hat{\rho}\)</span>, be exactly 34% every time? Surely not.</p>
 <p>Let’s repeat this exercise with the help of 33 groups of friends to understand how the value of <span class="math inline">\(\hat{\rho}\)</span> varies across 33 independent trials.</p>
@@ -410,30 +410,30 @@ window.Quarto = {
 <p>Observe the following details in the histogram:</p>
 <ul>
 <li>At the low end, one group removed 50 beads from the urn with proportion red between 0.20 and 0.25.</li>
-<li>At the high end, another group removed 50 beads from the urn with proportion between 0.45 and 0.5 red.</li>
-<li>However, the most frequently occurring proportions were between 0.30 and 0.35 red, right in the middle of the distribution.</li>
+<li>At the high end, another group removed 50 beads from the urn with proportion red between 0.45 and 0.5 red.</li>
+<li>However, the most commonly occurring proportions were around 0.4 red, right in the middle of the distribution.</li>
 <li>The distribution is somewhat bell-shaped.</li>
 </ul>
 <p><code>tactile_sample_urn</code> saves the results from our 33 groups of friends.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 33 × 4
-   group          red_beads prop_red group_ID
-   &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
- 1 Maeve, Josh           18     0.36        1
- 2 Vignesh, Eliot        16     0.32        2
- 3 Dania, Derek          21     0.42        3
- 4 Sanjana, Yuko         19     0.38        4
- 5 Paddy, Matt           16     0.32        5
- 6 Yao, Kate             23     0.46        6
- 7 Ishan, Cass           15     0.3         7
- 8 Mark, Jane            21     0.42        8
- 9 Esther, Henry         17     0.34        9
-10 Claire, Cloud         16     0.32       10
+   group           red_beads prop_red group_ID
+   &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
+ 1 Esther, Henry          17     0.34        1
+ 2 Ellie, Terrance        17     0.34        2
+ 3 Dania, Derek           21     0.42        3
+ 4 Ace, Chris             18     0.36        4
+ 5 Yuki, Harry            21     0.42        5
+ 6 Katie, Anthony         20     0.4         6
+ 7 Caroline, Edna         15     0.3         7
+ 8 Frank, Clara           21     0.42        8
+ 9 Ishan, Cass            15     0.3         9
+10 Mia, James             15     0.3        10
 # ℹ 23 more rows</code></pre>
 </div>
 </div>
-<p>For each <code>group</code>, we are given their names, the number of <code>red_beads</code> they obtained, and the corresponding proportion out of 50 beads that were red, called <code>prop_red</code>. We also have an <code>group_ID</code> variable which gives each of the 33 groups a unique identifier. Each row can be viewed as one instance of a replicated activity: using the shovel to remove 50 beads and computing the proportion of those beads that are red.</p>
+<p>For each <code>group</code>, we are given their names, the number of <code>red_beads</code> they obtained, and the corresponding proportion out of 50 beads that were red, called <code>prop_red</code>. We also have a <code>group_ID</code> variable which gives each of the 33 groups a unique identifier. Each row can be viewed as one instance of a replicated activity: using the shovel to remove 50 beads and computing the proportion of those beads that were red.</p>
 <p>Let’s visualize the distribution of these 33 proportions using <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code> with <code>binwidth = 0.05</code>. This is a computerized and complete version of the partially completed hand-drawn histogram you saw earlier.</p>
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tactile_sample_urn</span> <span class="op">|&gt;</span></span>
@@ -462,14 +462,14 @@ window.Quarto = {
 <span>       title <span class="op">=</span> <span class="st">"Proportions Red in 33 Samples"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section><section id="what-did-we-just-do" class="level3" data-number="3.1.3"><h3 data-number="3.1.3" class="anchored" data-anchor-id="what-did-we-just-do">
 <span class="header-section-number">3.1.3</span> What did we just do?</h3>
-<p>What we just demonstrated in this activity is the statistical concept of <strong>sampling</strong>. We want to know the proportion of red beads in the urn, with the urn being our <strong>population</strong>. Performing an exhaustive count of the red and white beads would be too time-consuming. Therefore, it is much more practical to extract a <em>sample</em> of 50 beads using the shovel. Using this sample of 50 beads, we estimated the proportion of the urn’s beads that are red to be about 34%.</p>
+<p>What we just demonstrated in this activity is the statistical concept of <strong>sampling</strong>. We want to know the proportion of red beads in the urn, with the urn being our <strong>population</strong>. Performing an exhaustive count of the red and white beads would be too time consuming. Therefore, it is much more practical to extract a <em>sample</em> of 50 beads using the shovel. Using this sample of 50 beads, we estimated the proportion of the urn’s beads that are red to be about 34%.</p>
 <p>Moreover, because we mixed the beads before each use of the shovel, the samples were random and independent. Because each sample was drawn at random, the samples were different from each other. This is an example of <em>sampling variation</em>. For example, what if instead of selecting 17 beads in our first sample we had selected just 11? Does that mean that the population proportion of the beads is 11/50 or 22%? No! Because we performed 33 trials we can look to our histogram, and see that the peak of the distribution occurs when <span class="math inline">\(.35 &lt; \hat{\rho} &lt; .4\)</span> , so it is <em>likely</em> that the proportion of red beads in the entire population will also fall in or near this range.</p>
 </section></section><section id="sec-virtual-sampling" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="sec-virtual-sampling">
 <span class="header-section-number">3.2</span> Virtual sampling</h2>
@@ -565,7 +565,7 @@ window.Quarto = {
 </div>
 </div>
 <p>How does this work? R evaluates if <code>color == red</code>, and treats <code>TRUE</code> values like the number <code>1</code> and <code>FALSE</code> values like the number <code>0</code>. So summing the number of <code>TRUE</code>s and <code>FALSE</code>s is equivalent to summing <code>1</code>’s and <code>0</code>’s. In the end, this operation counts the number of beads where <code>color</code> equals “red”.</p>
-<p>Finally, calculate the proportion red by dividing <code>numb_red</code> (The number of red beads observed in the shovel), by the shovel size (We are using a shovel of size 50).</p>
+<p>Finally, calculate the proportion red by dividing <code>numb_red</code> (the number of red beads observed in the shovel) by the shovel size (which is 50 in this example).</p>
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>trial_ID <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>shovel <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">trial_ID</span>, <span class="op">~</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span><span class="va">urn</span>, n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -578,8 +578,8 @@ window.Quarto = {
 1        1 &lt;tibble [50 × 2]&gt;       17     0.34</code></pre>
 </div>
 </div>
-<p>Careful readers will note that the <code>numb_red</code> is changing in each example above. The reason, of course, is that each block re-runs the shovel exercise, and slice_sample will return a random number of red beads. If we wanted the same number in each block, we would need to use <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> each time, always providing the same <code>seed</code> each time.</p>
-<p>Let’s now perform the virtual analog of having 33 groups of students use the sampling shovel!</p>
+<p>Careful readers will note that the <code>numb_red</code> is changing in each example above. The reason, of course, is that each block re-runs the shovel exercise, and <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample()</a></code> will return a random number of red beads. If we wanted the same number in each block, we would need to use the <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> function and then set the same <code>seed</code> each time.</p>
+<p>Let’s now perform the virtual analog of having 33 groups of students use the sampling shovel.</p>
 </section><section id="shovel-33-times" class="level3" data-number="3.2.2"><h3 data-number="3.2.2" class="anchored" data-anchor-id="shovel-33-times">
 <span class="header-section-number">3.2.2</span> Using the virtual shovel 33 times</h3>
 <p>In our tactile sampling exercise in <a href="#sec-sampling-activity" class="quarto-xref"><span>Section 3.1</span></a>, we had 33 groups of students use the shovel, yielding 33 samples of size 50 beads. We then used these 33 samples to compute 33 proportions.</p>
@@ -632,7 +632,7 @@ window.Quarto = {
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -643,12 +643,12 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Comparing 33 virtual and 33 tactile proportions red. Note that, though the figures differ slightly, both are centered around .35 to .45. This shows that, in both sampling distributions, the most frequently occuring proportion red is between 35% and 45%.</figcaption></figure>
 </div>
 </div>
 </div>
-<p>This visualization allows us to see how our results differed between our tactile and virtual urn results. As we can see, there is some variation between our results. This is not a cause for concern, as there is always expected sampling variation between results.</p>
+<p>This visualization allows us to see how our results differed between our tactile and virtual urn results. As we can see, there is some variation between our results. This is not a cause for concern, as there is always sampling variation across results.</p>
 </section><section id="shovel-1000-times" class="level3" data-number="3.2.3"><h3 data-number="3.2.3" class="anchored" data-anchor-id="shovel-1000-times">
 <span class="header-section-number">3.2.3</span> Using the virtual shovel 10,000 times</h3>
 <div class="cell">
@@ -659,7 +659,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Although we took 33 samples from the urn in the previous section, we should use so few samples. Instead, in this section we’ll examine the effects of sampling from the urn 10,000 times.</p>
+<p>Although we took 33 samples from the urn in the previous section, we should not use so few samples. Instead, in this section we’ll examine the effects of sampling from the urn 10,000 times.</p>
 <p>We can reuse our code from above, making sure to replace 33 trials with 10,000.</p>
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">9</span><span class="op">)</span></span>
@@ -683,7 +683,7 @@ window.Quarto = {
 <span>       title <span class="op">=</span> <span class="st">"Distribution of 10,000 proportions red"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -701,7 +701,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Instead of just one shovel, imagine we have three choices of shovels to extract a sample of beads with: shovels of size 25, 50, and 100. Using our newly developed tools for virtual sampling, let’s unpack the effect of having different sample sizes. Start by creating a tibble with 10,000 rows, each row representing an instance of us sampling from the urn with our chosen shovel size. Then, compute the resulting 10,000 replicates of proportion red. Finally, plot the distribution using a histogram.</p>
+<p>Instead of just one shovel, imagine we have three choices of shovels with which to extract a sample of beads: shovels of size 25, 50, and 100. Using our newly developed tools for virtual sampling, let’s unpack the effect of having different sample sizes. Start by creating a tibble with 10,000 rows, each row representing an instance of us sampling from the urn with our chosen shovel size. Then, compute the resulting 10,000 replicates of proportion red. Finally, plot the distribution using a histogram.</p>
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Within slice_sample(), n = 25 represents our shovel of size 25. We also divide</span></span>
 <span><span class="co"># by 25 to compute the proportion red.</span></span>
@@ -720,7 +720,7 @@ window.Quarto = {
 <span>       title <span class="op">=</span> <span class="st">"25"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -742,7 +742,7 @@ window.Quarto = {
 <span>       title <span class="op">=</span> <span class="st">"50"</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -765,7 +765,7 @@ window.Quarto = {
 <span>       title <span class="op">=</span> <span class="st">"100"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -800,13 +800,13 @@ window.Quarto = {
 <span><span class="va">comparing_sampling_distributions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Comparing the distributions of proportion red for different sample sizes (25, 50, 100). The important takeaway is that our center becomes more concentrated as our sample size increases, indicating a smaller standard deviation between our guesses.</figcaption></figure>
 </div>
 </div>
 </div>
 <p>Observe that as the sample size increases, the histogram becomes taller and narrower. This is because the <em>variation</em> of the proportion red for each sample decreases. Remember: A large variation means there are a wide range of values that might occur, while smaller variations are more concentrated around the central value.</p>
-<p>The <a href="https://en.wikipedia.org/wiki/Central_limit_theorem"><em>Central Limit Theorem</em></a> states, more or less, that when sample means are based on larger and larger sample sizes, the sampling distribution of these sample means becomes both narrower and more bell-shaped. In other words, the sampling distribution increasingly follows a <em>normal distribution</em> and the variation of this sampling distribution gets smaller, meaning smaller standard errors.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Central_limit_theorem"><em>Central Limit Theorem</em></a> states, more or less, that when sample means are based on larger and larger sample sizes, the sampling distribution of these sample means becomes both narrower and more bell-shaped. In other words, the sampling distribution increasingly follows a <em>normal distribution</em> and the variation of this sampling distribution gets smaller.</p>
 <p>Why does variation decrease as sample size increases? If we use a large sample size like 100 or 500, our sample is much more representative of the population. As a result, the proportion red in our sample (<span class="math inline">\(\hat{\rho}\)</span>) will be closer to the true population proportion (<span class="math inline">\(\rho\)</span>). On the other hand, smaller samples have much more variation because of chance. We are much more likely to have extreme estimates that are not representative of our population when the sample size is small.</p>
 <p>Let’s attempt to visualize the concept of <em>variation</em> a different way. For each sample size, let’s plot the proportion red for <em>all</em> 10,000 samples. With 3 different shovel sizes, we will have 30,000 total points, with each point representing an instance of sampling from the urn with a specific shovel size.</p>
 <div class="cell">
@@ -825,7 +825,7 @@ window.Quarto = {
 <span>        axis.ticks.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1335,15 +1335,15 @@ window.Quarto = {
    trial_ID shovel_ID samples            num_red prop_red
       &lt;int&gt;     &lt;dbl&gt; &lt;list&gt;               &lt;int&gt;    &lt;dbl&gt;
  1        1        25 &lt;tibble [25 × 2]&gt;       13     0.52
- 2        1        50 &lt;tibble [50 × 2]&gt;       25     0.5 
+ 2        1        50 &lt;tibble [50 × 2]&gt;       27     0.54
  3        1       100 &lt;tibble [100 × 2]&gt;      49     0.49
- 4        2        25 &lt;tibble [25 × 2]&gt;       10     0.4 
- 5        2        50 &lt;tibble [50 × 2]&gt;       24     0.48
- 6        2       100 &lt;tibble [100 × 2]&gt;      35     0.35
- 7        3        25 &lt;tibble [25 × 2]&gt;        9     0.36
- 8        3        50 &lt;tibble [50 × 2]&gt;       15     0.3 
- 9        3       100 &lt;tibble [100 × 2]&gt;      35     0.35
-10        4        25 &lt;tibble [25 × 2]&gt;       12     0.48
+ 4        2        25 &lt;tibble [25 × 2]&gt;       12     0.48
+ 5        2        50 &lt;tibble [50 × 2]&gt;       22     0.44
+ 6        2       100 &lt;tibble [100 × 2]&gt;      33     0.33
+ 7        3        25 &lt;tibble [25 × 2]&gt;       11     0.44
+ 8        3        50 &lt;tibble [50 × 2]&gt;       16     0.32
+ 9        3       100 &lt;tibble [100 × 2]&gt;      33     0.33
+10        4        25 &lt;tibble [25 × 2]&gt;       13     0.52
 # ℹ 29,990 more rows</code></pre>
 </div>
 </div>
@@ -1403,7 +1403,7 @@ window.Quarto = {
 3         100       0.0465</code></pre>
 </div>
 </div>
-<p>This is, approximately, the same result as we saw above, but with 1 re-factored tibble instead of 3 separate ones. We can also use functions like <code><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid()</a></code> in the future to make our code more concise.</p>
+<p>This is, approximately, the same result as we saw above, but with one re-factored tibble instead of three separate ones. Use functions like <code><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid()</a></code> in the future to make your code more concise.</p>
 <p>Now that we have this framework, there’s no need to limit ourselves to the sizes 25, 50, and 100. Why not try all integers from 1 to 100? We can use the same code, except we’ll now set <code>shovel_size = 1:100</code>. (We also decrease the number of replications from 10,000 to 1,000 in order to save time.)</p>
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">shovels_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid</a></span><span class="op">(</span>trial_ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span>, shovel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1418,14 +1418,14 @@ window.Quarto = {
 <pre><code>Rows: 100
 Columns: 2
 $ shovel_size  &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17…
-$ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.2140195…</code></pre>
+$ st_dev_p_hat &lt;dbl&gt; 0.49207941, 0.33817764, 0.27815410, 0.24720459, 0.2187414…</code></pre>
 </div>
 </div>
 <p>Now, we have the standard deviation of <code>prop_red</code> for all shovel sizes from 1 to 100. Let’s plot that value to see how it changes as the shovel gets larger:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Comparing standard deviations of proportions red for 100 different shovels. The standard deviation decreases at the same rate as the square root of shovel size. The red line shows the standard error.</figcaption></figure>
 </div>
 </div>
@@ -1501,7 +1501,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Previously seen three distributions of the sample proportion <span class="math inline">\(\hat{\rho}\)</span>.</figcaption></figure>
 </div>
 </div>
@@ -1511,7 +1511,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Previously seen comparing standard deviations of proportions red for 100 different shovels</figcaption></figure>
 </div>
 </div>
@@ -1530,7 +1530,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Three sampling distributions of the sample proportion <span class="math inline">\(\hat{
 ho}\)</span>. Note the increased concentration on the bins around .4 as our sample size increases.</figcaption></figure>
 </div>
@@ -1540,7 +1540,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Standard errors of the sample proportion based on sample sizes of 1 to 100</figcaption></figure>
 </div>
 </div>
@@ -1587,23 +1587,23 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 <p>The <em>moment in time</em> to which the Preceptor Table refers is now.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="khbizfzmxo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#khbizfzmxo table {
+<div id="vbktsrsedq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vbktsrsedq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#khbizfzmxo thead, #khbizfzmxo tbody, #khbizfzmxo tfoot, #khbizfzmxo tr, #khbizfzmxo td, #khbizfzmxo th {
+#vbktsrsedq thead, #vbktsrsedq tbody, #vbktsrsedq tfoot, #vbktsrsedq tr, #vbktsrsedq td, #vbktsrsedq th {
   border-style: none;
 }
 
-#khbizfzmxo p {
+#vbktsrsedq p {
   margin: 0;
   padding: 0;
 }
 
-#khbizfzmxo .gt_table {
+#vbktsrsedq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1629,12 +1629,12 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-left-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_caption {
+#vbktsrsedq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#khbizfzmxo .gt_title {
+#vbktsrsedq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1646,7 +1646,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-bottom-width: 0;
 }
 
-#khbizfzmxo .gt_subtitle {
+#vbktsrsedq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1658,7 +1658,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-top-width: 0;
 }
 
-#khbizfzmxo .gt_heading {
+#vbktsrsedq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1670,13 +1670,13 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-right-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_bottom_border {
+#vbktsrsedq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_col_headings {
+#vbktsrsedq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1691,7 +1691,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-right-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_col_heading {
+#vbktsrsedq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1711,7 +1711,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   overflow-x: hidden;
 }
 
-#khbizfzmxo .gt_column_spanner_outer {
+#vbktsrsedq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1723,15 +1723,15 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 4px;
 }
 
-#khbizfzmxo .gt_column_spanner_outer:first-child {
+#vbktsrsedq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#khbizfzmxo .gt_column_spanner_outer:last-child {
+#vbktsrsedq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#khbizfzmxo .gt_column_spanner {
+#vbktsrsedq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1743,11 +1743,11 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   width: 100%;
 }
 
-#khbizfzmxo .gt_spanner_row {
+#vbktsrsedq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#khbizfzmxo .gt_group_heading {
+#vbktsrsedq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1773,7 +1773,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   text-align: left;
 }
 
-#khbizfzmxo .gt_empty_group_heading {
+#vbktsrsedq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1788,15 +1788,15 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   vertical-align: middle;
 }
 
-#khbizfzmxo .gt_from_md > :first-child {
+#vbktsrsedq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#khbizfzmxo .gt_from_md > :last-child {
+#vbktsrsedq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#khbizfzmxo .gt_row {
+#vbktsrsedq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1815,7 +1815,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   overflow-x: hidden;
 }
 
-#khbizfzmxo .gt_stub {
+#vbktsrsedq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1828,7 +1828,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 5px;
 }
 
-#khbizfzmxo .gt_stub_row_group {
+#vbktsrsedq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1842,15 +1842,15 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   vertical-align: top;
 }
 
-#khbizfzmxo .gt_row_group_first td {
+#vbktsrsedq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#khbizfzmxo .gt_row_group_first th {
+#vbktsrsedq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#khbizfzmxo .gt_summary_row {
+#vbktsrsedq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1860,16 +1860,16 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 5px;
 }
 
-#khbizfzmxo .gt_first_summary_row {
+#vbktsrsedq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_first_summary_row.thick {
+#vbktsrsedq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#khbizfzmxo .gt_last_summary_row {
+#vbktsrsedq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1879,7 +1879,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-bottom-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_grand_summary_row {
+#vbktsrsedq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1889,7 +1889,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 5px;
 }
 
-#khbizfzmxo .gt_first_grand_summary_row {
+#vbktsrsedq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1899,7 +1899,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-top-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_last_grand_summary_row_top {
+#vbktsrsedq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1909,11 +1909,11 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-bottom-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_striped {
+#vbktsrsedq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#khbizfzmxo .gt_table_body {
+#vbktsrsedq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1922,7 +1922,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-bottom-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_footnotes {
+#vbktsrsedq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1936,7 +1936,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-right-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_footnote {
+#vbktsrsedq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1945,7 +1945,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 5px;
 }
 
-#khbizfzmxo .gt_sourcenotes {
+#vbktsrsedq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1959,7 +1959,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-right-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_sourcenote {
+#vbktsrsedq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1967,72 +1967,72 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 5px;
 }
 
-#khbizfzmxo .gt_left {
+#vbktsrsedq .gt_left {
   text-align: left;
 }
 
-#khbizfzmxo .gt_center {
+#vbktsrsedq .gt_center {
   text-align: center;
 }
 
-#khbizfzmxo .gt_right {
+#vbktsrsedq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#khbizfzmxo .gt_font_normal {
+#vbktsrsedq .gt_font_normal {
   font-weight: normal;
 }
 
-#khbizfzmxo .gt_font_bold {
+#vbktsrsedq .gt_font_bold {
   font-weight: bold;
 }
 
-#khbizfzmxo .gt_font_italic {
+#vbktsrsedq .gt_font_italic {
   font-style: italic;
 }
 
-#khbizfzmxo .gt_super {
+#vbktsrsedq .gt_super {
   font-size: 65%;
 }
 
-#khbizfzmxo .gt_footnote_marks {
+#vbktsrsedq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#khbizfzmxo .gt_asterisk {
+#vbktsrsedq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#khbizfzmxo .gt_indent_1 {
+#vbktsrsedq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#khbizfzmxo .gt_indent_2 {
+#vbktsrsedq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#khbizfzmxo .gt_indent_3 {
+#vbktsrsedq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#khbizfzmxo .gt_indent_4 {
+#vbktsrsedq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#khbizfzmxo .gt_indent_5 {
+#vbktsrsedq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#khbizfzmxo .katex-display {
+#vbktsrsedq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#khbizfzmxo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#vbktsrsedq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2097,23 +2097,23 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 <!-- DK: Add a column with is shovel_id and which goes from 1 to 50. Highlight that IDs, even two of them, don't really exist, but that they are conceptually convenient. -->
 <div class="cell">
 <div class="cell-output-display">
-<div id="mculmoacfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mculmoacfi table {
+<div id="ftnjmakunh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ftnjmakunh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mculmoacfi thead, #mculmoacfi tbody, #mculmoacfi tfoot, #mculmoacfi tr, #mculmoacfi td, #mculmoacfi th {
+#ftnjmakunh thead, #ftnjmakunh tbody, #ftnjmakunh tfoot, #ftnjmakunh tr, #ftnjmakunh td, #ftnjmakunh th {
   border-style: none;
 }
 
-#mculmoacfi p {
+#ftnjmakunh p {
   margin: 0;
   padding: 0;
 }
 
-#mculmoacfi .gt_table {
+#ftnjmakunh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2139,12 +2139,12 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-left-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_caption {
+#ftnjmakunh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mculmoacfi .gt_title {
+#ftnjmakunh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2156,7 +2156,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-bottom-width: 0;
 }
 
-#mculmoacfi .gt_subtitle {
+#ftnjmakunh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2168,7 +2168,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-top-width: 0;
 }
 
-#mculmoacfi .gt_heading {
+#ftnjmakunh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2180,13 +2180,13 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-right-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_bottom_border {
+#ftnjmakunh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_col_headings {
+#ftnjmakunh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2201,7 +2201,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-right-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_col_heading {
+#ftnjmakunh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2221,7 +2221,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   overflow-x: hidden;
 }
 
-#mculmoacfi .gt_column_spanner_outer {
+#ftnjmakunh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2233,15 +2233,15 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 4px;
 }
 
-#mculmoacfi .gt_column_spanner_outer:first-child {
+#ftnjmakunh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mculmoacfi .gt_column_spanner_outer:last-child {
+#ftnjmakunh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mculmoacfi .gt_column_spanner {
+#ftnjmakunh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2253,11 +2253,11 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   width: 100%;
 }
 
-#mculmoacfi .gt_spanner_row {
+#ftnjmakunh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mculmoacfi .gt_group_heading {
+#ftnjmakunh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2283,7 +2283,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   text-align: left;
 }
 
-#mculmoacfi .gt_empty_group_heading {
+#ftnjmakunh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2298,15 +2298,15 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   vertical-align: middle;
 }
 
-#mculmoacfi .gt_from_md > :first-child {
+#ftnjmakunh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mculmoacfi .gt_from_md > :last-child {
+#ftnjmakunh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mculmoacfi .gt_row {
+#ftnjmakunh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2325,7 +2325,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   overflow-x: hidden;
 }
 
-#mculmoacfi .gt_stub {
+#ftnjmakunh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2338,7 +2338,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 5px;
 }
 
-#mculmoacfi .gt_stub_row_group {
+#ftnjmakunh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2352,15 +2352,15 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   vertical-align: top;
 }
 
-#mculmoacfi .gt_row_group_first td {
+#ftnjmakunh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mculmoacfi .gt_row_group_first th {
+#ftnjmakunh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mculmoacfi .gt_summary_row {
+#ftnjmakunh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2370,16 +2370,16 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 5px;
 }
 
-#mculmoacfi .gt_first_summary_row {
+#ftnjmakunh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_first_summary_row.thick {
+#ftnjmakunh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mculmoacfi .gt_last_summary_row {
+#ftnjmakunh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2389,7 +2389,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-bottom-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_grand_summary_row {
+#ftnjmakunh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2399,7 +2399,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 5px;
 }
 
-#mculmoacfi .gt_first_grand_summary_row {
+#ftnjmakunh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2409,7 +2409,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-top-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_last_grand_summary_row_top {
+#ftnjmakunh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2419,11 +2419,11 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-bottom-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_striped {
+#ftnjmakunh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mculmoacfi .gt_table_body {
+#ftnjmakunh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2432,7 +2432,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-bottom-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_footnotes {
+#ftnjmakunh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2446,7 +2446,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-right-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_footnote {
+#ftnjmakunh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2455,7 +2455,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 5px;
 }
 
-#mculmoacfi .gt_sourcenotes {
+#ftnjmakunh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2469,7 +2469,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-right-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_sourcenote {
+#ftnjmakunh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2477,72 +2477,72 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 5px;
 }
 
-#mculmoacfi .gt_left {
+#ftnjmakunh .gt_left {
   text-align: left;
 }
 
-#mculmoacfi .gt_center {
+#ftnjmakunh .gt_center {
   text-align: center;
 }
 
-#mculmoacfi .gt_right {
+#ftnjmakunh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mculmoacfi .gt_font_normal {
+#ftnjmakunh .gt_font_normal {
   font-weight: normal;
 }
 
-#mculmoacfi .gt_font_bold {
+#ftnjmakunh .gt_font_bold {
   font-weight: bold;
 }
 
-#mculmoacfi .gt_font_italic {
+#ftnjmakunh .gt_font_italic {
   font-style: italic;
 }
 
-#mculmoacfi .gt_super {
+#ftnjmakunh .gt_super {
   font-size: 65%;
 }
 
-#mculmoacfi .gt_footnote_marks {
+#ftnjmakunh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mculmoacfi .gt_asterisk {
+#ftnjmakunh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mculmoacfi .gt_indent_1 {
+#ftnjmakunh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mculmoacfi .gt_indent_2 {
+#ftnjmakunh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mculmoacfi .gt_indent_3 {
+#ftnjmakunh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mculmoacfi .gt_indent_4 {
+#ftnjmakunh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mculmoacfi .gt_indent_5 {
+#ftnjmakunh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mculmoacfi .katex-display {
+#ftnjmakunh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mculmoacfi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ftnjmakunh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2613,23 +2613,23 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 <p>It includes rows from three sources: the data for units we want to have (the Preceptor Table), the data for units which we have (our actual data), and the data for units we do not care about (the rest of the population, not included in the data or the Preceptor Table).</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="kiywfzfbzi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kiywfzfbzi table {
+<div id="nxrhartytu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nxrhartytu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kiywfzfbzi thead, #kiywfzfbzi tbody, #kiywfzfbzi tfoot, #kiywfzfbzi tr, #kiywfzfbzi td, #kiywfzfbzi th {
+#nxrhartytu thead, #nxrhartytu tbody, #nxrhartytu tfoot, #nxrhartytu tr, #nxrhartytu td, #nxrhartytu th {
   border-style: none;
 }
 
-#kiywfzfbzi p {
+#nxrhartytu p {
   margin: 0;
   padding: 0;
 }
 
-#kiywfzfbzi .gt_table {
+#nxrhartytu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2655,12 +2655,12 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-left-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_caption {
+#nxrhartytu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kiywfzfbzi .gt_title {
+#nxrhartytu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2672,7 +2672,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-bottom-width: 0;
 }
 
-#kiywfzfbzi .gt_subtitle {
+#nxrhartytu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2684,7 +2684,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-top-width: 0;
 }
 
-#kiywfzfbzi .gt_heading {
+#nxrhartytu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2696,13 +2696,13 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-right-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_bottom_border {
+#nxrhartytu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_col_headings {
+#nxrhartytu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2717,7 +2717,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-right-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_col_heading {
+#nxrhartytu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2737,7 +2737,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   overflow-x: hidden;
 }
 
-#kiywfzfbzi .gt_column_spanner_outer {
+#nxrhartytu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2749,15 +2749,15 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 4px;
 }
 
-#kiywfzfbzi .gt_column_spanner_outer:first-child {
+#nxrhartytu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kiywfzfbzi .gt_column_spanner_outer:last-child {
+#nxrhartytu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kiywfzfbzi .gt_column_spanner {
+#nxrhartytu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2769,11 +2769,11 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   width: 100%;
 }
 
-#kiywfzfbzi .gt_spanner_row {
+#nxrhartytu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kiywfzfbzi .gt_group_heading {
+#nxrhartytu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2799,7 +2799,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   text-align: left;
 }
 
-#kiywfzfbzi .gt_empty_group_heading {
+#nxrhartytu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2814,15 +2814,15 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   vertical-align: middle;
 }
 
-#kiywfzfbzi .gt_from_md > :first-child {
+#nxrhartytu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kiywfzfbzi .gt_from_md > :last-child {
+#nxrhartytu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kiywfzfbzi .gt_row {
+#nxrhartytu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2841,7 +2841,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   overflow-x: hidden;
 }
 
-#kiywfzfbzi .gt_stub {
+#nxrhartytu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2854,7 +2854,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 5px;
 }
 
-#kiywfzfbzi .gt_stub_row_group {
+#nxrhartytu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2868,15 +2868,15 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   vertical-align: top;
 }
 
-#kiywfzfbzi .gt_row_group_first td {
+#nxrhartytu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kiywfzfbzi .gt_row_group_first th {
+#nxrhartytu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kiywfzfbzi .gt_summary_row {
+#nxrhartytu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2886,16 +2886,16 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 5px;
 }
 
-#kiywfzfbzi .gt_first_summary_row {
+#nxrhartytu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_first_summary_row.thick {
+#nxrhartytu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kiywfzfbzi .gt_last_summary_row {
+#nxrhartytu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2905,7 +2905,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-bottom-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_grand_summary_row {
+#nxrhartytu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2915,7 +2915,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 5px;
 }
 
-#kiywfzfbzi .gt_first_grand_summary_row {
+#nxrhartytu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2925,7 +2925,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-top-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_last_grand_summary_row_top {
+#nxrhartytu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2935,11 +2935,11 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-bottom-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_striped {
+#nxrhartytu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kiywfzfbzi .gt_table_body {
+#nxrhartytu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2948,7 +2948,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-bottom-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_footnotes {
+#nxrhartytu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2962,7 +2962,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-right-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_footnote {
+#nxrhartytu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2971,7 +2971,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 5px;
 }
 
-#kiywfzfbzi .gt_sourcenotes {
+#nxrhartytu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2985,7 +2985,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   border-right-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_sourcenote {
+#nxrhartytu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2993,72 +2993,72 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
   padding-right: 5px;
 }
 
-#kiywfzfbzi .gt_left {
+#nxrhartytu .gt_left {
   text-align: left;
 }
 
-#kiywfzfbzi .gt_center {
+#nxrhartytu .gt_center {
   text-align: center;
 }
 
-#kiywfzfbzi .gt_right {
+#nxrhartytu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kiywfzfbzi .gt_font_normal {
+#nxrhartytu .gt_font_normal {
   font-weight: normal;
 }
 
-#kiywfzfbzi .gt_font_bold {
+#nxrhartytu .gt_font_bold {
   font-weight: bold;
 }
 
-#kiywfzfbzi .gt_font_italic {
+#nxrhartytu .gt_font_italic {
   font-style: italic;
 }
 
-#kiywfzfbzi .gt_super {
+#nxrhartytu .gt_super {
   font-size: 65%;
 }
 
-#kiywfzfbzi .gt_footnote_marks {
+#nxrhartytu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kiywfzfbzi .gt_asterisk {
+#nxrhartytu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kiywfzfbzi .gt_indent_1 {
+#nxrhartytu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kiywfzfbzi .gt_indent_2 {
+#nxrhartytu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kiywfzfbzi .gt_indent_3 {
+#nxrhartytu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kiywfzfbzi .gt_indent_4 {
+#nxrhartytu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kiywfzfbzi .gt_indent_5 {
+#nxrhartytu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kiywfzfbzi .katex-display {
+#nxrhartytu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kiywfzfbzi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nxrhartytu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3308,7 +3308,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="sampling_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
