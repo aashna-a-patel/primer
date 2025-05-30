@@ -415,7 +415,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>This package provides infrastructure for doing tutorials, a common approach for learning R. After you install this package, run this command in the Console:</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tutorial.helpers</span><span class="fu">::</span><span class="fu"><a href="https://ppbds.github.io/tutorial.helpers/reference/set_positron_settings.html">set_positron_settings</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tutorial.helpers</span><span class="fu">::</span><span class="fu"><a href="https://ppbds.github.io/tutorial.helpers/reference/set_positron_settings.html">set_positron_settings</a></span><span class="op">(</span>positron_settings <span class="op">=</span> </span>
+<span>   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"terminal.integrated.defaultProfile.windows"</span> <span class="op">=</span> <span class="st">"Git Bash"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>set_positron_settings()</code> makes some sensible changes to your Positron settings file and to your <code>.Rprofile</code>.</p>
 <p>Let’s install another package:</p>

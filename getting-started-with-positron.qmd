@@ -175,7 +175,8 @@ This package provides infrastructure for doing tutorials, a common approach for 
 ```{r}
 #| eval: false
 #| code-fold: false
-tutorial.helpers::set_positron_settings()
+tutorial.helpers::set_positron_settings(positron_settings = 
+   list("terminal.integrated.defaultProfile.windows" = "Git Bash"))
 ```
 
 `set_positron_settings()` makes some sensible changes to your Positron settings file and to your `.Rprofile`.
