@@ -6,7 +6,6 @@ The world confronts us. Make decisions we must.
 
 ### Installing R and Positron {.unnumbered}
 
-
 <!-- Add images -->
 
 <!-- Need to figure out how to run with set_positron_settings(). -->
@@ -81,7 +80,7 @@ The far left of the Positron window is the Activity Bar. The area in which the W
 
 ### The Terminal {.unnumbered}
 
-The Console is where we talk to R. The Terminal is where we talk to the Computer. The Console behaves almost identically regardless of the kind of computer you use. The Terminal, sadly, is different. Next to "Console" on the Panel menu is "Terminal." See the red oval below. Click on the word "Terminal" to access it.
+The Console is where we talk to R. The Terminal is where we talk to the computer. The Console behaves almost identically regardless of the kind of computer you use. The Terminal, sadly, is different. Windows and Mac are very different. Next to "Console" on the Panel menu is "Terminal." See the red oval below. Click on the word "Terminal" to access it.
 
 ```{r}
 #| echo: false
@@ -90,16 +89,25 @@ knitr::include_graphics("getting-started-with-positron/images/terminal-1.png")
 
 `dkane@macbook ~ % ` is the "prompt," the place where we type commands, just like the `>` in the Console. Your prompt will be different from mine, especially if you are using Windows. 
 
-We often want a new Terminal with a different "shell," the program which serves as the interface between you and the computer. On a Mac, the default shell is referred to as "[Unix-like](https://en.wikipedia.org/wiki/Unix-like)" since it acts very much like the tradition UNIX command line. In Windows, the default shell is [PowerShell](https://en.wikipedia.org/wiki/PowerShell), an older technology which is not worth learning. To start a new Terminal with a specific shell, press the downward away next to the `+` sign. See the red arrow above.
+We often want a new Terminal with a different "shell," the program which serves as the interface between you and the computer. On a Mac, the default shell is referred to as "[Unix-like](https://en.wikipedia.org/wiki/Unix-like)" since it acts very much like the tradition UNIX command line. In Windows, the default shell is [PowerShell](https://en.wikipedia.org/wiki/PowerShell), an older technology which is not worth learning. To start a new Terminal with a specific shell, press the downward arrow next to the `+` sign. See the red arrow above.
 
 ```{r}
 #| echo: false
 knitr::include_graphics("getting-started-with-positron/images/terminal-2.png")
 ```
 
-If you are using Windows, you should see an option for "Git Bash," but only after you complete all the tasks in this chapter and restart Positron. 
+If you are using Windows, you should see an option for "Git Bash" (or maybe just "bash").
 
-Wth luck, Git Bash will also be the default every time you open the Terminal on Windows. But, if that does not work, you should select it by hand.
+Wth luck, Git Bash will also be the default every time you open the Terminal on Windows. But, if that does not work, you should select it by hand. One way to make it the default choice is to use the "Select Default Profile" tool:
+
+```{r}
+#| echo: false
+knitr::include_graphics("getting-started-with-positron/images/terminal-3.png")
+```
+
+Again, this is only useful for Windows users. But they should click on that tool and select the option that says "Git Bash" or "bash." This should set it as the default going forward.
+
+Click the `+` button to start a second Terminal and see if it works!
 
 ### Package installation {.unnumbered}
 
@@ -202,10 +210,7 @@ This package provides infrastructure for doing tutorials, a common approach for 
 ```{r}
 #| eval: false
 #| code-fold: false
-tutorial.helpers::set_positron_settings(
-  positron_settings = 
-   list("terminal.integrated.defaultProfile.windows" = 
-        "Git Bash"))
+tutorial.helpers::set_positron_settings()
 ```
 
 `set_positron_settings()` makes some sensible changes to your Positron settings file and to your `.Rprofile`.

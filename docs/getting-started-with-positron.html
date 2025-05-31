@@ -354,7 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The far left of the Positron window is the Activity Bar. The area in which the Welcome screen is currently located is the Editor. Once you start writing code, the Editor is the location in which your files will appear.</p>
 </section><section id="the-terminal" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="the-terminal">The Terminal</h3>
-<p>The Console is where we talk to R. The Terminal is where we talk to the Computer. The Console behaves almost identically regardless of the kind of computer you use. The Terminal, sadly, is different. Next to “Console” on the Panel menu is “Terminal.” See the red oval below. Click on the word “Terminal” to access it.</p>
+<p>The Console is where we talk to R. The Terminal is where we talk to the computer. The Console behaves almost identically regardless of the kind of computer you use. The Terminal, sadly, is different. Windows and Mac are very different. Next to “Console” on the Panel menu is “Terminal.” See the red oval below. Click on the word “Terminal” to access it.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -364,7 +364,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><code>dkane@macbook ~ %</code> is the “prompt,” the place where we type commands, just like the <code>&gt;</code> in the Console. Your prompt will be different from mine, especially if you are using Windows.</p>
-<p>We often want a new Terminal with a different “shell,” the program which serves as the interface between you and the computer. On a Mac, the default shell is referred to as “<a href="https://en.wikipedia.org/wiki/Unix-like">Unix-like</a>” since it acts very much like the tradition UNIX command line. In Windows, the default shell is <a href="https://en.wikipedia.org/wiki/PowerShell">PowerShell</a>, an older technology which is not worth learning. To start a new Terminal with a specific shell, press the downward away next to the <code>+</code> sign. See the red arrow above.</p>
+<p>We often want a new Terminal with a different “shell,” the program which serves as the interface between you and the computer. On a Mac, the default shell is referred to as “<a href="https://en.wikipedia.org/wiki/Unix-like">Unix-like</a>” since it acts very much like the tradition UNIX command line. In Windows, the default shell is <a href="https://en.wikipedia.org/wiki/PowerShell">PowerShell</a>, an older technology which is not worth learning. To start a new Terminal with a specific shell, press the downward arrow next to the <code>+</code> sign. See the red arrow above.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -373,8 +373,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>If you are using Windows, you should see an option for “Git Bash,” but only after you complete all the tasks in this chapter and restart Positron.</p>
-<p>Wth luck, Git Bash will also be the default every time you open the Terminal on Windows. But, if that does not work, you should select it by hand.</p>
+<p>If you are using Windows, you should see an option for “Git Bash” (or maybe just “bash”).</p>
+<p>Wth luck, Git Bash will also be the default every time you open the Terminal on Windows. But, if that does not work, you should select it by hand. One way to make it the default choice is to use the “Select Default Profile” tool:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="getting-started-with-positron/images/terminal-3.png" class="img-fluid figure-img" width="1031"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Again, this is only useful for Windows users. But they should click on that tool and select the option that says “Git Bash” or “bash.” This should set it as the default going forward.</p>
+<p>Click the <code>+</code> button to start a second Terminal and see if it works!</p>
 </section><section id="package-installation" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="package-installation">Package installation</h3>
 <p>To install packages, we work with the Console, not the Terminal.</p>
 <p>R <em>packages</em>, also known as <em>libraries</em>, extend the power of R by providing additional functions and data.</p>
@@ -443,10 +453,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>This package provides infrastructure for doing tutorials, a common approach for learning R. After you install this package, run this command in the Console:</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tutorial.helpers</span><span class="fu">::</span><span class="fu"><a href="https://ppbds.github.io/tutorial.helpers/reference/set_positron_settings.html">set_positron_settings</a></span><span class="op">(</span></span>
-<span>  positron_settings <span class="op">=</span> </span>
-<span>   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"terminal.integrated.defaultProfile.windows"</span> <span class="op">=</span> </span>
-<span>        <span class="st">"Git Bash"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tutorial.helpers</span><span class="fu">::</span><span class="fu"><a href="https://ppbds.github.io/tutorial.helpers/reference/set_positron_settings.html">set_positron_settings</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>set_positron_settings()</code> makes some sensible changes to your Positron settings file and to your <code>.Rprofile</code>.</p>
 <p>Let’s install another package:</p>
