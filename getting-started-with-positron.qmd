@@ -9,6 +9,8 @@ The world confronts us. Make decisions we must.
 
 <!-- Add images -->
 
+<!-- Need to figure out how to run with set_positron_settings(). -->
+
 We use [**R**](https://www.r-project.org/about.html) via [**Positron**](https://positron.posit.co). R is to Positron as a car's engine is to its dashboard.
 
 More precisely, R is a programming language that runs computations, while Positron is an *integrated development environment (IDE)* that provides an interface with many convenient features. Just as having access to a speedometer, rearview mirrors, and a navigation system makes driving much easier, using Positron's interface makes working with R much easier.
@@ -101,7 +103,7 @@ The process is very similar for an R package. You need to:
 knitr::include_graphics("getting-started-with-positron/images/install-versus-load.jpg")
 ```
 
-1.  *Install the package*: This is like installing an app on your phone. Most packages are not installed by default when you put R and Positron on your computer. Thus if you want to use a package for the first time, you need to install it. Once you've installed a package, you likely won't install it again unless you want to update it to a newer version.
+1.  *Install the package*: This is like installing an app on your phone. Most packages are not installed by default when you put R on your computer. Thus if you want to use a package for the first time, you need to install it. Once you've installed a package, you likely won't install it again unless you want to update it to a newer version.
 
 2.  *Load the package*: "Loading" a package is like opening an app on your phone. Packages are not loaded by default when you start Positron. You need to load each package you want to use every time you restart Positron.
 
@@ -175,8 +177,10 @@ This package provides infrastructure for doing tutorials, a common approach for 
 ```{r}
 #| eval: false
 #| code-fold: false
-tutorial.helpers::set_positron_settings(positron_settings = 
-   list("terminal.integrated.defaultProfile.windows" = "Git Bash"))
+tutorial.helpers::set_positron_settings(
+  positron_settings = 
+   list("terminal.integrated.defaultProfile.windows" = 
+        "Git Bash"))
 ```
 
 `set_positron_settings()` makes some sensible changes to your Positron settings file and to your `.Rprofile`.
@@ -216,6 +220,8 @@ Next, copy and paste the following to the Console:
 remotes::install_github("PPBDS/r4ds.tutorials")
 ```
 
+Instead of loading the **remotes** package explicitly, we used the double colon notation --- `::` --- to refer directly to the `install_github()` function which resides in the **remotes** package.
+
 There is a version of **r4ds.tutorials** available on CRAN, but we want to get the latest version, often called the "development" version.
 
 Then:
@@ -225,8 +231,6 @@ Then:
 #| code-fold: false
 remotes::install_github("PPBDS/primer.tutorials")
 ```
-
-Instead of loading the **remotes** package explicitly, we used the double colon notation --- `::` --- to refer directly to the `install_github()` function which resides in the **remotes** package.
 
 If the download fails, try
 
@@ -251,7 +255,8 @@ Because Positron is still evolving, there is no easy way to start a tutorial. In
 ```{r}
 #| eval: false
 #| code-fold: false
-learnr::run_tutorial(name = "positron", package = "tutorial.helpers")
+learnr::run_tutorial(name = "positron", 
+                     package = "tutorial.helpers")
 ```
 
 The first argument to `run_tutorial()` is the `name` of the tutorial and the second is the `package` in which the tutorial is installed. We often leave out the arguments and just provide their values. Example:
@@ -288,7 +293,7 @@ You can "pop" the tutorial into a browser by clicking the "Open the current URL 
 
 We think that working with the tutorial in the browser is more convenient than using the Viewer tab. If a tutorial becomes "greyed out," you can usually just "refresh" it with the "Reload the current URL" swirly arrow button, just to the left of the "Open the current URL in the default browser" button.
 
-Because the current Console is now being used to run the tutorial, we need to start up a new Console by pressing the "Start a New Session" button --- the `+` symbol --- on the Console menu. See the red arrow above. Choose the R option.
+Because the current Console is now being used to run the tutorial, we sometimes need to start up a new Console by pressing the "Start a New Session" button --- the `+` symbol --- on the Console menu. See the red arrow above. Choose the R option.
 
 ```{r}
 #| echo: false
@@ -299,7 +304,14 @@ You now have two R sessions running. The first is maintaining the tutorial itsel
 
 **Your work will automatically be saved between Positron sessions**. You can complete the tutorial in multiple sittings.
 
-Complete the "Tutorials in Positron" tutorial from the **tutorial.helpers** package.  
+Complete the "Tutorials in Positron" tutorial from the **tutorial.helpers** package. Recall that you start this tutorial by issuing this command in the Console:
+
+```{r}
+#| eval: false
+#| code-fold: false
+learnr::run_tutorial(name = "positron", 
+                     package = "tutorial.helpers")
+```
 
 Once you have done so, or if you already know R, you can start to learn about data science.
 
