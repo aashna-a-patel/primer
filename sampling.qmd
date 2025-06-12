@@ -693,7 +693,7 @@ This is the power of running many analyses at once using map functions and list 
 knitr::include_graphics("sampling/images/old_man_SE.png")
 ```
 
-*Standard errors (SE) quantify the effect of sampling variation on our estimates.* In other words, they quantify how much we can expect the calculated proportions of a shovel's beads that are red *to vary* from one sample to another sample to another sample, and so on. As sample size increases, the standard error decreases.
+*Standard errors (SE) quantify the effect of sampling variation on our estimates.* In other words, they quantify how much we can expect the calculated proportions of a shovel's beads that are red *to vary* from one sample to another sample to another sample. As sample size increases, the standard error decreases.
 
 *The standard error is the standard deviation of a sample statistic such as the estimated proportion.* For example, the *standard error of the mean* refers to the standard deviation of the distribution of sample means taken from a population. 
 
@@ -709,19 +709,19 @@ knitr::include_graphics("sampling/images/yoda.png")
 
 A **population** is the set of relevant units. The population's size is upper-case $N$.  In our sampling activities, the population is the collection of $N$ = 1,000 identically-sized red and white beads in the urn. This is about the simplest possible population. Other examples are all the adult men in the US, all the classrooms in a school, all the wheelbarrows in Massachusetts, all the values of your blood pressure, read at five minute intervals, for your entire life. Often, the population extends over time, as with your blood pressure readings and is, therefore, more amorphous. Consider all the people who have run for governor of a US state since 1900, or all the people who will run for governor through 2050. Those are also populations.
 
-A **population parameter** is a numeric statistic about the population that is unknown, but you wish you knew. For example, when this quantity is the mean, the population parameter of interest is the *population mean*. This is mathematically denoted with the Greek letter $\mu$ pronounced "mu." In our earlier sampling from the urn activity, however, since we were interested in the *proportion* of the urn's beads that were red, the population parameter is the *population proportion*, denoted with $\rho$. Different academic fields often use different Greek letters to denote the same population parameter.
+A **population parameter** is a numeric statistic about the population that is unknown, but you wish you knew. For example, when this quantity is the mean, the population parameter of interest is the *population mean*. This is mathematically denoted with the Greek letter $\mu$ pronounced "mu." In our earlier sampling-from-the-urn activity, however, since we were interested in the *proportion* of the urn's beads that were red, the population parameter is the *population proportion* of interest, denoted by $\rho$. Different academic fields often use different Greek letters to denote the same population parameter.
 
 A **census** is an exhaustive enumeration or counting of all $N$ units in the population in order to compute the population parameter's value *exactly*. In our sampling activity, this would correspond to counting the number of red beads out of the $N$ total in the urn and then computing the red *population proportion*, $\rho$, *exactly*. When the number $N$ of individuals or observations in our population is large as was the case with our urn, a census can be quite expensive in terms of time, energy, and money. A census is impossible for any population which includes the future, like our blood pressure next year or candidates for governor in 2050. There is a *truth*, but we could not, even in theory, determine it.
 
 **Sampling** is the act of collecting a sample from the population when we can not, or do not want to, perform a census. The sample size is lower case $n$, as opposed to upper case $N$ for the population's size. Typically the sample size $n$ is much smaller than the population size $N$. In our sampling activities, we used shovels with varying slots to extract samples of size $n = 1$ through $n = 100$. 
 
-A **point estimate**, also known as a **sample statistic**, is a measure computed from a sample that *estimates* an unknown population parameter. In our sampling activities, recall that the unknown population parameter was the proportion of red beads and that this is mathematically denoted by $\rho$. Our point estimate is the *sample proportion*: the proportion of the shovel's beads that are red. In other words, it is our guess at the proportion of the urn's beads that are red. The point estimate of the parameter $\rho$ is $\hat{\rho}$. The "hat" on top of the $\rho$ indicates that it is an estimate of the unknown population proportion $\rho$. 
+A **point estimate**, also known as a **sample statistic**, is a measure computed from a sample that *estimates* an unknown population parameter. In our sampling activities, recall that the unknown population parameter was the proportion of red beads and that this is denoted by $\rho$. Our point estimate is the *sample proportion*: the proportion of the shovel's beads that are red. In other words, it is our guess at the proportion of the urn's beads that are red. The point estimate of the parameter $\rho$ is $\hat{\rho}$. The "hat" on top of the $\rho$ indicates that it is an estimate of the unknown population proportion $\rho$. 
 
 A sample is said to be **representative** if it roughly *looks like* the population. In other words, are the sample's characteristics a good representation of the population's characteristics? In our sampling activity, are the samples of $n$ beads extracted using our shovels representative of the urn's $N = 1,000$ beads?
 
 A sample is **generalizable** if any results based on the sample can generalize to the population. In our sampling activity, can we generalize the sample proportion from our shovels to the entire urn? Using our mathematical notation, this is akin to asking if $\hat{\rho}$ is a "good guess" of $\rho$.
 
-**Biased sampling** occurs if certain individuals or observations in a population have a higher chance of being included in a sample than others. We say a sampling procedure is **unbiased** if every observation in a population had an equal chance of being sampled. Had the red beads been much smaller than the white beads, and therefore more prone to falling out of the shovel, our sample would have been **biased**. In our sampling activities, since we mixed all $N = 1,000$ beads prior to each group's sampling and since each of the equally-sized beads had an equal chance of being sampled, our samples were unbiased.
+**Biased sampling** occurs if certain individuals or observations in a population have a higher chance of being included in a sample than others. We say a sampling procedure is **unbiased** if every observation in a population had an equal chance of being sampled. Had the red beads been much smaller than the white beads, and therefore more prone to falling out of the shovel, our sample would have been **biased**. In our sampling activities, since we mixed all $N = 1,000$ beads prior to each group's sampling and since each of the beads had an equal chance of being sampled, our samples were unbiased.
 
 A sampling procedure is *random* if we sample randomly from the population in an unbiased fashion. With random sampling, each unit has an equal chance of being selected into the sample. This condition entails, among other things, sufficiently mixing the urn before each use of the shovel. 
 
@@ -767,8 +767,8 @@ For example, observe the centers of all three sampling distributions: all around
 
 ```{r}
 #| echo: false
-#| fig.cap: Previously seen comparing standard deviations of proportions red for 100
-#|   different shovels
+#| fig.cap: Previously seen comparing standard deviations of proportions red from 100
+#|   different shovel sizes
 
 shovels_100 |>
   ggplot(aes(x = shovel_size, y = st_dev_p_hat)) +
@@ -777,7 +777,7 @@ shovels_100 |>
        y = "Standard deviation of the proportion red")
 ```
 
-So as the sample size increases, the standard deviation of the proportion of red beads across the 1,000 replications decreases. This type of standard deviation has another special name: **standard error**
+As the sample size increases, the standard deviation of the proportion of red beads across the 1,000 replications decreases. This type of standard deviation has another special name: **standard error**
 
 ### What is a standard error?
 
@@ -793,9 +793,10 @@ Larger sample size = smaller standard error = more representative of the truth.
 
 To help reinforce these concepts, let's re-display our previous figure but using our new sampling terminology, notation, and definitions:
 
+
 ```{r}
 #| echo: false
-#| fig.cap: "Three sampling distributions of the sample proportion $\\hat{\rho}$. Note
+#| fig.cap: "Three sampling distributions of the sample proportion $\\hat{\\rho}$. Note
 #|   the increased concentration on the bins around .4 as our sample size increases."
 
 p_hat_compare <- virtual_prop |> 
@@ -826,7 +827,7 @@ shovels_100 |>
        y = expression(Standard~error~of~hat(italic(rho))))
 ```
 
-Remember the key message of this last table: that as the sample size $n$ goes up, the "typical" error of your point estimate will go down, as quantified by the *standard error*.
+As the sample size $n$ goes up, the "typical" error of your point estimate will go down, as quantified by the *standard error*.
 
 ### The moral of the story {#moral-of-the-story}
 
@@ -840,11 +841,11 @@ Standard error is just a fancy term for your uncertainty about something you don
 knitr::include_graphics("sampling/images/final_preceptor.png")
 ```
 
-This hierarchy represents the knowledge we need to understand standard errors. At the bottom, we have math. It's the foundation for our understanding, but it doesn't need to be what we take away from this lesson. As we go up, we simplify the topic. The top of the pyramid are the basic levels of understanding that will help you to remember in the future. 
+This hierarchy represents the knowledge we need to understand standard errors. At the bottom, we have math. It's the foundation for our understanding, but it doesn't need to be what we take away from this lesson. As we go up, we simplify the topic. The top of the pyramid are the most basic levels of understanding. 
 
-If I know your estimate plus or minus *two* standard errors, I know your 95% confidence interval. This is valuable information. Standard error is really just a measure for how uncertain we are about something we do not know, the thing we are estimating. Speaking loosely, standard error is the way old people talk about confidence intervals. 
+If I know your estimate plus or minus *two* standard errors, I know your 95% confidence interval. This is valuable information. Standard error is really just a measure for how uncertain we are about something we do not know, the thing we are estimating. Speaking snarkily, standard error is the way old people talk about confidence intervals. 
 
-Recall that $\hat{\rho}$ is the estimated value of p which comes from taking a sample. There can be billions and billions of $\hat{\rho}$'s. We look at a large group of $\hat{\rho}$'s, create a distribution of results to represent the possible values of $\rho$ based on our findings, and then we compute a standard error to account for our own uncertainty about our predictions. Our 95% confidence interval for our prediction is our estimate plus or minus **two** standard errors. 
+Recall that $\hat{\rho}$ is the estimated value of p which comes from taking a sample. There can be billions and billions of $\hat{\rho}$'s. We look at a large group of $\hat{\rho}$'s, create a distribution of results to represent the possible values of $\rho$ based on our findings, and then we compute a standard error to account for our own uncertainty about our estimates. Our 95% confidence interval for our prediction is our estimate plus or minus **two** standard errors. 
 
 You must understand what the standard error of $\hat{\rho}$ means. You do not need to understand why. 
 
