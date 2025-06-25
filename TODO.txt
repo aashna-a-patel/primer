@@ -1,5 +1,23 @@
 # Priorities
 
+Is the Probability chapter correct? Especially the two models section. How can we calculate your odds of having the disease if we don't know the background rate of people having the disease. Imagine if no one had the disease. Or everyone did! In either case, it does not matter what my test result is! Same applies in the 0.1% or 99.9% cases.
+
+
+Update Getting Started with this advice for dealing with primer.data/primer.tutorials:
+
+----
+se HTTPS Instead of Default GitHub API (Fallback Option)
+You can try setting a different download method in your R session:
+
+r
+options(download.file.method = "libcurl")
+remotes::install_github("PPBDS/primer.tutorials")
+Or try with curl or wininet (on Windows):
+
+r
+options(download.file.method = "wininet")  # Windows only
+remotes::install_github("PPBDS/primer.tutorials") When I used this command and than ran the command learnr::run_tutorial("021-probability", "primer.tutorials") as suggested by ChatGPT for Windows, this issue was quickly resolved for me.
+----
 
 linear_reg
 logistic_reg

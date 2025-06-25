@@ -921,27 +921,27 @@ There are three main categories of probability distributions: univariate, joint 
 
 <!-- Consider the parallel structure of the 2-model, 3-model, and n-model case. First, we  begin by discussing how to create the joint distribution of possible models and possible experimental results. This is done by, first, assuming that one of the models is true and then, second, show the variation in the world which results. That is, even if we know for a fact that you do not have the disease, there is still a chance that your test will come back positive.
 
- Then, we create the joint distribution by doing that same thing for all possible models. (We show all this code.) The joint distribution is a tibble which we are happy to look at. It always has two columns: the first is the possible models (have disease) and the second is one possible result (test_positive) if that model is true. And that each possible model have at least 1,000 rows in the joint distribution.. -->
+ Then, we create the joint distribution by doing that same thing for all possible models. (We show all this code.) The joint distribution is a tibble which we are happy to look at. It always has two columns: the first is the possible models (have disease or don't have the disease) and the second is one possible result (test_positive) given that that model is true. And that each possible model has at least 1,000 rows in the joint distribution.. -->
 
 
 <!-- Having create the joint distribution, we graph it in two dimensions. (We show the code for that.) Then, we graph it in three dimensions with rayshader. (We have a rough movie.) Then, we take a "slice" of that joint distribution via rayshader (Have the movie but needs improvement). Move that slice around. Et cetera. Not sure how to do all that . . . Note that you can make rayshader objects interactive with rgl::rglwidget(). The ggral (sp?) package might also be useful (Did not use ggral yet to create rayshader 3D). -->
 
-<!-- After rayshader, we then use the joint distribution to make two graphics, showing the posterior distribution for the model. The first is unnormalized and the second is normalized. In both cases, we begin with the joint distribution --- an object we have saved --- and then use filter to get our slice. Both graph and unromalized and normalized were made in 2D, could considered using rayshader/movie. -->
+<!-- After rayshader, we then use the joint distribution to make two graphics, showing the posterior distribution for the model. The first is unnormalized and the second is normalized. In both cases, we begin with the joint distribution --- an object we have saved --- and then use filter to get our slice. Both graphs --- unnormalized and normalized --- were made in 2D, could considered using rayshader/movie. -->
 
-The simplest possible setting for inference involves two models --- meaning two possible states of the world --- and two outcomes from an experiment. Imagine that there is a disease --- *Probophobia*, an irrational fear of probability --- which you either have or don't have. We don't know if you have the diseases, but we do assume that there are only two possibilities. 
+The simplest possible setting for inference involves two models --- meaning two possible states of the world --- and two outcomes from an experiment. Imagine that there is a disease --- *Probophobia*, an irrational fear of probability --- which you either have or don't have. We don't know if you have the diseases, but we assume that these are the only two possibilities. 
 
-We also have a test which is 99% accurate when given to a person who has *Probophobia*. Unfortunately, the test is only 50% accurate for people who do not have *Probophobia*. In this experiment, there only two possible outcomes: a positive and a negative result on the test. 
+We also have a test which is 99% accurate when given to a person who has *Probophobia*. Unfortunately, the test is only 50% accurate for people who do not have *Probophobia*. In this experiment, there only two possible outcomes: a positive or a negative result on the test. 
 
 Question: *If you test positive, what is the probability that you have Probophobia?*
 
-More generally, we are estimating a *conditional probability*. Conditional on the outcome of a postive test, what is the probability that you have Probophobia? Mathematically, we want:
+More generally, we are estimating a *conditional probability*. Conditional on the outcome of a positive test, what is the probability that you have Probophobia? Mathematically, we want:
 
 $$ P(\text{Probophobia | Test = Postive} ) $$
 
 
 To answer this question, we need to use the tools of joint and conditional probability from earlier in the Chapter. We begin by building, by hand, the joint distribution of the possible models (you have the Probophobia or you do not) and of the possible outcomes (you test positive or negative). Building the joint distribution involves *assuming* that each model is true and then creating the distribution of outcomes which might occur if that assumption is true. 
 
-For example, assume you have Probophobia. There is then a 50% chance that you test positive and a 50% chance you test negative. Similarly, if we assume that the second model is true --- that you don't have Probophobia --- then there is 1% chance you test positive and a 99% you chance negative. Of course, for you (or any individual) we do not know for sure what is happening. We do not know if you have the disease. We do not know what your test will show. But we can use these relationships to construct the joint distribution.
+For example, assume you have Probophobia. There is then a 99% chance that you test positive and a 1% chance you test negative. Similarly, if we assume that the second model is true --- i.e., that you don't have Probophobia --- then there is 50% chance you test positive and a 50% you chance negative. Of course, for you (or any individual) we do not know for sure what is happening. We do not know if you have the disease. We do not know what your test will show. But we can use these relationships to construct the joint distribution.
 
 
 ```{r}
@@ -949,9 +949,6 @@ set.seed(9)
 ```
 
 <!-- DK: Redo this analysis, and perhaps other similar examples below. First, column of tibble is the state of the world. Or list of all possible models. In this case, this would be `have_disease` which should be either TRUE or FALSE.  -->
-
-
-
 
 
 ```{r}
