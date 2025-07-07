@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.7.31">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>10&nbsp; N Parameters – Preceptor's Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference</title>
+<title>9&nbsp; N Parameters – Preceptor's Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,8 +18,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -30,7 +31,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -62,15 +63,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./set-up.html" rel="next">
 <link href="./five-parameters.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a08d9001fe0711adfabc365c1b400f34.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-d3c9390091c69a50683db05bc45f20d8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -123,14 +125,14 @@ window.Quarto = {
 };
 </script>
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./n-parameters.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">N Parameters</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./n-parameters.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">N Parameters</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -185,12 +187,6 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./getting-started-with-rstudio.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Getting Started with RStudio</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./getting-started-with-positron.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started with Positron</span></a>
   </div>
@@ -233,26 +229,20 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./mechanics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mechanics</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./four-parameters-categorical.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Four Parameters: Categorical</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Four Parameters: Categorical</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./five-parameters.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Five Parameters</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Five Parameters</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./n-parameters.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">N Parameters</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">N Parameters</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -282,42 +272,42 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#wisdom" id="toc-wisdom" class="nav-link active" data-scroll-target="#wisdom"><span class="header-section-number">10.1</span> Wisdom</a>
+<a href="#wisdom" id="toc-wisdom" class="nav-link active" data-scroll-target="#wisdom"><span class="header-section-number">9.1</span> Wisdom</a>
   <ul class="collapse">
-<li><a href="#preceptor-table" id="toc-preceptor-table" class="nav-link" data-scroll-target="#preceptor-table"><span class="header-section-number">10.1.1</span> Preceptor Table</a></li>
-  <li><a href="#eda-of-shaming" id="toc-eda-of-shaming" class="nav-link" data-scroll-target="#eda-of-shaming"><span class="header-section-number">10.1.2</span> EDA of <code>shaming</code></a></li>
-  <li><a href="#validity" id="toc-validity" class="nav-link" data-scroll-target="#validity"><span class="header-section-number">10.1.3</span> Validity</a></li>
+<li><a href="#preceptor-table" id="toc-preceptor-table" class="nav-link" data-scroll-target="#preceptor-table"><span class="header-section-number">9.1.1</span> Preceptor Table</a></li>
+  <li><a href="#eda-of-shaming" id="toc-eda-of-shaming" class="nav-link" data-scroll-target="#eda-of-shaming"><span class="header-section-number">9.1.2</span> EDA of <code>shaming</code></a></li>
+  <li><a href="#validity" id="toc-validity" class="nav-link" data-scroll-target="#validity"><span class="header-section-number">9.1.3</span> Validity</a></li>
   </ul>
 </li>
   <li>
-<a href="#justice" id="toc-justice" class="nav-link" data-scroll-target="#justice"><span class="header-section-number">10.2</span> Justice</a>
+<a href="#justice" id="toc-justice" class="nav-link" data-scroll-target="#justice"><span class="header-section-number">9.2</span> Justice</a>
   <ul class="collapse">
-<li><a href="#the-population-table" id="toc-the-population-table" class="nav-link" data-scroll-target="#the-population-table"><span class="header-section-number">10.2.1</span> The Population Table</a></li>
-  <li><a href="#stability" id="toc-stability" class="nav-link" data-scroll-target="#stability"><span class="header-section-number">10.2.2</span> Stability</a></li>
-  <li><a href="#representativeness" id="toc-representativeness" class="nav-link" data-scroll-target="#representativeness"><span class="header-section-number">10.2.3</span> Representativeness</a></li>
-  <li><a href="#unconfoundedness" id="toc-unconfoundedness" class="nav-link" data-scroll-target="#unconfoundedness"><span class="header-section-number">10.2.4</span> Unconfoundedness</a></li>
+<li><a href="#the-population-table" id="toc-the-population-table" class="nav-link" data-scroll-target="#the-population-table"><span class="header-section-number">9.2.1</span> The Population Table</a></li>
+  <li><a href="#stability" id="toc-stability" class="nav-link" data-scroll-target="#stability"><span class="header-section-number">9.2.2</span> Stability</a></li>
+  <li><a href="#representativeness" id="toc-representativeness" class="nav-link" data-scroll-target="#representativeness"><span class="header-section-number">9.2.3</span> Representativeness</a></li>
+  <li><a href="#unconfoundedness" id="toc-unconfoundedness" class="nav-link" data-scroll-target="#unconfoundedness"><span class="header-section-number">9.2.4</span> Unconfoundedness</a></li>
   </ul>
 </li>
   <li>
-<a href="#courage" id="toc-courage" class="nav-link" data-scroll-target="#courage"><span class="header-section-number">10.3</span> Courage</a>
+<a href="#courage" id="toc-courage" class="nav-link" data-scroll-target="#courage"><span class="header-section-number">9.3</span> Courage</a>
   <ul class="collapse">
-<li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><span class="header-section-number">10.3.1</span> Models</a></li>
-  <li><a href="#tests" id="toc-tests" class="nav-link" data-scroll-target="#tests"><span class="header-section-number">10.3.2</span> Tests</a></li>
-  <li><a href="#data-generating-mechanism" id="toc-data-generating-mechanism" class="nav-link" data-scroll-target="#data-generating-mechanism"><span class="header-section-number">10.3.3</span> Data Generating Mechanism</a></li>
+<li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><span class="header-section-number">9.3.1</span> Models</a></li>
+  <li><a href="#tests" id="toc-tests" class="nav-link" data-scroll-target="#tests"><span class="header-section-number">9.3.2</span> Tests</a></li>
+  <li><a href="#data-generating-mechanism" id="toc-data-generating-mechanism" class="nav-link" data-scroll-target="#data-generating-mechanism"><span class="header-section-number">9.3.3</span> Data Generating Mechanism</a></li>
   </ul>
 </li>
   <li>
-<a href="#temperance" id="toc-temperance" class="nav-link" data-scroll-target="#temperance"><span class="header-section-number">10.4</span> Temperance</a>
+<a href="#temperance" id="toc-temperance" class="nav-link" data-scroll-target="#temperance"><span class="header-section-number">9.4</span> Temperance</a>
   <ul class="collapse">
-<li><a href="#questions-and-answers" id="toc-questions-and-answers" class="nav-link" data-scroll-target="#questions-and-answers"><span class="header-section-number">10.4.1</span> Questions and Answers</a></li>
-  <li><a href="#humility" id="toc-humility" class="nav-link" data-scroll-target="#humility"><span class="header-section-number">10.4.2</span> Humility</a></li>
+<li><a href="#questions-and-answers" id="toc-questions-and-answers" class="nav-link" data-scroll-target="#questions-and-answers"><span class="header-section-number">9.4.1</span> Questions and Answers</a></li>
+  <li><a href="#humility" id="toc-humility" class="nav-link" data-scroll-target="#humility"><span class="header-section-number">9.4.2</span> Humility</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/PPBDS/primer/edit/main/n-parameters.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-n-parameters" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">N Parameters</span></span></h1>
+<h1 class="title"><span id="sec-n-parameters" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">N Parameters</span></span></h1>
 </div>
 
 
@@ -340,8 +330,8 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p><em>How can you encourage politically engaged voters to go out to the polls on election day?</em></p>
 </blockquote>
-<section id="wisdom" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="wisdom">
-<span class="header-section-number">10.1</span> Wisdom</h2>
+<section id="wisdom" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="wisdom">
+<span class="header-section-number">9.1</span> Wisdom</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -357,8 +347,8 @@ window.Quarto = {
 <p><em>What is the causal effect of postcards on voting?</em></p>
 </blockquote>
 <p>Wisdom requires the creation of a Preceptor Table, an examination of our data, and a determination, using the concept of validity, as to whether or not we can (reasonably!) assume that the two come from the same population.</p>
-<section id="preceptor-table" class="level3" data-number="10.1.1"><h3 data-number="10.1.1" class="anchored" data-anchor-id="preceptor-table">
-<span class="header-section-number">10.1.1</span> Preceptor Table</h3>
+<section id="preceptor-table" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="preceptor-table">
+<span class="header-section-number">9.1.1</span> Preceptor Table</h3>
 <p><em>Causal or predictive model</em>: The phrasing of the question — especially the phrase “causal effect” — makes it obvious that we need a causal, rather than a predictive, model. There will be at least two potential outcomes for every unit.</p>
 <p><em>Units</em>: The units of our Preceptor Table are individual voters in Texas around the time of the next election.</p>
 <p><em>Outcome</em>: The outcome is voting or not voting. That is, we are researching the question of how to convince people to vote, not how to convince them to vote for a specific candidate. This project is about getting our voters to the polls, not about convincing their voters to switch to our side.</p>
@@ -368,23 +358,23 @@ window.Quarto = {
 <p>The Preceptor Table is the smallest possible table such that, if no data were missing, the calculation of all quantities of interest would be trivial. The <strong>causal effect</strong>, for each individual, is the difference in voting behavior under treatment versus control. Consider:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="vnolrwvxqf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vnolrwvxqf table {
+<div id="chtrlsmjmk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#chtrlsmjmk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vnolrwvxqf thead, #vnolrwvxqf tbody, #vnolrwvxqf tfoot, #vnolrwvxqf tr, #vnolrwvxqf td, #vnolrwvxqf th {
+#chtrlsmjmk thead, #chtrlsmjmk tbody, #chtrlsmjmk tfoot, #chtrlsmjmk tr, #chtrlsmjmk td, #chtrlsmjmk th {
   border-style: none;
 }
 
-#vnolrwvxqf p {
+#chtrlsmjmk p {
   margin: 0;
   padding: 0;
 }
 
-#vnolrwvxqf .gt_table {
+#chtrlsmjmk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -410,12 +400,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#vnolrwvxqf .gt_caption {
+#chtrlsmjmk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vnolrwvxqf .gt_title {
+#chtrlsmjmk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -427,7 +417,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#vnolrwvxqf .gt_subtitle {
+#chtrlsmjmk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -439,7 +429,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#vnolrwvxqf .gt_heading {
+#chtrlsmjmk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -451,13 +441,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#vnolrwvxqf .gt_bottom_border {
+#chtrlsmjmk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vnolrwvxqf .gt_col_headings {
+#chtrlsmjmk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -472,7 +462,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#vnolrwvxqf .gt_col_heading {
+#chtrlsmjmk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -492,7 +482,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#vnolrwvxqf .gt_column_spanner_outer {
+#chtrlsmjmk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -504,15 +494,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#vnolrwvxqf .gt_column_spanner_outer:first-child {
+#chtrlsmjmk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vnolrwvxqf .gt_column_spanner_outer:last-child {
+#chtrlsmjmk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vnolrwvxqf .gt_column_spanner {
+#chtrlsmjmk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -524,11 +514,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#vnolrwvxqf .gt_spanner_row {
+#chtrlsmjmk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vnolrwvxqf .gt_group_heading {
+#chtrlsmjmk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -554,7 +544,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#vnolrwvxqf .gt_empty_group_heading {
+#chtrlsmjmk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -569,15 +559,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#vnolrwvxqf .gt_from_md > :first-child {
+#chtrlsmjmk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vnolrwvxqf .gt_from_md > :last-child {
+#chtrlsmjmk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vnolrwvxqf .gt_row {
+#chtrlsmjmk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -596,7 +586,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#vnolrwvxqf .gt_stub {
+#chtrlsmjmk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -609,7 +599,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#vnolrwvxqf .gt_stub_row_group {
+#chtrlsmjmk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -623,15 +613,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#vnolrwvxqf .gt_row_group_first td {
+#chtrlsmjmk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vnolrwvxqf .gt_row_group_first th {
+#chtrlsmjmk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vnolrwvxqf .gt_summary_row {
+#chtrlsmjmk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -641,16 +631,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#vnolrwvxqf .gt_first_summary_row {
+#chtrlsmjmk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vnolrwvxqf .gt_first_summary_row.thick {
+#chtrlsmjmk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vnolrwvxqf .gt_last_summary_row {
+#chtrlsmjmk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -660,7 +650,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#vnolrwvxqf .gt_grand_summary_row {
+#chtrlsmjmk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -670,7 +660,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#vnolrwvxqf .gt_first_grand_summary_row {
+#chtrlsmjmk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -680,7 +670,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#vnolrwvxqf .gt_last_grand_summary_row_top {
+#chtrlsmjmk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -690,11 +680,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#vnolrwvxqf .gt_striped {
+#chtrlsmjmk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vnolrwvxqf .gt_table_body {
+#chtrlsmjmk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -703,7 +693,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#vnolrwvxqf .gt_footnotes {
+#chtrlsmjmk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -717,7 +707,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#vnolrwvxqf .gt_footnote {
+#chtrlsmjmk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -726,7 +716,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#vnolrwvxqf .gt_sourcenotes {
+#chtrlsmjmk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -740,7 +730,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#vnolrwvxqf .gt_sourcenote {
+#chtrlsmjmk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -748,72 +738,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#vnolrwvxqf .gt_left {
+#chtrlsmjmk .gt_left {
   text-align: left;
 }
 
-#vnolrwvxqf .gt_center {
+#chtrlsmjmk .gt_center {
   text-align: center;
 }
 
-#vnolrwvxqf .gt_right {
+#chtrlsmjmk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vnolrwvxqf .gt_font_normal {
+#chtrlsmjmk .gt_font_normal {
   font-weight: normal;
 }
 
-#vnolrwvxqf .gt_font_bold {
+#chtrlsmjmk .gt_font_bold {
   font-weight: bold;
 }
 
-#vnolrwvxqf .gt_font_italic {
+#chtrlsmjmk .gt_font_italic {
   font-style: italic;
 }
 
-#vnolrwvxqf .gt_super {
+#chtrlsmjmk .gt_super {
   font-size: 65%;
 }
 
-#vnolrwvxqf .gt_footnote_marks {
+#chtrlsmjmk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vnolrwvxqf .gt_asterisk {
+#chtrlsmjmk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vnolrwvxqf .gt_indent_1 {
+#chtrlsmjmk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vnolrwvxqf .gt_indent_2 {
+#chtrlsmjmk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vnolrwvxqf .gt_indent_3 {
+#chtrlsmjmk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vnolrwvxqf .gt_indent_4 {
+#chtrlsmjmk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vnolrwvxqf .gt_indent_5 {
+#chtrlsmjmk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vnolrwvxqf .katex-display {
+#chtrlsmjmk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vnolrwvxqf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#chtrlsmjmk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -915,8 +905,8 @@ Covariates
 </blockquote>
 <p>As usual, our question becomes both more and less precise simultaneously. It is more precise in that we only care about a very specific moment in space and time: the election for governor in Texas in 2026. It is less precise in that we are almost always interested in different aspects of the problem, mainly because of the decisions we must make.</p>
 <p>In this case, we might not have enough money to send postcards to every voter. Maybe we should focus in politically engaged voters. Maybe we should focus on other subsets. We should probably only send postcards to voters who are Republican or are likely to vote Republican, unless, that is, some postcards actually decrease someone’s proposensity to vote. The real world is full of complexity.</p>
-</section><section id="eda-of-shaming" class="level3" data-number="10.1.2"><h3 data-number="10.1.2" class="anchored" data-anchor-id="eda-of-shaming">
-<span class="header-section-number">10.1.2</span> EDA of <code>shaming</code>
+</section><section id="eda-of-shaming" class="level3" data-number="9.1.2"><h3 data-number="9.1.2" class="anchored" data-anchor-id="eda-of-shaming">
+<span class="header-section-number">9.1.2</span> EDA of <code>shaming</code>
 </h3>
 <p>After loading the packages we need, let’s perform an EDA, starting off by running <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code> on the <code>shaming</code> tibble from the <strong>primer.data</strong> package.</p>
 <div class="cell">
@@ -985,7 +975,7 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
 <span>         caption <span class="op">=</span> <span class="st">"Random sample of 5% of the data from Gerber, Green, and Larimer (2008)"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="n-parameters_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="n-parameters_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1051,14 +1041,14 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
 <span>         caption <span class="op">=</span> <span class="st">"Random sample of 5% of the data from Gerber, Green, and Larimer (2008)"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="n-parameters_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="n-parameters_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Although this plot is pleasing, we need to create an actual model with this data in order to answer our questions.</p>
-</section><section id="validity" class="level3" data-number="10.1.3"><h3 data-number="10.1.3" class="anchored" data-anchor-id="validity">
-<span class="header-section-number">10.1.3</span> Validity</h3>
+</section><section id="validity" class="level3" data-number="9.1.3"><h3 data-number="9.1.3" class="anchored" data-anchor-id="validity">
+<span class="header-section-number">9.1.3</span> Validity</h3>
 <p>Validity is the consistency, or lack there of, in the columns of your data set and the corresponding columns in your Preceptor Table. In order to consider the two data sets to be drawn from the same population, the columns from one must have a <em>valid correspondence</em> with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the <em>Population Table</em>, which is the first step in Justice. Consider two counter-arguments to the assumption of validity in this case.</p>
 <p>First, voting in a primary election in 2006 in Michigan is not the same thing as voting in a general election in Texas in 2026. Primary elections are less newsworthy and, usually, less competitive. Our client, the gubernatorial candidate, has already won his primary. The outcome he cares about is voting in a general elections. Treatments which might, or might not, affect participation in a primary are irrelevant. Moreover, the political culture of Texas and Michigan are very different. The meaning and importance of voting is not identical across states, nor over time.</p>
 <p>Second, our client is interested in using a measure of civic engagement. We build that measure out of past voting behavior. Right now, we aren’t even sure that we can access this data in Texas. And, even if we can, the salience of those elections in the years before 2026 will differ from those in Michigan in the years before 2006.</p>
@@ -1066,8 +1056,8 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
 <blockquote class="blockquote">
 <p><em>Using the results of a voting experiment in Michigan in 2006, we seek to forecast the causal effect on voter participation of sending postcards in the Texas gubernatorial general election of 2026.</em></p>
 </blockquote>
-</section></section><section id="justice" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="justice">
-<span class="header-section-number">10.2</span> Justice</h2>
+</section></section><section id="justice" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="justice">
+<span class="header-section-number">9.2</span> Justice</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1077,29 +1067,29 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
 </div>
 </div>
 <p>Justice includes the creation of the Population Table, followed by a discussion about the assumptions of stability, representativeness and unconfoundedness.</p>
-<section id="the-population-table" class="level3" data-number="10.2.1"><h3 data-number="10.2.1" class="anchored" data-anchor-id="the-population-table">
-<span class="header-section-number">10.2.1</span> The Population Table</h3>
+<section id="the-population-table" class="level3" data-number="9.2.1"><h3 data-number="9.2.1" class="anchored" data-anchor-id="the-population-table">
+<span class="header-section-number">9.2.1</span> The Population Table</h3>
 <p>The Population Table shows rows from three sources: the Preceptor Table, the data, and the population from which the rows in both the Preceptor Table and the data were drawn.</p>
 <p>The better we get at data science, the less that we sweat the details of the Population Table.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="wfksltdhkc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wfksltdhkc table {
+<div id="cxjpuudbem" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cxjpuudbem table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wfksltdhkc thead, #wfksltdhkc tbody, #wfksltdhkc tfoot, #wfksltdhkc tr, #wfksltdhkc td, #wfksltdhkc th {
+#cxjpuudbem thead, #cxjpuudbem tbody, #cxjpuudbem tfoot, #cxjpuudbem tr, #cxjpuudbem td, #cxjpuudbem th {
   border-style: none;
 }
 
-#wfksltdhkc p {
+#cxjpuudbem p {
   margin: 0;
   padding: 0;
 }
 
-#wfksltdhkc .gt_table {
+#cxjpuudbem .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1125,12 +1115,12 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   border-left-color: #D3D3D3;
 }
 
-#wfksltdhkc .gt_caption {
+#cxjpuudbem .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wfksltdhkc .gt_title {
+#cxjpuudbem .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1142,7 +1132,7 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   border-bottom-width: 0;
 }
 
-#wfksltdhkc .gt_subtitle {
+#cxjpuudbem .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1154,7 +1144,7 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   border-top-width: 0;
 }
 
-#wfksltdhkc .gt_heading {
+#cxjpuudbem .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1166,13 +1156,13 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   border-right-color: #D3D3D3;
 }
 
-#wfksltdhkc .gt_bottom_border {
+#cxjpuudbem .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wfksltdhkc .gt_col_headings {
+#cxjpuudbem .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1187,7 +1177,7 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   border-right-color: #D3D3D3;
 }
 
-#wfksltdhkc .gt_col_heading {
+#cxjpuudbem .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1207,7 +1197,7 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   overflow-x: hidden;
 }
 
-#wfksltdhkc .gt_column_spanner_outer {
+#cxjpuudbem .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1219,15 +1209,15 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   padding-right: 4px;
 }
 
-#wfksltdhkc .gt_column_spanner_outer:first-child {
+#cxjpuudbem .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wfksltdhkc .gt_column_spanner_outer:last-child {
+#cxjpuudbem .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wfksltdhkc .gt_column_spanner {
+#cxjpuudbem .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1239,11 +1229,11 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   width: 100%;
 }
 
-#wfksltdhkc .gt_spanner_row {
+#cxjpuudbem .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wfksltdhkc .gt_group_heading {
+#cxjpuudbem .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1269,7 +1259,7 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   text-align: left;
 }
 
-#wfksltdhkc .gt_empty_group_heading {
+#cxjpuudbem .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1284,15 +1274,15 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   vertical-align: middle;
 }
 
-#wfksltdhkc .gt_from_md > :first-child {
+#cxjpuudbem .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wfksltdhkc .gt_from_md > :last-child {
+#cxjpuudbem .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wfksltdhkc .gt_row {
+#cxjpuudbem .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1311,7 +1301,7 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   overflow-x: hidden;
 }
 
-#wfksltdhkc .gt_stub {
+#cxjpuudbem .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1324,7 +1314,7 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   padding-right: 5px;
 }
 
-#wfksltdhkc .gt_stub_row_group {
+#cxjpuudbem .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1338,15 +1328,15 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   vertical-align: top;
 }
 
-#wfksltdhkc .gt_row_group_first td {
+#cxjpuudbem .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wfksltdhkc .gt_row_group_first th {
+#cxjpuudbem .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wfksltdhkc .gt_summary_row {
+#cxjpuudbem .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1356,16 +1346,16 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   padding-right: 5px;
 }
 
-#wfksltdhkc .gt_first_summary_row {
+#cxjpuudbem .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wfksltdhkc .gt_first_summary_row.thick {
+#cxjpuudbem .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wfksltdhkc .gt_last_summary_row {
+#cxjpuudbem .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1375,7 +1365,7 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   border-bottom-color: #D3D3D3;
 }
 
-#wfksltdhkc .gt_grand_summary_row {
+#cxjpuudbem .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1385,7 +1375,7 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   padding-right: 5px;
 }
 
-#wfksltdhkc .gt_first_grand_summary_row {
+#cxjpuudbem .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1395,7 +1385,7 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   border-top-color: #D3D3D3;
 }
 
-#wfksltdhkc .gt_last_grand_summary_row_top {
+#cxjpuudbem .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1405,11 +1395,11 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   border-bottom-color: #D3D3D3;
 }
 
-#wfksltdhkc .gt_striped {
+#cxjpuudbem .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wfksltdhkc .gt_table_body {
+#cxjpuudbem .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1418,7 +1408,7 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   border-bottom-color: #D3D3D3;
 }
 
-#wfksltdhkc .gt_footnotes {
+#cxjpuudbem .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1432,7 +1422,7 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   border-right-color: #D3D3D3;
 }
 
-#wfksltdhkc .gt_footnote {
+#cxjpuudbem .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1441,7 +1431,7 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   padding-right: 5px;
 }
 
-#wfksltdhkc .gt_sourcenotes {
+#cxjpuudbem .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1455,7 +1445,7 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   border-right-color: #D3D3D3;
 }
 
-#wfksltdhkc .gt_sourcenote {
+#cxjpuudbem .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1463,72 +1453,72 @@ $ neighbors  &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
   padding-right: 5px;
 }
 
-#wfksltdhkc .gt_left {
+#cxjpuudbem .gt_left {
   text-align: left;
 }
 
-#wfksltdhkc .gt_center {
+#cxjpuudbem .gt_center {
   text-align: center;
 }
 
-#wfksltdhkc .gt_right {
+#cxjpuudbem .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wfksltdhkc .gt_font_normal {
+#cxjpuudbem .gt_font_normal {
   font-weight: normal;
 }
 
-#wfksltdhkc .gt_font_bold {
+#cxjpuudbem .gt_font_bold {
   font-weight: bold;
 }
 
-#wfksltdhkc .gt_font_italic {
+#cxjpuudbem .gt_font_italic {
   font-style: italic;
 }
 
-#wfksltdhkc .gt_super {
+#cxjpuudbem .gt_super {
   font-size: 65%;
 }
 
-#wfksltdhkc .gt_footnote_marks {
+#cxjpuudbem .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wfksltdhkc .gt_asterisk {
+#cxjpuudbem .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wfksltdhkc .gt_indent_1 {
+#cxjpuudbem .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wfksltdhkc .gt_indent_2 {
+#cxjpuudbem .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wfksltdhkc .gt_indent_3 {
+#cxjpuudbem .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wfksltdhkc .gt_indent_4 {
+#cxjpuudbem .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wfksltdhkc .gt_indent_5 {
+#cxjpuudbem .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wfksltdhkc .katex-display {
+#cxjpuudbem .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wfksltdhkc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cxjpuudbem div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1679,22 +1669,22 @@ Outcomes
 <p>We also don’t worry about getting other details correct. For example, we know that this experiment includes four post cards, plus the control. That is five potential outcomes, and 10 possible causal effects, since the definition of a causal effect in the difference between any two potential outcomes. We don’t bother to include all those details in the Population Table.</p>
 <p>Recall that the purpose of the Preceptor Table is to force us to answer the key questions. Is the model predictive or causal? What are the units, outcomes and covariates/treatments?</p>
 <p>Similarly, the purpose of the Population Table is to force us to think hard about the key assumptions of validity, stability, representativeness, and unconfoundedness.</p>
-</section><section id="stability" class="level3" data-number="10.2.2"><h3 data-number="10.2.2" class="anchored" data-anchor-id="stability">
-<span class="header-section-number">10.2.2</span> Stability</h3>
+</section><section id="stability" class="level3" data-number="9.2.2"><h3 data-number="9.2.2" class="anchored" data-anchor-id="stability">
+<span class="header-section-number">9.2.2</span> Stability</h3>
 <p>Stability means that the relationship between the columns is the same for three categories of rows: the data, the Preceptor table, and the larger population from which both are drawn. Of course, what we most need is for the relationship between the columns to be the same between the data and the Preceptor Table. If it isn’t, then we can’t use models estimated on the former to make inferences about the latter. But it is weird to just assume a connection between in Michigan in 2006 and Texas in 2026. Any such assumption is really a broader claim about many years and many jurisdictions. Our description of the underlying population is the <em>glue</em> which connects the data and the Preceptor Table.</p>
 <p>Is data collected in 2006 on voting behavior likely to be the same in 2026? Frankly, we don’t know! We aren’t sure what would impact someone’s response to a postcard encouraging them to vote. It is possible, for instance, that a postcard informing neighbors of voting status has a bigger effect in a world with more social media.</p>
 <p>When we are confronted with this uncertainty, we can consider making our timeframe smaller. However, we would still need to assume stability from 2006 (time of data collection) to 2026. Stability allows us to ignore the issue of time.</p>
-</section><section id="representativeness" class="level3" data-number="10.2.3"><h3 data-number="10.2.3" class="anchored" data-anchor-id="representativeness">
-<span class="header-section-number">10.2.3</span> Representativeness</h3>
+</section><section id="representativeness" class="level3" data-number="9.2.3"><h3 data-number="9.2.3" class="anchored" data-anchor-id="representativeness">
+<span class="header-section-number">9.2.3</span> Representativeness</h3>
 <p>Even if the stability assumption holds, we still have problems with representativeness because Michigan and Texas are (very?) different states. In one sense, neither the data nor the Preceptor Table is a sample. Both include, more or less, the entire electorates in their respective states. But, from the point of view of the Population Table, they are both samples from the underling population. Even if we, with the help of the stability assumption, don’t think that anything has changes between 2006 and 2026, we are still trying to use data from Michigan to make an inference about Texas. The obvious problem is that voters in Michigan are (very?) different from voters in Texas, in all sorts of ways which might matter to our analysis.</p>
-</section><section id="unconfoundedness" class="level3" data-number="10.2.4"><h3 data-number="10.2.4" class="anchored" data-anchor-id="unconfoundedness">
-<span class="header-section-number">10.2.4</span> Unconfoundedness</h3>
+</section><section id="unconfoundedness" class="level3" data-number="9.2.4"><h3 data-number="9.2.4" class="anchored" data-anchor-id="unconfoundedness">
+<span class="header-section-number">9.2.4</span> Unconfoundedness</h3>
 <p>The great advantage of randomized assignment of treatment is that it guarantees unconfoundedness. There is no way for treatment assignment to be correlated with anything, including potential outcomes, if treatment assignment is random.</p>
 <blockquote class="blockquote">
 <p><em>Using the results of a voting experiment in Michigan in 2006 primary election, we seek to forecast the causal effect on voter participation of sending postcards in the Texas gubernatorial general election of 2026. There is concern that data from a primary election might not generalize to a general election and that political culture in the two states differ too much to allow for data from one to enable useful forecasts in the other.</em></p>
 </blockquote>
-</section></section><section id="courage" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="courage">
-<span class="header-section-number">10.3</span> Courage</h2>
+</section></section><section id="courage" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="courage">
+<span class="header-section-number">9.3</span> Courage</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1703,8 +1693,8 @@ Outcomes
 </div>
 </div>
 </div>
-<section id="models" class="level3" data-number="10.3.1"><h3 data-number="10.3.1" class="anchored" data-anchor-id="models">
-<span class="header-section-number">10.3.1</span> Models</h3>
+<section id="models" class="level3" data-number="9.3.1"><h3 data-number="9.3.1" class="anchored" data-anchor-id="models">
+<span class="header-section-number">9.3.1</span> Models</h3>
 <p>Justice gave us the Population Table. Courage selects the data generating mechanism. We first specify the mathematical formula which connects the outcome variable we are interested in with the other data that we have. We explore different models. We need to decide which variables to include and to estimate the values of unknown parameters. We check our models for consistency with the data we have. We avoid hypothesis tests. We select one model, the data generating mechanism or DGM.</p>
 <!-- DK: Should either do logistic or discuss more why not. Seem to recall that logistic took a long time with so much data. -->
 <p>Given that the outcome variable is 0/1, a logistic model is the obvious choice. However, in this case, a linear model with a normal error term provides more or less the same answer.</p>
@@ -1713,8 +1703,8 @@ Outcomes
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/paul-buerkner/brms">brms</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mjskay.github.io/tidybayes/">tidybayes</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="voted-treatment-sex" class="level4" data-number="10.3.1.1"><h4 data-number="10.3.1.1" class="anchored" data-anchor-id="voted-treatment-sex">
-<span class="header-section-number">10.3.1.1</span> voted ~ treatment + sex</h4>
+<section id="voted-treatment-sex" class="level4" data-number="9.3.1.1"><h4 data-number="9.3.1.1" class="anchored" data-anchor-id="voted-treatment-sex">
+<span class="header-section-number">9.3.1.1</span> voted ~ treatment + sex</h4>
 <p>In this section, we will look at the relationship between primary voting and treatment + sex.</p>
 <p><em>The math:</em></p>
 <p>Without variable names:</p>
@@ -1724,33 +1714,15 @@ Outcomes
 <p>The second type of formal notation, more associated with the virtue Courage, includes the actual variable names we are using. The trickiest part is the transformation of character/factor variables into indicator variables, meaning variables with 0/1 values. Because <code>treatment</code> has 5 levels, we need 4 indicator variables. The fifth level — which, by default, is the first variable alphabetically (for character variables) or the first level (for factor variables) — is incorporated in the intercept.</p>
 <p>Let’s translate the model into code.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">voted</span> <span class="op">~</span> <span class="va">treatment</span> <span class="op">+</span> <span class="va">sex</span>,</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulbuerkner.com/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">voted</span> <span class="op">~</span> <span class="va">treatment</span> <span class="op">+</span> <span class="va">sex</span>,</span>
 <span>             data <span class="op">=</span> <span class="va">x</span>,</span>
 <span>             family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">gaussian</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>             refresh <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>             silent <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>             seed <span class="op">=</span> <span class="fl">99</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Trying to compile a simple C file</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Running /Library/Frameworks/R.framework/Resources/bin/R CMD SHLIB foo.c
-using C compiler: ‘Apple clang version 15.0.0 (clang-1500.3.9.4)’
-using SDK: ‘’
-clang -arch arm64 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/unsupported"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/BH/include" -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/StanHeaders/include/src/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/StanHeaders/include/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppParallel/include/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/rstan/include" -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DUSE_STANC3 -DSTRICT_R_HEADERS  -DBOOST_PHOENIX_NO_VARIADIC_EXPRESSION  -D_HAS_AUTO_PTR_ETC=0  -include '/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp'  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2  -c foo.c -o foo.o
-In file included from &lt;built-in&gt;:1:
-In file included from /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp:22:
-In file included from /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/Eigen/Dense:1:
-In file included from /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/Eigen/Core:19:
-/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/Eigen/src/Core/util/Macros.h:679:10: fatal error: 'cmath' file not found
-#include &lt;cmath&gt;
-         ^~~~~~~
-1 error generated.
-make: *** [foo.o] Error 1</code></pre>
-</div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">fit_1</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">fit_1</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code> Family: gaussian 
   Links: mu = identity; sigma = identity 
@@ -1779,7 +1751,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p>We will now create a table that nicely formats the results of <code>fit_1</code> using the <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression()</a></code> function from the <strong>gtsummary</strong> package. It will also display the associated 95% confidence interval for each coefficient.</p>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">fit_1</span>, </span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">fit_1</span>, </span>
 <span>               intercept <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>               estimate_fun <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/style_sigfig.html">style_sigfig</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  </span>
@@ -1791,23 +1763,23 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span>  <span class="fu">tab_source_note</span><span class="op">(</span><span class="fu">md</span><span class="op">(</span><span class="st">"Source: Gerber, Green, and Larimer (2008)"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">cols_label</span><span class="op">(</span>estimate <span class="op">=</span> <span class="fu">md</span><span class="op">(</span><span class="st">"**Parameter**"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<div id="nxfpxzkhdv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nxfpxzkhdv table {
+<div id="lcydglcsmz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lcydglcsmz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nxfpxzkhdv thead, #nxfpxzkhdv tbody, #nxfpxzkhdv tfoot, #nxfpxzkhdv tr, #nxfpxzkhdv td, #nxfpxzkhdv th {
+#lcydglcsmz thead, #lcydglcsmz tbody, #lcydglcsmz tfoot, #lcydglcsmz tr, #lcydglcsmz td, #lcydglcsmz th {
   border-style: none;
 }
 
-#nxfpxzkhdv p {
+#lcydglcsmz p {
   margin: 0;
   padding: 0;
 }
 
-#nxfpxzkhdv .gt_table {
+#lcydglcsmz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1833,12 +1805,12 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#nxfpxzkhdv .gt_caption {
+#lcydglcsmz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nxfpxzkhdv .gt_title {
+#lcydglcsmz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1850,7 +1822,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-bottom-width: 0;
 }
 
-#nxfpxzkhdv .gt_subtitle {
+#lcydglcsmz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1862,7 +1834,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-top-width: 0;
 }
 
-#nxfpxzkhdv .gt_heading {
+#lcydglcsmz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1874,13 +1846,13 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nxfpxzkhdv .gt_bottom_border {
+#lcydglcsmz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nxfpxzkhdv .gt_col_headings {
+#lcydglcsmz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1895,7 +1867,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nxfpxzkhdv .gt_col_heading {
+#lcydglcsmz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1915,7 +1887,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   overflow-x: hidden;
 }
 
-#nxfpxzkhdv .gt_column_spanner_outer {
+#lcydglcsmz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1927,15 +1899,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 4px;
 }
 
-#nxfpxzkhdv .gt_column_spanner_outer:first-child {
+#lcydglcsmz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nxfpxzkhdv .gt_column_spanner_outer:last-child {
+#lcydglcsmz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nxfpxzkhdv .gt_column_spanner {
+#lcydglcsmz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1947,11 +1919,11 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   width: 100%;
 }
 
-#nxfpxzkhdv .gt_spanner_row {
+#lcydglcsmz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nxfpxzkhdv .gt_group_heading {
+#lcydglcsmz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1977,7 +1949,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   text-align: left;
 }
 
-#nxfpxzkhdv .gt_empty_group_heading {
+#lcydglcsmz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1992,15 +1964,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   vertical-align: middle;
 }
 
-#nxfpxzkhdv .gt_from_md > :first-child {
+#lcydglcsmz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nxfpxzkhdv .gt_from_md > :last-child {
+#lcydglcsmz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nxfpxzkhdv .gt_row {
+#lcydglcsmz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2019,7 +1991,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   overflow-x: hidden;
 }
 
-#nxfpxzkhdv .gt_stub {
+#lcydglcsmz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2032,7 +2004,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#nxfpxzkhdv .gt_stub_row_group {
+#lcydglcsmz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2046,15 +2018,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   vertical-align: top;
 }
 
-#nxfpxzkhdv .gt_row_group_first td {
+#lcydglcsmz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nxfpxzkhdv .gt_row_group_first th {
+#lcydglcsmz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nxfpxzkhdv .gt_summary_row {
+#lcydglcsmz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2064,16 +2036,16 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#nxfpxzkhdv .gt_first_summary_row {
+#lcydglcsmz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nxfpxzkhdv .gt_first_summary_row.thick {
+#lcydglcsmz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nxfpxzkhdv .gt_last_summary_row {
+#lcydglcsmz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2083,7 +2055,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#nxfpxzkhdv .gt_grand_summary_row {
+#lcydglcsmz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2093,7 +2065,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#nxfpxzkhdv .gt_first_grand_summary_row {
+#lcydglcsmz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2103,7 +2075,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#nxfpxzkhdv .gt_last_grand_summary_row_top {
+#lcydglcsmz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2113,11 +2085,11 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#nxfpxzkhdv .gt_striped {
+#lcydglcsmz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nxfpxzkhdv .gt_table_body {
+#lcydglcsmz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2126,7 +2098,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#nxfpxzkhdv .gt_footnotes {
+#lcydglcsmz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2140,7 +2112,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nxfpxzkhdv .gt_footnote {
+#lcydglcsmz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2149,7 +2121,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#nxfpxzkhdv .gt_sourcenotes {
+#lcydglcsmz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2163,7 +2135,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nxfpxzkhdv .gt_sourcenote {
+#lcydglcsmz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2171,146 +2143,149 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#nxfpxzkhdv .gt_left {
+#lcydglcsmz .gt_left {
   text-align: left;
 }
 
-#nxfpxzkhdv .gt_center {
+#lcydglcsmz .gt_center {
   text-align: center;
 }
 
-#nxfpxzkhdv .gt_right {
+#lcydglcsmz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nxfpxzkhdv .gt_font_normal {
+#lcydglcsmz .gt_font_normal {
   font-weight: normal;
 }
 
-#nxfpxzkhdv .gt_font_bold {
+#lcydglcsmz .gt_font_bold {
   font-weight: bold;
 }
 
-#nxfpxzkhdv .gt_font_italic {
+#lcydglcsmz .gt_font_italic {
   font-style: italic;
 }
 
-#nxfpxzkhdv .gt_super {
+#lcydglcsmz .gt_super {
   font-size: 65%;
 }
 
-#nxfpxzkhdv .gt_footnote_marks {
+#lcydglcsmz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nxfpxzkhdv .gt_asterisk {
+#lcydglcsmz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nxfpxzkhdv .gt_indent_1 {
+#lcydglcsmz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nxfpxzkhdv .gt_indent_2 {
+#lcydglcsmz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nxfpxzkhdv .gt_indent_3 {
+#lcydglcsmz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nxfpxzkhdv .gt_indent_4 {
+#lcydglcsmz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nxfpxzkhdv .gt_indent_5 {
+#lcydglcsmz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nxfpxzkhdv .katex-display {
+#lcydglcsmz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nxfpxzkhdv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lcydglcsmz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
 <thead>
-<tr class="gt_heading">
-<td colspan="3" class="gt_heading gt_title gt_font_normal" style=""><span data-qmd-base64="PHN0cm9uZz5MaWtlbGlob29kIG9mIFZvdGluZyBpbiB0aGUgTmV4dCBFbGVjdGlvbjwvc3Ryb25nPg=="><span class="gt_from_md"><strong>Likelihood of Voting in the Next Election</strong></span></span></td>
-    </tr>
-<tr class="gt_heading">
-<td colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">How Treatment Assignment and Age Predict Likelihood of Voting</td>
-    </tr>
-<tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span data-qmd-base64="PHN0cm9uZz5DaGFyYWN0ZXJpc3RpYzwvc3Ryb25nPg=="><span class="gt_from_md"><strong>Characteristic</strong></span></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span data-qmd-base64="PHN0cm9uZz5QYXJhbWV0ZXI8L3N0cm9uZz4="><span class="gt_from_md"><strong>Parameter</strong></span></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span data-qmd-base64="PHN0cm9uZz45NSUgQ0k8L3N0cm9uZz4="><span class="gt_from_md"><strong>95% CI</strong></span></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
-    </tr>
+<tr class="gt_heading header">
+<th colspan="3" class="gt_heading gt_title gt_font_normal"><strong>Likelihood of Voting in the Next Election</strong></th>
+</tr>
+<tr class="gt_heading even">
+<th colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">How Treatment Assignment and Age Predict Likelihood of Voting</th>
+</tr>
+<tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Parameter</strong></th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong></th>
+</tr>
 </thead>
 <tbody class="gt_table_body">
-<tr>
-<td headers="label" class="gt_row gt_left">(Intercept)</td>
-<td headers="estimate" class="gt_row gt_center">0.291</td>
-<td headers="conf.low" class="gt_row gt_center">0.288, 0.293</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">(Intercept)</td>
+<td class="gt_row gt_center" headers="estimate">0.291</td>
+<td class="gt_row gt_center" headers="conf.low">0.288, 0.293</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">treatment</td>
-<td headers="estimate" class="gt_row gt_center"><br></td>
-<td headers="conf.low" class="gt_row gt_center"><br></td>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">treatment</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;No Postcard</td>
-<td headers="estimate" class="gt_row gt_center">—</td>
-<td headers="conf.low" class="gt_row gt_center">—</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;No Postcard</td>
+<td class="gt_row gt_center" headers="estimate">—</td>
+<td class="gt_row gt_center" headers="conf.low">—</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;treatmentCivicDuty</td>
-<td headers="estimate" class="gt_row gt_center">0.018</td>
-<td headers="conf.low" class="gt_row gt_center">0.013, 0.023</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;treatmentCivicDuty</td>
+<td class="gt_row gt_center" headers="estimate">0.018</td>
+<td class="gt_row gt_center" headers="conf.low">0.013, 0.023</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Hawthorne</td>
-<td headers="estimate" class="gt_row gt_center">0.026</td>
-<td headers="conf.low" class="gt_row gt_center">0.021, 0.031</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Hawthorne</td>
+<td class="gt_row gt_center" headers="estimate">0.026</td>
+<td class="gt_row gt_center" headers="conf.low">0.021, 0.031</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Self</td>
-<td headers="estimate" class="gt_row gt_center">0.049</td>
-<td headers="conf.low" class="gt_row gt_center">0.043, 0.054</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Self</td>
+<td class="gt_row gt_center" headers="estimate">0.049</td>
+<td class="gt_row gt_center" headers="conf.low">0.043, 0.054</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Neighbors</td>
-<td headers="estimate" class="gt_row gt_center">0.081</td>
-<td headers="conf.low" class="gt_row gt_center">0.076, 0.086</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Neighbors</td>
+<td class="gt_row gt_center" headers="estimate">0.081</td>
+<td class="gt_row gt_center" headers="conf.low">0.076, 0.086</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">sex</td>
-<td headers="estimate" class="gt_row gt_center"><br></td>
-<td headers="conf.low" class="gt_row gt_center"><br></td>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">sex</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;sexMale</td>
-<td headers="estimate" class="gt_row gt_center">0.012</td>
-<td headers="conf.low" class="gt_row gt_center">0.009, 0.015</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;sexMale</td>
+<td class="gt_row gt_center" headers="estimate">0.012</td>
+<td class="gt_row gt_center" headers="conf.low">0.009, 0.015</td>
 </tr>
 </tbody>
-<tfoot class="gt_sourcenotes"><tr>
-<td class="gt_sourcenote" colspan="3"><span data-qmd-base64="U291cmNlOiBHZXJiZXIsIEdyZWVuLCBhbmQgTGFyaW1lciAoMjAwOCk="><span class="gt_from_md">Source: Gerber, Green, and Larimer (2008)</span></span></td>
-    </tr></tfoot>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="3">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span data-qmd-base64="Q0kgPSBDcmVkaWJsZSBJbnRlcnZhbA=="><span class="gt_from_md">CI = Credible Interval</span></span>
-</td>
-    </tr></tfoot>
+<tfoot class="gt_sourcenotes">
+<tr class="odd">
+<td colspan="3" class="gt_sourcenote">Abbreviation: CI = Credible Interval</td>
+</tr>
+<tr class="even">
+<td colspan="3" class="gt_sourcenote">Source: Gerber, Green, and Larimer (2008)</td>
+</tr>
+</tfoot>
 </table>
 </div>
 </div>
@@ -2320,40 +2295,22 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <li><p>The intercept of this model is the expected value of the probability of someone voting in the 2006 primary given that they are part of the control group and are female. In this case, we estimate that women in the control group will vote ~29% of the time.</p></li>
 <li><p>The coefficient for <code>sexMale</code> indicates the difference in likelihood of voting between a male and female. In other words, when comparing men and women, the 0.012 implies that men are ~1.2% more likely to vote than women. Note that, because this is a linear model with no interactions between sex and other variables, this difference applies to any male, regardless of the treatment he received. Because sex can not be manipulated (by assumption), we should not use a causal interpretation of the coefficient.</p></li>
 <li><p>The coefficients of the treatments, on the other hand, do have a causal interpretation. For a single individual, of either sex, being sent the Self postcard increases your probability of voting by 4.9%. It appears that the <code>Neighbors</code> treatment is the most effective at ~8.1% and <code>Civic Duty</code> is the least effective at ~1.8%.</p></li>
-</ul></section><section id="voted-age_z-sex-treatment-voter_class-voter_classtreatment" class="level4" data-number="10.3.1.2"><h4 data-number="10.3.1.2" class="anchored" data-anchor-id="voted-age_z-sex-treatment-voter_class-voter_classtreatment">
-<span class="header-section-number">10.3.1.2</span> voted ~ age_z + sex + treatment + voter_class + voter_class*treatment</h4>
+</ul></section><section id="voted-age_z-sex-treatment-voter_class-voter_classtreatment" class="level4" data-number="9.3.1.2"><h4 data-number="9.3.1.2" class="anchored" data-anchor-id="voted-age_z-sex-treatment-voter_class-voter_classtreatment">
+<span class="header-section-number">9.3.1.2</span> voted ~ age_z + sex + treatment + voter_class + voter_class*treatment</h4>
 <p>It is time to look at interactions! Create another model named <code>fit_2</code> that estimates <code>voted</code> as a function of <code>age_z</code>, <code>sex</code>, <code>treatment</code>, <code>voter_class</code>, and the interaction between treatment and voter classification.</p>
 <p>The math:</p>
 <p><span class="math display">\[y_{i} = \beta_{0} + \beta_{1} age\_z + \beta_{2}male_i + \beta_{3}civic\_duty_i + \\ \beta_{4}hawthorne_i + \beta_{5}self_i + \beta_{6}neighbors_i + \\ \beta_{7}Sometimes\ vote_i + \beta_{8}Always\ vote_i + \\ \beta_{9}civic\_duty_i Sometimes\ vote_i + \beta_{10}hawthorne_i Sometimes\ vote_i + \\ \beta_{11}self_i Sometimes\ vote_i + \beta_{11}neighbors_i Sometimes\ vote_i + \\ \beta_{12}civic\_duty_i Always\ vote_i + \beta_{13}hawthorne_i Always\ vote_i + \\ \beta_{14}self_i Always\ vote_i + \beta_{15}neighbors_i Always\ vote_i + \epsilon_{i}\]</span> Translate into code:</p>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">voted</span> <span class="op">~</span> <span class="va">age_z</span> <span class="op">+</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">treatment</span> <span class="op">+</span> <span class="va">voter_class</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulbuerkner.com/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">voted</span> <span class="op">~</span> <span class="va">age_z</span> <span class="op">+</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">treatment</span> <span class="op">+</span> <span class="va">voter_class</span> <span class="op">+</span> </span>
 <span>                            <span class="va">treatment</span><span class="op">*</span><span class="va">voter_class</span>,</span>
 <span>             data <span class="op">=</span> <span class="va">x</span>,</span>
 <span>             family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">gaussian</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>             refresh <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>             silent <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>             seed <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Trying to compile a simple C file</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Running /Library/Frameworks/R.framework/Resources/bin/R CMD SHLIB foo.c
-using C compiler: ‘Apple clang version 15.0.0 (clang-1500.3.9.4)’
-using SDK: ‘’
-clang -arch arm64 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/unsupported"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/BH/include" -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/StanHeaders/include/src/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/StanHeaders/include/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppParallel/include/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/rstan/include" -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DUSE_STANC3 -DSTRICT_R_HEADERS  -DBOOST_PHOENIX_NO_VARIADIC_EXPRESSION  -D_HAS_AUTO_PTR_ETC=0  -include '/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp'  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2  -c foo.c -o foo.o
-In file included from &lt;built-in&gt;:1:
-In file included from /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp:22:
-In file included from /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/Eigen/Dense:1:
-In file included from /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/Eigen/Core:19:
-/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/Eigen/src/Core/util/Macros.h:679:10: fatal error: 'cmath' file not found
-#include &lt;cmath&gt;
-         ^~~~~~~
-1 error generated.
-make: *** [foo.o] Error 1</code></pre>
-</div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">fit_2</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">fit_2</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code> Family: gaussian 
   Links: mu = identity; sigma = identity 
@@ -2411,7 +2368,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p>As we did with our first model, create a regression table to observe our findings:</p>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">fit_2</span>, </span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">fit_2</span>, </span>
 <span>               intercept <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>               estimate_fun <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/style_sigfig.html">style_sigfig</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/as_gt.html">as_gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -2420,23 +2377,23 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span>  <span class="fu">tab_source_note</span><span class="op">(</span><span class="fu">md</span><span class="op">(</span><span class="st">"Source: Gerber, Green, and Larimer (2008)"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">cols_label</span><span class="op">(</span>estimate <span class="op">=</span> <span class="fu">md</span><span class="op">(</span><span class="st">"**Parameter**"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<div id="rrvrcwdcwe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rrvrcwdcwe table {
+<div id="gijsxtlhfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gijsxtlhfi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rrvrcwdcwe thead, #rrvrcwdcwe tbody, #rrvrcwdcwe tfoot, #rrvrcwdcwe tr, #rrvrcwdcwe td, #rrvrcwdcwe th {
+#gijsxtlhfi thead, #gijsxtlhfi tbody, #gijsxtlhfi tfoot, #gijsxtlhfi tr, #gijsxtlhfi td, #gijsxtlhfi th {
   border-style: none;
 }
 
-#rrvrcwdcwe p {
+#gijsxtlhfi p {
   margin: 0;
   padding: 0;
 }
 
-#rrvrcwdcwe .gt_table {
+#gijsxtlhfi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2462,12 +2419,12 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#rrvrcwdcwe .gt_caption {
+#gijsxtlhfi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rrvrcwdcwe .gt_title {
+#gijsxtlhfi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2479,7 +2436,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-bottom-width: 0;
 }
 
-#rrvrcwdcwe .gt_subtitle {
+#gijsxtlhfi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2491,7 +2448,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-top-width: 0;
 }
 
-#rrvrcwdcwe .gt_heading {
+#gijsxtlhfi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2503,13 +2460,13 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#rrvrcwdcwe .gt_bottom_border {
+#gijsxtlhfi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rrvrcwdcwe .gt_col_headings {
+#gijsxtlhfi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2524,7 +2481,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#rrvrcwdcwe .gt_col_heading {
+#gijsxtlhfi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2544,7 +2501,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   overflow-x: hidden;
 }
 
-#rrvrcwdcwe .gt_column_spanner_outer {
+#gijsxtlhfi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2556,15 +2513,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 4px;
 }
 
-#rrvrcwdcwe .gt_column_spanner_outer:first-child {
+#gijsxtlhfi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rrvrcwdcwe .gt_column_spanner_outer:last-child {
+#gijsxtlhfi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rrvrcwdcwe .gt_column_spanner {
+#gijsxtlhfi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2576,11 +2533,11 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   width: 100%;
 }
 
-#rrvrcwdcwe .gt_spanner_row {
+#gijsxtlhfi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rrvrcwdcwe .gt_group_heading {
+#gijsxtlhfi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2606,7 +2563,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   text-align: left;
 }
 
-#rrvrcwdcwe .gt_empty_group_heading {
+#gijsxtlhfi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2621,15 +2578,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   vertical-align: middle;
 }
 
-#rrvrcwdcwe .gt_from_md > :first-child {
+#gijsxtlhfi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rrvrcwdcwe .gt_from_md > :last-child {
+#gijsxtlhfi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rrvrcwdcwe .gt_row {
+#gijsxtlhfi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2648,7 +2605,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   overflow-x: hidden;
 }
 
-#rrvrcwdcwe .gt_stub {
+#gijsxtlhfi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2661,7 +2618,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#rrvrcwdcwe .gt_stub_row_group {
+#gijsxtlhfi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2675,15 +2632,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   vertical-align: top;
 }
 
-#rrvrcwdcwe .gt_row_group_first td {
+#gijsxtlhfi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rrvrcwdcwe .gt_row_group_first th {
+#gijsxtlhfi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rrvrcwdcwe .gt_summary_row {
+#gijsxtlhfi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2693,16 +2650,16 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#rrvrcwdcwe .gt_first_summary_row {
+#gijsxtlhfi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rrvrcwdcwe .gt_first_summary_row.thick {
+#gijsxtlhfi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rrvrcwdcwe .gt_last_summary_row {
+#gijsxtlhfi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2712,7 +2669,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#rrvrcwdcwe .gt_grand_summary_row {
+#gijsxtlhfi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2722,7 +2679,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#rrvrcwdcwe .gt_first_grand_summary_row {
+#gijsxtlhfi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2732,7 +2689,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#rrvrcwdcwe .gt_last_grand_summary_row_top {
+#gijsxtlhfi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2742,11 +2699,11 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#rrvrcwdcwe .gt_striped {
+#gijsxtlhfi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rrvrcwdcwe .gt_table_body {
+#gijsxtlhfi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2755,7 +2712,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#rrvrcwdcwe .gt_footnotes {
+#gijsxtlhfi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2769,7 +2726,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#rrvrcwdcwe .gt_footnote {
+#gijsxtlhfi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2778,7 +2735,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#rrvrcwdcwe .gt_sourcenotes {
+#gijsxtlhfi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2792,7 +2749,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#rrvrcwdcwe .gt_sourcenote {
+#gijsxtlhfi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2800,216 +2757,219 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#rrvrcwdcwe .gt_left {
+#gijsxtlhfi .gt_left {
   text-align: left;
 }
 
-#rrvrcwdcwe .gt_center {
+#gijsxtlhfi .gt_center {
   text-align: center;
 }
 
-#rrvrcwdcwe .gt_right {
+#gijsxtlhfi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rrvrcwdcwe .gt_font_normal {
+#gijsxtlhfi .gt_font_normal {
   font-weight: normal;
 }
 
-#rrvrcwdcwe .gt_font_bold {
+#gijsxtlhfi .gt_font_bold {
   font-weight: bold;
 }
 
-#rrvrcwdcwe .gt_font_italic {
+#gijsxtlhfi .gt_font_italic {
   font-style: italic;
 }
 
-#rrvrcwdcwe .gt_super {
+#gijsxtlhfi .gt_super {
   font-size: 65%;
 }
 
-#rrvrcwdcwe .gt_footnote_marks {
+#gijsxtlhfi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rrvrcwdcwe .gt_asterisk {
+#gijsxtlhfi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rrvrcwdcwe .gt_indent_1 {
+#gijsxtlhfi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rrvrcwdcwe .gt_indent_2 {
+#gijsxtlhfi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rrvrcwdcwe .gt_indent_3 {
+#gijsxtlhfi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rrvrcwdcwe .gt_indent_4 {
+#gijsxtlhfi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rrvrcwdcwe .gt_indent_5 {
+#gijsxtlhfi .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rrvrcwdcwe .katex-display {
+#gijsxtlhfi .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rrvrcwdcwe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gijsxtlhfi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
 <thead>
-<tr class="gt_heading">
-<td colspan="3" class="gt_heading gt_title gt_font_normal" style=""><span data-qmd-base64="PHN0cm9uZz5MaWtlbGlob29kIG9mIFZvdGluZyBpbiB0aGUgTmV4dCBFbGVjdGlvbjwvc3Ryb25nPg=="><span class="gt_from_md"><strong>Likelihood of Voting in the Next Election</strong></span></span></td>
-    </tr>
-<tr class="gt_heading">
-<td colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">How Treatment Assignment and Other Variables Predict Likelihood of Voting</td>
-    </tr>
-<tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span data-qmd-base64="PHN0cm9uZz5DaGFyYWN0ZXJpc3RpYzwvc3Ryb25nPg=="><span class="gt_from_md"><strong>Characteristic</strong></span></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span data-qmd-base64="PHN0cm9uZz5QYXJhbWV0ZXI8L3N0cm9uZz4="><span class="gt_from_md"><strong>Parameter</strong></span></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span data-qmd-base64="PHN0cm9uZz45NSUgQ0k8L3N0cm9uZz4="><span class="gt_from_md"><strong>95% CI</strong></span></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
-    </tr>
+<tr class="gt_heading header">
+<th colspan="3" class="gt_heading gt_title gt_font_normal"><strong>Likelihood of Voting in the Next Election</strong></th>
+</tr>
+<tr class="gt_heading even">
+<th colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">How Treatment Assignment and Other Variables Predict Likelihood of Voting</th>
+</tr>
+<tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Parameter</strong></th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong></th>
+</tr>
 </thead>
 <tbody class="gt_table_body">
-<tr>
-<td headers="label" class="gt_row gt_left">(Intercept)</td>
-<td headers="estimate" class="gt_row gt_center">0.153</td>
-<td headers="conf.low" class="gt_row gt_center">0.147, 0.159</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">(Intercept)</td>
+<td class="gt_row gt_center" headers="estimate">0.153</td>
+<td class="gt_row gt_center" headers="conf.low">0.147, 0.159</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">age_z</td>
-<td headers="estimate" class="gt_row gt_center">0.035</td>
-<td headers="conf.low" class="gt_row gt_center">0.034, 0.037</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">age_z</td>
+<td class="gt_row gt_center" headers="estimate">0.035</td>
+<td class="gt_row gt_center" headers="conf.low">0.034, 0.037</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">sex</td>
-<td headers="estimate" class="gt_row gt_center"><br></td>
-<td headers="conf.low" class="gt_row gt_center"><br></td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">sex</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;sexMale</td>
-<td headers="estimate" class="gt_row gt_center">0.008</td>
-<td headers="conf.low" class="gt_row gt_center">0.005, 0.011</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;sexMale</td>
+<td class="gt_row gt_center" headers="estimate">0.008</td>
+<td class="gt_row gt_center" headers="conf.low">0.005, 0.011</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">treatment</td>
-<td headers="estimate" class="gt_row gt_center"><br></td>
-<td headers="conf.low" class="gt_row gt_center"><br></td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">treatment</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;No Postcard</td>
-<td headers="estimate" class="gt_row gt_center">—</td>
-<td headers="conf.low" class="gt_row gt_center">—</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;No Postcard</td>
+<td class="gt_row gt_center" headers="estimate">—</td>
+<td class="gt_row gt_center" headers="conf.low">—</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;treatmentCivicDuty</td>
-<td headers="estimate" class="gt_row gt_center">0.010</td>
-<td headers="conf.low" class="gt_row gt_center">-0.003, 0.023</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;treatmentCivicDuty</td>
+<td class="gt_row gt_center" headers="estimate">0.010</td>
+<td class="gt_row gt_center" headers="conf.low">-0.003, 0.023</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Hawthorne</td>
-<td headers="estimate" class="gt_row gt_center">0.008</td>
-<td headers="conf.low" class="gt_row gt_center">-0.006, 0.021</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Hawthorne</td>
+<td class="gt_row gt_center" headers="estimate">0.008</td>
+<td class="gt_row gt_center" headers="conf.low">-0.006, 0.021</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Self</td>
-<td headers="estimate" class="gt_row gt_center">0.023</td>
-<td headers="conf.low" class="gt_row gt_center">0.010, 0.036</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Self</td>
+<td class="gt_row gt_center" headers="estimate">0.023</td>
+<td class="gt_row gt_center" headers="conf.low">0.010, 0.036</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Neighbors</td>
-<td headers="estimate" class="gt_row gt_center">0.044</td>
-<td headers="conf.low" class="gt_row gt_center">0.031, 0.057</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Neighbors</td>
+<td class="gt_row gt_center" headers="estimate">0.044</td>
+<td class="gt_row gt_center" headers="conf.low">0.031, 0.057</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">voter_class</td>
-<td headers="estimate" class="gt_row gt_center"><br></td>
-<td headers="conf.low" class="gt_row gt_center"><br></td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">voter_class</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Rarely Vote</td>
-<td headers="estimate" class="gt_row gt_center">—</td>
-<td headers="conf.low" class="gt_row gt_center">—</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Rarely Vote</td>
+<td class="gt_row gt_center" headers="estimate">—</td>
+<td class="gt_row gt_center" headers="conf.low">—</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;voter_classSometimesVote</td>
-<td headers="estimate" class="gt_row gt_center">0.114</td>
-<td headers="conf.low" class="gt_row gt_center">0.108, 0.121</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;voter_classSometimesVote</td>
+<td class="gt_row gt_center" headers="estimate">0.114</td>
+<td class="gt_row gt_center" headers="conf.low">0.108, 0.121</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;voter_classAlwaysVote</td>
-<td headers="estimate" class="gt_row gt_center">0.294</td>
-<td headers="conf.low" class="gt_row gt_center">0.287, 0.301</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;voter_classAlwaysVote</td>
+<td class="gt_row gt_center" headers="estimate">0.294</td>
+<td class="gt_row gt_center" headers="conf.low">0.287, 0.301</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">treatment * voter_class</td>
-<td headers="estimate" class="gt_row gt_center"><br></td>
-<td headers="conf.low" class="gt_row gt_center"><br></td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">treatment * voter_class</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;treatmentCivicDuty * voter_classSometimesVote</td>
-<td headers="estimate" class="gt_row gt_center">0.014</td>
-<td headers="conf.low" class="gt_row gt_center">0.000, 0.029</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;treatmentCivicDuty * voter_classSometimesVote</td>
+<td class="gt_row gt_center" headers="estimate">0.014</td>
+<td class="gt_row gt_center" headers="conf.low">0.000, 0.029</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Hawthorne * voter_classSometimesVote</td>
-<td headers="estimate" class="gt_row gt_center">0.019</td>
-<td headers="conf.low" class="gt_row gt_center">0.004, 0.034</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Hawthorne * voter_classSometimesVote</td>
+<td class="gt_row gt_center" headers="estimate">0.019</td>
+<td class="gt_row gt_center" headers="conf.low">0.004, 0.034</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Self * voter_classSometimesVote</td>
-<td headers="estimate" class="gt_row gt_center">0.030</td>
-<td headers="conf.low" class="gt_row gt_center">0.016, 0.044</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Self * voter_classSometimesVote</td>
+<td class="gt_row gt_center" headers="estimate">0.030</td>
+<td class="gt_row gt_center" headers="conf.low">0.016, 0.044</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Neighbors * voter_classSometimesVote</td>
-<td headers="estimate" class="gt_row gt_center">0.042</td>
-<td headers="conf.low" class="gt_row gt_center">0.028, 0.057</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Neighbors * voter_classSometimesVote</td>
+<td class="gt_row gt_center" headers="estimate">0.042</td>
+<td class="gt_row gt_center" headers="conf.low">0.028, 0.057</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;treatmentCivicDuty * voter_classAlwaysVote</td>
-<td headers="estimate" class="gt_row gt_center">-0.001</td>
-<td headers="conf.low" class="gt_row gt_center">-0.018, 0.015</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;treatmentCivicDuty * voter_classAlwaysVote</td>
+<td class="gt_row gt_center" headers="estimate">-0.001</td>
+<td class="gt_row gt_center" headers="conf.low">-0.018, 0.015</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Hawthorne * voter_classAlwaysVote</td>
-<td headers="estimate" class="gt_row gt_center">0.025</td>
-<td headers="conf.low" class="gt_row gt_center">0.008, 0.043</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Hawthorne * voter_classAlwaysVote</td>
+<td class="gt_row gt_center" headers="estimate">0.025</td>
+<td class="gt_row gt_center" headers="conf.low">0.008, 0.043</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Self * voter_classAlwaysVote</td>
-<td headers="estimate" class="gt_row gt_center">0.025</td>
-<td headers="conf.low" class="gt_row gt_center">0.009, 0.041</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Self * voter_classAlwaysVote</td>
+<td class="gt_row gt_center" headers="estimate">0.025</td>
+<td class="gt_row gt_center" headers="conf.low">0.009, 0.041</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Neighbors * voter_classAlwaysVote</td>
-<td headers="estimate" class="gt_row gt_center">0.046</td>
-<td headers="conf.low" class="gt_row gt_center">0.030, 0.063</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Neighbors * voter_classAlwaysVote</td>
+<td class="gt_row gt_center" headers="estimate">0.046</td>
+<td class="gt_row gt_center" headers="conf.low">0.030, 0.063</td>
 </tr>
 </tbody>
-<tfoot class="gt_sourcenotes"><tr>
-<td class="gt_sourcenote" colspan="3"><span data-qmd-base64="U291cmNlOiBHZXJiZXIsIEdyZWVuLCBhbmQgTGFyaW1lciAoMjAwOCk="><span class="gt_from_md">Source: Gerber, Green, and Larimer (2008)</span></span></td>
-    </tr></tfoot>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="3">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span data-qmd-base64="Q0kgPSBDcmVkaWJsZSBJbnRlcnZhbA=="><span class="gt_from_md">CI = Credible Interval</span></span>
-</td>
-    </tr></tfoot>
+<tfoot class="gt_sourcenotes">
+<tr class="odd">
+<td colspan="3" class="gt_sourcenote">Abbreviation: CI = Credible Interval</td>
+</tr>
+<tr class="even">
+<td colspan="3" class="gt_sourcenote">Source: Gerber, Green, and Larimer (2008)</td>
+</tr>
+</tfoot>
 </table>
 </div>
 </div>
@@ -3020,13 +2980,13 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <li><p>The coefficient of age_z, 0.035, implies a change of ~3.5% in likelihood of voting for each increment of one standard deviation (~ 14.45 years). For example: when comparing someone 50 years old with someone 65, the latter is about 3.5% more likely to vote.</p></li>
 <li><p>Exposure to the Neighbors treatment shows a ~4.4% increase in voting likelihood for someone in the Rarely Vote category. Because of random assignment of treatment, we can interpret that coefficient as an estimate of the average treatment effect.</p></li>
 <li><p>If someone were from a different voter classification, the calculation is more complex because we need to account for the interaction term. For example, for individuals who Sometimes Vote, the treatment effect of Neighbors is 8.6%. For Always Vote Neighbors, it is 9%.</p></li>
-</ul></section></section><section id="tests" class="level3" data-number="10.3.2"><h3 data-number="10.3.2" class="anchored" data-anchor-id="tests">
-<span class="header-section-number">10.3.2</span> Tests</h3>
-</section><section id="data-generating-mechanism" class="level3" data-number="10.3.3"><h3 data-number="10.3.3" class="anchored" data-anchor-id="data-generating-mechanism">
-<span class="header-section-number">10.3.3</span> Data Generating Mechanism</h3>
+</ul></section></section><section id="tests" class="level3" data-number="9.3.2"><h3 data-number="9.3.2" class="anchored" data-anchor-id="tests">
+<span class="header-section-number">9.3.2</span> Tests</h3>
+</section><section id="data-generating-mechanism" class="level3" data-number="9.3.3"><h3 data-number="9.3.3" class="anchored" data-anchor-id="data-generating-mechanism">
+<span class="header-section-number">9.3.3</span> Data Generating Mechanism</h3>
 <p>Should we use <code>fit_1</code> or <code>fit_2</code>? Reasonable people will differ.</p>
-</section></section><section id="temperance" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="temperance">
-<span class="header-section-number">10.4</span> Temperance</h2>
+</section></section><section id="temperance" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="temperance">
+<span class="header-section-number">9.4</span> Temperance</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -3036,15 +2996,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
 <p>Courage produced the data generating mechanism. Temperance guides us in the use of the DGM — or the “model” — we have created to answer the questions with which we began. We create posteriors for the quantities of interest. We should be modest in the claims we make. The posteriors we create are never the “truth.” The assumptions we made to create the model are never perfect. Yet decisions made with flawed posteriors are almost always better than decisions made without them.</p>
-<section id="questions-and-answers" class="level3" data-number="10.4.1"><h3 data-number="10.4.1" class="anchored" data-anchor-id="questions-and-answers">
-<span class="header-section-number">10.4.1</span> Questions and Answers</h3>
+<section id="questions-and-answers" class="level3" data-number="9.4.1"><h3 data-number="9.4.1" class="anchored" data-anchor-id="questions-and-answers">
+<span class="header-section-number">9.4.1</span> Questions and Answers</h3>
 <p>Recall our initial question: <em>What is the causal effect, on the likelihood of voting, of different postcards on voters of different levels of political engagement?</em></p>
 <p>To answer the question, we want to look at different average treatment effects for each treatment and type of voting behavior. In the real world, the treatment effect for person A is almost always different than the treatment effect for person B.</p>
 <p>In this section, we will create a plot that displays the posterior probability distributions of the average treatment effects for men of average age across all combinations of 4 treatments and 3 voter classifications. This means that we are making a total of <em>12</em> inferences.</p>
 <p><em>Important note</em>: We could look at lots of ages and both Male and Female subjects. However, that would not change our estimates of the treatment effects. The model is linear, so terms associated with <code>age_z</code> and <code>sex</code> disappear when we do the subtraction. This is one of the great advantages of linear models.</p>
 <p>To begin, we will need to create our <code>newobs</code> object.</p>
 <div class="cell">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Because our model is linear, the terms associated with age_z and sex disappear</span></span>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Because our model is linear, the terms associated with age_z and sex disappear</span></span>
 <span><span class="co"># when we perform subtraction. The treatment effects calculated thereafter will</span></span>
 <span><span class="co"># not only apply to males of the z-scored age of ~ 50 years. The treatment</span></span>
 <span><span class="co"># effects apply to all participants, despite calling these inputs.</span></span>
@@ -3078,7 +3038,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p>Take a look the <code>newobs</code> object before trying to use it.</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">newobs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">newobs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 15 × 5
    sex   age_z treatment   voter_class    names                     
@@ -3102,7 +3062,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p>Now that we have <code>newobs</code>, we just use the same call to <code><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code> as usual.</p>
 <div class="cell">
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_2</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_2</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="va">newobs</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 60,000 × 10
@@ -3125,7 +3085,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <!-- DK: Discuss how these are continuous, not 0/1. What does it mean? Why can we use it? -->
 <p>This data is not in a format which is easy to work with. We want to calculate causal effects, which are the difference between two potential outcomes. This is easiest to do when all potential outcomes are on the same line. Consider:</p>
 <div class="cell">
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">draws</span> <span class="op">&lt;-</span> <span class="va">fit_2</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">draws</span> <span class="op">&lt;-</span> <span class="va">fit_2</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="va">newobs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">names</span>, <span class="va">.epred</span><span class="op">)</span> <span class="op">|&gt;</span>  </span>
@@ -3163,7 +3123,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <p>Recall that, when calculating a treatment effect, we need to subtract the estimate for each category from the control group for that category. For example, if we wanted to find the treatment effect for the <code>neighbors_always_vote</code> group, we would need: <code>neighbors_always_vote</code> minus <code>no_postcard_always_vote</code>.</p>
 <p>Therefore, we will use <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> twelve times, for each of the treatments and voting frequencies. After, we will <code>pivot_longer</code> in order for the treatment effects to be sensibly categorized for plotting. If any of this sounds confusing, read the code comments carefully.</p>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">plot_data</span> <span class="op">&lt;-</span> <span class="va">draws</span> <span class="op">|&gt;</span> </span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">plot_data</span> <span class="op">&lt;-</span> <span class="va">draws</span> <span class="op">|&gt;</span> </span>
 <span>  </span>
 <span>  <span class="co"># Using our cleaned naming system, ATE calculations are simple enough. Note</span></span>
 <span>  <span class="co"># how much easier the code reads because we have taken the trouble to line up</span></span>
@@ -3203,7 +3163,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p>Finally, we will plot our data! Read the code comments for explanations on aesthetic choices, as well as a helpful discussion on <code><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder()</a></code>.</p>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">plot_data</span>  <span class="op">|&gt;</span> </span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">plot_data</span>  <span class="op">|&gt;</span> </span>
 <span>  </span>
 <span>  <span class="co"># Reordering the y axis values allows a smoother visual interpretation - </span></span>
 <span>  <span class="co"># you can see the treatments in sequential ATE.</span></span>
@@ -3213,7 +3173,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span>  <span class="co"># position = "dodge" is the only sure way to see all 3 treatment distributions</span></span>
 <span>  <span class="co"># identity, single, or any others drop "Sometimes" - topic for further study</span></span>
 <span>  </span>
-<span>    <span class="fu"><a href="http://mjskay.github.io/ggdist/reference/stat_slab.html">stat_slab</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">`Voter Class`</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://mjskay.github.io/ggdist/reference/stat_slab.html">stat_slab</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">`Voter Class`</span><span class="op">)</span>,</span>
 <span>              position <span class="op">=</span> <span class="st">'dodge'</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="http://jrnold.github.io/ggthemes/reference/scale_calc.html">scale_fill_calc</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  </span>
@@ -3231,7 +3191,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="n-parameters_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="n-parameters_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -3245,8 +3205,8 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <p>What does this mean for us, as we consider which postcards to send? * Consider the highest yellow distribution, which is the posterior distribution for the average treatment effect of receiving the Neighbors postcard (compared to not getting a postcard) for Always Voters. The posterior is centered around 9% with a 95% confidence interval of, roughly, 8% to 10%. * Overall, the Civic Duty and Hawthorne postcards had small average treatment effects, across all three categories of voter. The causal effect on Rarely Voters was much smaller, regardless of treatment. It was also much less precisely estimated because there were many fewer Rarely Voters in the data. *The best way to increase turnover, assuming there are limits to how many postcards you can send, is to focus on Sometimes/Always voters and to use the Neighbors postcard.</p>
 <p><em>Conclusion</em>: If we had a limited number of postcards, we would send the Neighbors postcard to citizens who already demonstrate a tendency to vote.</p>
 <p>How confident are we in these findings? If we needed to convince our boss that this is the right strategy, we need to explain how confident we are in our assumptions. To do that, we must understand the three levels of knowledge in the world of posteriors.</p>
-</section><section id="humility" class="level3" data-number="10.4.2"><h3 data-number="10.4.2" class="anchored" data-anchor-id="humility">
-<span class="header-section-number">10.4.2</span> Humility</h3>
+</section><section id="humility" class="level3" data-number="9.4.2"><h3 data-number="9.4.2" class="anchored" data-anchor-id="humility">
+<span class="header-section-number">9.4.2</span> Humility</h3>
 <p><em>We can never know the truth.</em></p>
 <p>There exist three primary levels of knowledge possible knowledge in our scenario: the Truth (the ideal Preceptor Table), the DGM Posterior, and Our Posterior.</p>
 <p>If we know the Truth (with a capital “T”), then we know the ideal Preceptor Table. With that knowledge, we can <em>directly</em> answer our question precisely. We can calculate each individual’s treatment effect, and any summary measure we might be interested in, like the average treatment effect.</p>
@@ -3268,236 +3228,242 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -3505,187 +3471,163 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./five-parameters.html" class="pagination-link" aria-label="Five Parameters">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Five Parameters</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Five Parameters</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

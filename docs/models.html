@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.7.31">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>4&nbsp; Models – Preceptor's Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference</title>
 <style>
@@ -18,8 +18,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -30,7 +31,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -62,15 +63,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./two-parameters.html" rel="next">
 <link href="./sampling.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a08d9001fe0711adfabc365c1b400f34.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-d3c9390091c69a50683db05bc45f20d8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -123,7 +125,7 @@ window.Quarto = {
 };
 </script>
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
@@ -185,12 +187,6 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./getting-started-with-rstudio.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Getting Started with RStudio</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./getting-started-with-positron.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started with Positron</span></a>
   </div>
@@ -233,26 +229,20 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./mechanics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mechanics</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./four-parameters-categorical.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Four Parameters: Categorical</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Four Parameters: Categorical</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./five-parameters.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Five Parameters</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Five Parameters</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./n-parameters.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">N Parameters</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">N Parameters</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -370,23 +360,23 @@ window.Quarto = {
 <p><em>Moment in Time</em>: The moment in time is just after Election Day 2024.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="rvftbyuryq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rvftbyuryq table {
+<div id="iyscebqwvx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iyscebqwvx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rvftbyuryq thead, #rvftbyuryq tbody, #rvftbyuryq tfoot, #rvftbyuryq tr, #rvftbyuryq td, #rvftbyuryq th {
+#iyscebqwvx thead, #iyscebqwvx tbody, #iyscebqwvx tfoot, #iyscebqwvx tr, #iyscebqwvx td, #iyscebqwvx th {
   border-style: none;
 }
 
-#rvftbyuryq p {
+#iyscebqwvx p {
   margin: 0;
   padding: 0;
 }
 
-#rvftbyuryq .gt_table {
+#iyscebqwvx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -412,12 +402,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#rvftbyuryq .gt_caption {
+#iyscebqwvx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rvftbyuryq .gt_title {
+#iyscebqwvx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -429,7 +419,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#rvftbyuryq .gt_subtitle {
+#iyscebqwvx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -441,7 +431,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#rvftbyuryq .gt_heading {
+#iyscebqwvx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -453,13 +443,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rvftbyuryq .gt_bottom_border {
+#iyscebqwvx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rvftbyuryq .gt_col_headings {
+#iyscebqwvx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -474,7 +464,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rvftbyuryq .gt_col_heading {
+#iyscebqwvx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -494,7 +484,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#rvftbyuryq .gt_column_spanner_outer {
+#iyscebqwvx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -506,15 +496,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#rvftbyuryq .gt_column_spanner_outer:first-child {
+#iyscebqwvx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rvftbyuryq .gt_column_spanner_outer:last-child {
+#iyscebqwvx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rvftbyuryq .gt_column_spanner {
+#iyscebqwvx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -526,11 +516,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#rvftbyuryq .gt_spanner_row {
+#iyscebqwvx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rvftbyuryq .gt_group_heading {
+#iyscebqwvx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -556,7 +546,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#rvftbyuryq .gt_empty_group_heading {
+#iyscebqwvx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -571,15 +561,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#rvftbyuryq .gt_from_md > :first-child {
+#iyscebqwvx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rvftbyuryq .gt_from_md > :last-child {
+#iyscebqwvx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rvftbyuryq .gt_row {
+#iyscebqwvx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -598,7 +588,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#rvftbyuryq .gt_stub {
+#iyscebqwvx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -611,7 +601,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rvftbyuryq .gt_stub_row_group {
+#iyscebqwvx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -625,15 +615,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#rvftbyuryq .gt_row_group_first td {
+#iyscebqwvx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rvftbyuryq .gt_row_group_first th {
+#iyscebqwvx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rvftbyuryq .gt_summary_row {
+#iyscebqwvx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -643,16 +633,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rvftbyuryq .gt_first_summary_row {
+#iyscebqwvx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rvftbyuryq .gt_first_summary_row.thick {
+#iyscebqwvx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rvftbyuryq .gt_last_summary_row {
+#iyscebqwvx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -662,7 +652,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rvftbyuryq .gt_grand_summary_row {
+#iyscebqwvx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -672,7 +662,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rvftbyuryq .gt_first_grand_summary_row {
+#iyscebqwvx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -682,7 +672,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#rvftbyuryq .gt_last_grand_summary_row_top {
+#iyscebqwvx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -692,11 +682,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rvftbyuryq .gt_striped {
+#iyscebqwvx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rvftbyuryq .gt_table_body {
+#iyscebqwvx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -705,7 +695,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rvftbyuryq .gt_footnotes {
+#iyscebqwvx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -719,7 +709,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rvftbyuryq .gt_footnote {
+#iyscebqwvx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -728,7 +718,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rvftbyuryq .gt_sourcenotes {
+#iyscebqwvx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -742,7 +732,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rvftbyuryq .gt_sourcenote {
+#iyscebqwvx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -750,72 +740,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rvftbyuryq .gt_left {
+#iyscebqwvx .gt_left {
   text-align: left;
 }
 
-#rvftbyuryq .gt_center {
+#iyscebqwvx .gt_center {
   text-align: center;
 }
 
-#rvftbyuryq .gt_right {
+#iyscebqwvx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rvftbyuryq .gt_font_normal {
+#iyscebqwvx .gt_font_normal {
   font-weight: normal;
 }
 
-#rvftbyuryq .gt_font_bold {
+#iyscebqwvx .gt_font_bold {
   font-weight: bold;
 }
 
-#rvftbyuryq .gt_font_italic {
+#iyscebqwvx .gt_font_italic {
   font-style: italic;
 }
 
-#rvftbyuryq .gt_super {
+#iyscebqwvx .gt_super {
   font-size: 65%;
 }
 
-#rvftbyuryq .gt_footnote_marks {
+#iyscebqwvx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rvftbyuryq .gt_asterisk {
+#iyscebqwvx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rvftbyuryq .gt_indent_1 {
+#iyscebqwvx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rvftbyuryq .gt_indent_2 {
+#iyscebqwvx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rvftbyuryq .gt_indent_3 {
+#iyscebqwvx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rvftbyuryq .gt_indent_4 {
+#iyscebqwvx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rvftbyuryq .gt_indent_5 {
+#iyscebqwvx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rvftbyuryq .katex-display {
+#iyscebqwvx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rvftbyuryq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#iyscebqwvx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -885,23 +875,23 @@ window.Quarto = {
 <p>The allowed choice are “Joe Biden,” “Donald Trump,” “Other,” “Not Sure,” and “I would not vote.” 42% of those polled indicated Joe Biden. Although rounding makes it impossible to know for sure, we will assume that 655 of the 1,559 “US adult citizens” would vote for Biden. Our data looks like:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="cghfpihpqw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cghfpihpqw table {
+<div id="qvvxjowmvh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qvvxjowmvh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cghfpihpqw thead, #cghfpihpqw tbody, #cghfpihpqw tfoot, #cghfpihpqw tr, #cghfpihpqw td, #cghfpihpqw th {
+#qvvxjowmvh thead, #qvvxjowmvh tbody, #qvvxjowmvh tfoot, #qvvxjowmvh tr, #qvvxjowmvh td, #qvvxjowmvh th {
   border-style: none;
 }
 
-#cghfpihpqw p {
+#qvvxjowmvh p {
   margin: 0;
   padding: 0;
 }
 
-#cghfpihpqw .gt_table {
+#qvvxjowmvh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -927,12 +917,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#cghfpihpqw .gt_caption {
+#qvvxjowmvh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cghfpihpqw .gt_title {
+#qvvxjowmvh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -944,7 +934,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#cghfpihpqw .gt_subtitle {
+#qvvxjowmvh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -956,7 +946,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#cghfpihpqw .gt_heading {
+#qvvxjowmvh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -968,13 +958,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cghfpihpqw .gt_bottom_border {
+#qvvxjowmvh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cghfpihpqw .gt_col_headings {
+#qvvxjowmvh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -989,7 +979,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cghfpihpqw .gt_col_heading {
+#qvvxjowmvh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1009,7 +999,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#cghfpihpqw .gt_column_spanner_outer {
+#qvvxjowmvh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1021,15 +1011,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#cghfpihpqw .gt_column_spanner_outer:first-child {
+#qvvxjowmvh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cghfpihpqw .gt_column_spanner_outer:last-child {
+#qvvxjowmvh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cghfpihpqw .gt_column_spanner {
+#qvvxjowmvh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1041,11 +1031,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#cghfpihpqw .gt_spanner_row {
+#qvvxjowmvh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cghfpihpqw .gt_group_heading {
+#qvvxjowmvh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1071,7 +1061,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#cghfpihpqw .gt_empty_group_heading {
+#qvvxjowmvh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1086,15 +1076,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#cghfpihpqw .gt_from_md > :first-child {
+#qvvxjowmvh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cghfpihpqw .gt_from_md > :last-child {
+#qvvxjowmvh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cghfpihpqw .gt_row {
+#qvvxjowmvh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1113,7 +1103,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#cghfpihpqw .gt_stub {
+#qvvxjowmvh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1126,7 +1116,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cghfpihpqw .gt_stub_row_group {
+#qvvxjowmvh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1140,15 +1130,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#cghfpihpqw .gt_row_group_first td {
+#qvvxjowmvh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cghfpihpqw .gt_row_group_first th {
+#qvvxjowmvh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cghfpihpqw .gt_summary_row {
+#qvvxjowmvh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1158,16 +1148,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cghfpihpqw .gt_first_summary_row {
+#qvvxjowmvh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cghfpihpqw .gt_first_summary_row.thick {
+#qvvxjowmvh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cghfpihpqw .gt_last_summary_row {
+#qvvxjowmvh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1177,7 +1167,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#cghfpihpqw .gt_grand_summary_row {
+#qvvxjowmvh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1187,7 +1177,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cghfpihpqw .gt_first_grand_summary_row {
+#qvvxjowmvh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1197,7 +1187,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#cghfpihpqw .gt_last_grand_summary_row_top {
+#qvvxjowmvh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1207,11 +1197,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#cghfpihpqw .gt_striped {
+#qvvxjowmvh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cghfpihpqw .gt_table_body {
+#qvvxjowmvh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1220,7 +1210,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#cghfpihpqw .gt_footnotes {
+#qvvxjowmvh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1234,7 +1224,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cghfpihpqw .gt_footnote {
+#qvvxjowmvh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1243,7 +1233,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cghfpihpqw .gt_sourcenotes {
+#qvvxjowmvh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1257,7 +1247,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cghfpihpqw .gt_sourcenote {
+#qvvxjowmvh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1265,72 +1255,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cghfpihpqw .gt_left {
+#qvvxjowmvh .gt_left {
   text-align: left;
 }
 
-#cghfpihpqw .gt_center {
+#qvvxjowmvh .gt_center {
   text-align: center;
 }
 
-#cghfpihpqw .gt_right {
+#qvvxjowmvh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cghfpihpqw .gt_font_normal {
+#qvvxjowmvh .gt_font_normal {
   font-weight: normal;
 }
 
-#cghfpihpqw .gt_font_bold {
+#qvvxjowmvh .gt_font_bold {
   font-weight: bold;
 }
 
-#cghfpihpqw .gt_font_italic {
+#qvvxjowmvh .gt_font_italic {
   font-style: italic;
 }
 
-#cghfpihpqw .gt_super {
+#qvvxjowmvh .gt_super {
   font-size: 65%;
 }
 
-#cghfpihpqw .gt_footnote_marks {
+#qvvxjowmvh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cghfpihpqw .gt_asterisk {
+#qvvxjowmvh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cghfpihpqw .gt_indent_1 {
+#qvvxjowmvh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cghfpihpqw .gt_indent_2 {
+#qvvxjowmvh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cghfpihpqw .gt_indent_3 {
+#qvvxjowmvh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cghfpihpqw .gt_indent_4 {
+#qvvxjowmvh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cghfpihpqw .gt_indent_5 {
+#qvvxjowmvh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cghfpihpqw .katex-display {
+#qvvxjowmvh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cghfpihpqw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qvvxjowmvh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1408,23 +1398,23 @@ window.Quarto = {
 <p>We use the <em>Population Table</em> to acknowledge the wider source from which we could have collected our data. It includes rows from three sources: the data for units we want to have (the Preceptor Table), the data for units which we have (our actual data), and the data for units we do not care about (the rest of the population, not included in the data or in the Preceptor Table). Consider:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ufcimovpxi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ufcimovpxi table {
+<div id="vxtloyjuxq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vxtloyjuxq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ufcimovpxi thead, #ufcimovpxi tbody, #ufcimovpxi tfoot, #ufcimovpxi tr, #ufcimovpxi td, #ufcimovpxi th {
+#vxtloyjuxq thead, #vxtloyjuxq tbody, #vxtloyjuxq tfoot, #vxtloyjuxq tr, #vxtloyjuxq td, #vxtloyjuxq th {
   border-style: none;
 }
 
-#ufcimovpxi p {
+#vxtloyjuxq p {
   margin: 0;
   padding: 0;
 }
 
-#ufcimovpxi .gt_table {
+#vxtloyjuxq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1450,12 +1440,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#ufcimovpxi .gt_caption {
+#vxtloyjuxq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ufcimovpxi .gt_title {
+#vxtloyjuxq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1467,7 +1457,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#ufcimovpxi .gt_subtitle {
+#vxtloyjuxq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1479,7 +1469,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#ufcimovpxi .gt_heading {
+#vxtloyjuxq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1491,13 +1481,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ufcimovpxi .gt_bottom_border {
+#vxtloyjuxq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ufcimovpxi .gt_col_headings {
+#vxtloyjuxq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1512,7 +1502,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ufcimovpxi .gt_col_heading {
+#vxtloyjuxq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1532,7 +1522,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ufcimovpxi .gt_column_spanner_outer {
+#vxtloyjuxq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1544,15 +1534,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#ufcimovpxi .gt_column_spanner_outer:first-child {
+#vxtloyjuxq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ufcimovpxi .gt_column_spanner_outer:last-child {
+#vxtloyjuxq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ufcimovpxi .gt_column_spanner {
+#vxtloyjuxq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1564,11 +1554,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#ufcimovpxi .gt_spanner_row {
+#vxtloyjuxq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ufcimovpxi .gt_group_heading {
+#vxtloyjuxq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1594,7 +1584,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#ufcimovpxi .gt_empty_group_heading {
+#vxtloyjuxq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1609,15 +1599,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#ufcimovpxi .gt_from_md > :first-child {
+#vxtloyjuxq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ufcimovpxi .gt_from_md > :last-child {
+#vxtloyjuxq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ufcimovpxi .gt_row {
+#vxtloyjuxq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1636,7 +1626,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ufcimovpxi .gt_stub {
+#vxtloyjuxq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1649,7 +1639,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ufcimovpxi .gt_stub_row_group {
+#vxtloyjuxq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1663,15 +1653,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#ufcimovpxi .gt_row_group_first td {
+#vxtloyjuxq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ufcimovpxi .gt_row_group_first th {
+#vxtloyjuxq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ufcimovpxi .gt_summary_row {
+#vxtloyjuxq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1681,16 +1671,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ufcimovpxi .gt_first_summary_row {
+#vxtloyjuxq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ufcimovpxi .gt_first_summary_row.thick {
+#vxtloyjuxq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ufcimovpxi .gt_last_summary_row {
+#vxtloyjuxq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1700,7 +1690,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ufcimovpxi .gt_grand_summary_row {
+#vxtloyjuxq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1710,7 +1700,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ufcimovpxi .gt_first_grand_summary_row {
+#vxtloyjuxq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1720,7 +1710,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#ufcimovpxi .gt_last_grand_summary_row_top {
+#vxtloyjuxq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1730,11 +1720,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ufcimovpxi .gt_striped {
+#vxtloyjuxq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ufcimovpxi .gt_table_body {
+#vxtloyjuxq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1743,7 +1733,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ufcimovpxi .gt_footnotes {
+#vxtloyjuxq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1757,7 +1747,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ufcimovpxi .gt_footnote {
+#vxtloyjuxq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1766,7 +1756,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ufcimovpxi .gt_sourcenotes {
+#vxtloyjuxq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1780,7 +1770,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ufcimovpxi .gt_sourcenote {
+#vxtloyjuxq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1788,72 +1778,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ufcimovpxi .gt_left {
+#vxtloyjuxq .gt_left {
   text-align: left;
 }
 
-#ufcimovpxi .gt_center {
+#vxtloyjuxq .gt_center {
   text-align: center;
 }
 
-#ufcimovpxi .gt_right {
+#vxtloyjuxq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ufcimovpxi .gt_font_normal {
+#vxtloyjuxq .gt_font_normal {
   font-weight: normal;
 }
 
-#ufcimovpxi .gt_font_bold {
+#vxtloyjuxq .gt_font_bold {
   font-weight: bold;
 }
 
-#ufcimovpxi .gt_font_italic {
+#vxtloyjuxq .gt_font_italic {
   font-style: italic;
 }
 
-#ufcimovpxi .gt_super {
+#vxtloyjuxq .gt_super {
   font-size: 65%;
 }
 
-#ufcimovpxi .gt_footnote_marks {
+#vxtloyjuxq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ufcimovpxi .gt_asterisk {
+#vxtloyjuxq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ufcimovpxi .gt_indent_1 {
+#vxtloyjuxq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ufcimovpxi .gt_indent_2 {
+#vxtloyjuxq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ufcimovpxi .gt_indent_3 {
+#vxtloyjuxq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ufcimovpxi .gt_indent_4 {
+#vxtloyjuxq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ufcimovpxi .gt_indent_5 {
+#vxtloyjuxq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ufcimovpxi .katex-display {
+#vxtloyjuxq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ufcimovpxi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#vxtloyjuxq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2036,10 +2026,10 @@ window.Quarto = {
  1     0
  2     1
  3     0
- 4     0
+ 4     1
  5     0
  6     0
- 7     1
+ 7     0
  8     1
  9     0
 10     0</code></pre>
@@ -2087,9 +2077,9 @@ window.Quarto = {
 <p>The <strong>brms</strong> package provides a user-friendly interface to work with the statistical language <a href="https://mc-stan.org/">Stan</a>, the leading tool for Bayesian model building.</p>
 <section id="gaussian" class="level4" data-number="4.3.1.1"><h4 data-number="4.3.1.1" class="anchored" data-anchor-id="gaussian">
 <span class="header-section-number">4.3.1.1</span> Gaussian</h4>
-<p>The key function in the <strong>brms</strong> package is <code><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm()</a></code>.</p>
+<p>The key function in the <strong>brms</strong> package is <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">biden</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulbuerkner.com/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">biden</span> <span class="op">~</span> <span class="fl">1</span>,</span>
 <span>                data <span class="op">=</span> <span class="va">poll_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Compiling Stan program...</code></pre>
@@ -2101,8 +2091,8 @@ window.Quarto = {
 <pre><code>
 SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
 Chain 1: 
-Chain 1: Gradient evaluation took 7.6e-05 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.76 seconds.
+Chain 1: Gradient evaluation took 6e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.6 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
@@ -2119,15 +2109,15 @@ Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 0.1 seconds (Warm-up)
-Chain 1:                0.096 seconds (Sampling)
-Chain 1:                0.196 seconds (Total)
+Chain 1:  Elapsed Time: 0.099 seconds (Warm-up)
+Chain 1:                0.089 seconds (Sampling)
+Chain 1:                0.188 seconds (Total)
 Chain 1: 
 
 SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 2).
 Chain 2: 
-Chain 2: Gradient evaluation took 2.7e-05 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.27 seconds.
+Chain 2: Gradient evaluation took 2.9e-05 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.29 seconds.
 Chain 2: Adjust your expectations accordingly!
 Chain 2: 
 Chain 2: 
@@ -2144,9 +2134,9 @@ Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 2: 
-Chain 2:  Elapsed Time: 0.103 seconds (Warm-up)
-Chain 2:                0.12 seconds (Sampling)
-Chain 2:                0.223 seconds (Total)
+Chain 2:  Elapsed Time: 0.099 seconds (Warm-up)
+Chain 2:                0.095 seconds (Sampling)
+Chain 2:                0.194 seconds (Total)
 Chain 2: 
 
 SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 3).
@@ -2169,9 +2159,9 @@ Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 3: 
-Chain 3:  Elapsed Time: 0.103 seconds (Warm-up)
-Chain 3:                0.097 seconds (Sampling)
-Chain 3:                0.2 seconds (Total)
+Chain 3:  Elapsed Time: 0.098 seconds (Warm-up)
+Chain 3:                0.112 seconds (Sampling)
+Chain 3:                0.21 seconds (Total)
 Chain 3: 
 
 SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 4).
@@ -2194,22 +2184,22 @@ Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 4: 
-Chain 4:  Elapsed Time: 0.103 seconds (Warm-up)
-Chain 4:                0.12 seconds (Sampling)
-Chain 4:                0.223 seconds (Total)
+Chain 4:  Elapsed Time: 0.102 seconds (Warm-up)
+Chain 4:                0.094 seconds (Sampling)
+Chain 4:                0.196 seconds (Total)
 Chain 4: </code></pre>
 </div>
 </div>
 <p>Notes:</p>
 <ul>
-<li><p><code><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm()</a></code> produces a great deal of output, as you can see above. This is useful if there is some sort of problem. But, most of the time, we don’t care. So we suppress the output in the rest of the <em>Primer</em>, using <code>refresh = 0</code> and <code>silent = 2</code>.</p></li>
-<li><p>We almost always assign the result of a <code><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm()</a></code> call to an object, as here. By convention, the name of that object begins with “fit” because it is a <strong>fit</strong>ted model object. This model was created quickly but larger models take longer. So, we assign the result to an object so we don’t need to recreate it.</p></li>
-<li><p>The first argument to <code><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm()</a></code> is <code>formula</code>. This is provided using the R formula syntax in which the dependent variable, <code>red</code> is separated from the independent variables by a tilde: <code>~</code>. This is the standard approach in almost all R model estimating functions. In this case, the only independent variable is a constant, which is represented with a <code>1</code>.</p></li>
-<li><p>The second argument to <code><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm()</a></code> is <code>data</code>, which is a tibble containing the data used to estimate the model parameters. The variables specified in the <code>formula</code> must match the variables in the tibble which is passed in, which is .</p></li>
+<li><p><code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code> produces a great deal of output, as you can see above. This is useful if there is some sort of problem. But, most of the time, we don’t care. So we suppress the output in the rest of the <em>Primer</em>, using <code>refresh = 0</code> and <code>silent = 2</code>.</p></li>
+<li><p>We almost always assign the result of a <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code> call to an object, as here. By convention, the name of that object begins with “fit” because it is a <strong>fit</strong>ted model object. This model was created quickly but larger models take longer. So, we assign the result to an object so we don’t need to recreate it.</p></li>
+<li><p>The first argument to <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code> is <code>formula</code>. This is provided using the R formula syntax in which the dependent variable, <code>red</code> is separated from the independent variables by a tilde: <code>~</code>. This is the standard approach in almost all R model estimating functions. In this case, the only independent variable is a constant, which is represented with a <code>1</code>.</p></li>
+<li><p>The second argument to <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code> is <code>data</code>, which is a tibble containing the data used to estimate the model parameters. The variables specified in the <code>formula</code> must match the variables in the tibble which is passed in, which is .</p></li>
 <li><p>Because the fitting process is random, if we run this code again we will get a (very slightly) different answer. In most applications, the differences are too small to matter. But, they are annoying! So, we use the <code>seed</code> argument so that your result will match ours.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">biden</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulbuerkner.com/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">biden</span> <span class="op">~</span> <span class="fl">1</span>,</span>
 <span>                data <span class="op">=</span> <span class="va">poll_data</span>,</span>
 <span>                refresh <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>                silent <span class="op">=</span> <span class="fl">2</span>,</span>
@@ -2247,8 +2237,8 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <li><p>The “Links” are “identity” for both “mu” and “sigma.” Recall the the gaussian/normal distribution is specified as <span class="math inline">\(N(\mu, \sigma^2)\)</span> in which <span class="math inline">\(\mu\)</span>, or “mu,” is the parameter for the mean or center of the distribution and <span class="math inline">\(\sigma\)</span>, or “sigma,” is the parameter for the standard deviation or spread of the distribution.</p></li>
 </ul>
 <!-- DK: ? Identity links are ones in which the mathematical connection between the  --><ul>
-<li><p>The “Formula” is <code>biden ~ 1</code>, which is what we passed in to the <code>formula</code> argument when we called <code><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm()</a></code>.</p></li>
-<li><p>The “Data” is <code>poll_data</code>, which is what we passed in to the <code>data</code> argument when we called <code><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm()</a></code>. Note the reminder that there are 1,559 observations. Never hurts to check that the reported number of observations matches what you expect.</p></li>
+<li><p>The “Formula” is <code>biden ~ 1</code>, which is what we passed in to the <code>formula</code> argument when we called <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code>.</p></li>
+<li><p>The “Data” is <code>poll_data</code>, which is what we passed in to the <code>data</code> argument when we called <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code>. Note the reminder that there are 1,559 observations. Never hurts to check that the reported number of observations matches what you expect.</p></li>
 <li><p>Fitting Bayesian models is computationally complex. The information about “Draws,” and the values for “Rhat,” “Bulk_ESS,” and “Tail_ESS” refer to those complexities. The bottom message gives a basic explanation. Don’t worry about any of that now.</p></li>
 <li><p>The “Intercept” is the key part of the model. Because the family is (incorrectly!) Gaussian and the link function an identity, the actual model we are estimating looks like:</p></li>
 </ul>
@@ -2312,7 +2302,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="models_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="models_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2326,16 +2316,16 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 # Groups:   .row [1]
     .row .chain .iteration .draw .prediction
    &lt;int&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt;       &lt;dbl&gt;
- 1     1     NA         NA     1     -0.185 
- 2     1     NA         NA     2      0.452 
- 3     1     NA         NA     3      0.177 
- 4     1     NA         NA     4      1.06  
- 5     1     NA         NA     5      0.495 
- 6     1     NA         NA     6      0.912 
- 7     1     NA         NA     7      1.63  
- 8     1     NA         NA     8      0.379 
- 9     1     NA         NA     9      0.337 
-10     1     NA         NA    10     -0.0841
+ 1     1     NA         NA     1       0.418
+ 2     1     NA         NA     2       0.938
+ 3     1     NA         NA     3       0.198
+ 4     1     NA         NA     4       0.285
+ 5     1     NA         NA     5       0.162
+ 6     1     NA         NA     6       0.424
+ 7     1     NA         NA     7       1.40 
+ 8     1     NA         NA     8      -0.144
+ 9     1     NA         NA     9       0.434
+10     1     NA         NA    10       0.928
 # ℹ 3,990 more rows</code></pre>
 </div>
 </div>
@@ -2350,7 +2340,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="models_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="models_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2360,16 +2350,16 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <p>Sadly, most usage of <code><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check()</a></code> does not produce such a clear cut conclusion. We need to decide if <span class="math inline">\(y\)</span> and <span class="math inline">\(y_rep\)</span> are “close enough” that our model can be used as if it were true.</p>
 <section id="bernoulli" class="level4" data-number="4.3.2.1"><h4 data-number="4.3.2.1" class="anchored" data-anchor-id="bernoulli">
 <span class="header-section-number">4.3.2.1</span> Bernoulli</h4>
-<p>We have discovered that our initial assumption about the correct mathematical formula for the data generating mechanism was mistaken. Instead of a gaussion (or Normal) probability model, we should use a Bernoulli model. We must modify our call to <code><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm()</a></code> as follows:</p>
+<p>We have discovered that our initial assumption about the correct mathematical formula for the data generating mechanism was mistaken. Instead of a gaussion (or Normal) probability model, we should use a Bernoulli model. We must modify our call to <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code> as follows:</p>
 <div class="cell">
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_bern</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">biden</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_bern</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulbuerkner.com/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">biden</span> <span class="op">~</span> <span class="fl">1</span>,</span>
 <span>                data <span class="op">=</span> <span class="va">poll_data</span>,</span>
-<span>                family <span class="op">=</span> <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/brmsfamily.html">bernoulli</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                family <span class="op">=</span> <span class="fu"><a href="https://paulbuerkner.com/brms/reference/brmsfamily.html">bernoulli</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>                refresh <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>                silent <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>                seed <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This call to <code><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm()</a></code> is the same as the previous one, except that we have specified the value of the <code>family</code> argument as <code><a href="https://paul-buerkner.github.io/brms/reference/brmsfamily.html">bernoulli()</a></code>. (Note that we can give just the name of the family, which is itself a function, or include the parentheses as in <code><a href="https://paul-buerkner.github.io/brms/reference/brmsfamily.html">bernoulli()</a></code>. The results are the same.) Recall that the default value of <code>family</code> is <code><a href="https://rdrr.io/r/stats/family.html">gaussian()</a></code> or, equivalently, <code>guassian</code>. In a Bernoulli data generating mechanism, we have:</p>
+<p>This call to <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code> is the same as the previous one, except that we have specified the value of the <code>family</code> argument as <code><a href="https://paulbuerkner.com/brms/reference/brmsfamily.html">bernoulli()</a></code>. (Note that we can give just the name of the family, which is itself a function, or include the parentheses as in <code><a href="https://paulbuerkner.com/brms/reference/brmsfamily.html">bernoulli()</a></code>. The results are the same.) Recall that the default value of <code>family</code> is <code><a href="https://rdrr.io/r/stats/family.html">gaussian()</a></code> or, equivalently, <code>guassian</code>. In a Bernoulli data generating mechanism, we have:</p>
 <p><span class="math display">\[ biden_i  \sim Bernoulli(\rho) \]</span></p>
 <p>Each voter <span class="math inline">\(i\)</span> which we sample either supports Biden or they do not. If person <span class="math inline">\(i\)</span> supports Biden, the value drawn is <code>1</code>, which is the standard way of representing <code>TRUE</code>. In other words, <span class="math inline">\(biden_i = 1\)</span> means that person <span class="math inline">\(i\)</span> supports Biden. Similarly, a person not supporting Biden is indicated with <code>0</code>, meaning that it is <code>FALSE</code> that the person <span class="math inline">\(i\)</span> supports Biden. <span class="math inline">\(\rho\)</span> is the only parameter in a Bernoulli model. It is the probability that a <code>1</code>, instead of a <code>0</code>, is drawn. That is, <span class="math inline">\(\rho\)</span> is the probability that a person supports Biden or, equivalently, the proportion of all voters who support Biden.</p>
 <p>Consider the fitted object:</p>
@@ -2439,7 +2429,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="models_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="models_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2454,14 +2444,14 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
     .row .chain .iteration .draw .prediction
    &lt;int&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt;       &lt;int&gt;
  1     1     NA         NA     1           1
- 2     1     NA         NA     2           1
- 3     1     NA         NA     3           1
- 4     1     NA         NA     4           0
- 5     1     NA         NA     5           1
+ 2     1     NA         NA     2           0
+ 3     1     NA         NA     3           0
+ 4     1     NA         NA     4           1
+ 5     1     NA         NA     5           0
  6     1     NA         NA     6           1
  7     1     NA         NA     7           0
  8     1     NA         NA     8           0
- 9     1     NA         NA     9           1
+ 9     1     NA         NA     9           0
 10     1     NA         NA    10           0
 # ℹ 3,990 more rows</code></pre>
 </div>
@@ -2474,12 +2464,12 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="models_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="models_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Using <code>type = "bars"</code> is a good choice for <code><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check()</a></code> when <code>family</code> is <code><a href="https://paul-buerkner.github.io/brms/reference/brmsfamily.html">bernoulli()</a></code>. Note how the 10 replications of <span class="math inline">\(y_rep\)</span> are indistinguishable from the true output values <span class="math inline">\(y\)</span>. A good model produces replications, sometimes termed “fake data,” which is indistinguishable for the actual data.</p>
+<p>Using <code>type = "bars"</code> is a good choice for <code><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check()</a></code> when <code>family</code> is <code><a href="https://paulbuerkner.com/brms/reference/brmsfamily.html">bernoulli()</a></code>. Note how the 10 replications of <span class="math inline">\(y_rep\)</span> are indistinguishable from the true output values <span class="math inline">\(y\)</span>. A good model produces replications, sometimes termed “fake data,” which is indistinguishable for the actual data.</p>
 </section></section><section id="data-generating-mechanism" class="level3" data-number="4.3.3"><h3 data-number="4.3.3" class="anchored" data-anchor-id="data-generating-mechanism">
 <span class="header-section-number">4.3.3</span> Data Generating Mechanism</h3>
 <p>We now have our data generating mechansim:</p>
@@ -2547,236 +2537,242 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -2784,185 +2780,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./sampling.html" class="pagination-link" aria-label="Sampling">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sampling</span></span>
       </a>          

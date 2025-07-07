@@ -30,7 +30,6 @@ book:
   chapters:
     - index.qmd
     - preamble.qmd
-    - getting-started-with-rstudio.qmd
     - getting-started-with-positron.qmd
     - rubin-causal-model.qmd
     - probability.qmd
@@ -38,7 +37,7 @@ book:
     - models.qmd
     - two-parameters.qmd
     - three-parameters-causal.qmd
-    - mechanics.qmd
+    # - mechanics.qmd
     # - four-parameters-continuous.qmd
     - four-parameters-categorical.qmd
     - five-parameters.qmd

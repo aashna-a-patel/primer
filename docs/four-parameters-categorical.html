@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.7.31">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>8&nbsp; Four Parameters: Categorical – Preceptor's Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference</title>
+<title>7&nbsp; Four Parameters: Categorical – Preceptor's Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,8 +18,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -30,7 +31,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -61,16 +62,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./five-parameters.html" rel="next">
-<link href="./mechanics.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<link href="./three-parameters-causal.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a08d9001fe0711adfabc365c1b400f34.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-d3c9390091c69a50683db05bc45f20d8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -123,14 +125,14 @@ window.Quarto = {
 };
 </script>
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./four-parameters-categorical.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Four Parameters: Categorical</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./four-parameters-categorical.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Four Parameters: Categorical</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -185,12 +187,6 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./getting-started-with-rstudio.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Getting Started with RStudio</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./getting-started-with-positron.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting Started with Positron</span></a>
   </div>
@@ -233,26 +229,20 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./mechanics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mechanics</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./four-parameters-categorical.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Four Parameters: Categorical</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Four Parameters: Categorical</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./five-parameters.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Five Parameters</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Five Parameters</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./n-parameters.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">N Parameters</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">N Parameters</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -282,44 +272,44 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#wisdom" id="toc-wisdom" class="nav-link active" data-scroll-target="#wisdom"><span class="header-section-number">8.1</span> Wisdom</a>
+<a href="#wisdom" id="toc-wisdom" class="nav-link active" data-scroll-target="#wisdom"><span class="header-section-number">7.1</span> Wisdom</a>
   <ul class="collapse">
-<li><a href="#preceptor-table" id="toc-preceptor-table" class="nav-link" data-scroll-target="#preceptor-table"><span class="header-section-number">8.1.1</span> Preceptor Table</a></li>
-  <li><a href="#eda" id="toc-eda" class="nav-link" data-scroll-target="#eda"><span class="header-section-number">8.1.2</span> EDA</a></li>
-  <li><a href="#validity" id="toc-validity" class="nav-link" data-scroll-target="#validity"><span class="header-section-number">8.1.3</span> Validity</a></li>
+<li><a href="#preceptor-table" id="toc-preceptor-table" class="nav-link" data-scroll-target="#preceptor-table"><span class="header-section-number">7.1.1</span> Preceptor Table</a></li>
+  <li><a href="#eda" id="toc-eda" class="nav-link" data-scroll-target="#eda"><span class="header-section-number">7.1.2</span> EDA</a></li>
+  <li><a href="#validity" id="toc-validity" class="nav-link" data-scroll-target="#validity"><span class="header-section-number">7.1.3</span> Validity</a></li>
   </ul>
 </li>
   <li>
-<a href="#justice" id="toc-justice" class="nav-link" data-scroll-target="#justice"><span class="header-section-number">8.2</span> Justice</a>
+<a href="#justice" id="toc-justice" class="nav-link" data-scroll-target="#justice"><span class="header-section-number">7.2</span> Justice</a>
   <ul class="collapse">
-<li><a href="#population-table" id="toc-population-table" class="nav-link" data-scroll-target="#population-table"><span class="header-section-number">8.2.1</span> Population Table</a></li>
-  <li><a href="#stability" id="toc-stability" class="nav-link" data-scroll-target="#stability"><span class="header-section-number">8.2.2</span> Stability</a></li>
-  <li><a href="#representativeness" id="toc-representativeness" class="nav-link" data-scroll-target="#representativeness"><span class="header-section-number">8.2.3</span> Representativeness</a></li>
-  <li><a href="#unconfoundedness" id="toc-unconfoundedness" class="nav-link" data-scroll-target="#unconfoundedness"><span class="header-section-number">8.2.4</span> Unconfoundedness</a></li>
+<li><a href="#population-table" id="toc-population-table" class="nav-link" data-scroll-target="#population-table"><span class="header-section-number">7.2.1</span> Population Table</a></li>
+  <li><a href="#stability" id="toc-stability" class="nav-link" data-scroll-target="#stability"><span class="header-section-number">7.2.2</span> Stability</a></li>
+  <li><a href="#representativeness" id="toc-representativeness" class="nav-link" data-scroll-target="#representativeness"><span class="header-section-number">7.2.3</span> Representativeness</a></li>
+  <li><a href="#unconfoundedness" id="toc-unconfoundedness" class="nav-link" data-scroll-target="#unconfoundedness"><span class="header-section-number">7.2.4</span> Unconfoundedness</a></li>
   </ul>
 </li>
   <li>
-<a href="#courage" id="toc-courage" class="nav-link" data-scroll-target="#courage"><span class="header-section-number">8.3</span> Courage</a>
+<a href="#courage" id="toc-courage" class="nav-link" data-scroll-target="#courage"><span class="header-section-number">7.3</span> Courage</a>
   <ul class="collapse">
-<li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><span class="header-section-number">8.3.1</span> Models</a></li>
-  <li><a href="#tests" id="toc-tests" class="nav-link" data-scroll-target="#tests"><span class="header-section-number">8.3.2</span> Tests</a></li>
-  <li><a href="#data-generating-mechanism" id="toc-data-generating-mechanism" class="nav-link" data-scroll-target="#data-generating-mechanism"><span class="header-section-number">8.3.3</span> Data Generating Mechanism</a></li>
+<li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><span class="header-section-number">7.3.1</span> Models</a></li>
+  <li><a href="#tests" id="toc-tests" class="nav-link" data-scroll-target="#tests"><span class="header-section-number">7.3.2</span> Tests</a></li>
+  <li><a href="#data-generating-mechanism" id="toc-data-generating-mechanism" class="nav-link" data-scroll-target="#data-generating-mechanism"><span class="header-section-number">7.3.3</span> Data Generating Mechanism</a></li>
   </ul>
 </li>
   <li>
-<a href="#temperance" id="toc-temperance" class="nav-link" data-scroll-target="#temperance"><span class="header-section-number">8.4</span> Temperance</a>
+<a href="#temperance" id="toc-temperance" class="nav-link" data-scroll-target="#temperance"><span class="header-section-number">7.4</span> Temperance</a>
   <ul class="collapse">
-<li><a href="#questions-and-answers" id="toc-questions-and-answers" class="nav-link" data-scroll-target="#questions-and-answers"><span class="header-section-number">8.4.1</span> Questions and Answers</a></li>
-  <li><a href="#humility" id="toc-humility" class="nav-link" data-scroll-target="#humility"><span class="header-section-number">8.4.2</span> Humility</a></li>
+<li><a href="#questions-and-answers" id="toc-questions-and-answers" class="nav-link" data-scroll-target="#questions-and-answers"><span class="header-section-number">7.4.1</span> Questions and Answers</a></li>
+  <li><a href="#humility" id="toc-humility" class="nav-link" data-scroll-target="#humility"><span class="header-section-number">7.4.2</span> Humility</a></li>
   </ul>
 </li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">8.5</span> Summary</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">7.5</span> Summary</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/PPBDS/primer/edit/main/four-parameters-categorical.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Four Parameters: Categorical</span>
+<span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Four Parameters: Categorical</span>
 </h1>
 </div>
 
@@ -346,11 +336,11 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p><em>What was the relationship between sex and voting in the 1992 US Presidential election?</em></p>
 </blockquote>
-<section id="wisdom" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="wisdom">
-<span class="header-section-number">8.1</span> Wisdom</h2>
+<section id="wisdom" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="wisdom">
+<span class="header-section-number">7.1</span> Wisdom</h2>
 <p>Wisdom requires the creation of a Preceptor Table, an examination of our data, and a determination, using the concept of validity, as to whether or not we can (reasonably!) assume that the two come from the same population.</p>
-<section id="preceptor-table" class="level3" data-number="8.1.1"><h3 data-number="8.1.1" class="anchored" data-anchor-id="preceptor-table">
-<span class="header-section-number">8.1.1</span> Preceptor Table</h3>
+<section id="preceptor-table" class="level3" data-number="7.1.1"><h3 data-number="7.1.1" class="anchored" data-anchor-id="preceptor-table">
+<span class="header-section-number">7.1.1</span> Preceptor Table</h3>
 <p>A Preceptor Table is smallest possible table with rows and columns such that, if there is no missing data, our question is easy to answer.</p>
 <p><em>Causal or predictive model</em>: This model is predictive not causal. Sex can not be a treatment because there is no (plausible) way to manipulate it. Recall the motto: “No causation without manipulation.”</p>
 <p><em>Units</em>: The rows of the Preceptor Table refer to individual US voters. The question suggests that we are not interested in people who did not vote, although one might explore if men were more or less likely to vote in the first place. As always, the initial question rarely specifies the Preceptor Table precisely.</p>
@@ -359,23 +349,23 @@ window.Quarto = {
 <p><em>Moment in Time</em>: The Preceptor Table refers to the election season in the fall of 1992. We make no claims about other US presidential elections, not least because few feature a third party candidate as popular as Perot. Our purpose here is historical. We want to better understand what happened in this election, not make claims about other time periods. The moment in time is, however, longer than just Election Day itself since mail-in votes were cast in the weeks proceeding the election.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="pmoguymzic" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pmoguymzic table {
+<div id="xsnpxdfqto" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xsnpxdfqto table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pmoguymzic thead, #pmoguymzic tbody, #pmoguymzic tfoot, #pmoguymzic tr, #pmoguymzic td, #pmoguymzic th {
+#xsnpxdfqto thead, #xsnpxdfqto tbody, #xsnpxdfqto tfoot, #xsnpxdfqto tr, #xsnpxdfqto td, #xsnpxdfqto th {
   border-style: none;
 }
 
-#pmoguymzic p {
+#xsnpxdfqto p {
   margin: 0;
   padding: 0;
 }
 
-#pmoguymzic .gt_table {
+#xsnpxdfqto .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -401,12 +391,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#pmoguymzic .gt_caption {
+#xsnpxdfqto .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pmoguymzic .gt_title {
+#xsnpxdfqto .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -418,7 +408,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#pmoguymzic .gt_subtitle {
+#xsnpxdfqto .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -430,7 +420,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#pmoguymzic .gt_heading {
+#xsnpxdfqto .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -442,13 +432,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pmoguymzic .gt_bottom_border {
+#xsnpxdfqto .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pmoguymzic .gt_col_headings {
+#xsnpxdfqto .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -463,7 +453,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pmoguymzic .gt_col_heading {
+#xsnpxdfqto .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -483,7 +473,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#pmoguymzic .gt_column_spanner_outer {
+#xsnpxdfqto .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -495,15 +485,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#pmoguymzic .gt_column_spanner_outer:first-child {
+#xsnpxdfqto .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pmoguymzic .gt_column_spanner_outer:last-child {
+#xsnpxdfqto .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pmoguymzic .gt_column_spanner {
+#xsnpxdfqto .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -515,11 +505,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#pmoguymzic .gt_spanner_row {
+#xsnpxdfqto .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pmoguymzic .gt_group_heading {
+#xsnpxdfqto .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -545,7 +535,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#pmoguymzic .gt_empty_group_heading {
+#xsnpxdfqto .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -560,15 +550,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#pmoguymzic .gt_from_md > :first-child {
+#xsnpxdfqto .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pmoguymzic .gt_from_md > :last-child {
+#xsnpxdfqto .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pmoguymzic .gt_row {
+#xsnpxdfqto .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -587,7 +577,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#pmoguymzic .gt_stub {
+#xsnpxdfqto .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -600,7 +590,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pmoguymzic .gt_stub_row_group {
+#xsnpxdfqto .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -614,15 +604,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#pmoguymzic .gt_row_group_first td {
+#xsnpxdfqto .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pmoguymzic .gt_row_group_first th {
+#xsnpxdfqto .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pmoguymzic .gt_summary_row {
+#xsnpxdfqto .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -632,16 +622,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pmoguymzic .gt_first_summary_row {
+#xsnpxdfqto .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pmoguymzic .gt_first_summary_row.thick {
+#xsnpxdfqto .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pmoguymzic .gt_last_summary_row {
+#xsnpxdfqto .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -651,7 +641,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#pmoguymzic .gt_grand_summary_row {
+#xsnpxdfqto .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -661,7 +651,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pmoguymzic .gt_first_grand_summary_row {
+#xsnpxdfqto .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -671,7 +661,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#pmoguymzic .gt_last_grand_summary_row_top {
+#xsnpxdfqto .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -681,11 +671,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#pmoguymzic .gt_striped {
+#xsnpxdfqto .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pmoguymzic .gt_table_body {
+#xsnpxdfqto .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -694,7 +684,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#pmoguymzic .gt_footnotes {
+#xsnpxdfqto .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -708,7 +698,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pmoguymzic .gt_footnote {
+#xsnpxdfqto .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -717,7 +707,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pmoguymzic .gt_sourcenotes {
+#xsnpxdfqto .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -731,7 +721,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pmoguymzic .gt_sourcenote {
+#xsnpxdfqto .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -739,72 +729,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pmoguymzic .gt_left {
+#xsnpxdfqto .gt_left {
   text-align: left;
 }
 
-#pmoguymzic .gt_center {
+#xsnpxdfqto .gt_center {
   text-align: center;
 }
 
-#pmoguymzic .gt_right {
+#xsnpxdfqto .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pmoguymzic .gt_font_normal {
+#xsnpxdfqto .gt_font_normal {
   font-weight: normal;
 }
 
-#pmoguymzic .gt_font_bold {
+#xsnpxdfqto .gt_font_bold {
   font-weight: bold;
 }
 
-#pmoguymzic .gt_font_italic {
+#xsnpxdfqto .gt_font_italic {
   font-style: italic;
 }
 
-#pmoguymzic .gt_super {
+#xsnpxdfqto .gt_super {
   font-size: 65%;
 }
 
-#pmoguymzic .gt_footnote_marks {
+#xsnpxdfqto .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pmoguymzic .gt_asterisk {
+#xsnpxdfqto .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pmoguymzic .gt_indent_1 {
+#xsnpxdfqto .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pmoguymzic .gt_indent_2 {
+#xsnpxdfqto .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pmoguymzic .gt_indent_3 {
+#xsnpxdfqto .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pmoguymzic .gt_indent_4 {
+#xsnpxdfqto .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pmoguymzic .gt_indent_5 {
+#xsnpxdfqto .gt_indent_5 {
   text-indent: 25px;
 }
 
-#pmoguymzic .katex-display {
+#xsnpxdfqto .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#pmoguymzic div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xsnpxdfqto div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -878,8 +868,8 @@ Covariate
 <blockquote class="blockquote">
 <p><em>What was the relationship between sex and voting in the 1992 US Presidential election among supporters of the three leading candidates: Clinton, Bush and Perot?</em></p>
 </blockquote>
-</section><section id="eda" class="level3" data-number="8.1.2"><h3 data-number="8.1.2" class="anchored" data-anchor-id="eda">
-<span class="header-section-number">8.1.2</span> EDA</h3>
+</section><section id="eda" class="level3" data-number="7.1.2"><h3 data-number="7.1.2" class="anchored" data-anchor-id="eda">
+<span class="header-section-number">7.1.2</span> EDA</h3>
 <p>Our data comes from <a href="https://electionstudies.org/">American National Election Studies</a>. The <strong>primer.data</strong> package includes a version of the main data set with a selection of variables. The full ANES data is much richer than this relatively simple tibble.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -947,42 +937,42 @@ Covariate
 <span>         caption <span class="op">=</span> <span class="st">"Source: American National Election Survey"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="four-parameters-categorical_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="four-parameters-categorical_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section id="validity" class="level3" data-number="8.1.3"><h3 data-number="8.1.3" class="anchored" data-anchor-id="validity">
-<span class="header-section-number">8.1.3</span> Validity</h3>
+</section><section id="validity" class="level3" data-number="7.1.3"><h3 data-number="7.1.3" class="anchored" data-anchor-id="validity">
+<span class="header-section-number">7.1.3</span> Validity</h3>
 <p>Our Preceptor Table includes the 103,754,865 people who voted for one of the three leading candidates in the 1992 presidential election. Our data includes a (tiny) subset of those people. This is a standard aspect of a “historical” data science project, when the data we want (the Preceptor Table) and the data we have come from the same moment in time. This makes the assumptions of validity and stability much easier to maintain. Of course, there can always be problems. A response to the nice ANES surveyer about one’s vote (or sex) is not the same thing as one’s actual vote (or sex). Indeed, a standard artifact of political surveys is that more people claim to have voted for the winning candidate than actually did. In this case, however, we will assume that validity holds and that we can “stack” the columns from the Preceptor Table and the data on top of each other. In fact, validity allows us to assume that the rows in the data is actually a <em>subset</em> of the rows in the Preceptor Table. To summarize:</p>
 <blockquote class="blockquote">
 <p><em>Using data from the National Election Studies survey of US citizens, we seek to understand the relationship between voter preference and sex in the 1992 Presidential election.</em></p>
 </blockquote>
-</section></section><section id="justice" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="justice">
-<span class="header-section-number">8.2</span> Justice</h2>
+</section></section><section id="justice" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="justice">
+<span class="header-section-number">7.2</span> Justice</h2>
 <p>Justice concerns four topics: the Population Table, stability, representativeness, and unconfoundedness.</p>
-<section id="population-table" class="level3" data-number="8.2.1"><h3 data-number="8.2.1" class="anchored" data-anchor-id="population-table">
-<span class="header-section-number">8.2.1</span> Population Table</h3>
+<section id="population-table" class="level3" data-number="7.2.1"><h3 data-number="7.2.1" class="anchored" data-anchor-id="population-table">
+<span class="header-section-number">7.2.1</span> Population Table</h3>
 <p>Because this project is historical, the Population Table has the same number of rows as the Preceptor Table.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="lsvfkyhend" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lsvfkyhend table {
+<div id="yfjealador" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yfjealador table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lsvfkyhend thead, #lsvfkyhend tbody, #lsvfkyhend tfoot, #lsvfkyhend tr, #lsvfkyhend td, #lsvfkyhend th {
+#yfjealador thead, #yfjealador tbody, #yfjealador tfoot, #yfjealador tr, #yfjealador td, #yfjealador th {
   border-style: none;
 }
 
-#lsvfkyhend p {
+#yfjealador p {
   margin: 0;
   padding: 0;
 }
 
-#lsvfkyhend .gt_table {
+#yfjealador .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1008,12 +998,12 @@ Covariate
   border-left-color: #D3D3D3;
 }
 
-#lsvfkyhend .gt_caption {
+#yfjealador .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lsvfkyhend .gt_title {
+#yfjealador .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1025,7 +1015,7 @@ Covariate
   border-bottom-width: 0;
 }
 
-#lsvfkyhend .gt_subtitle {
+#yfjealador .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1037,7 +1027,7 @@ Covariate
   border-top-width: 0;
 }
 
-#lsvfkyhend .gt_heading {
+#yfjealador .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1049,13 +1039,13 @@ Covariate
   border-right-color: #D3D3D3;
 }
 
-#lsvfkyhend .gt_bottom_border {
+#yfjealador .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lsvfkyhend .gt_col_headings {
+#yfjealador .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1070,7 +1060,7 @@ Covariate
   border-right-color: #D3D3D3;
 }
 
-#lsvfkyhend .gt_col_heading {
+#yfjealador .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1090,7 +1080,7 @@ Covariate
   overflow-x: hidden;
 }
 
-#lsvfkyhend .gt_column_spanner_outer {
+#yfjealador .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1102,15 +1092,15 @@ Covariate
   padding-right: 4px;
 }
 
-#lsvfkyhend .gt_column_spanner_outer:first-child {
+#yfjealador .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lsvfkyhend .gt_column_spanner_outer:last-child {
+#yfjealador .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lsvfkyhend .gt_column_spanner {
+#yfjealador .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1122,11 +1112,11 @@ Covariate
   width: 100%;
 }
 
-#lsvfkyhend .gt_spanner_row {
+#yfjealador .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lsvfkyhend .gt_group_heading {
+#yfjealador .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1152,7 +1142,7 @@ Covariate
   text-align: left;
 }
 
-#lsvfkyhend .gt_empty_group_heading {
+#yfjealador .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1167,15 +1157,15 @@ Covariate
   vertical-align: middle;
 }
 
-#lsvfkyhend .gt_from_md > :first-child {
+#yfjealador .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lsvfkyhend .gt_from_md > :last-child {
+#yfjealador .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lsvfkyhend .gt_row {
+#yfjealador .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1194,7 +1184,7 @@ Covariate
   overflow-x: hidden;
 }
 
-#lsvfkyhend .gt_stub {
+#yfjealador .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1207,7 +1197,7 @@ Covariate
   padding-right: 5px;
 }
 
-#lsvfkyhend .gt_stub_row_group {
+#yfjealador .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1221,15 +1211,15 @@ Covariate
   vertical-align: top;
 }
 
-#lsvfkyhend .gt_row_group_first td {
+#yfjealador .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lsvfkyhend .gt_row_group_first th {
+#yfjealador .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lsvfkyhend .gt_summary_row {
+#yfjealador .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1239,16 +1229,16 @@ Covariate
   padding-right: 5px;
 }
 
-#lsvfkyhend .gt_first_summary_row {
+#yfjealador .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lsvfkyhend .gt_first_summary_row.thick {
+#yfjealador .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lsvfkyhend .gt_last_summary_row {
+#yfjealador .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1258,7 +1248,7 @@ Covariate
   border-bottom-color: #D3D3D3;
 }
 
-#lsvfkyhend .gt_grand_summary_row {
+#yfjealador .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1268,7 +1258,7 @@ Covariate
   padding-right: 5px;
 }
 
-#lsvfkyhend .gt_first_grand_summary_row {
+#yfjealador .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1278,7 +1268,7 @@ Covariate
   border-top-color: #D3D3D3;
 }
 
-#lsvfkyhend .gt_last_grand_summary_row_top {
+#yfjealador .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1288,11 +1278,11 @@ Covariate
   border-bottom-color: #D3D3D3;
 }
 
-#lsvfkyhend .gt_striped {
+#yfjealador .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lsvfkyhend .gt_table_body {
+#yfjealador .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1301,7 +1291,7 @@ Covariate
   border-bottom-color: #D3D3D3;
 }
 
-#lsvfkyhend .gt_footnotes {
+#yfjealador .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1315,7 +1305,7 @@ Covariate
   border-right-color: #D3D3D3;
 }
 
-#lsvfkyhend .gt_footnote {
+#yfjealador .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1324,7 +1314,7 @@ Covariate
   padding-right: 5px;
 }
 
-#lsvfkyhend .gt_sourcenotes {
+#yfjealador .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1338,7 +1328,7 @@ Covariate
   border-right-color: #D3D3D3;
 }
 
-#lsvfkyhend .gt_sourcenote {
+#yfjealador .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1346,72 +1336,72 @@ Covariate
   padding-right: 5px;
 }
 
-#lsvfkyhend .gt_left {
+#yfjealador .gt_left {
   text-align: left;
 }
 
-#lsvfkyhend .gt_center {
+#yfjealador .gt_center {
   text-align: center;
 }
 
-#lsvfkyhend .gt_right {
+#yfjealador .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lsvfkyhend .gt_font_normal {
+#yfjealador .gt_font_normal {
   font-weight: normal;
 }
 
-#lsvfkyhend .gt_font_bold {
+#yfjealador .gt_font_bold {
   font-weight: bold;
 }
 
-#lsvfkyhend .gt_font_italic {
+#yfjealador .gt_font_italic {
   font-style: italic;
 }
 
-#lsvfkyhend .gt_super {
+#yfjealador .gt_super {
   font-size: 65%;
 }
 
-#lsvfkyhend .gt_footnote_marks {
+#yfjealador .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lsvfkyhend .gt_asterisk {
+#yfjealador .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lsvfkyhend .gt_indent_1 {
+#yfjealador .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lsvfkyhend .gt_indent_2 {
+#yfjealador .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lsvfkyhend .gt_indent_3 {
+#yfjealador .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lsvfkyhend .gt_indent_4 {
+#yfjealador .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lsvfkyhend .gt_indent_5 {
+#yfjealador .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lsvfkyhend .katex-display {
+#yfjealador .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lsvfkyhend div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#yfjealador div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1526,20 +1516,20 @@ Covariate
 </div>
 </div>
 <p>We are not interested in these voters outside of the 1992 election. So, this Population Table, unlike most, does not require a <code>Time</code> column. The Preceptor Table and the data come from the same moment in time. Of course, this is not literally true. Recall: <strong>The <code>Time</code> column is always a lie.</strong> Some voters cast their ballots weeks before Election Day. Some NES participants were surveyed right after the election. Some were survey later. We sweep all these complications under the mythical moment in time which we assert is the same for both the data and the Preceptor Table.</p>
-</section><section id="stability" class="level3" data-number="8.2.2"><h3 data-number="8.2.2" class="anchored" data-anchor-id="stability">
-<span class="header-section-number">8.2.2</span> Stability</h3>
+</section><section id="stability" class="level3" data-number="7.2.2"><h3 data-number="7.2.2" class="anchored" data-anchor-id="stability">
+<span class="header-section-number">7.2.2</span> Stability</h3>
 <p>If the assumption of stability holds, then the relationship between the columns in the Population Table is the same for three categories of rows: the data, the Preceptor Table, and the larger population from which both are drawn. In this case, there is no larger population. Or, rather, the Preceptor Table is the larger population. And, since the data and the Preceptor Table come from the same moment in time, stability holds by definition.</p>
-</section><section id="representativeness" class="level3" data-number="8.2.3"><h3 data-number="8.2.3" class="anchored" data-anchor-id="representativeness">
-<span class="header-section-number">8.2.3</span> Representativeness</h3>
+</section><section id="representativeness" class="level3" data-number="7.2.3"><h3 data-number="7.2.3" class="anchored" data-anchor-id="representativeness">
+<span class="header-section-number">7.2.3</span> Representativeness</h3>
 <p>The NES is a highly professional organization so their survey does a good of capturing a random sample of all voters. But no real world survey is perfect! There are always problems. In particular, there are (somewhat) unobserved differences between the sort of people who respond to surveys and the sort of people who don’t. NES is more likely to capture the votes of cooperative people than the votes of misanthropes. If, among misanthropes, the relationship between sex and Presidential candidate is different than the relationship among cooperative voters, we might have problems. The technical term for the problem of people who don’t respond to surveys is “non-response.”</p>
-</section><section id="unconfoundedness" class="level3" data-number="8.2.4"><h3 data-number="8.2.4" class="anchored" data-anchor-id="unconfoundedness">
-<span class="header-section-number">8.2.4</span> Unconfoundedness</h3>
+</section><section id="unconfoundedness" class="level3" data-number="7.2.4"><h3 data-number="7.2.4" class="anchored" data-anchor-id="unconfoundedness">
+<span class="header-section-number">7.2.4</span> Unconfoundedness</h3>
 <p>Because this is a predictive, not causal, model, the assumption of unconfoundedness is irrelevant.</p>
 <blockquote class="blockquote">
 <p><em>Using data from the National Election Studies (NES) survey of US citizens, we seek to understand the relationship between voter preference and sex in the 1992 Presidential election. Our results might be biased by differential non-response among different categories of voters.</em></p>
 </blockquote>
-</section></section><section id="courage" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="courage">
-<span class="header-section-number">8.3</span> Courage</h2>
+</section></section><section id="courage" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="courage">
+<span class="header-section-number">7.3</span> Courage</h2>
 <p>Justice gave us the Population Table. Courage selects the data generating mechanism. We first specify the mathematical formula which connects the outcome variable we are interested in with the other data that we have.</p>
 <p>Because we have three possible outcomes, and because there is no natural ordering among the outcomes, a <em>categorical</em> model is the most natural choice. The binomial model which we used in <a href="models.html" class="quarto-xref"><span>Chapter 4</span></a> is just a special case of a categorical model, one in which there are only two outcomes. Recall:</p>
 <p><span class="math display">\[ red_i  \sim Bernoulli(\rho) \]</span> A more verbose way to present this same model would be:</p>
@@ -1566,18 +1556,18 @@ Covariate
 \end{aligned}
 \]</span></p>
 <p>There is no longer just one <span class="math inline">\(\beta_0\)</span> and one <span class="math inline">\(\beta_1\)</span>. Instead, there is <span class="math inline">\(\beta_0\)</span> for Clinton, labeled as <span class="math inline">\(\beta_{0, clinton}\)</span> and a <span class="math inline">\(\beta_0\)</span> for Perot, labeled as <span class="math inline">\(\beta_{0, perot}\)</span>. The same applies to <span class="math inline">\(\beta_1\)</span>. These parameters need to be different because being male has a different connection to the probability for voting for Clinton than it does for the probability for voting for Perot. We can’t have a separate <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> for Bush because <span class="math inline">\(\rho_{bush}\)</span> is fully defined once we know <span class="math inline">\(\rho_{clinton}\)</span> and <span class="math inline">\(\rho_{perot}\)</span>.</p>
-<section id="models" class="level3" data-number="8.3.1"><h3 data-number="8.3.1" class="anchored" data-anchor-id="models">
-<span class="header-section-number">8.3.1</span> Models</h3>
+<section id="models" class="level3" data-number="7.3.1"><h3 data-number="7.3.1" class="anchored" data-anchor-id="models">
+<span class="header-section-number">7.3.1</span> Models</h3>
 <p>Fitting a categorical model with <strong>brms</strong> is very similar to fitting the other models we have learned.</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_nes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">pres_vote</span> <span class="op">~</span> <span class="va">sex</span>,</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_nes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulbuerkner.com/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">pres_vote</span> <span class="op">~</span> <span class="va">sex</span>,</span>
 <span>               data <span class="op">=</span> <span class="va">nes_92</span>,</span>
-<span>               family <span class="op">=</span> <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/brmsfamily.html">categorical</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>               family <span class="op">=</span> <span class="fu"><a href="https://paulbuerkner.com/brms/reference/brmsfamily.html">categorical</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>               silent <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>               refresh <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>               seed <span class="op">=</span> <span class="fl">76</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We use <code>silent = 2</code> and <code>refresh = 0</code> to hide all the messages produced by <code><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm()</a></code>. We don’t want to clutter the <em>Primer</em>. But those messages can be important. So, we constructing your models interactively, show the messages, at least until you confirm that there is nothing to worry about.</p>
+<p>We use <code>silent = 2</code> and <code>refresh = 0</code> to hide all the messages produced by <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code>. We don’t want to clutter the <em>Primer</em>. But those messages can be important. So, we constructing your models interactively, show the messages, at least until you confirm that there is nothing to worry about.</p>
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_nes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1630,14 +1620,14 @@ muPerot_sexMale      0.4244909 0.14498279  0.1399061  0.71336963</code></pre>
 <span>                    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Perot"</span>, <span class="st">"Bush"</span>, <span class="st">"Clinton"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="four-parameters-categorical_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="four-parameters-categorical_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <!-- Provide comparison of male voting probabilities. Relate this to overall voting probabilities. -->
-</section><section id="tests" class="level3" data-number="8.3.2"><h3 data-number="8.3.2" class="anchored" data-anchor-id="tests">
-<span class="header-section-number">8.3.2</span> Tests</h3>
+</section><section id="tests" class="level3" data-number="7.3.2"><h3 data-number="7.3.2" class="anchored" data-anchor-id="tests">
+<span class="header-section-number">7.3.2</span> Tests</h3>
 <p>As usual, we use <code><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check()</a></code> to examine if the “fake data” created from our DGM matches our actual data.</p>
 <div class="cell">
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">fit_nes</span>, type <span class="op">=</span> <span class="st">"bars"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1646,13 +1636,13 @@ muPerot_sexMale      0.4244909 0.14498279  0.1399061  0.71336963</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="four-parameters-categorical_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="four-parameters-categorical_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section id="data-generating-mechanism" class="level3" data-number="8.3.3"><h3 data-number="8.3.3" class="anchored" data-anchor-id="data-generating-mechanism">
-<span class="header-section-number">8.3.3</span> Data Generating Mechanism</h3>
+</section><section id="data-generating-mechanism" class="level3" data-number="7.3.3"><h3 data-number="7.3.3" class="anchored" data-anchor-id="data-generating-mechanism">
+<span class="header-section-number">7.3.3</span> Data Generating Mechanism</h3>
 <p>Putting the mathematics together with the parameter estimates gives us the data generating mechanism</p>
 <p><span class="math display">\[ vote_i  \sim Categorical(\rho_{bush}, \rho_{clinton}, \rho_{perot}) \]</span></p>
 <p><span class="math display">\[
@@ -1662,11 +1652,11 @@ muPerot_sexMale      0.4244909 0.14498279  0.1399061  0.71336963</code></pre>
 \rho_{perot} &amp;=&amp; \frac{e^{-0.86 + 0.42 male}}{1 + e^{-0.86 + 0.42 male}}\\
 \end{aligned}
 \]</span> This is the last time we are going to go to the trouble of combining the mathematical formula of the DGM with the specific estimated values. First, these formulas are misleading! The value of <span class="math inline">\(\beta_{0, clinton}\)</span>, for example, is not exactly 0.45. In fact, we don’t know what the value is! Being Bayesians, we calculated a posterior probability distribution for <span class="math inline">\(\beta_{0, clinton}\)</span>. We draw from that distribution when we calculate quantities of interest, as we did above with <code><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code>. Second, you probably did not even look that closely at these complex formulas. And we don’t blame you! Being a good race car driver means focussing on how to drive better, not on the physics of carburetors. Similar, being a good data scientist means focusing on the Cardinal Virtues as a method for using data to answer questions. Leave the math to the computer.</p>
-</section></section><section id="temperance" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="temperance">
-<span class="header-section-number">8.4</span> Temperance</h2>
+</section></section><section id="temperance" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="temperance">
+<span class="header-section-number">7.4</span> Temperance</h2>
 <p>Courage produced the data generating mechanism. Temperance guides us in the use of the DGM — or the “model” — we have created to answer the questions with which we began. We create posteriors for the quantities of interest. We should be modest in the claims we make. The posteriors we create are never the “truth.” The assumptions we made to create the model are never perfect. Yet decisions made with flawed posteriors are almost always better than decisions made without them.</p>
-<section id="questions-and-answers" class="level3" data-number="8.4.1"><h3 data-number="8.4.1" class="anchored" data-anchor-id="questions-and-answers">
-<span class="header-section-number">8.4.1</span> Questions and Answers</h3>
+<section id="questions-and-answers" class="level3" data-number="7.4.1"><h3 data-number="7.4.1" class="anchored" data-anchor-id="questions-and-answers">
+<span class="header-section-number">7.4.1</span> Questions and Answers</h3>
 <p>Recall the question with which we began:</p>
 <blockquote class="blockquote">
 <p><em>What was the relationship between sex and voting in the 1992 US Presidential election?</em></p>
@@ -1687,7 +1677,7 @@ muPerot_sexMale      0.4244909 0.14498279  0.1399061  0.71336963</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="four-parameters-categorical_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="four-parameters-categorical_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1702,244 +1692,250 @@ muPerot_sexMale      0.4244909 0.14498279  0.1399061  0.71336963</code></pre>
 <span>  <span class="co">#                   limits = c("Perot", "Bush", "Clinton"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- Make a plot of just male versus female differences, three histograms total. -->
-</section><section id="humility" class="level3" data-number="8.4.2"><h3 data-number="8.4.2" class="anchored" data-anchor-id="humility">
-<span class="header-section-number">8.4.2</span> Humility</h3>
+</section><section id="humility" class="level3" data-number="7.4.2"><h3 data-number="7.4.2" class="anchored" data-anchor-id="humility">
+<span class="header-section-number">7.4.2</span> Humility</h3>
 <p><em>We can never know the truth.</em></p>
-</section></section><section id="summary" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="summary">
-<span class="header-section-number">8.5</span> Summary</h2>
+</section></section><section id="summary" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="summary">
+<span class="header-section-number">7.5</span> Summary</h2>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1947,192 +1943,168 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./mechanics.html" class="pagination-link" aria-label="Mechanics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mechanics</span></span>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./three-parameters-causal.html" class="pagination-link" aria-label="Three Parameters: Causal">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Three Parameters: Causal</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./five-parameters.html" class="pagination-link" aria-label="Five Parameters">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Five Parameters</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Five Parameters</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
