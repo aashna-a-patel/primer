@@ -1,5 +1,9 @@
 # Priorities
 
+Update tutorial name in tutorial.helpers and then fix Getting Started chapter.
+
+Add pak::pak as an option for downloading primer.tutorials in Getting Started
+
 Is the Probability chapter correct? Especially the two models section. How can we calculate your odds of having the disease if we don't know the background rate of people having the disease. Imagine if no one had the disease. Or everyone did! In either case, it does not matter what my test result is! Same applies in the 0.1% or 99.9% cases.
 
 
@@ -19,11 +23,9 @@ options(download.file.method = "wininet")  # Windows only
 remotes::install_github("PPBDS/primer.tutorials") When I used this command and than ran the command learnr::run_tutorial("021-probability", "primer.tutorials") as suggested by ChatGPT for Windows, this issue was quickly resolved for me.
 ----
 
-linear_reg
-logistic_reg
-multinom_reg
+Or pak::pak()
 
-equatiomatic
+
 
 Need to standardize the creation of the Population Table, include ID/time column.
 
