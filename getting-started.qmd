@@ -103,9 +103,9 @@ Wth luck, bash will also be the default every time you open the Terminal on Wind
 knitr::include_graphics("getting-started/images/terminal-3.png")
 ```
 
-Again, this is only useful for Windows users. But they should click on that tool and select the option that says "bash" or something like it. This should set it as the default going forward.
+Again, this is only useful for Windows users. But they should click on that tool and select the option that says "Git Bash" or something like it. This should set it as the default going forward.
 
-Click the `+` button to start a second Terminal and see if it works!
+Click the `+` button to start a second Terminal and see if it works! Restarting Positron may help.
 
 ### Package installation {.unnumbered}
 
