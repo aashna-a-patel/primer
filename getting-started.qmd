@@ -20,7 +20,11 @@ Download and install R and Positron on your computer.
 
 2. [Download and install Positron](https://github.com/posit-dev/positron/releases). Use the latest release at the top.
 
-3. If you are using Windows, you **must** also install RTools. See [here](https://cran.r-project.org/bin/windows/Rtools/) for the latest version. Currently, the Rtools45 installer is what you want, assuming that your installed R version is at least 4.5.0. The link is in the seventh paragraph of [this page](https://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html). Use your favorite AI to help determine whether to use the Rtools45 installer or 64-bit ARM Rtools45 installer. Again, this is not required, but if you have problems installing packages later in this chapter, you **must** install RTools. If not, you are all set.
+3. If you are using Windows, you **must** also do two things:
+
+  + Install [Git for Windows](https://gitforwindows.org/). Make sure to check the option which installs "Git Bash."
+
+  + Install RTools. See [here](https://cran.r-project.org/bin/windows/Rtools/) for the latest version. Currently, the Rtools45 installer is what you want, assuming that your installed R version is at least 4.5.0. The link is in the seventh paragraph of [this page](https://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html). Use your favorite AI to help determine whether to use the Rtools45 installer or 64-bit ARM Rtools45 installer. Again, this is not required, but if you have problems installing packages later in this chapter, you **must** install RTools. If not, you are all set.
 
 <!-- Advice about Workbench? -->
 
@@ -94,7 +98,7 @@ We often want a new Terminal with a different "shell," the program which serves 
 knitr::include_graphics("getting-started/images/terminal-2.png")
 ```
 
-If you are using Windows, you should see an option for "Git Bash" (or maybe just "bash"), at least if your have installed RTools as we told you to do above. If you did, and you don't see a bash option, try restarting Positron.
+If you are using Windows, you should see an option for "Git Bash" (or maybe just "bash"), at least if your have installed Git for Windows as we told you to do above. If you did, and you don't see a bash option, try restarting Positron.
 
 Wth luck, bash will also be the default every time you open the Terminal on Windows. But, if that does not work, you should select it by hand. One way to make it the default choice is to use the "Select Default Profile" tool:
 
