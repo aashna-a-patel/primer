@@ -265,11 +265,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li><p><a href="https://cloud.r-project.org/">Download and install R</a>. If you are using a Mac, make sure to use the correct installation, depending on whether you are using newer Apple silicon “M1-3 Macs” (first option) or older “Intel Macs” (second option). You can look up the chip used in your Mac by checking “About This Mac” under the Apple menu.</p></li>
 <li><p><a href="https://github.com/posit-dev/positron/releases">Download and install Positron</a>. Use the latest release at the top.</p></li>
-<li><p>If you are using Windows, you <strong>must</strong> also install <a href="https://gitforwindows.org/">Git for Windows</a>. Make sure to select the option which also installs Git Bash.</p></li>
+<li><p>If you are using Windows, you <strong>must</strong> also install RTools. See <a href="https://cran.r-project.org/bin/windows/Rtools/">here</a> for the latest version. Currently, the Rtools45 installer is what you want, assuming that your installed R version is at least 4.5.0. The link is in the seventh paragraph of <a href="https://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html">this page</a>. Use your favorite AI to help determine whether to use the Rtools45 installer or 64-bit ARM Rtools45 installer. Again, this is not required, but if you have problems installing packages later in this chapter, you <strong>must</strong> install RTools. If not, you are all set.</p></li>
 </ol>
-<p>If you are using Windows, you should <em>consider</em> installing RTools. See <a href="https://cran.r-project.org/bin/windows/Rtools/">here</a> for the latest version. Currently, the Rtools45 installer is what you want, assuming that your installed R version is at least 4.5.0. The link is in the seventh paragraph of <a href="https://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html">this page</a>. Use your favorite AI to help determine whether to use the Rtools45 installer or 64-bit ARM Rtools45 installer. Again, this is not required, but if you have problems installing packages later in this chapter, you <strong>must</strong> install RTools. If not, you are all set.</p>
-<!-- Advice about Workbench? -->
-</section><section id="the-console" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="the-console">The Console</h3>
+<!-- Advice about Workbench? --></section><section id="the-console" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="the-console">The Console</h3>
 <p>Much as we don’t drive a car by interacting directly with the engine but rather by interacting with elements of the car’s dashboard, we won’t be using R directly. Instead, we will work through Positron’s interface. After you install R and Positron on your computer, you’ll have two new <em>programs</em> (also called <em>applications</em>) you can open. Always work in Positron and not directly in the R application.</p>
 <p>Open up Positron.</p>
 <div class="cell">
@@ -334,7 +332,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><code>dkane@macbook ~ %</code> is the “prompt,” the place where we type commands, just like the <code>&gt;</code> in the Console. Your prompt will be different from mine, especially if you are using Windows.</p>
-<p>We often want a new Terminal with a different “shell,” the program which serves as the interface between you and the computer. On a Mac, the default shell is referred to as “<a href="https://en.wikipedia.org/wiki/Unix-like">Unix-like</a>” since it acts very much like the tradition UNIX command line. In Windows, the default shell is <a href="https://en.wikipedia.org/wiki/PowerShell">PowerShell</a>, an older technology which is not worth learning. To start a new Terminal with a specific shell, press the downward arrow next to the <code>+</code> sign. See the red arrow above.</p>
+<p>We often want a new Terminal with a different “shell,” the program which serves as the interface between you and the computer. On a Mac, the default shell is referred to as “<a href="https://en.wikipedia.org/wiki/Unix-like">Unix-like</a>” since it acts very much like the tradition UNIX command line. In Windows, the default shell is <a href="https://en.wikipedia.org/wiki/PowerShell">PowerShell</a>, an older technology which is not worth learning. To start a new Terminal with a specific shell, press the downward arrow next to the <code>+</code> sign. This is the “Launch Profile …” arrow. See the red arrow above.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -343,8 +341,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>If you are using Windows, you should see an option for “Git Bash” (or maybe just “bash”).</p>
-<p>Wth luck, Git Bash will also be the default every time you open the Terminal on Windows. But, if that does not work, you should select it by hand. One way to make it the default choice is to use the “Select Default Profile” tool:</p>
+<p>If you are using Windows, you should see an option for “Git Bash” (or maybe just “bash”), at least if your have installed RTools as we told you to do above. If you did, and you don’t see a bash option, try restarting Positron.</p>
+<p>Wth luck, bash will also be the default every time you open the Terminal on Windows. But, if that does not work, you should select it by hand. One way to make it the default choice is to use the “Select Default Profile” tool:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -353,7 +351,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Again, this is only useful for Windows users. But they should click on that tool and select the option that says “Git Bash” or “bash.” This should set it as the default going forward.</p>
+<p>Again, this is only useful for Windows users. But they should click on that tool and select the option that says “bash” or something like it. This should set it as the default going forward.</p>
 <p>Click the <code>+</code> button to start a second Terminal and see if it works!</p>
 </section><section id="package-installation" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="package-installation">Package installation</h3>
 <p>To install packages, we work with the Console, not the Terminal.</p>
@@ -455,18 +453,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"timeout"</span> <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This gives the download more time to complete. Try it again.</p>
+<p>If that fails, try:</p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="st">"PPBDS/primer.tutorials"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Some other new packages will be installed as well, most importantly <strong>primer.data</strong>, which includes most of the data we use in the <em>Primer</em>. It may take a few minutes. If something gets messed up, it is often useful to read the error messages and see if a specific package is at fault. If so, use the <code><a href="https://rdrr.io/r/utils/remove.packages.html">remove.packages()</a></code> function to remove the problematic package and then install it again.</p>
-<p>If <strong>primer.tutorials</strong> does not install correctly, don’t worry about it. This package is much less important than <strong>positron.tutorials</strong> and <strong>r4ds.tutorials</strong>.</p>
+<p>If <strong>primer.tutorials</strong> does not install correctly, don’t worry about it for now. This package is much less important than <strong>positron.tutorials</strong> and <strong>r4ds.tutorials</strong>.</p>
 </section><section id="tutorials" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="tutorials">Tutorials</h3>
 <p>There are many tutorials available in the <strong>positron.tutorials</strong>, <strong>r4ds.tutorials</strong>, and <strong>primer.tutorials</strong> packages.</p>
 <p>Because Positron is still evolving, there is no easy way to start a tutorial. Instead, we must issue a command like this from the Console:</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">learnr</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/learnr/reference/run_tutorial.html">run_tutorial</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"positron"</span>, </span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">learnr</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/learnr/reference/run_tutorial.html">run_tutorial</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"positron"</span>, </span>
 <span>                     package <span class="op">=</span> <span class="st">"tutorial.helpers"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The first argument to <code>run_tutorial()</code> is the <code>name</code> of the tutorial and the second is the <code>package</code> in which the tutorial is installed. We often leave out the arguments and just provide their values. Example:</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">learnr</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/learnr/reference/run_tutorial.html">run_tutorial</a></span><span class="op">(</span><span class="st">"01-code"</span>, <span class="st">"positron.tutorials"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">learnr</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/learnr/reference/run_tutorial.html">run_tutorial</a></span><span class="op">(</span><span class="st">"01-code"</span>, <span class="st">"positron.tutorials"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This is how you will start the next tutorial you are likely to be assigned, the <code>01-code</code> tutorial from the <strong>positron.tutorials</strong> package.</p>
 <p>You may notice that the Console will show output as the tutorial is starting up. This is because Positron is running the code to create the tutorial.</p>
@@ -505,7 +508,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Your work will automatically be saved between Positron sessions</strong>. You can complete the tutorial in multiple sittings.</p>
 <p>Complete the “Tutorials in Positron” tutorial from the <strong>tutorial.helpers</strong> package. Recall that you start this tutorial by issuing this command in the Console:</p>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">learnr</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/learnr/reference/run_tutorial.html">run_tutorial</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"positron"</span>, </span>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">learnr</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/learnr/reference/run_tutorial.html">run_tutorial</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"positron"</span>, </span>
 <span>                     package <span class="op">=</span> <span class="st">"tutorial.helpers"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once you have done so, or if you already know R, you can start to learn about data science.</p>
@@ -516,7 +519,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Installed, from CRAN, the <strong>remotes</strong>, <strong>tutorial.helpers</strong> and <strong>tidyverse</strong> packages:</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Only run this options() line if NOT on Cloud platform</span></span>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Only run this options() line if NOT on Cloud platform</span></span>
 <span><span class="co"># options("pkgType" = "binary"). </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
@@ -526,7 +529,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Installed, from Github, the <strong>positron.tutorials</strong>, <strong>r4ds.tutorials</strong>, and <strong>primer.tutorials</strong> packages:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"PPBDS/positron.tutorials"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"PPBDS/positron.tutorials"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"PPBDS/r4ds.tutorials"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"PPBDS/primer.tutorials"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -534,11 +537,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Complete the “Tutorials in Positron” tutorial from the <strong>tutorial.helpers</strong> package:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">learnr</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/learnr/reference/run_tutorial.html">run_tutorial</a></span><span class="op">(</span><span class="st">"positron"</span>, package <span class="op">=</span> <span class="st">"tutorial.helpers"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">learnr</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/learnr/reference/run_tutorial.html">run_tutorial</a></span><span class="op">(</span><span class="st">"positron"</span>, package <span class="op">=</span> <span class="st">"tutorial.helpers"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As part of that tutorial, you will also run:</p>
 <div class="cell">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tutorial.helpers</span><span class="fu">::</span><span class="fu"><a href="https://ppbds.github.io/tutorial.helpers/reference/set_positron_settings.html">set_positron_settings</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tutorial.helpers</span><span class="fu">::</span><span class="fu"><a href="https://ppbds.github.io/tutorial.helpers/reference/set_positron_settings.html">set_positron_settings</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s get started.</p>
 <div class="cell">

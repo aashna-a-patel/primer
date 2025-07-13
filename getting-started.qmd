@@ -20,9 +20,7 @@ Download and install R and Positron on your computer.
 
 2. [Download and install Positron](https://github.com/posit-dev/positron/releases). Use the latest release at the top.
 
-3. If you are using Windows, you **must** also install [Git for Windows](https://gitforwindows.org/). Make sure to select the option which also installs Git Bash. 
-
-If you are using Windows, you should *consider* installing RTools. See [here](https://cran.r-project.org/bin/windows/Rtools/) for the latest version. Currently, the Rtools45 installer is what you want, assuming that your installed R version is at least 4.5.0. The link is in the seventh paragraph of [this page](https://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html). Use your favorite AI to help determine whether to use the Rtools45 installer or 64-bit ARM Rtools45 installer. Again, this is not required, but if you have problems installing packages later in this chapter, you **must** install RTools. If not, you are all set.
+3. If you are using Windows, you **must** also install RTools. See [here](https://cran.r-project.org/bin/windows/Rtools/) for the latest version. Currently, the Rtools45 installer is what you want, assuming that your installed R version is at least 4.5.0. The link is in the seventh paragraph of [this page](https://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html). Use your favorite AI to help determine whether to use the Rtools45 installer or 64-bit ARM Rtools45 installer. Again, this is not required, but if you have problems installing packages later in this chapter, you **must** install RTools. If not, you are all set.
 
 <!-- Advice about Workbench? -->
 
@@ -89,23 +87,23 @@ knitr::include_graphics("getting-started/images/terminal-1.png")
 
 `dkane@macbook ~ % ` is the "prompt," the place where we type commands, just like the `>` in the Console. Your prompt will be different from mine, especially if you are using Windows. 
 
-We often want a new Terminal with a different "shell," the program which serves as the interface between you and the computer. On a Mac, the default shell is referred to as "[Unix-like](https://en.wikipedia.org/wiki/Unix-like)" since it acts very much like the tradition UNIX command line. In Windows, the default shell is [PowerShell](https://en.wikipedia.org/wiki/PowerShell), an older technology which is not worth learning. To start a new Terminal with a specific shell, press the downward arrow next to the `+` sign. See the red arrow above.
+We often want a new Terminal with a different "shell," the program which serves as the interface between you and the computer. On a Mac, the default shell is referred to as "[Unix-like](https://en.wikipedia.org/wiki/Unix-like)" since it acts very much like the tradition UNIX command line. In Windows, the default shell is [PowerShell](https://en.wikipedia.org/wiki/PowerShell), an older technology which is not worth learning. To start a new Terminal with a specific shell, press the downward arrow next to the `+` sign. This is the "Launch Profile ..." arrow. See the red arrow above.
 
 ```{r}
 #| echo: false
 knitr::include_graphics("getting-started/images/terminal-2.png")
 ```
 
-If you are using Windows, you should see an option for "Git Bash" (or maybe just "bash").
+If you are using Windows, you should see an option for "Git Bash" (or maybe just "bash"), at least if your have installed RTools as we told you to do above. If you did, and you don't see a bash option, try restarting Positron.
 
-Wth luck, Git Bash will also be the default every time you open the Terminal on Windows. But, if that does not work, you should select it by hand. One way to make it the default choice is to use the "Select Default Profile" tool:
+Wth luck, bash will also be the default every time you open the Terminal on Windows. But, if that does not work, you should select it by hand. One way to make it the default choice is to use the "Select Default Profile" tool:
 
 ```{r}
 #| echo: false
 knitr::include_graphics("getting-started/images/terminal-3.png")
 ```
 
-Again, this is only useful for Windows users. But they should click on that tool and select the option that says "Git Bash" or "bash." This should set it as the default going forward.
+Again, this is only useful for Windows users. But they should click on that tool and select the option that says "bash" or something like it. This should set it as the default going forward.
 
 Click the `+` button to start a second Terminal and see if it works!
 
@@ -272,9 +270,18 @@ options("timeout" = 600)
 
 This gives the download more time to complete. Try it again.
 
+If that fails, try:
+
+```{r}
+#| eval: false
+#| code-fold: false
+install.packages("pak")
+pak::pak("PPBDS/primer.tutorials")
+```
+
 Some other new packages will be installed as well, most importantly **primer.data**, which includes most of the data we use in the *Primer*. It may take a few minutes. If something gets messed up, it is often useful to read the error messages and see if a specific package is at fault. If so, use the `remove.packages()` function to remove the problematic package and then install it again.
 
-If **primer.tutorials** does not install correctly, don't worry about it. This package is much less important than **positron.tutorials** and **r4ds.tutorials**.
+If **primer.tutorials** does not install correctly, don't worry about it for now. This package is much less important than **positron.tutorials** and **r4ds.tutorials**.
 
 ### Tutorials {.unnumbered}
 
