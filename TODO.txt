@@ -1,11 +1,32 @@
 # Priorities
 
+Update tutorial name in tutorial.helpers and then fix Getting Started chapter.
 
-linear_reg
-logistic_reg
-multinom_reg
+Revisit set_positron_setting() function, and its description here. Set at least Git Bash default.
 
-equatiomatic
+
+
+Is the Probability chapter correct? Especially the two models section. How can we calculate your odds of having the disease if we don't know the background rate of people having the disease. Imagine if no one had the disease. Or everyone did! In either case, it does not matter what my test result is! Same applies in the 0.1% or 99.9% cases.
+
+
+Update Getting Started with this advice for dealing with primer.data/primer.tutorials:
+
+----
+se HTTPS Instead of Default GitHub API (Fallback Option)
+You can try setting a different download method in your R session:
+
+r
+options(download.file.method = "libcurl")
+remotes::install_github("PPBDS/primer.tutorials")
+Or try with curl or wininet (on Windows):
+
+r
+options(download.file.method = "wininet")  # Windows only
+remotes::install_github("PPBDS/primer.tutorials") When I used this command and than ran the command learnr::run_tutorial("021-probability", "primer.tutorials") as suggested by ChatGPT for Windows, this issue was quickly resolved for me.
+----
+
+
+
 
 Need to standardize the creation of the Population Table, include ID/time column.
 
@@ -33,20 +54,7 @@ Make more use of "When Shall We Use Our Heads
 Instead of the Formula?" https://meehl.umn.edu/sites/meehl.umn.edu/files/files/043_when_use_heads.pdf
 
 
-Maybe stop using tidy() since it gives an annoying warning since brms models have variables, by default, with underscores in the names?
-
 Should predictive/causal question come at the end of the Preceptor Table reasoning?
-
-We have run out of time to introduce tidymodels. I still think that this is an interesting idea, especially with the bayesian package. But not this time.
-
-
-I need to clean up the chapters. There is a lot of sloppiness.
-
-I need to clean up the tutorials we have: rcm, probability, sampling.
-
-I need to add tutorials for the remaining 7 chapters.
-
-Try to use gtsummary() and make it standard.
 
 
 
@@ -427,4 +435,4 @@ Issue seems associated with Rcpp installation. It got so annoying that I stopped
 
 Make a 15 second video, put it on YouTube. "We don't estimate parameters because we care about parameters. Parameters are imaginary! Like unicorns! [Put finger on forehead and imitate unicorn.] We estimate parameters to build Data Generating Mechanisms. And with a DGM, you can move the world!"
 
-Aashna Patel
+

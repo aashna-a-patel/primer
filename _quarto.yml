@@ -30,19 +30,18 @@ book:
   chapters:
     - index.qmd
     - preamble.qmd
-    - getting-started-with-rstudio.qmd
-    - getting-started-with-positron.qmd
+    - getting-started.qmd
     - rubin-causal-model.qmd
     - probability.qmd
     - sampling.qmd
     - models.qmd
     - two-parameters.qmd
     - three-parameters-causal.qmd
-    - mechanics.qmd
+    # - mechanics.qmd
     # - four-parameters-continuous.qmd
-    - four-parameters-categorical.qmd
-    - five-parameters.qmd
-    - n-parameters.qmd
+    # - four-parameters-categorical.qmd
+    # - five-parameters.qmd
+    # - n-parameters.qmd
     - set-up.qmd
     - style-guide.qmd 
     - references.qmd
