@@ -304,7 +304,11 @@ window.Quarto = {
   
 
 
-</header><!-- Two parameter chapter is missing the math. --><p><a href="models.html" class="quarto-xref"><span>Chapter 4</span></a> used a logistic regression model, an appropriate approach when the outcome variable takes on just two possible values, generally recoded as <code>0</code> or <code>1</code>. In this chapter, we will a linear regression model because our outcome variable, <code>height</code>, is continuous.</p>
+</header><!-- Read https://ppbds.github.io/primer/two-parameters.html
+
+Read below (looking at comments)
+
+make much more similar to the tutorial. --><!-- Two parameter chapter is missing the math. --><p><a href="models.html" class="quarto-xref"><span>Chapter 4</span></a> used a logistic regression model, an appropriate approach when the outcome variable takes on just two possible values, generally recoded as <code>0</code> or <code>1</code>. In this chapter, we will a linear regression model because our outcome variable, <code>height</code>, is continuous.</p>
 <p>The reason for making models is not, primarily, that making models is fun – although it is! The reason is that the world confronts us. Make decisions we must. We must decide between options X or Y. We must choose from actions A, B and C. Confronted by a choice, we need to make a model of the world to help us choose wisely.</p>
 <p>The real world is complex. Any substantive decision problem includes a great deal of complexity and requires even more context. We do not have the time to get into that level of detail now. So, we simplify. We are going to create a model of height for adults. We will then use that model to answer:</p>
 <blockquote class="blockquote">
@@ -346,23 +350,23 @@ window.Quarto = {
 <p>Here are some rows from our Preceptor Table:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="owcfmcvsho" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#owcfmcvsho table {
+<div id="esxcpazgwl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#esxcpazgwl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#owcfmcvsho thead, #owcfmcvsho tbody, #owcfmcvsho tfoot, #owcfmcvsho tr, #owcfmcvsho td, #owcfmcvsho th {
+#esxcpazgwl thead, #esxcpazgwl tbody, #esxcpazgwl tfoot, #esxcpazgwl tr, #esxcpazgwl td, #esxcpazgwl th {
   border-style: none;
 }
 
-#owcfmcvsho p {
+#esxcpazgwl p {
   margin: 0;
   padding: 0;
 }
 
-#owcfmcvsho .gt_table {
+#esxcpazgwl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -388,12 +392,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#owcfmcvsho .gt_caption {
+#esxcpazgwl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#owcfmcvsho .gt_title {
+#esxcpazgwl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -405,7 +409,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#owcfmcvsho .gt_subtitle {
+#esxcpazgwl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -417,7 +421,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#owcfmcvsho .gt_heading {
+#esxcpazgwl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -429,13 +433,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#owcfmcvsho .gt_bottom_border {
+#esxcpazgwl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#owcfmcvsho .gt_col_headings {
+#esxcpazgwl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -450,7 +454,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#owcfmcvsho .gt_col_heading {
+#esxcpazgwl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -470,7 +474,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#owcfmcvsho .gt_column_spanner_outer {
+#esxcpazgwl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -482,15 +486,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#owcfmcvsho .gt_column_spanner_outer:first-child {
+#esxcpazgwl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#owcfmcvsho .gt_column_spanner_outer:last-child {
+#esxcpazgwl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#owcfmcvsho .gt_column_spanner {
+#esxcpazgwl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -502,11 +506,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#owcfmcvsho .gt_spanner_row {
+#esxcpazgwl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#owcfmcvsho .gt_group_heading {
+#esxcpazgwl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -532,7 +536,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#owcfmcvsho .gt_empty_group_heading {
+#esxcpazgwl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -547,15 +551,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#owcfmcvsho .gt_from_md > :first-child {
+#esxcpazgwl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#owcfmcvsho .gt_from_md > :last-child {
+#esxcpazgwl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#owcfmcvsho .gt_row {
+#esxcpazgwl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -574,7 +578,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#owcfmcvsho .gt_stub {
+#esxcpazgwl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -587,7 +591,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#owcfmcvsho .gt_stub_row_group {
+#esxcpazgwl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -601,15 +605,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#owcfmcvsho .gt_row_group_first td {
+#esxcpazgwl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#owcfmcvsho .gt_row_group_first th {
+#esxcpazgwl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#owcfmcvsho .gt_summary_row {
+#esxcpazgwl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -619,16 +623,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#owcfmcvsho .gt_first_summary_row {
+#esxcpazgwl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#owcfmcvsho .gt_first_summary_row.thick {
+#esxcpazgwl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#owcfmcvsho .gt_last_summary_row {
+#esxcpazgwl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -638,7 +642,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#owcfmcvsho .gt_grand_summary_row {
+#esxcpazgwl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -648,7 +652,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#owcfmcvsho .gt_first_grand_summary_row {
+#esxcpazgwl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -658,7 +662,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#owcfmcvsho .gt_last_grand_summary_row_top {
+#esxcpazgwl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -668,11 +672,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#owcfmcvsho .gt_striped {
+#esxcpazgwl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#owcfmcvsho .gt_table_body {
+#esxcpazgwl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -681,7 +685,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#owcfmcvsho .gt_footnotes {
+#esxcpazgwl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -695,7 +699,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#owcfmcvsho .gt_footnote {
+#esxcpazgwl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -704,7 +708,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#owcfmcvsho .gt_sourcenotes {
+#esxcpazgwl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -718,7 +722,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#owcfmcvsho .gt_sourcenote {
+#esxcpazgwl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -726,72 +730,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#owcfmcvsho .gt_left {
+#esxcpazgwl .gt_left {
   text-align: left;
 }
 
-#owcfmcvsho .gt_center {
+#esxcpazgwl .gt_center {
   text-align: center;
 }
 
-#owcfmcvsho .gt_right {
+#esxcpazgwl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#owcfmcvsho .gt_font_normal {
+#esxcpazgwl .gt_font_normal {
   font-weight: normal;
 }
 
-#owcfmcvsho .gt_font_bold {
+#esxcpazgwl .gt_font_bold {
   font-weight: bold;
 }
 
-#owcfmcvsho .gt_font_italic {
+#esxcpazgwl .gt_font_italic {
   font-style: italic;
 }
 
-#owcfmcvsho .gt_super {
+#esxcpazgwl .gt_super {
   font-size: 65%;
 }
 
-#owcfmcvsho .gt_footnote_marks {
+#esxcpazgwl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#owcfmcvsho .gt_asterisk {
+#esxcpazgwl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#owcfmcvsho .gt_indent_1 {
+#esxcpazgwl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#owcfmcvsho .gt_indent_2 {
+#esxcpazgwl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#owcfmcvsho .gt_indent_3 {
+#esxcpazgwl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#owcfmcvsho .gt_indent_4 {
+#esxcpazgwl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#owcfmcvsho .gt_indent_5 {
+#esxcpazgwl .gt_indent_5 {
   text-indent: 25px;
 }
 
-#owcfmcvsho .katex-display {
+#esxcpazgwl .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#owcfmcvsho div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#esxcpazgwl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -919,11 +923,11 @@ $ sleep          &lt;int&gt; 4, 4, 4, NA, 8, NA, NA, 8, 8, 8, 7, 5, 4, NA, 5, 7,
 <pre><code># A tibble: 5 × 3
     age sex    height
   &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;
-1    49 Male    178  
-2    11 Female  151. 
-3     4 Male     98.8
-4    73 Female  161. 
-5    68 Female  152. </code></pre>
+1    29 Male     185.
+2     0 Male      NA 
+3    30 Female   169 
+4    26 Female   158.
+5    25 Male     183.</code></pre>
 </div>
 </div>
 <p>We think of both <code>age</code> and <code>height</code> as numbers. And they are numbers! But R distinguishes between “integers” and “doubles,” only the second of which allow for decimal values. In the <code>nhanes</code> data, <code>age</code> is an integer and <code>height</code> is a double.</p>
