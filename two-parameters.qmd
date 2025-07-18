@@ -8,6 +8,13 @@
 library(gt)
 ```
 
+<!-- Read https://ppbds.github.io/primer/two-parameters.html
+
+Read below (looking at comments)
+
+make much more similar to the tutorial. -->
+
+
 
 
 
