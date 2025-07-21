@@ -397,6 +397,8 @@ library(broom)
 tidy(fit_1, conf.int = TRUE)
 ```
 
+The intercept (about 165 cm) estimates the average height for females (the reference group). The coefficient for sexMale (around 9.56 cm) shows that males are on average taller by that amount compared to females.
+
 <!-- DK: Insert interpretions of the parameters. perhaps equixomatic? -->
 
 
@@ -405,6 +407,8 @@ tidy(fit_1, conf.int = TRUE)
 x |> 
   summarise(avg_heigh = mean(height), .by = sex)
 ```
+
+The average heights confirm the regression results: males average about 174 cm and females about 165 cm in this sample.
 
 * The estimated error ("Est.Error") also makes sense. This is the standard error and can be calculated by hand as the standard deviation of the data divided by the squart root of the number of observations:
 
