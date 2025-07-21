@@ -210,7 +210,7 @@ Will the data we have --- which is only for a sample of adult Americans more tha
 
 ### Validity
 
-Validity involves our columns. More specifically, whether our columns mean the same thing. Does "height" in our Preceptor Table mean the same thing as "height" in NHANES? Almost certainly. Of course, we need to be careful about mistakes like measurement units, like centimeters in one and inches in the other. And there can be issues like: Are measurements taken with shoes on or shoes off? But, for the most part, the "height" variable in NHANES in 2010 is a *valid* proxy for the "height" of individuals today. We can stack the two data sets together and consider them to have come from the same population. The same applies to sex.
+Validity refers to whether columns from different datasets represent the same concept. For example, does "height" in the Preceptor Table mean the same as "height" in NHANES? Most likely, yes. However, we need to watch for differences like measurement units—centimeters versus inches—or whether people were measured with shoes on or off. These kinds of differences could mean that the `height` columns don’t truly align. Still, overall, the NHANES 2010 height data is a valid stand-in for modern height measurements. That means we can reasonably stack the two datasets and treat them as if they come from the same population. The same logic applies to the `sex` variable.
 
 Since validity holds, we can combine the Preceptor Table and our data into a Population Table.
 
