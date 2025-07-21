@@ -67,29 +67,34 @@ So, what does our Preceptor Table look like? Assuming we are predicting height f
 
 Here are some rows from our Preceptor Table: 
 
-
 ```{r}
 #| echo: false
 
-dplyr::tibble(ID = c("1", "2", "...", "10", "11", "...", "N"),
-       height = c("150", "172", "...", "160", "142", "...", "190"),
-       sex = c("M", "F", "...", "F", "F", "...", "M")) |>
-
+tibble(
+  ID = c("1", "2", "...", "5000", "5001", "...", "N"),
+  height = c("150", "172", "...", "160", "142", "...", "190"),
+  sex = c("F", "M", "...", "M", "F", "...", "M")
+) |>
   gt() |>
   tab_header(title = "Preceptor Table") |>
-  cols_label(ID = md("ID"),
-             height = md("Height"),
-             sex = md("Sex")) |>
-  tab_style(cell_borders(sides = "right"),
-            location = cells_body(columns = c(ID))) |>
-  tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"),
-            locations = cells_column_labels(columns = c(ID))) |>
+  cols_label(
+    ID = md("ID"),
+    height = md("Height"),
+    sex = md("Sex")
+  ) |>
+  tab_style(
+    style = cell_borders(sides = "right"),
+    locations = cells_body(columns = c(ID))
+  ) |>
+  tab_style(
+    style = cell_text(align = "left", v_align = "middle", size = "large"),
+    locations = cells_column_labels(columns = c(ID))
+  ) |>
   cols_align(align = "center", columns = everything()) |>
   cols_align(align = "left", columns = c(ID)) |>
   fmt_markdown(columns = everything()) |>
   tab_spanner(label = "Outcome", columns = c(height)) |>
   tab_spanner(label = "Covariate", columns = c(sex))
-
 ```
 
 This table would extend all the way until person 8 billion-and-something. We don't know the number of rows, so we use `N`. If we had this table, all of our questions could be answered with simple math. No inference is necessary if we have a Preceptor Table. But what does our actual data look like? 
@@ -183,6 +188,23 @@ x |>
          ) 
 ```
 
+Let's take a look at another example of the plotted data using height as our outcome variable:
+
+```{r}
+nhanes |>
+  filter(age >= 18) |>
+  drop_na() |>
+  ggplot(aes(x = height)) +
+  geom_histogram(bins = 50, fill = "#69b3a2", color = "white") +
+  labs(
+    title = "Adult Heights in the US in 2010",
+    subtitle = "The Average Height of Adults in the US in 2010 was around 162 cm (64 in)",
+    x = "Height (cm)",
+    y = "Count",
+    caption = "Source: National Health and Nutrition Examination Survey"
+  ) +
+  theme_minimal(base_size = 14)
+```
 
 Will the data we have --- which is only for a sample of adult Americans more than a decade ago --- allow us to answer our questions, however roughly? Only if the assumption of *validity* makes sense.
 
