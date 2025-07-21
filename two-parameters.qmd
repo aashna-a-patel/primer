@@ -251,37 +251,41 @@ Our **actual data** rows contain the information that we *do* know. These rows c
 
 Our **other** rows contain no data. These are subjects which fall under our desired population, but for which we have no data. As such, all outcomes and covariates are missing. (A subtle point is that, even for other data, we "know" the ID and the Year for each subject. Of course, we don't *really* know these things, but, conceptually, we are defining the meaning of those rows on the basis of those variables.)
 
-<!-- DK: Need to standardize the creation of the Population Table, include ID/time column. -->
+<!-- DK: Need to standardize the creation of the Population Table, include ID/time column.  AP: should be good-->
 
 ```{r}
 #| echo: false
-tibble(source = c("Preceptor Table", "Preceptor Table", "...",
-                  "Actual Data", "Actual Data", "Actual Data", "...", 
-                  "Other", "Other", "Other"),
-       sex = c("Male", "Female", "...",
-                  "Male", "Female", "Male", "...",
-                  "?", "?", "?"),
-       year = c("2024", "2024", "...",
-                "2009", "2011", "2010", "...",
-                "?", "?", "?"),
-       height = c("?", "?", "...",
-                 "180", "160", "168", "...",
-                 "?", "?", "?")) |>
-  
-  # Then, we use the gt function to make it pretty
-  
+tibble(
+  ID = c("P1", "P2", "...", "D1", "D2", "D3", "...", "O1", "O2", "O3"),
+  source = c("Preceptor", "Preceptor", "...", 
+             "Actual", "Actual", "Actual", "...", 
+             "Other", "Other", "Other"),
+  year = c("2024", "2024", "...", 
+           "2009", "2010", "2011", "...", 
+           "?", "?", "?"),
+  sex = c("Male", "Female", "...", 
+          "Male", "Female", "Male", "...", 
+          "?", "?", "?"),
+  height = c("?", "?", "...", 
+             "180", "160", "168", "...", 
+             "?", "?", "?")
+) |>
   gt() |>
-  cols_label(source = md("Source"),
-             sex = md("Sex"),
-             year = md("Year"),
-             height = md("Height")) |>
+  tab_header(title = "Population Table") |>
+  cols_label(
+    ID = md("ID"),
+    source = md("Source"),
+    year = md("Year"),
+    sex = md("Sex"),
+    height = md("Height")
+  ) |>
   tab_style(cell_borders(sides = "right"),
-            location = cells_body(columns = c(source))) |>
-  tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
-            locations = cells_column_labels(columns = c(source))) |>
+            location = cells_body(columns = c(ID))) |>
+  tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"),
+            locations = cells_column_labels(columns = c(ID))) |>
   cols_align(align = "center", columns = everything()) |>
-  cols_align(align = "left", columns = c(source)) |>
-  fmt_markdown(columns = everything())  
+  cols_align(align = "left", columns = c(ID)) |>
+  fmt_markdown(columns = everything())
 ```
 
 ### Stability
