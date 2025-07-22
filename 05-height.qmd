@@ -218,9 +218,19 @@ knitr::include_graphics("other/images/Justice.jpg")
 
 ### Validity
 
+**Validity** refers to whether variables across different datasets represent the same underlying concept. For example, does `height` in the Preceptor Table mean the same as `height` in NHANES? Most likely—but we must consider potential differences, such as units (centimeters vs. inches) or measurement conditions (with or without shoes). These discrepancies could affect alignment. Still, the NHANES 2010 height data is a reasonable proxy for current adult height, allowing us to treat both datasets as drawn from the same population. The same reasoning applies to the `sex` variable.
+
+Because validity holds, we can merge the Preceptor Table with our actual data to form the Population Table.
+
 ### Stability
 
+**Stability** means that the relationship between variables in the Population Table remains consistent across all three sources: the actual data, the Preceptor Table, and the broader population from which both are drawn.
+
 ### Representativeness
+
+**Representativeness** concerns two key relationships among the rows in the Population Table: first, how well the data represents the broader population; and second, how well the population reflects the Preceptor Table.
+
+In our case, the population includes all adults worldwide. Is U.S. data from 2010 representative of that global population? Not exactly. People in the U.S. differ in systematic ways—both biologically and culturally—from those in other parts of the world.
 
 ### Unconfoundedness
 
