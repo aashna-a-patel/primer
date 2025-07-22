@@ -20,12 +20,12 @@ We don’t build models just for fun—though it is fun. We build models because
 
 Of course, the real world is messy. Real decisions come with complexity and context we can’t fully capture here. So, we simplify. In this chapter, we’ll model adult height using a linear regression and explore two key questions:
 
-Scenario 1: 
+Scenario 1 (Predictive): 
 Imagine that you're in charge of ordering uniforms for next year’s Marine Corps bootcamp recruits. There are many decisions to make: the cost of different designs, the number of male and female recruits, the distributions of heights and weights, and so on.
 
 How does average height differ between men and women?
 
-Scenario 2:
+Scenario 2 (Causal):
 Imagine that you're advising a school district that’s considering implementing daily physical education (PE) for younger students. There are many decisions to make: how much time to devote to PE, whether it will affect academic schedules, and whether it will improve long-term health outcomes. NHANES includes data on physical activity levels and self-reported height.
 
 Does higher physical activity during youth lead to greater adult height?
@@ -88,8 +88,9 @@ scenario1_table <- tibble(
   )
 
 scenario1_table
-
 ```
+
+This table would have about 8 billion rows—one per adult. With it, calculating average height by sex would be straightforward, no modeling needed. 
 
 Scenario 2:
 
@@ -113,4 +114,8 @@ scenario2_table <- tibble(
 
 scenario2_table
 ```
+
+This table would include all adults with their treatment status and covariates. If complete, we could directly assess the program’s effect on height.
+
+But what does our actual data look like?
 
