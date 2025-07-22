@@ -1,5 +1,116 @@
----
-title: "Untitled"
-format: html
----
+# Height
+
+```{r}
+#| label: hidden-libraries
+#| message: false
+#| echo: false
+#| warning: false
+library(gt)
+library(tidyverse)
+library(primer.data)
+library(skimr)
+library(tidymodels)
+library(equatiomatic)
+library(broom)
+```
+
+@sec-models used a logistic regression model—an appropriate choice when the outcome has just two possible values. In this chapter, we’ll use a linear regression model because our outcome variable, height, is continuous.
+
+We don’t build models just for fun—though it is fun. We build models because the world presents us with decisions. Should we choose X or Y? Action A, B, or C? When faced with choices, we create models to better understand how the world works and to make smarter, more informed decisions.
+
+Of course, the real world is messy. Real decisions come with complexity and context we can’t fully capture here. So, we simplify. In this chapter, we’ll model adult height using a linear regression and explore two key questions:
+
+Scenario 1: 
+Imagine that you're in charge of ordering uniforms for next year’s Marine Corps bootcamp recruits. There are many decisions to make: the cost of different designs, the number of male and female recruits, the distributions of heights and weights, and so on.
+
+How does average height differ between men and women?
+
+Scenario 2:
+Imagine that you're advising a school district that’s considering implementing daily physical education (PE) for younger students. There are many decisions to make: how much time to devote to PE, whether it will affect academic schedules, and whether it will improve long-term health outcomes. NHANES includes data on physical activity levels and self-reported height.
+
+Does higher physical activity during youth lead to greater adult height?
+
+The world confronts us. Make decisions we must.
+
+NHANES is a voluntary survey that oversamples groups like older adults and minorities. This can make the raw data unbalanced and inaccurate for the whole population, so sampling weights are used to correct it.
+
+Data science is ultimately a moral act, so we will use the four [Cardinal Virtues](https://en.wikipedia.org/wiki/Cardinal_virtues) --- Wisdom, Justice, Courage and Temperance --- to guide our approach.  
+
+## Wisdom
+
+```{r}
+#| echo: false
+knitr::include_graphics("two-parameters/images/learn_the ways.gif")
+```
+
+
+Which rows and columns of data do you need such that, if you had them all, the calculation of the quantity of interest would be trivial? The steps we usually take to construct the Preceptor Table include:
+
+**Scenario 1:** How does average height differ between men and women?
+
+* *Units*: All adults in the world, one row per person.
+* *Outcome*: Individual height. While the question concerns average height, modeling individual heights allows calculation of group averages.
+* *Treatment*: None.
+* *Causal or predictive model*: Predictive. We aim to estimate differences, not causal effects.
+* *Covariates*: Sex must be included to differentiate men and women.
+* *Moment in Time*: Present—heights measured “now.”
+
+The Preceptor Table here would have about 8 billion rows (one per adult) and columns for sex and height.
+
+
+
+**Scenario 2:** Does participation in a youth physical activity program cause an increase in adult height?
+
+* *Units*: All adults, regardless of participation status.
+* *Outcome*: Adult height.
+* *Treatment*: Participation in the youth physical activity program.
+* *Causal or predictive model*: Causal. The goal is to estimate the effect of the program on height.
+* *Covariates*: Sex, socioeconomic status, nutrition, and age at treatment to control for confounding.
+* *Moment in Time*: Treatment in the past; height measured now.
+
+This Preceptor Table would also have many rows—one per adult—with columns for treatment, height, sex, and relevant covariates.
+
+Here are some rows from our Preceptor Tables: 
+
+Scenario 1:
+```{r}
+#| echo: false
+scenario1_table <- tibble(
+  ID = c("Adult 1", "Adult 2", "...", "Adult N"),
+  height = c("165", "178", "...", "170"),
+  sex = c("Female", "Male", "...", "Female")
+) |>
+  gt() |>
+  cols_label(
+    ID = md("ID"),
+    height = md("Height (cm)"),
+    sex = md("Sex")
+  )
+
+scenario1_table
+
+```
+
+Scenario 2:
+
+```{r}
+#| echo: false
+scenario2_table <- tibble(
+  ID = c("Adult 1", "Adult 2", "...", "Adult N"),
+  treatment = c("Yes", "No", "...", "No"),
+  height = c("172", "160", "...", "168"),
+  sex = c("Male", "Female", "...", "Male"),
+  socioeconomic_status = c("Low", "High", "...", "Medium")
+) |>
+  gt() |>
+  cols_label(
+    ID = md("ID"),
+    treatment = md("Program Participation"),
+    height = md("Height (cm)"),
+    sex = md("Sex"),
+    socioeconomic_status = md("Socioeconomic Status")
+  )
+
+scenario2_table
+```
 
