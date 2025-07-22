@@ -25,14 +25,14 @@ Imagine that you're in charge of ordering uniforms for next year’s Marine Corp
 
 How does average height differ between men and women?
 
+---
+
 Scenario 2 (Causal):
 Imagine that you're advising a school district that’s considering implementing daily physical education (PE) for younger students. There are many decisions to make: how much time to devote to PE, whether it will affect academic schedules, and whether it will improve long-term health outcomes. NHANES includes data on physical activity levels and self-reported height.
 
 Does higher physical activity during youth lead to greater adult height?
 
-The world confronts us. Make decisions we must.
-
-NHANES is a voluntary survey that oversamples groups like older adults and minorities. This can make the raw data unbalanced and inaccurate for the whole population, so sampling weights are used to correct it.
+> The world confronts us. Make decisions we must.
 
 Data science is ultimately a moral act, so we will use the four [Cardinal Virtues](https://en.wikipedia.org/wiki/Cardinal_virtues) --- Wisdom, Justice, Courage and Temperance --- to guide our approach.  
 
@@ -43,6 +43,9 @@ Data science is ultimately a moral act, so we will use the four [Cardinal Virtue
 knitr::include_graphics("two-parameters/images/learn_the ways.gif")
 ```
 
+Wisdom begins with the Preceptor Table: the ideal data needed to answer our questions. Next, we examine the data we actually have. Using the concept of *validity*, we assess whether the data we possess are sufficiently similar to the ideal data to provide meaningful insights.
+
+### Preceptor Table
 
 Which rows and columns of data do you need such that, if you had them all, the calculation of the quantity of interest would be trivial? The steps we usually take to construct the Preceptor Table include:
 
@@ -57,7 +60,7 @@ Which rows and columns of data do you need such that, if you had them all, the c
 
 The Preceptor Table here would have about 8 billion rows (one per adult) and columns for sex and height.
 
-
+---
 
 **Scenario 2:** Does participation in a youth physical activity program cause an increase in adult height?
 
@@ -92,6 +95,8 @@ scenario1_table
 
 This table would have about 8 billion rows—one per adult. With it, calculating average height by sex would be straightforward, no modeling needed. 
 
+---
+
 Scenario 2:
 
 ```{r}
@@ -118,4 +123,30 @@ scenario2_table
 This table would include all adults with their treatment status and covariates. If complete, we could directly assess the program’s effect on height.
 
 But what does our actual data look like?
+
+### EDA
+
+Consider the `nhanes` dataset from the National Health and Nutrition Examination Survey conducted by the CDC between 2009 and 2011.
+
+NHANES is a voluntary survey that oversamples groups such as older adults and minorities, which can make the raw data unbalanced for the overall population. To address this, sampling weights are applied for accurate representation.
+
+```{r}
+#| code-fold: false
+#| warning: false
+glimpse(nhanes)
+```
+
+The dataset contains 10,000 entries from the 2009 survey, each representing an individual’s health and demographic information. Some values, like `pulse` and `pregnancies`, have missing data, and repeated values likely reflect individuals from the same household.
+
+The dataset includes `r ncol(nhanes)` variables covering physical attributes such as weight and height. For now, we focus on three: `age`, `sex`, and `height`.
+
+```{r}
+#| code-fold: false
+nhanes |> 
+  select(age, sex, height)
+```
+
+This subset displays `age`, `sex`, and `height` for 10,000 individuals, including both children and adults. Repeated rows may indicate household clustering or duplicate observations.
+
+Examine a random sample:
 
