@@ -285,6 +285,8 @@ tibble(
     sex = md("Sex"),
     height = md("Height")
   ) |>
+  tab_spanner(label = "Covariates", columns = c(sex)) |>
+  tab_spanner(label = "Outcome", columns = c(height)) |>
   tab_style(cell_borders(sides = "right"),
             location = cells_body(columns = c(ID))) |>
   tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"),
@@ -324,6 +326,8 @@ tibble(
     treatment = md("Treatment"),
     height = md("Height")
   ) |>
+  tab_spanner(label = "Covariates", columns = c(treatment)) |>
+  tab_spanner(label = "Outcome", columns = c(height)) |>
   tab_style(cell_borders(sides = "right"),
             location = cells_body(columns = c(ID))) |>
   tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"),
@@ -332,3 +336,5 @@ tibble(
   cols_align(align = "left", columns = c(ID)) |>
   fmt_markdown(columns = everything())
 ```
+
+## Courage
