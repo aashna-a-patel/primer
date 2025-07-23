@@ -338,3 +338,13 @@ tibble(
 ```
 
 ## Courage
+
+```{r}
+#| echo: false
+knitr::include_graphics("other/images/Courage.jpg")
+```
+
+In data science, *we deal with words, math, and code, but the most important of these is code.* We need Courage to create the model, to take the leap of faith that we can make our ideas real. 
+
+**Justice** helped us define the Population Table—the framework of the world we’re trying to understand. **Courage** guides the next step: choosing the data-generating process. We begin by specifying a mathematical relationship between the outcome we care about and the variables we observe. We explore different modeling options, decide which covariates to include, estimate unknown parameters, and check whether our models fit the data well. Rather than rely on traditional hypothesis testing, we focus on clarity and reasoned judgment to select a final model.
+
