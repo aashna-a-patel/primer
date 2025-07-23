@@ -234,7 +234,26 @@ In our case, the population includes all adults worldwide. Is U.S. data from 201
 
 ### Unconfoundedness
 
+**Unconfoundedness** means that, once we account for pre-treatment covariates, the assignment of treatment is independent of the potential outcomes. In other words, there are no hidden biases linking who gets the treatment to what their outcomes would have been. A model is **confounded** when this assumption does not hold.
+
 ### Population
+
+The **population** is not the same as the dataset we have—participants from the CDC’s NHANES survey conducted between 2009 and 2011. That’s simply our **data**. Nor is the population the set of individuals we *wish* we had data on—those make up the **Preceptor Table**. The population is the broader set of individuals that includes both the people we’ve observed and those we want to observe. Typically, this population is much larger than either group.
+
+There's almost always a time component to consider. Our data comes from the past, but the questions we ask are often about the present or even the future. For instance, in **Scenario 1**, we want to estimate average adult height *today*, not just in 2009–2011. And in **Scenario 2**, we may want to assess the impact of a treatment across broader or more current populations than the original data covers.
+
+Can we generalize from the data we have to the population we care about? That depends. U.S. adults from over a decade ago are not identical to today’s global adult population. Cultural, environmental, and biological differences matter. Still, this data may be the best we have—and often, using imperfect data is better than using none at all.
+
+But not always. If the data is irrelevant to the question—for example, trying to estimate the median height of fifth-grade girls in Tokyo from this sample—it may do more harm than good. **Wisdom** lies in knowing when your data is “good enough” and when to seek better information—or rely on other forms of judgment.
 
 ### The Population Table
 
+> The **Population Table** includes one row for each unit–time combination in the full population from which both the Preceptor Table and the observed data are drawn.
+
+It brings together three types of rows:
+
+* **Preceptor Table rows** represent the ideal data we *wish* we had to answer our question. These rows include covariates like `sex`, but no outcomes.
+* **Actual data rows** represent what we *do* have—both covariates and outcomes. For example, in our dataset, these rows may come from adults surveyed in 2009–2011, with complete entries for `sex`, `height`, and `year`.
+* **Other rows** represent individuals in the broader population for whom we have no data. These rows are empty except for structural identifiers like ID and time. While we don’t truly know those values, we define them conceptually to complete the population structure.
+
+The Population Table allows us to frame our question in terms of what we ideally want to know, what we actually observe, and where gaps in data remain. This framework applies whether we’re estimating average height today (Scenario 1) or assessing a treatment effect (Scenario 2).
