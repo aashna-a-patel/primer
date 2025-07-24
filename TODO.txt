@@ -1,5 +1,27 @@
 # Priorities
 
+## Ivy
+
+Not an R Package (get rid of package check)
+
+Does not use renv. Try r-dependencies. 
+
+    uses: r-lib/actions/setup-r-dependencies@v2 
+
+Check if the above is the latest Versions
+
+Once the above is working, with quarto render, send a PR
+
+Then install renv for the package. 
+
+Then remove r-dependencies and use renv approach.
+
+Then learn about making the book automatically for each change and what that means
+
+
+
+
+
 ## Guidelines for Chapter Rewrites
 
 * There should be two "Imgagine that" sentences, one causal and one prediction, interested in different times and different units. One is the same as the tutorial, but one is different.
