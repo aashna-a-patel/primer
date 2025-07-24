@@ -348,125 +348,132 @@ In data science, *we deal with words, math, and code, but the most important of 
 
 **Justice** helped us define the Population Table—the framework of the world we’re trying to understand. **Courage** guides the next step: choosing the data-generating process. We begin by specifying a mathematical relationship between the outcome we care about and the variables we observe. We explore different modeling options, decide which covariates to include, estimate unknown parameters, and check whether our models fit the data well. Rather than rely on traditional hypothesis testing, we focus on clarity and reasoned judgment to select a final model.
 
-We use a simple linear model:
+## Modeling the Data
+
+We use a simple linear model to understand how an outcome varies with a categorical covariate.
+
+### Model Specification
+
+For both scenarios—whether estimating **height by sex** or **income by political affiliation**—we use a model of the form:
 
 $$
-y_i = \beta_0 + \beta_1 \cdot \text{sex}_\text{Male} + \epsilon_i
+y_i = \beta_0 + \beta_1 \cdot X_i + \epsilon_i
 $$
 
-with $\epsilon_i \sim N(0, \sigma^2)$. Here, $y_i$ represents the height of adult $i$, and $\epsilon_i$ is the *error term*—the difference between the actual height of individual $i$ and the height predicted by the model. We assume the errors are normally distributed with mean 0 and standard deviation $\sigma$.
+* $y_i$: the outcome for individual $i$ (e.g., height or income)
+* $X_i$: the covariate of interest (e.g., sex or political affiliation, coded as a binary indicator)
+* $\beta_0$: the intercept, representing the average for the reference group
+* $\beta_1$: the difference between the two groups
+* $\epsilon_i \sim N(0, \sigma^2)$: normally distributed residuals capturing random variation
 
 ::: callout-note
 **Model Parameters**
 
-- This model includes three unknown parameters: $\beta_0$, $\beta_1$, and $\sigma$. While we can never know their exact values—*perfection lies only in God's own R code*—we can estimate their *posterior distributions* using the Bayesian methods introduced in Chapters @sec-probability and @sec-models.
-
-- As George Box famously said, *"All models are wrong, but some are useful."* This model is certainly wrong, but we hope it is useful.
-
-- The parameter we care most about is $\mu$, the *population* average height of adult men. This is **not** the same as the sample average, which we can compute directly with `mean(x$height)`. Instead, $\mu$ refers to the true mean in the population we're trying to understand.
-
-- What exactly is that population? If we are walking around Copenhagen, the relevant population might be the set of adult men we could meet today—not U.S. men in 2010. Still, we might assume both sets are drawn from the same underlying population. Whether this assumption is reasonable is a question of *validity*.
-
-- $\sigma$ represents the standard deviation of the residuals—how much individual heights vary from the group average. While we estimate its posterior distribution like the others, $\sigma$ is considered a *nuisance* or *auxiliary* parameter: useful for inference, but not of direct interest.
+* This model includes three unknowns: $\beta_0$, $\beta_1$, and $\sigma$. We can’t know their true values but can estimate them and their uncertainty using statistical inference.
+* The parameter of greatest interest is usually $\mu$, the **population average** for a group, not just the average in our sample.
+* $\sigma$ is the standard deviation of the residuals. It’s useful for quantifying uncertainty but is often treated as a **nuisance parameter**.
+* As George Box said, *“All models are wrong, but some are useful.”* Even a simple model can guide important decisions.
 :::
 
-### Models
+---
 
-Let's estimate a simple version of the model using the **tidymodels** package.
+### Fit the Model
+
+Let’s fit the model using `tidymodels`.
 
 ```{r}
-#| code-fold: false
 #| message: false
 library(tidymodels)
-```
-
-Because we are estimating a linear model, we begin with:
-
-```{r}
-#| echo: true
-#| message: false
 
 fit_1 <- linear_reg() |> 
   set_engine("lm") |> 
   fit(height ~ sex, data = x)
 ```
 
-The formula `height ~ sex` defines a simple linear regression model where we predict height based on sex. This corresponds to the mathematical model:
+The formula `height ~ sex` fits a model where the outcome (`height`) depends on the categorical variable `sex`. R automatically encodes `sex` as a dummy variable, typically treating `"Female"` as the reference group.
 
-$$
-y_i = \beta_0 + \beta_1 \cdot \text{sex}_{\text{Male}} + \epsilon_i
-$$
-
-Here, $y_i$ represents the height of individual $i$, and $\epsilon_i$ is the error term, assumed to follow a normal distribution: $\epsilon_i \sim N(0, \sigma^2)$. The intercept $\beta_0$ estimates the average height for the reference group (females), while $\beta_1$ captures the average height difference between males and females.
+To examine the fitted coefficients:
 
 ```{r}
-#| echo: true
 fit_1
 ```
 
-Printing the model shows the fitted coefficients. In R, the `(Intercept)` term corresponds to $\beta_0$, and the coefficient for `sexMale` corresponds to $\beta_1$, which estimates the average increase in height for males relative to females.
-
-To view the model results more clearly, we can use the `tidy()` function from the **broom** package:
+To view the results with confidence intervals:
 
 ```{r}
-#| code-fold: false
-#| message: false
-#| echo: true
 library(broom)
 
 tidy(fit_1, conf.int = TRUE)
 ```
 
-* The intercept (around 165 cm) gives the estimated average height for females.
-* The `sexMale` coefficient (approximately 9.56 cm) indicates that males are, on average, 9.56 cm taller than females in our sample.
-* The 95% confidence interval for this difference helps quantify the uncertainty around that estimate.
+---
 
-To double-check, let’s compute the actual average heights by sex:
+### Interpretation
+
+* The **intercept** (`(Intercept)`) estimates the average height of the reference group (e.g., females).
+* The **coefficient** for `sexMale` represents how much taller (on average) males are than females.
+* The **confidence interval** provides a plausible range for the population-level difference.
+
+To check this against the actual sample means:
 
 ```{r}
-#| echo: true
 x |> 
   summarise(avg_height = mean(height), .by = sex)
 ```
 
-These averages confirm the model’s results: females average about 165 cm, and males about 174 cm.
-
-The standard error provides a measure of how much the estimated average might vary if we took another sample. We can approximate it manually as:
+To approximate the standard error of the sample mean:
 
 ```{r}
-#| echo: true
 sd(x$height) / sqrt(nrow(x))
 ```
 
-This gives us a sense of the model's precision. Confidence intervals are based on this standard error, calculated as:
+This helps us understand how much the sample mean might vary if we had drawn a different group of individuals.
 
-$$
-\text{Estimate} \pm 2 \times \text{Standard Error}
-$$
-
-While we estimate $\sigma$, the standard deviation of the residuals, it's considered a **nuisance parameter**—necessary for modeling but not of primary interest. Our focus is on $\mu$, the population mean height for females, and the difference captured by $\beta_1$.
-
+---
 
 ### Data Generating Mechanism
 
-We model `height`, a continuous variable measured in centimeters, using a simple linear model with a constant term. Based on available data, the average adult male height in the U.S. is approximately 176 cm. The model can be expressed as:
+To simulate data or reason about uncertainty, we often define a **data generating process**. For instance, we might assume:
 
-$$
-\text{height}_i = 176 + \epsilon_i
-$$
+```math
+\text{height}_i = 176 + \epsilon_i,\quad \epsilon_i \sim N(0, 0.75^2)
+```
 
-where the error term $\epsilon_i \sim N(0, 0.75^2)$ accounts for individual variability around the mean.
+This suggests that adult male height centers around 176 cm with modest individual variation.
+
+Such a model is idealized—but if it approximates reality well, it can be useful.
 
 ---
 
 ### Posterior Predictive Check
 
-Before accepting `fit_1` as our data-generating mechanism, we should evaluate its adequacy using a posterior predictive check.
+Before trusting our model as a reliable approximation, we should test whether it replicates the data we see.
 
 ```{r}
-## tidymodels::pp_check(fit_1)
+##tidymodels::pp_check(fit_1)
 ```
 
-This diagnostic compares the observed data, $y$, with replicated data sets, $y_{\text{rep}}$, generated from the fitted model. In this case, the observed and replicated values align closely, suggesting that `fit_1` captures the overall distribution well enough to proceed.
+The plot (not shown here) compares our observed data to several replicated datasets simulated from the fitted model.
 
-However, the fit is not perfect. The observed data is slightly more peaked, and there are minor deviations in the tails—particularly around 200 cm. While it is theoretically possible to refine the model to better match these characteristics, such refinements may complicate the model unnecessarily. For our current purposes, `fit_1` serves as an acceptable and reasonable approximation of the true data-generating process.
+* If the replicated distributions closely resemble the actual data, the model is reasonable.
+* In our case, the model performs well but not perfectly: the observed data has slightly sharper peaks and heavier tails.
+
+Rather than overfitting, we accept these imperfections and move forward with a model that is **good enough** to support insight.
+
+---
+
+### Generalizing to Other Scenarios
+
+This structure applies whether:
+
+* **Outcome:** `height` (continuous),
+  **Covariate:** `sex`,
+  **Goal:** Estimate average height difference between males and females.
+
+**OR**
+
+* **Outcome:** `income` (continuous),
+  **Covariate:** `party_affiliation`,
+  **Goal:** Estimate average income difference between liberals and conservatives.
+
+The modeling approach remains the same; only the variable names and substantive interpretation differ.
