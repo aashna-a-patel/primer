@@ -485,141 +485,121 @@ The modeling approach remains the same; only the variable names and substantive 
 knitr::include_graphics("other/images/Temperance.jpg")
 ```
 
-## Questions and Answers
 
-### What is the probability that the next adult male we meet will be taller than 180 cm?
+### Questions and Answers
 
-We distinguish between two types of unknowns:
+#### What is the probability that the next adult male we meet will be taller than 180 cm?
 
-* **Expected values**: What’s the average height across a population?
-* **Predicted values**: What’s the height of a specific, randomly chosen individual?
-
-To estimate the height of a specific adult male, we use `add_predicted_draws()`, which incorporates both model uncertainty and individual variation.
+We can simulate predicted values using the model and a new dataset containing only males. Since we’re working with a **frequentist model**, we'll use `predict()` combined with the model's residual standard deviation to simulate individual variation.
 
 ```{r}
-#| code-fold: false
-new_draws <- fit_1 |>
-  add_predicted_draws(newdata = tibble(sex = "Male"), n = 1000)
+#| echo: true
+# Simulate predictions for a new male individual
+n_sim <- 10000
+new_male <- tibble(sex = "Male")
+
+# Get the point prediction and residual sd
+point_pred <- predict(fit_1, new_data = new_male)$.pred
+resid_sd <- glance(fit_1)$sigma
+
+# Simulate 10,000 predicted male heights
+set.seed(123)
+simulated_heights <- rnorm(n_sim, mean = point_pred, sd = resid_sd)
+
+# Probability taller than 180 cm
+mean(simulated_heights > 180)
 ```
 
-Let’s visualize the posterior predictive distribution:
-
 ```{r}
-new_draws |>
-  ggplot(aes(x = .prediction)) +
-  geom_histogram(aes(y = after_stat(count / sum(count))), bins = 60, fill = "#69b3a2", color = "white") +
+#| echo: true
+# Visualize simulated heights
+tibble(height = simulated_heights) |>
+  ggplot(aes(x = height)) +
+  geom_histogram(aes(y = after_stat(density)), bins = 60, fill = "#69b3a2") +
+  geom_vline(xintercept = 180, color = "red", linetype = "dashed") +
   labs(
-    title = "Posterior Predictive Distribution for Height",
-    subtitle = "For a Randomly Chosen Adult Male",
+    title = "Predicted Height for a Random Male",
+    subtitle = "Probability of height > 180 cm is shaded",
     x = "Height (cm)",
-    y = "Probability",
-    caption = "Source: NHANES 2009–2011"
+    y = "Density"
   ) +
-  scale_y_continuous(labels = scales::percent_format()) +
   theme_minimal()
 ```
 
-And now compute the probability that a randomly chosen man is taller than 180 cm:
-
-```{r}
-new_draws |>
-  summarise(p_taller_than_180 = mean(.prediction > 180))
-```
-
-This gives a clear estimate—for example, a \~30% chance that a random adult male is taller than 180 cm.
-
-> ⚠️ While our data is from U.S. adults in 2010, we're applying it to situations today. Whether that generalization is valid is a matter of **Wisdom**. Use humility and caution when applying models outside the exact context of the data.
+This approach reflects *prediction* for a single individual, so it includes both uncertainty in the mean and individual variability. You should find that about **30%** of predicted men are taller than 180 cm in this model.
 
 ---
 
-### What is the probability that the tallest of four random men is at least 10 cm taller than the shortest?
-
-Bayesian simulation allows us to answer complex questions like this by generating multiple draws and comparing statistics within each simulated group.
+#### What is the probability that the tallest of 4 random men is at least 10 cm taller than the shortest?
 
 ```{r}
-#| code-fold: false
-draws_4 <- fit_1 |>
-  add_predicted_draws(newdata = tibble(sex = rep("Male", 4)), n = 1000) |>
-  select(.draw, .row, .prediction) |>
-  pivot_wider(names_from = .row, values_from = .prediction) |>
-  rowwise() |>
-  mutate(diff = max(c_across(`1`:`4`)) - min(c_across(`1`:`4`))) |>
-  ungroup()
+#| echo: true
+# Simulate 4 men per row across 10,000 simulations
+sim_draws <- replicate(4, rnorm(n_sim, mean = point_pred, sd = resid_sd)) |>
+  as_tibble(.name_repair = "unique") |>
+  set_names(paste0("man", 1:4))
+
+# Compute height range for each simulated group of 4
+sim_draws <- sim_draws |>
+  mutate(diff = pmax(man1, man2, man3, man4) - pmin(man1, man2, man3, man4))
+
+# Proportion of groups with a range > 10 cm
+mean(sim_draws$diff > 10)
 ```
 
-Visualize the distribution of height differences:
-
 ```{r}
-draws_4 |>
-  ggplot(aes(x = diff)) +
-  geom_histogram(aes(y = after_stat(count / sum(count))), bins = 60, fill = "#ffbf80", color = "white") +
+#| echo: true
+# Plot the distribution of height differences
+ggplot(sim_draws, aes(x = diff)) +
+  geom_histogram(aes(y = after_stat(density)), bins = 50, fill = "#77aadd") +
+  geom_vline(xintercept = 10, linetype = "dashed", color = "red") +
   labs(
-    title = "Posterior Distribution of Height Difference",
-    subtitle = "Between Tallest and Shortest of 4 Random Adult Males",
+    title = "Height Difference Between Tallest and Shortest in Group of 4",
+    subtitle = "Simulated from model predictions",
     x = "Height Difference (cm)",
-    y = "Probability",
-    caption = "Source: NHANES 2009–2011"
+    y = "Density"
   ) +
-  scale_y_continuous(labels = scales::percent_format()) +
   theme_minimal()
 ```
 
-Calculate the probability that the height difference exceeds 10 cm:
-
-```{r}
-draws_4 |>
-  summarise(p_diff_over_10 = mean(diff > 10))
-```
-
-This provides the probability (e.g., \~77%) that among four random men, the height spread exceeds 10 cm.
+Expect around **70–80%** of the groups to have a height range over 10 cm.
 
 ---
 
-### What is the posterior distribution of the 3rd tallest man among the next 100?
+#### What is the posterior distribution of the 3rd tallest among the next 100 men?
 
-We can simulate 100 random adult males and extract the 3rd tallest in each draw:
-
-```{r}
-#| code-fold: false
-draws_100 <- fit_1 |>
-  add_predicted_draws(newdata = tibble(sex = rep("Male", 100)), n = 1000) |>
-  select(.draw, .row, .prediction) |>
-  pivot_wider(names_from = .row, values_from = .prediction) |>
-  rowwise() |>
-  mutate(third_tallest = sort(c_across(everything()), decreasing = TRUE)[3]) |>
-  ungroup()
-```
-
-Now, visualize the posterior distribution of the 3rd tallest man:
+This is a more extreme version of the same simulation idea:
 
 ```{r}
-draws_100 |>
+#| echo: true
+# Simulate 10,000 groups of 100 heights each
+third_tallest <- replicate(10000, {
+  sample <- rnorm(100, mean = point_pred, sd = resid_sd)
+  sort(sample, decreasing = TRUE)[3]  # 3rd tallest
+})
+
+# Plot
+tibble(third_tallest) |>
   ggplot(aes(x = third_tallest)) +
-  geom_histogram(aes(y = after_stat(count / sum(count))), bins = 60, fill = "#8da0cb", color = "white") +
+  geom_histogram(aes(y = after_stat(density)), bins = 60, fill = "#e38b75") +
   labs(
-    title = "Posterior Distribution of 3rd Tallest Man's Height",
-    subtitle = "Out of 100 Random Adult Males",
+    title = "Simulated Distribution of the 3rd Tallest of 100 Men",
+    subtitle = "Based on predicted male heights",
     x = "Height (cm)",
-    y = "Probability",
-    caption = "Source: NHANES 2009–2011"
+    y = "Density"
   ) +
-  scale_y_continuous(labels = scales::percent_format()) +
   theme_minimal()
 ```
 
-This provides a clear sense of where we expect the 3rd tallest person to fall, assuming our model holds.
-
 ---
 
-## Humility
+### Humility
 
-It’s tempting to treat these probabilities as *truths*. But we are always several steps removed from certainty:
+Even though our model lets us answer complex questions, we must proceed with humility. Our predictions are only as good as the assumptions that underlie them:
 
-1. **Truth** – The full Preceptor Table (unattainable in real life).
-2. **DGM Posterior** – The world where we know the exact model and parameter values.
-3. **Our Posterior** – Based on partial data, assumptions, and estimations.
+* Is U.S. height data from 2010 still valid for our question today?
+* Do our residuals truly follow a normal distribution?
+* Are the relationships stable across populations and time?
 
-Even if our model is reasonable, it depends on prior assumptions, the match between data and context, and statistical choices. Every estimate carries uncertainty—and *humility* means recognizing our predictions are informed guesses, not guarantees.
-
-> *Using data to answer questions requires not only mathematical skill but moral clarity. Temperance reminds us that overconfidence is the enemy of truth.*
+**Tempered judgment** reminds us that while models can guide decisions, they should not dictate them. There is no perfect forecast — only informed, cautious inference.
 
