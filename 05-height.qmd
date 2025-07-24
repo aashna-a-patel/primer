@@ -477,3 +477,149 @@ This structure applies whether:
   **Goal:** Estimate average income difference between liberals and conservatives.
 
 The modeling approach remains the same; only the variable names and substantive interpretation differ.
+
+## Temperance
+
+```{r}
+#| echo: false
+knitr::include_graphics("other/images/Temperance.jpg")
+```
+
+## Questions and Answers
+
+### What is the probability that the next adult male we meet will be taller than 180 cm?
+
+We distinguish between two types of unknowns:
+
+* **Expected values**: What’s the average height across a population?
+* **Predicted values**: What’s the height of a specific, randomly chosen individual?
+
+To estimate the height of a specific adult male, we use `add_predicted_draws()`, which incorporates both model uncertainty and individual variation.
+
+```{r}
+#| code-fold: false
+new_draws <- fit_1 |>
+  add_predicted_draws(newdata = tibble(sex = "Male"), n = 1000)
+```
+
+Let’s visualize the posterior predictive distribution:
+
+```{r}
+new_draws |>
+  ggplot(aes(x = .prediction)) +
+  geom_histogram(aes(y = after_stat(count / sum(count))), bins = 60, fill = "#69b3a2", color = "white") +
+  labs(
+    title = "Posterior Predictive Distribution for Height",
+    subtitle = "For a Randomly Chosen Adult Male",
+    x = "Height (cm)",
+    y = "Probability",
+    caption = "Source: NHANES 2009–2011"
+  ) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  theme_minimal()
+```
+
+And now compute the probability that a randomly chosen man is taller than 180 cm:
+
+```{r}
+new_draws |>
+  summarise(p_taller_than_180 = mean(.prediction > 180))
+```
+
+This gives a clear estimate—for example, a \~30% chance that a random adult male is taller than 180 cm.
+
+> ⚠️ While our data is from U.S. adults in 2010, we're applying it to situations today. Whether that generalization is valid is a matter of **Wisdom**. Use humility and caution when applying models outside the exact context of the data.
+
+---
+
+### What is the probability that the tallest of four random men is at least 10 cm taller than the shortest?
+
+Bayesian simulation allows us to answer complex questions like this by generating multiple draws and comparing statistics within each simulated group.
+
+```{r}
+#| code-fold: false
+draws_4 <- fit_1 |>
+  add_predicted_draws(newdata = tibble(sex = rep("Male", 4)), n = 1000) |>
+  select(.draw, .row, .prediction) |>
+  pivot_wider(names_from = .row, values_from = .prediction) |>
+  rowwise() |>
+  mutate(diff = max(c_across(`1`:`4`)) - min(c_across(`1`:`4`))) |>
+  ungroup()
+```
+
+Visualize the distribution of height differences:
+
+```{r}
+draws_4 |>
+  ggplot(aes(x = diff)) +
+  geom_histogram(aes(y = after_stat(count / sum(count))), bins = 60, fill = "#ffbf80", color = "white") +
+  labs(
+    title = "Posterior Distribution of Height Difference",
+    subtitle = "Between Tallest and Shortest of 4 Random Adult Males",
+    x = "Height Difference (cm)",
+    y = "Probability",
+    caption = "Source: NHANES 2009–2011"
+  ) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  theme_minimal()
+```
+
+Calculate the probability that the height difference exceeds 10 cm:
+
+```{r}
+draws_4 |>
+  summarise(p_diff_over_10 = mean(diff > 10))
+```
+
+This provides the probability (e.g., \~77%) that among four random men, the height spread exceeds 10 cm.
+
+---
+
+### What is the posterior distribution of the 3rd tallest man among the next 100?
+
+We can simulate 100 random adult males and extract the 3rd tallest in each draw:
+
+```{r}
+#| code-fold: false
+draws_100 <- fit_1 |>
+  add_predicted_draws(newdata = tibble(sex = rep("Male", 100)), n = 1000) |>
+  select(.draw, .row, .prediction) |>
+  pivot_wider(names_from = .row, values_from = .prediction) |>
+  rowwise() |>
+  mutate(third_tallest = sort(c_across(everything()), decreasing = TRUE)[3]) |>
+  ungroup()
+```
+
+Now, visualize the posterior distribution of the 3rd tallest man:
+
+```{r}
+draws_100 |>
+  ggplot(aes(x = third_tallest)) +
+  geom_histogram(aes(y = after_stat(count / sum(count))), bins = 60, fill = "#8da0cb", color = "white") +
+  labs(
+    title = "Posterior Distribution of 3rd Tallest Man's Height",
+    subtitle = "Out of 100 Random Adult Males",
+    x = "Height (cm)",
+    y = "Probability",
+    caption = "Source: NHANES 2009–2011"
+  ) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  theme_minimal()
+```
+
+This provides a clear sense of where we expect the 3rd tallest person to fall, assuming our model holds.
+
+---
+
+## Humility
+
+It’s tempting to treat these probabilities as *truths*. But we are always several steps removed from certainty:
+
+1. **Truth** – The full Preceptor Table (unattainable in real life).
+2. **DGM Posterior** – The world where we know the exact model and parameter values.
+3. **Our Posterior** – Based on partial data, assumptions, and estimations.
+
+Even if our model is reasonable, it depends on prior assumptions, the match between data and context, and statistical choices. Every estimate carries uncertainty—and *humility* means recognizing our predictions are informed guesses, not guarantees.
+
+> *Using data to answer questions requires not only mathematical skill but moral clarity. Temperance reminds us that overconfidence is the enemy of truth.*
+
