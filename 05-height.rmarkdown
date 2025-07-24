@@ -470,3 +470,4 @@ Before accepting `fit_1` as our data-generating mechanism, we should evaluate it
 This diagnostic compares the observed data, $y$, with replicated data sets, $y_{\text{rep}}$, generated from the fitted model. In this case, the observed and replicated values align closely, suggesting that `fit_1` captures the overall distribution well enough to proceed.
 
 However, the fit is not perfect. The observed data is slightly more peaked, and there are minor deviations in the tails—particularly around 200 cm. While it is theoretically possible to refine the model to better match these characteristics, such refinements may complicate the model unnecessarily. For our current purposes, `fit_1` serves as an acceptable and reasonable approximation of the true data-generating process.
+
