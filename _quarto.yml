@@ -35,7 +35,7 @@ book:
     - probability.qmd
     - sampling.qmd
     - models.qmd
-    - two-parameters.qmd
+    - 05-height.qmd
     - three-parameters-causal.qmd
     # - mechanics.qmd
     # - four-parameters-continuous.qmd

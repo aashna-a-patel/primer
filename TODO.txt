@@ -18,6 +18,20 @@ Then remove r-dependencies and use renv approach.
 
 Then learn about making the book automatically for each change and what that means
 
+## Aashna
+
+Change titles for currently used chapters.
+
+Change _quarto.yml to use those
+
+Submit PR for above.
+
+New branch!
+
+quarto render from the Terminal
+
+Submit PR (which will be lots of files)
+
 
 
 
