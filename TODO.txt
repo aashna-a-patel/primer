@@ -32,7 +32,7 @@ quarto render from the Terminal
 
 Submit PR (which will be lots of files)
 
-
+Start work on three parameters. 
 
 
 
