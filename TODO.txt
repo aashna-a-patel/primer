@@ -2,6 +2,8 @@
 
 ## Ivy
 
+Need a renv folder which looks like renv folder in primer.tutorials. 
+
 Not an R Package (get rid of package check)
 
 Does not use renv. Try r-dependencies. 
