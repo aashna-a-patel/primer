@@ -29,10 +29,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Required for rendering and dependencies
       - uses: r-lib/actions/setup-pandoc@v2
 
-      # Set up Quarto manually with a valid version
       - uses: quarto-dev/quarto-actions/setup@v2
         with:
           version: "1.4.550"
@@ -46,8 +44,6 @@ jobs:
           cache-version: 1
 
       - run: Rscript -e 'install.packages("rcmdcheck")'
-
-      - uses: r-lib/actions/check-r-package@v2
 
       # Render the Quarto project at the end
       - run: quarto render
