@@ -7,10 +7,10 @@ on:
   pull_request:
     branches: [main, master]
 
-name: R-CMD-check
+name: Build-the-book
 
 jobs:
-  R-CMD-check:
+  build-the-book:
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
