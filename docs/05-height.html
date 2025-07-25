@@ -1,0 +1,3460 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>5&nbsp; Height – Preceptor's Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./three-parameters-causal.html" rel="next">
+<link href="./models.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d3c9390091c69a50683db05bc45f20d8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-height.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Height</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Preceptor’s Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/PPBDS/primer/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Preceptor-s-Primer-for-Bayesian-Data-Science--Using-the-Cardinal-Virtues-for-Inference.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Preceptor-s-Primer-for-Bayesian-Data-Science--Using-the-Cardinal-Virtues-for-Inference.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+</div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preamble.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preamble</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting-started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting Started</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rubin-causal-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Rubin Causal Model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-height.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Height</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./three-parameters-causal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Three Parameters: Causal</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./set-up.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Set Up for Working on PPBDS Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./style-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Style Guide</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#wisdom" id="toc-wisdom" class="nav-link active" data-scroll-target="#wisdom"><span class="header-section-number">5.1</span> Wisdom</a>
+  <ul class="collapse">
+<li><a href="#preceptor-table" id="toc-preceptor-table" class="nav-link" data-scroll-target="#preceptor-table"><span class="header-section-number">5.1.1</span> Preceptor Table</a></li>
+  <li><a href="#eda" id="toc-eda" class="nav-link" data-scroll-target="#eda"><span class="header-section-number">5.1.2</span> EDA</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#justice" id="toc-justice" class="nav-link" data-scroll-target="#justice"><span class="header-section-number">5.2</span> Justice</a>
+  <ul class="collapse">
+<li><a href="#validity" id="toc-validity" class="nav-link" data-scroll-target="#validity"><span class="header-section-number">5.2.1</span> Validity</a></li>
+  <li><a href="#stability" id="toc-stability" class="nav-link" data-scroll-target="#stability"><span class="header-section-number">5.2.2</span> Stability</a></li>
+  <li><a href="#representativeness" id="toc-representativeness" class="nav-link" data-scroll-target="#representativeness"><span class="header-section-number">5.2.3</span> Representativeness</a></li>
+  <li><a href="#unconfoundedness" id="toc-unconfoundedness" class="nav-link" data-scroll-target="#unconfoundedness"><span class="header-section-number">5.2.4</span> Unconfoundedness</a></li>
+  <li><a href="#population" id="toc-population" class="nav-link" data-scroll-target="#population"><span class="header-section-number">5.2.5</span> Population</a></li>
+  <li><a href="#the-population-table" id="toc-the-population-table" class="nav-link" data-scroll-target="#the-population-table"><span class="header-section-number">5.2.6</span> The Population Table</a></li>
+  </ul>
+</li>
+  <li><a href="#courage" id="toc-courage" class="nav-link" data-scroll-target="#courage"><span class="header-section-number">5.3</span> Courage</a></li>
+  <li>
+<a href="#modeling-the-data" id="toc-modeling-the-data" class="nav-link" data-scroll-target="#modeling-the-data"><span class="header-section-number">5.4</span> Modeling the Data</a>
+  <ul class="collapse">
+<li><a href="#model-specification" id="toc-model-specification" class="nav-link" data-scroll-target="#model-specification"><span class="header-section-number">5.4.1</span> Model Specification</a></li>
+  <li><a href="#fit-the-model" id="toc-fit-the-model" class="nav-link" data-scroll-target="#fit-the-model"><span class="header-section-number">5.4.2</span> Fit the Model</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">5.4.3</span> Interpretation</a></li>
+  <li><a href="#data-generating-mechanism" id="toc-data-generating-mechanism" class="nav-link" data-scroll-target="#data-generating-mechanism"><span class="header-section-number">5.4.4</span> Data Generating Mechanism</a></li>
+  <li><a href="#posterior-predictive-check" id="toc-posterior-predictive-check" class="nav-link" data-scroll-target="#posterior-predictive-check"><span class="header-section-number">5.4.5</span> Posterior Predictive Check</a></li>
+  <li><a href="#generalizing-to-other-scenarios" id="toc-generalizing-to-other-scenarios" class="nav-link" data-scroll-target="#generalizing-to-other-scenarios"><span class="header-section-number">5.4.6</span> Generalizing to Other Scenarios</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#temperance" id="toc-temperance" class="nav-link" data-scroll-target="#temperance"><span class="header-section-number">5.5</span> Temperance</a>
+  <ul class="collapse">
+<li><a href="#questions-and-answers" id="toc-questions-and-answers" class="nav-link" data-scroll-target="#questions-and-answers"><span class="header-section-number">5.5.1</span> Questions and Answers</a></li>
+  <li><a href="#humility" id="toc-humility" class="nav-link" data-scroll-target="#humility"><span class="header-section-number">5.5.2</span> Humility</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/PPBDS/primer/edit/main/05-height.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Height</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p><a href="models.html" class="quarto-xref"><span>Chapter 4</span></a> used a logistic regression model—an appropriate choice when the outcome has just two possible values. In this chapter, we’ll use a linear regression model because our outcome variable, height, is continuous.</p>
+<p>We don’t build models just for fun—though it is fun. We build models because the world presents us with decisions. Should we choose X or Y? Action A, B, or C? When faced with choices, we create models to better understand how the world works and to make smarter, more informed decisions.</p>
+<p>Of course, the real world is messy. Real decisions come with complexity and context we can’t fully capture here. So, we simplify. In this chapter, we’ll model adult height using a linear regression and explore two key questions:</p>
+<p>Scenario 1 (Predictive): Imagine that you’re in charge of ordering uniforms for next year’s Marine Corps bootcamp recruits. There are many decisions to make: the cost of different designs, the number of male and female recruits, the distributions of heights and weights, and so on.</p>
+<p>How does average height differ between men and women?</p>
+<hr>
+<p>Scenario 2 (Causal): Imagine that you’re advising a school district that’s considering implementing daily physical education (PE) for younger students. There are many decisions to make: how much time to devote to PE, whether it will affect academic schedules, and whether it will improve long-term health outcomes. NHANES includes data on physical activity levels and self-reported height.</p>
+<p>Does higher physical activity during youth lead to greater adult height?</p>
+<blockquote class="blockquote">
+<p>The world confronts us. Make decisions we must.</p>
+</blockquote>
+<p>Data science is ultimately a moral act, so we will use the four <a href="https://en.wikipedia.org/wiki/Cardinal_virtues">Cardinal Virtues</a> — Wisdom, Justice, Courage and Temperance — to guide our approach.</p>
+<section id="wisdom" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="wisdom">
+<span class="header-section-number">5.1</span> Wisdom</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="two-parameters/images/learn_the ways.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Wisdom begins with the Preceptor Table: the ideal data needed to answer our questions. Next, we examine the data we actually have. Using the concept of <em>validity</em>, we assess whether the data we possess are sufficiently similar to the ideal data to provide meaningful insights.</p>
+<section id="preceptor-table" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="preceptor-table">
+<span class="header-section-number">5.1.1</span> Preceptor Table</h3>
+<p>Which rows and columns of data do you need such that, if you had them all, the calculation of the quantity of interest would be trivial? The steps we usually take to construct the Preceptor Table include:</p>
+<p><strong>Scenario 1:</strong> How does average height differ between men and women?</p>
+<ul>
+<li>
+<em>Units</em>: All adults in the world, one row per person.</li>
+<li>
+<em>Outcome</em>: Individual height. While the question concerns average height, modeling individual heights allows calculation of group averages.</li>
+<li>
+<em>Treatment</em>: None.</li>
+<li>
+<em>Causal or predictive model</em>: Predictive. We aim to estimate differences, not causal effects.</li>
+<li>
+<em>Covariates</em>: Sex must be included to differentiate men and women.</li>
+<li>
+<em>Moment in Time</em>: Present—heights measured “now.”</li>
+</ul>
+<p>The Preceptor Table here would have about 8 billion rows (one per adult) and columns for sex and height.</p>
+<hr>
+<p><strong>Scenario 2:</strong> Does participation in a youth physical activity program cause an increase in adult height?</p>
+<ul>
+<li>
+<em>Units</em>: All adults, regardless of participation status.</li>
+<li>
+<em>Outcome</em>: Adult height.</li>
+<li>
+<em>Treatment</em>: Participation in the youth physical activity program.</li>
+<li>
+<em>Causal or predictive model</em>: Causal. The goal is to estimate the effect of the program on height.</li>
+<li>
+<em>Covariates</em>: Sex, socioeconomic status, nutrition, and age at treatment to control for confounding.</li>
+<li>
+<em>Moment in Time</em>: Treatment in the past; height measured now.</li>
+</ul>
+<p>This Preceptor Table would also have many rows—one per adult—with columns for treatment, height, sex, and relevant covariates.</p>
+<p>Here are some rows from our Preceptor Tables:</p>
+<p>Scenario 1:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="hqkxopxlux" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hqkxopxlux table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hqkxopxlux thead, #hqkxopxlux tbody, #hqkxopxlux tfoot, #hqkxopxlux tr, #hqkxopxlux td, #hqkxopxlux th {
+  border-style: none;
+}
+
+#hqkxopxlux p {
+  margin: 0;
+  padding: 0;
+}
+
+#hqkxopxlux .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hqkxopxlux .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hqkxopxlux .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hqkxopxlux .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hqkxopxlux .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hqkxopxlux .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hqkxopxlux .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hqkxopxlux .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hqkxopxlux .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hqkxopxlux .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hqkxopxlux .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hqkxopxlux .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hqkxopxlux .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hqkxopxlux .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hqkxopxlux .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hqkxopxlux .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hqkxopxlux .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hqkxopxlux .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hqkxopxlux .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hqkxopxlux .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hqkxopxlux .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hqkxopxlux .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hqkxopxlux .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hqkxopxlux .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hqkxopxlux .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hqkxopxlux .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hqkxopxlux .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hqkxopxlux .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hqkxopxlux .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hqkxopxlux .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hqkxopxlux .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hqkxopxlux .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hqkxopxlux .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hqkxopxlux .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hqkxopxlux .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hqkxopxlux .gt_left {
+  text-align: left;
+}
+
+#hqkxopxlux .gt_center {
+  text-align: center;
+}
+
+#hqkxopxlux .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hqkxopxlux .gt_font_normal {
+  font-weight: normal;
+}
+
+#hqkxopxlux .gt_font_bold {
+  font-weight: bold;
+}
+
+#hqkxopxlux .gt_font_italic {
+  font-style: italic;
+}
+
+#hqkxopxlux .gt_super {
+  font-size: 65%;
+}
+
+#hqkxopxlux .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hqkxopxlux .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hqkxopxlux .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hqkxopxlux .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hqkxopxlux .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hqkxopxlux .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hqkxopxlux .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#hqkxopxlux .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hqkxopxlux div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
+<th id="ID" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">ID</th>
+<th id="height" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Height (cm)</th>
+<th id="sex" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Sex</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID">Adult 1</td>
+<td class="gt_row gt_right" headers="height">165</td>
+<td class="gt_row gt_left" headers="sex">Female</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID">Adult 2</td>
+<td class="gt_row gt_right" headers="height">178</td>
+<td class="gt_row gt_left" headers="sex">Male</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID">...</td>
+<td class="gt_row gt_right" headers="height">...</td>
+<td class="gt_row gt_left" headers="sex">...</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID">Adult N</td>
+<td class="gt_row gt_right" headers="height">170</td>
+<td class="gt_row gt_left" headers="sex">Female</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>This table would have about 8 billion rows—one per adult. With it, calculating average height by sex would be straightforward, no modeling needed.</p>
+<hr>
+<p>Scenario 2:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="jnzpvxpjjg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jnzpvxpjjg table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#jnzpvxpjjg thead, #jnzpvxpjjg tbody, #jnzpvxpjjg tfoot, #jnzpvxpjjg tr, #jnzpvxpjjg td, #jnzpvxpjjg th {
+  border-style: none;
+}
+
+#jnzpvxpjjg p {
+  margin: 0;
+  padding: 0;
+}
+
+#jnzpvxpjjg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jnzpvxpjjg .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#jnzpvxpjjg .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jnzpvxpjjg .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jnzpvxpjjg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jnzpvxpjjg .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jnzpvxpjjg .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jnzpvxpjjg .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jnzpvxpjjg .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jnzpvxpjjg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jnzpvxpjjg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jnzpvxpjjg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jnzpvxpjjg .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#jnzpvxpjjg .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#jnzpvxpjjg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jnzpvxpjjg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jnzpvxpjjg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jnzpvxpjjg .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jnzpvxpjjg .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jnzpvxpjjg .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jnzpvxpjjg .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jnzpvxpjjg .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#jnzpvxpjjg .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jnzpvxpjjg .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#jnzpvxpjjg .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jnzpvxpjjg .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jnzpvxpjjg .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jnzpvxpjjg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jnzpvxpjjg .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jnzpvxpjjg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jnzpvxpjjg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jnzpvxpjjg .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jnzpvxpjjg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jnzpvxpjjg .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jnzpvxpjjg .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jnzpvxpjjg .gt_left {
+  text-align: left;
+}
+
+#jnzpvxpjjg .gt_center {
+  text-align: center;
+}
+
+#jnzpvxpjjg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jnzpvxpjjg .gt_font_normal {
+  font-weight: normal;
+}
+
+#jnzpvxpjjg .gt_font_bold {
+  font-weight: bold;
+}
+
+#jnzpvxpjjg .gt_font_italic {
+  font-style: italic;
+}
+
+#jnzpvxpjjg .gt_super {
+  font-size: 65%;
+}
+
+#jnzpvxpjjg .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#jnzpvxpjjg .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jnzpvxpjjg .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#jnzpvxpjjg .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#jnzpvxpjjg .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#jnzpvxpjjg .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#jnzpvxpjjg .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#jnzpvxpjjg .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#jnzpvxpjjg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
+<th id="ID" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">ID</th>
+<th id="treatment" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Program Participation</th>
+<th id="height" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Height (cm)</th>
+<th id="sex" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Sex</th>
+<th id="socioeconomic_status" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Socioeconomic Status</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID">Adult 1</td>
+<td class="gt_row gt_left" headers="treatment">Yes</td>
+<td class="gt_row gt_right" headers="height">172</td>
+<td class="gt_row gt_left" headers="sex">Male</td>
+<td class="gt_row gt_left" headers="socioeconomic_status">Low</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID">Adult 2</td>
+<td class="gt_row gt_left" headers="treatment">No</td>
+<td class="gt_row gt_right" headers="height">160</td>
+<td class="gt_row gt_left" headers="sex">Female</td>
+<td class="gt_row gt_left" headers="socioeconomic_status">High</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID">...</td>
+<td class="gt_row gt_left" headers="treatment">...</td>
+<td class="gt_row gt_right" headers="height">...</td>
+<td class="gt_row gt_left" headers="sex">...</td>
+<td class="gt_row gt_left" headers="socioeconomic_status">...</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID">Adult N</td>
+<td class="gt_row gt_left" headers="treatment">No</td>
+<td class="gt_row gt_right" headers="height">168</td>
+<td class="gt_row gt_left" headers="sex">Male</td>
+<td class="gt_row gt_left" headers="socioeconomic_status">Medium</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>This table would include all adults with their treatment status and covariates. If complete, we could directly assess the program’s effect on height.</p>
+<p>But what does our actual data look like?</p>
+<p>Like all aspects of a data science problem, the Preceptor Table evolves as we continue our work.</p>
+</section><section id="eda" class="level3" data-number="5.1.2"><h3 data-number="5.1.2" class="anchored" data-anchor-id="eda">
+<span class="header-section-number">5.1.2</span> EDA</h3>
+<p>Consider the <code>nhanes</code> dataset from the National Health and Nutrition Examination Survey conducted by the CDC between 2009 and 2011.</p>
+<p>NHANES is a voluntary survey that oversamples groups such as older adults and minorities, which can make the raw data unbalanced for the overall population. To address this, sampling weights are applied for accurate representation.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">glimpse</span><span class="op">(</span><span class="va">nhanes</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 10,000
+Columns: 15
+$ survey         &lt;int&gt; 2009, 2009, 2009, 2009, 2009, 2009, 2009, 2009, 2009, 2…
+$ sex            &lt;chr&gt; "Male", "Male", "Male", "Male", "Female", "Male", "Male…
+$ age            &lt;int&gt; 34, 34, 34, 4, 49, 9, 8, 45, 45, 45, 66, 58, 54, 10, 58…
+$ race           &lt;chr&gt; "White", "White", "White", "Other", "White", "White", "…
+$ education      &lt;fct&gt; High School, High School, High School, NA, Some College…
+$ hh_income      &lt;fct&gt; 25000-34999, 25000-34999, 25000-34999, 20000-24999, 350…
+$ weight         &lt;dbl&gt; 87.4, 87.4, 87.4, 17.0, 86.7, 29.8, 35.2, 75.7, 75.7, 7…
+$ height         &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7,…
+$ bmi            &lt;dbl&gt; 32.22, 32.22, 32.22, 15.30, 30.57, 16.82, 20.64, 27.24,…
+$ pulse          &lt;int&gt; 70, 70, 70, NA, 86, 82, 72, 62, 62, 62, 60, 62, 76, 80,…
+$ diabetes       &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ general_health &lt;int&gt; 3, 3, 3, NA, 3, NA, NA, 4, 4, 4, 4, 4, 2, NA, NA, 3, NA…
+$ depressed      &lt;fct&gt; Several, Several, Several, NA, Several, NA, NA, None, N…
+$ pregnancies    &lt;int&gt; NA, NA, NA, NA, 2, NA, NA, 1, 1, 1, NA, NA, NA, NA, NA,…
+$ sleep          &lt;int&gt; 4, 4, 4, NA, 8, NA, NA, 8, 8, 8, 7, 5, 4, NA, 5, 7, NA,…</code></pre>
+</div>
+</div>
+<p>The dataset contains 10,000 entries from the 2009 survey, each representing an individual’s health and demographic information. Some values, like <code>pulse</code> and <code>pregnancies</code>, have missing data, and repeated values likely reflect individuals from the same household.</p>
+<p>The dataset includes 15 variables covering physical attributes such as weight and height. For now, we focus on three: <code>age</code>, <code>sex</code>, and <code>height</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nhanes</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">age</span>, <span class="va">sex</span>, <span class="va">height</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10,000 × 3
+     age sex    height
+   &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;
+ 1    34 Male     165.
+ 2    34 Male     165.
+ 3    34 Male     165.
+ 4     4 Male     105.
+ 5    49 Female   168.
+ 6     9 Male     133.
+ 7     8 Male     131.
+ 8    45 Female   167.
+ 9    45 Female   167.
+10    45 Female   167.
+# ℹ 9,990 more rows</code></pre>
+</div>
+</div>
+<p>This subset displays <code>age</code>, <code>sex</code>, and <code>height</code> for 10,000 individuals, including both children and adults. Repeated rows may indicate household clustering or duplicate observations.</p>
+<p>Examine a random sample:</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nhanes</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">age</span>, <span class="va">sex</span>, <span class="va">height</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+    age sex    height
+  &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;
+1    10 Female   152.
+2    18 Female   154.
+3    80 Male     170.
+4    28 Male     177.
+5    68 Female   170.</code></pre>
+</div>
+</div>
+<p>Always examine your data carefully. Are there any missing (<code>NA</code>) values? Do the column types make sense—for example, why is <code>age</code> stored as an integer rather than a double? Are there more females than males?</p>
+<p><strong>You can never look at your data too closely.</strong></p>
+<p>Alongside <code>glimpse()</code>, the <code>skim()</code> function from the <strong>skimr</strong> package provides a helpful overview, including summary statistics for each variable.</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nhanes</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">age</span>, <span class="va">sex</span>, <span class="va">height</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">skim</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">select(nhanes, age, sex, …</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">10000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 13%">
+<col style="width: 19%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 15%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: left;">sex</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr></tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 11%">
+<col style="width: 16%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">36.74</td>
+<td style="text-align: right;">22.40</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">17.0</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">54.0</td>
+<td style="text-align: right;">80.0</td>
+<td style="text-align: left;">▇▇▇▆▅</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">height</td>
+<td style="text-align: right;">353</td>
+<td style="text-align: right;">0.96</td>
+<td style="text-align: right;">161.88</td>
+<td style="text-align: right;">20.19</td>
+<td style="text-align: right;">83.6</td>
+<td style="text-align: right;">156.8</td>
+<td style="text-align: right;">166</td>
+<td style="text-align: right;">174.5</td>
+<td style="text-align: right;">200.4</td>
+<td style="text-align: left;">▁▁▁▇▂</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Interesting—there are 353 missing values in the <code>height</code> column. This isn’t immediately obvious from <code>glimpse()</code>. To remove these, we’ll use <code>drop_na()</code>, which deletes any rows with missing values. To make the statistical inference more visually meaningful, we’ll work with a random sample of 50 observations. In practice, of course, we would use the full dataset.</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># We use set.seed() to ensure that anyone running this code will get the same</span></span>
+<span><span class="co"># set of observations in their tibble. See ?set.seed for details.</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">nhanes</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">18</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">height</span>, <span class="va">sex</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">drop_na</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s plot this data using <code>geom_histogram()</code>.</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_histogram</span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">50</span>, fill <span class="op">=</span> <span class="st">"#69b3a2"</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Adult Heights (Sample of 50) from NHANES 2010"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"Subset of 50 adults aged 18+ from NHANES, average height ≈ 162 cm"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Height (cm)"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Count"</span>,</span>
+<span>    caption <span class="op">=</span> <span class="st">"Source: National Health and Nutrition Examination Survey"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">14</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05-height_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Can data from a sample of adult Americans collected over a decade ago still help us answer our questions—even approximately? Only if the assumption of <em>validity</em> holds.</p>
+</section></section><section id="justice" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="justice">
+<span class="header-section-number">5.2</span> Justice</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="other/images/Justice.jpg" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Justice concerns the Population Table and the four key assumptions which underlie it: validity, stability, representativeness, and unconfoundedness.</p>
+</blockquote>
+<section id="validity" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="validity">
+<span class="header-section-number">5.2.1</span> Validity</h3>
+<p><strong>Validity</strong> refers to whether variables across different datasets represent the same underlying concept. For example, does <code>height</code> in the Preceptor Table mean the same as <code>height</code> in NHANES? Most likely—but we must consider potential differences, such as units (centimeters vs.&nbsp;inches) or measurement conditions (with or without shoes). These discrepancies could affect alignment. Still, the NHANES 2010 height data is a reasonable proxy for current adult height, allowing us to treat both datasets as drawn from the same population. The same reasoning applies to the <code>sex</code> variable.</p>
+<p>Because validity holds, we can merge the Preceptor Table with our actual data to form the Population Table.</p>
+</section><section id="stability" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="stability">
+<span class="header-section-number">5.2.2</span> Stability</h3>
+<p><strong>Stability</strong> means that the relationship between variables in the Population Table remains consistent across all three sources: the actual data, the Preceptor Table, and the broader population from which both are drawn.</p>
+</section><section id="representativeness" class="level3" data-number="5.2.3"><h3 data-number="5.2.3" class="anchored" data-anchor-id="representativeness">
+<span class="header-section-number">5.2.3</span> Representativeness</h3>
+<p><strong>Representativeness</strong> concerns two key relationships among the rows in the Population Table: first, how well the data represents the broader population; and second, how well the population reflects the Preceptor Table.</p>
+<p>In our case, the population includes all adults worldwide. Is U.S. data from 2010 representative of that global population? Not exactly. People in the U.S. differ in systematic ways—both biologically and culturally—from those in other parts of the world.</p>
+</section><section id="unconfoundedness" class="level3" data-number="5.2.4"><h3 data-number="5.2.4" class="anchored" data-anchor-id="unconfoundedness">
+<span class="header-section-number">5.2.4</span> Unconfoundedness</h3>
+<p><strong>Unconfoundedness</strong> means that, once we account for pre-treatment covariates, the assignment of treatment is independent of the potential outcomes. In other words, there are no hidden biases linking who gets the treatment to what their outcomes would have been. A model is <strong>confounded</strong> when this assumption does not hold.</p>
+</section><section id="population" class="level3" data-number="5.2.5"><h3 data-number="5.2.5" class="anchored" data-anchor-id="population">
+<span class="header-section-number">5.2.5</span> Population</h3>
+<p>The <strong>population</strong> is not the same as the dataset we have—participants from the CDC’s NHANES survey conducted between 2009 and 2011. That’s simply our <strong>data</strong>. Nor is the population the set of individuals we <em>wish</em> we had data on—those make up the <strong>Preceptor Table</strong>. The population is the broader set of individuals that includes both the people we’ve observed and those we want to observe. Typically, this population is much larger than either group.</p>
+<p>There’s almost always a time component to consider. Our data comes from the past, but the questions we ask are often about the present or even the future. For instance, in <strong>Scenario 1</strong>, we want to estimate average adult height <em>today</em>, not just in 2009–2011. And in <strong>Scenario 2</strong>, we may want to assess the impact of a treatment across broader or more current populations than the original data covers.</p>
+<p>Can we generalize from the data we have to the population we care about? That depends. U.S. adults from over a decade ago are not identical to today’s global adult population. Cultural, environmental, and biological differences matter. Still, this data may be the best we have—and often, using imperfect data is better than using none at all.</p>
+<p>But not always. If the data is irrelevant to the question—for example, trying to estimate the median height of fifth-grade girls in Tokyo from this sample—it may do more harm than good. <strong>Wisdom</strong> lies in knowing when your data is “good enough” and when to seek better information—or rely on other forms of judgment.</p>
+</section><section id="the-population-table" class="level3" data-number="5.2.6"><h3 data-number="5.2.6" class="anchored" data-anchor-id="the-population-table">
+<span class="header-section-number">5.2.6</span> The Population Table</h3>
+<blockquote class="blockquote">
+<p>The <strong>Population Table</strong> includes one row for each unit–time combination in the full population from which both the Preceptor Table and the observed data are drawn.</p>
+</blockquote>
+<p>It brings together three types of rows:</p>
+<ul>
+<li>
+<strong>Preceptor Table rows</strong> represent the ideal data we <em>wish</em> we had to answer our question. These rows include covariates like <code>sex</code>, but no outcomes.</li>
+<li>
+<strong>Actual data rows</strong> represent what we <em>do</em> have—both covariates and outcomes. For example, in our dataset, these rows may come from adults surveyed in 2009–2011, with complete entries for <code>sex</code>, <code>height</code>, and <code>year</code>.</li>
+<li>
+<strong>Other rows</strong> represent individuals in the broader population for whom we have no data. These rows are empty except for structural identifiers like ID and time. While we don’t truly know those values, we define them conceptually to complete the population structure.</li>
+</ul>
+<p>The Population Table allows us to frame our question in terms of what we ideally want to know, what we actually observe, and where gaps in data remain. This framework applies whether we’re estimating average height today (Scenario 1) or assessing a treatment effect (Scenario 2).</p>
+<p>Scenario 1:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="jnmaiyhpuz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jnmaiyhpuz table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#jnmaiyhpuz thead, #jnmaiyhpuz tbody, #jnmaiyhpuz tfoot, #jnmaiyhpuz tr, #jnmaiyhpuz td, #jnmaiyhpuz th {
+  border-style: none;
+}
+
+#jnmaiyhpuz p {
+  margin: 0;
+  padding: 0;
+}
+
+#jnmaiyhpuz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jnmaiyhpuz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#jnmaiyhpuz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jnmaiyhpuz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jnmaiyhpuz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jnmaiyhpuz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jnmaiyhpuz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jnmaiyhpuz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jnmaiyhpuz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jnmaiyhpuz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jnmaiyhpuz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jnmaiyhpuz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jnmaiyhpuz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#jnmaiyhpuz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#jnmaiyhpuz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jnmaiyhpuz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jnmaiyhpuz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jnmaiyhpuz .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jnmaiyhpuz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jnmaiyhpuz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jnmaiyhpuz .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jnmaiyhpuz .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#jnmaiyhpuz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jnmaiyhpuz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#jnmaiyhpuz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jnmaiyhpuz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jnmaiyhpuz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jnmaiyhpuz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jnmaiyhpuz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jnmaiyhpuz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jnmaiyhpuz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jnmaiyhpuz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jnmaiyhpuz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jnmaiyhpuz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jnmaiyhpuz .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jnmaiyhpuz .gt_left {
+  text-align: left;
+}
+
+#jnmaiyhpuz .gt_center {
+  text-align: center;
+}
+
+#jnmaiyhpuz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jnmaiyhpuz .gt_font_normal {
+  font-weight: normal;
+}
+
+#jnmaiyhpuz .gt_font_bold {
+  font-weight: bold;
+}
+
+#jnmaiyhpuz .gt_font_italic {
+  font-style: italic;
+}
+
+#jnmaiyhpuz .gt_super {
+  font-size: 65%;
+}
+
+#jnmaiyhpuz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#jnmaiyhpuz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jnmaiyhpuz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#jnmaiyhpuz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#jnmaiyhpuz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#jnmaiyhpuz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#jnmaiyhpuz .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#jnmaiyhpuz .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#jnmaiyhpuz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="gt_heading header">
+<th colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border">Population Table – Height Prediction</th>
+</tr>
+<tr class="gt_col_headings gt_spanner_row even">
+<th rowspan="2" id="ID" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="text-align: left; font-size: large; vertical-align: middle;" scope="col">ID</th>
+<th rowspan="2" id="source" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Source</th>
+<th rowspan="2" id="year" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Year</th>
+<th id="Covariates" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><div class="gt_column_spanner">
+Covariates
+</div></th>
+<th id="Outcome" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><div class="gt_column_spanner">
+Outcome
+</div></th>
+</tr>
+<tr class="gt_col_headings header">
+<th id="sex" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Sex</th>
+<th id="height" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Height</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">P1</td>
+<td class="gt_row gt_center" headers="source">Preceptor</td>
+<td class="gt_row gt_center" headers="year">2024</td>
+<td class="gt_row gt_center" headers="sex">Male</td>
+<td class="gt_row gt_center" headers="height">?</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">P2</td>
+<td class="gt_row gt_center" headers="source">Preceptor</td>
+<td class="gt_row gt_center" headers="year">2024</td>
+<td class="gt_row gt_center" headers="sex">Female</td>
+<td class="gt_row gt_center" headers="height">?</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="source">…</td>
+<td class="gt_row gt_center" headers="year">…</td>
+<td class="gt_row gt_center" headers="sex">…</td>
+<td class="gt_row gt_center" headers="height">…</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">D1</td>
+<td class="gt_row gt_center" headers="source">Actual</td>
+<td class="gt_row gt_center" headers="year">2009</td>
+<td class="gt_row gt_center" headers="sex">Male</td>
+<td class="gt_row gt_center" headers="height">180</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">D2</td>
+<td class="gt_row gt_center" headers="source">Actual</td>
+<td class="gt_row gt_center" headers="year">2010</td>
+<td class="gt_row gt_center" headers="sex">Female</td>
+<td class="gt_row gt_center" headers="height">160</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">D3</td>
+<td class="gt_row gt_center" headers="source">Actual</td>
+<td class="gt_row gt_center" headers="year">2011</td>
+<td class="gt_row gt_center" headers="sex">Male</td>
+<td class="gt_row gt_center" headers="height">168</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="source">…</td>
+<td class="gt_row gt_center" headers="year">…</td>
+<td class="gt_row gt_center" headers="sex">…</td>
+<td class="gt_row gt_center" headers="height">…</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">O1</td>
+<td class="gt_row gt_center" headers="source">Other</td>
+<td class="gt_row gt_center" headers="year">?</td>
+<td class="gt_row gt_center" headers="sex">?</td>
+<td class="gt_row gt_center" headers="height">?</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">O2</td>
+<td class="gt_row gt_center" headers="source">Other</td>
+<td class="gt_row gt_center" headers="year">?</td>
+<td class="gt_row gt_center" headers="sex">?</td>
+<td class="gt_row gt_center" headers="height">?</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">O3</td>
+<td class="gt_row gt_center" headers="source">Other</td>
+<td class="gt_row gt_center" headers="year">?</td>
+<td class="gt_row gt_center" headers="sex">?</td>
+<td class="gt_row gt_center" headers="height">?</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<hr>
+<p>Scenario 2:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="hjcyubnvcy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hjcyubnvcy table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hjcyubnvcy thead, #hjcyubnvcy tbody, #hjcyubnvcy tfoot, #hjcyubnvcy tr, #hjcyubnvcy td, #hjcyubnvcy th {
+  border-style: none;
+}
+
+#hjcyubnvcy p {
+  margin: 0;
+  padding: 0;
+}
+
+#hjcyubnvcy .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hjcyubnvcy .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hjcyubnvcy .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hjcyubnvcy .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hjcyubnvcy .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hjcyubnvcy .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hjcyubnvcy .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hjcyubnvcy .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hjcyubnvcy .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hjcyubnvcy .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hjcyubnvcy .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hjcyubnvcy .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hjcyubnvcy .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hjcyubnvcy .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hjcyubnvcy .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hjcyubnvcy .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hjcyubnvcy .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hjcyubnvcy .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hjcyubnvcy .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hjcyubnvcy .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hjcyubnvcy .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hjcyubnvcy .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hjcyubnvcy .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hjcyubnvcy .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hjcyubnvcy .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hjcyubnvcy .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hjcyubnvcy .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hjcyubnvcy .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hjcyubnvcy .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hjcyubnvcy .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hjcyubnvcy .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hjcyubnvcy .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hjcyubnvcy .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hjcyubnvcy .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hjcyubnvcy .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hjcyubnvcy .gt_left {
+  text-align: left;
+}
+
+#hjcyubnvcy .gt_center {
+  text-align: center;
+}
+
+#hjcyubnvcy .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hjcyubnvcy .gt_font_normal {
+  font-weight: normal;
+}
+
+#hjcyubnvcy .gt_font_bold {
+  font-weight: bold;
+}
+
+#hjcyubnvcy .gt_font_italic {
+  font-style: italic;
+}
+
+#hjcyubnvcy .gt_super {
+  font-size: 65%;
+}
+
+#hjcyubnvcy .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hjcyubnvcy .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hjcyubnvcy .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hjcyubnvcy .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hjcyubnvcy .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hjcyubnvcy .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hjcyubnvcy .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#hjcyubnvcy .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hjcyubnvcy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="gt_heading header">
+<th colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border">Population Table – Treatment Effect on Height</th>
+</tr>
+<tr class="gt_col_headings gt_spanner_row even">
+<th rowspan="2" id="ID" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="text-align: left; font-size: large; vertical-align: middle;" scope="col">ID</th>
+<th rowspan="2" id="source" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Source</th>
+<th rowspan="2" id="year" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Year</th>
+<th id="Covariates" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><div class="gt_column_spanner">
+Covariates
+</div></th>
+<th id="Outcome" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><div class="gt_column_spanner">
+Outcome
+</div></th>
+</tr>
+<tr class="gt_col_headings header">
+<th id="treatment" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Treatment</th>
+<th id="height" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Height</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">P1</td>
+<td class="gt_row gt_center" headers="source">Preceptor</td>
+<td class="gt_row gt_center" headers="year">2024</td>
+<td class="gt_row gt_center" headers="treatment">Yes</td>
+<td class="gt_row gt_center" headers="height">?</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">P2</td>
+<td class="gt_row gt_center" headers="source">Preceptor</td>
+<td class="gt_row gt_center" headers="year">2024</td>
+<td class="gt_row gt_center" headers="treatment">No</td>
+<td class="gt_row gt_center" headers="height">?</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="source">…</td>
+<td class="gt_row gt_center" headers="year">…</td>
+<td class="gt_row gt_center" headers="treatment">…</td>
+<td class="gt_row gt_center" headers="height">…</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">D1</td>
+<td class="gt_row gt_center" headers="source">Actual</td>
+<td class="gt_row gt_center" headers="year">2009</td>
+<td class="gt_row gt_center" headers="treatment">Yes</td>
+<td class="gt_row gt_center" headers="height">176</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">D2</td>
+<td class="gt_row gt_center" headers="source">Actual</td>
+<td class="gt_row gt_center" headers="year">2010</td>
+<td class="gt_row gt_center" headers="treatment">No</td>
+<td class="gt_row gt_center" headers="height">162</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">D3</td>
+<td class="gt_row gt_center" headers="source">Actual</td>
+<td class="gt_row gt_center" headers="year">2011</td>
+<td class="gt_row gt_center" headers="treatment">Yes</td>
+<td class="gt_row gt_center" headers="height">170</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="source">…</td>
+<td class="gt_row gt_center" headers="year">…</td>
+<td class="gt_row gt_center" headers="treatment">…</td>
+<td class="gt_row gt_center" headers="height">…</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">O1</td>
+<td class="gt_row gt_center" headers="source">Other</td>
+<td class="gt_row gt_center" headers="year">?</td>
+<td class="gt_row gt_center" headers="treatment">?</td>
+<td class="gt_row gt_center" headers="height">?</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">O2</td>
+<td class="gt_row gt_center" headers="source">Other</td>
+<td class="gt_row gt_center" headers="year">?</td>
+<td class="gt_row gt_center" headers="treatment">?</td>
+<td class="gt_row gt_center" headers="height">?</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">O3</td>
+<td class="gt_row gt_center" headers="source">Other</td>
+<td class="gt_row gt_center" headers="year">?</td>
+<td class="gt_row gt_center" headers="treatment">?</td>
+<td class="gt_row gt_center" headers="height">?</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section></section><section id="courage" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="courage">
+<span class="header-section-number">5.3</span> Courage</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="other/images/Courage.jpg" class="img-fluid figure-img" width="1024"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In data science, <em>we deal with words, math, and code, but the most important of these is code.</em> We need Courage to create the model, to take the leap of faith that we can make our ideas real.</p>
+<p><strong>Justice</strong> helped us define the Population Table—the framework of the world we’re trying to understand. <strong>Courage</strong> guides the next step: choosing the data-generating process. We begin by specifying a mathematical relationship between the outcome we care about and the variables we observe. We explore different modeling options, decide which covariates to include, estimate unknown parameters, and check whether our models fit the data well. Rather than rely on traditional hypothesis testing, we focus on clarity and reasoned judgment to select a final model.</p>
+</section><section id="modeling-the-data" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="modeling-the-data">
+<span class="header-section-number">5.4</span> Modeling the Data</h2>
+<p>We use a simple linear model to understand how an outcome varies with a categorical covariate.</p>
+<section id="model-specification" class="level3" data-number="5.4.1"><h3 data-number="5.4.1" class="anchored" data-anchor-id="model-specification">
+<span class="header-section-number">5.4.1</span> Model Specification</h3>
+<p>For both scenarios—whether estimating <strong>height by sex</strong> or <strong>income by political affiliation</strong>—we use a model of the form:</p>
+<p><span class="math display">\[
+y_i = \beta_0 + \beta_1 \cdot X_i + \epsilon_i
+\]</span></p>
+<ul>
+<li>
+<span class="math inline">\(y_i\)</span>: the outcome for individual <span class="math inline">\(i\)</span> (e.g., height or income)</li>
+<li>
+<span class="math inline">\(X_i\)</span>: the covariate of interest (e.g., sex or political affiliation, coded as a binary indicator)</li>
+<li>
+<span class="math inline">\(\beta_0\)</span>: the intercept, representing the average for the reference group</li>
+<li>
+<span class="math inline">\(\beta_1\)</span>: the difference between the two groups</li>
+<li>
+<span class="math inline">\(\epsilon_i \sim N(0, \sigma^2)\)</span>: normally distributed residuals capturing random variation</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Model Parameters</strong></p>
+<ul>
+<li>This model includes three unknowns: <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, and <span class="math inline">\(\sigma\)</span>. We can’t know their true values but can estimate them and their uncertainty using statistical inference.</li>
+<li>The parameter of greatest interest is usually <span class="math inline">\(\mu\)</span>, the <strong>population average</strong> for a group, not just the average in our sample.</li>
+<li>
+<span class="math inline">\(\sigma\)</span> is the standard deviation of the residuals. It’s useful for quantifying uncertainty but is often treated as a <strong>nuisance parameter</strong>.</li>
+<li>As George Box said, <em>“All models are wrong, but some are useful.”</em> Even a simple model can guide important decisions.</li>
+</ul>
+</div>
+</div>
+<hr></section><section id="fit-the-model" class="level3" data-number="5.4.2"><h3 data-number="5.4.2" class="anchored" data-anchor-id="fit-the-model">
+<span class="header-section-number">5.4.2</span> Fit the Model</h3>
+<p>Let’s fit the model using <code>tidymodels</code>.</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit_1</span> <span class="op">&lt;-</span> <span class="fu">linear_reg</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">set_engine</span><span class="op">(</span><span class="st">"lm"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">fit</span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The formula <code>height ~ sex</code> fits a model where the outcome (<code>height</code>) depends on the categorical variable <code>sex</code>. R automatically encodes <code>sex</code> as a dummy variable, typically treating <code>"Female"</code> as the reference group.</p>
+<p>To examine the fitted coefficients:</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>parsnip model object
+
+
+Call:
+stats::lm(formula = height ~ sex, data = data)
+
+Coefficients:
+(Intercept)      sexMale  
+     164.74         9.56  </code></pre>
+</div>
+</div>
+<p>To view the results with confidence intervals:</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">fit_1</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 7
+  term        estimate std.error statistic  p.value conf.low conf.high
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)   165.        1.10    149.   1.10e-65   163.       167. 
+2 sexMale         9.56      1.63      5.87 3.91e- 7     6.29      12.8</code></pre>
+</div>
+</div>
+<hr></section><section id="interpretation" class="level3" data-number="5.4.3"><h3 data-number="5.4.3" class="anchored" data-anchor-id="interpretation">
+<span class="header-section-number">5.4.3</span> Interpretation</h3>
+<ul>
+<li>The <strong>intercept</strong> (<code>(Intercept)</code>) estimates the average height of the reference group (e.g., females).</li>
+<li>The <strong>coefficient</strong> for <code>sexMale</code> represents how much taller (on average) males are than females.</li>
+<li>The <strong>confidence interval</strong> provides a plausible range for the population-level difference.</li>
+</ul>
+<p>To check this against the actual sample means:</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>avg_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, .by <span class="op">=</span> <span class="va">sex</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  sex    avg_height
+  &lt;chr&gt;       &lt;dbl&gt;
+1 Male         174.
+2 Female       165.</code></pre>
+</div>
+</div>
+<p>To approximate the standard error of the sample mean:</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">height</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.052616</code></pre>
+</div>
+</div>
+<p>This helps us understand how much the sample mean might vary if we had drawn a different group of individuals.</p>
+<hr></section><section id="data-generating-mechanism" class="level3" data-number="5.4.4"><h3 data-number="5.4.4" class="anchored" data-anchor-id="data-generating-mechanism">
+<span class="header-section-number">5.4.4</span> Data Generating Mechanism</h3>
+<p>To simulate data or reason about uncertainty, we often define a <strong>data generating process</strong>. For instance, we might assume:</p>
+<pre class="math"><code>\text{height}_i = 176 + \epsilon_i,\quad \epsilon_i \sim N(0, 0.75^2)</code></pre>
+<p>This suggests that adult male height centers around 176 cm with modest individual variation.</p>
+<p>Such a model is idealized—but if it approximates reality well, it can be useful.</p>
+<hr></section><section id="posterior-predictive-check" class="level3" data-number="5.4.5"><h3 data-number="5.4.5" class="anchored" data-anchor-id="posterior-predictive-check">
+<span class="header-section-number">5.4.5</span> Posterior Predictive Check</h3>
+<p>Before trusting our model as a reliable approximation, we should test whether it replicates the data we see.</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">##tidymodels::pp_check(fit_1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The plot (not shown here) compares our observed data to several replicated datasets simulated from the fitted model.</p>
+<ul>
+<li>If the replicated distributions closely resemble the actual data, the model is reasonable.</li>
+<li>In our case, the model performs well but not perfectly: the observed data has slightly sharper peaks and heavier tails.</li>
+</ul>
+<p>Rather than overfitting, we accept these imperfections and move forward with a model that is <strong>good enough</strong> to support insight.</p>
+<hr></section><section id="generalizing-to-other-scenarios" class="level3" data-number="5.4.6"><h3 data-number="5.4.6" class="anchored" data-anchor-id="generalizing-to-other-scenarios">
+<span class="header-section-number">5.4.6</span> Generalizing to Other Scenarios</h3>
+<p>This structure applies whether:</p>
+<ul>
+<li>
+<strong>Outcome:</strong> <code>height</code> (continuous), <strong>Covariate:</strong> <code>sex</code>, <strong>Goal:</strong> Estimate average height difference between males and females.</li>
+</ul>
+<p><strong>OR</strong></p>
+<ul>
+<li>
+<strong>Outcome:</strong> <code>income</code> (continuous), <strong>Covariate:</strong> <code>party_affiliation</code>, <strong>Goal:</strong> Estimate average income difference between liberals and conservatives.</li>
+</ul>
+<p>The modeling approach remains the same; only the variable names and substantive interpretation differ.</p>
+</section></section><section id="temperance" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="temperance">
+<span class="header-section-number">5.5</span> Temperance</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="other/images/Temperance.jpg" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="questions-and-answers" class="level3" data-number="5.5.1"><h3 data-number="5.5.1" class="anchored" data-anchor-id="questions-and-answers">
+<span class="header-section-number">5.5.1</span> Questions and Answers</h3>
+<section id="what-is-the-probability-that-the-next-adult-male-we-meet-will-be-taller-than-180-cm" class="level4" data-number="5.5.1.1"><h4 data-number="5.5.1.1" class="anchored" data-anchor-id="what-is-the-probability-that-the-next-adult-male-we-meet-will-be-taller-than-180-cm">
+<span class="header-section-number">5.5.1.1</span> What is the probability that the next adult male we meet will be taller than 180 cm?</h4>
+<p>We can simulate predicted values using the model and a new dataset containing only males. Since we’re working with a <strong>frequentist model</strong>, we’ll use <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> combined with the model’s residual standard deviation to simulate individual variation.</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Simulate predictions for a new male individual</span></span>
+<span><span class="va">n_sim</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
+<span><span class="va">new_male</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"Male"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the point prediction and residual sd</span></span>
+<span><span class="va">point_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fit_1</span>, new_data <span class="op">=</span> <span class="va">new_male</span><span class="op">)</span><span class="op">$</span><span class="va">.pred</span></span>
+<span><span class="va">resid_sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">fit_1</span><span class="op">)</span><span class="op">$</span><span class="va">sigma</span></span>
+<span></span>
+<span><span class="co"># Simulate 10,000 predicted male heights</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">simulated_heights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n_sim</span>, mean <span class="op">=</span> <span class="va">point_pred</span>, sd <span class="op">=</span> <span class="va">resid_sd</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Probability taller than 180 cm</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">simulated_heights</span> <span class="op">&gt;</span> <span class="fl">180</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1594</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Visualize simulated heights</span></span>
+<span><span class="fu">tibble</span><span class="op">(</span>height <span class="op">=</span> <span class="va">simulated_heights</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="fu">after_stat</span><span class="op">(</span><span class="va">density</span><span class="op">)</span><span class="op">)</span>, bins <span class="op">=</span> <span class="fl">60</span>, fill <span class="op">=</span> <span class="st">"#69b3a2"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">180</span>, color <span class="op">=</span> <span class="st">"red"</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Predicted Height for a Random Male"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"Probability of height &gt; 180 cm is shaded"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Height (cm)"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Density"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05-height_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This approach reflects <em>prediction</em> for a single individual, so it includes both uncertainty in the mean and individual variability. You should find that about <strong>30%</strong> of predicted men are taller than 180 cm in this model.</p>
+<hr></section><section id="what-is-the-probability-that-the-tallest-of-4-random-men-is-at-least-10-cm-taller-than-the-shortest" class="level4" data-number="5.5.1.2"><h4 data-number="5.5.1.2" class="anchored" data-anchor-id="what-is-the-probability-that-the-tallest-of-4-random-men-is-at-least-10-cm-taller-than-the-shortest">
+<span class="header-section-number">5.5.1.2</span> What is the probability that the tallest of 4 random men is at least 10 cm taller than the shortest?</h4>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Simulate 4 men per row across 10,000 simulations</span></span>
+<span><span class="va">sim_draws</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n_sim</span>, mean <span class="op">=</span> <span class="va">point_pred</span>, sd <span class="op">=</span> <span class="va">resid_sd</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">as_tibble</span><span class="op">(</span>.name_repair <span class="op">=</span> <span class="st">"unique"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">set_names</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"man"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stderr">
+<pre><code>New names:
+• `` -&gt; `...1`
+• `` -&gt; `...2`
+• `` -&gt; `...3`
+• `` -&gt; `...4`</code></pre>
+</div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Compute height range for each simulated group of 4</span></span>
+<span><span class="va">sim_draws</span> <span class="op">&lt;-</span> <span class="va">sim_draws</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>diff <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmax</a></span><span class="op">(</span><span class="va">man1</span>, <span class="va">man2</span>, <span class="va">man3</span>, <span class="va">man4</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmin</a></span><span class="op">(</span><span class="va">man1</span>, <span class="va">man2</span>, <span class="va">man3</span>, <span class="va">man4</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Proportion of groups with a range &gt; 10 cm</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">sim_draws</span><span class="op">$</span><span class="va">diff</span> <span class="op">&gt;</span> <span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6088</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Plot the distribution of height differences</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">sim_draws</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">diff</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="fu">after_stat</span><span class="op">(</span><span class="va">density</span><span class="op">)</span><span class="op">)</span>, bins <span class="op">=</span> <span class="fl">50</span>, fill <span class="op">=</span> <span class="st">"#77aadd"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">10</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Height Difference Between Tallest and Shortest in Group of 4"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"Simulated from model predictions"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Height Difference (cm)"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Density"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05-height_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Expect around <strong>70–80%</strong> of the groups to have a height range over 10 cm.</p>
+<hr></section><section id="what-is-the-posterior-distribution-of-the-3rd-tallest-among-the-next-100-men" class="level4" data-number="5.5.1.3"><h4 data-number="5.5.1.3" class="anchored" data-anchor-id="what-is-the-posterior-distribution-of-the-3rd-tallest-among-the-next-100-men">
+<span class="header-section-number">5.5.1.3</span> What is the posterior distribution of the 3rd tallest among the next 100 men?</h4>
+<p>This is a more extreme version of the same simulation idea:</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Simulate 10,000 groups of 100 heights each</span></span>
+<span><span class="va">third_tallest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="op">{</span></span>
+<span>  <span class="va">sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, mean <span class="op">=</span> <span class="va">point_pred</span>, sd <span class="op">=</span> <span class="va">resid_sd</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">sample</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>  <span class="co"># 3rd tallest</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot</span></span>
+<span><span class="fu">tibble</span><span class="op">(</span><span class="va">third_tallest</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">third_tallest</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="fu">after_stat</span><span class="op">(</span><span class="va">density</span><span class="op">)</span><span class="op">)</span>, bins <span class="op">=</span> <span class="fl">60</span>, fill <span class="op">=</span> <span class="st">"#e38b75"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Simulated Distribution of the 3rd Tallest of 100 Men"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"Based on predicted male heights"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Height (cm)"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Density"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05-height_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr></section></section><section id="humility" class="level3" data-number="5.5.2"><h3 data-number="5.5.2" class="anchored" data-anchor-id="humility">
+<span class="header-section-number">5.5.2</span> Humility</h3>
+<p>Even though our model lets us answer complex questions, we must proceed with humility. Our predictions are only as good as the assumptions that underlie them:</p>
+<ul>
+<li>Is U.S. height data from 2010 still valid for our question today?</li>
+<li>Do our residuals truly follow a normal distribution?</li>
+<li>Are the relationships stable across populations and time?</li>
+</ul>
+<p><strong>Tempered judgment</strong> reminds us that while models can guide decisions, they should not dictate them. There is no perfect forecast — only informed, cautious inference.</p>
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./models.html" class="pagination-link" aria-label="Models">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Models</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./three-parameters-causal.html" class="pagination-link" aria-label="Three Parameters: Causal">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Three Parameters: Causal</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/PPBDS/primer/edit/main/05-height.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
