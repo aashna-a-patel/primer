@@ -1,0 +1,2934 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>4&nbsp; Models – Preceptor's Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05-height.html" rel="next">
+<link href="./03-beads.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d3c9390091c69a50683db05bc45f20d8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-elections.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Models</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Preceptor’s Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/PPBDS/primer/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Preceptor-s-Primer-for-Bayesian-Data-Science--Using-the-Cardinal-Virtues-for-Inference.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Preceptor-s-Primer-for-Bayesian-Data-Science--Using-the-Cardinal-Virtues-for-Inference.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+</div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preamble.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preamble</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting-started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting Started</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-causal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Rubin Causal Model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-sat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-beads.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-elections.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-height.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Height</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-immigration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Three Parameters: Causal</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./set-up.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Set Up for Working on PPBDS Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./style-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Style Guide</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#wisdom" id="toc-wisdom" class="nav-link active" data-scroll-target="#wisdom"><span class="header-section-number">4.1</span> Wisdom</a>
+  <ul class="collapse">
+<li><a href="#preceptor-table" id="toc-preceptor-table" class="nav-link" data-scroll-target="#preceptor-table"><span class="header-section-number">4.1.1</span> Preceptor Table</a></li>
+  <li><a href="#eda" id="toc-eda" class="nav-link" data-scroll-target="#eda"><span class="header-section-number">4.1.2</span> EDA</a></li>
+  <li><a href="#validity" id="toc-validity" class="nav-link" data-scroll-target="#validity"><span class="header-section-number">4.1.3</span> Validity</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#justice" id="toc-justice" class="nav-link" data-scroll-target="#justice"><span class="header-section-number">4.2</span> Justice</a>
+  <ul class="collapse">
+<li><a href="#population-table" id="toc-population-table" class="nav-link" data-scroll-target="#population-table"><span class="header-section-number">4.2.1</span> Population Table</a></li>
+  <li><a href="#stability" id="toc-stability" class="nav-link" data-scroll-target="#stability"><span class="header-section-number">4.2.2</span> Stability</a></li>
+  <li><a href="#representativeness" id="toc-representativeness" class="nav-link" data-scroll-target="#representativeness"><span class="header-section-number">4.2.3</span> Representativeness</a></li>
+  <li><a href="#unconfoundedness" id="toc-unconfoundedness" class="nav-link" data-scroll-target="#unconfoundedness"><span class="header-section-number">4.2.4</span> Unconfoundedness</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#courage" id="toc-courage" class="nav-link" data-scroll-target="#courage"><span class="header-section-number">4.3</span> Courage</a>
+  <ul class="collapse">
+<li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><span class="header-section-number">4.3.1</span> Models</a></li>
+  <li><a href="#tests" id="toc-tests" class="nav-link" data-scroll-target="#tests"><span class="header-section-number">4.3.2</span> Tests</a></li>
+  <li><a href="#data-generating-mechanism" id="toc-data-generating-mechanism" class="nav-link" data-scroll-target="#data-generating-mechanism"><span class="header-section-number">4.3.3</span> Data Generating Mechanism</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#temperance" id="toc-temperance" class="nav-link" data-scroll-target="#temperance"><span class="header-section-number">4.4</span> Temperance</a>
+  <ul class="collapse">
+<li><a href="#questions-and-answers" id="toc-questions-and-answers" class="nav-link" data-scroll-target="#questions-and-answers"><span class="header-section-number">4.4.1</span> Questions and Answers</a></li>
+  <li><a href="#humility" id="toc-humility" class="nav-link" data-scroll-target="#humility"><span class="header-section-number">4.4.2</span> Humility</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/PPBDS/primer/edit/main/04-elections.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="sec-models" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Models</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><!-- What should the Question for this chapter be? And, if we start by keeping the simple \rho of Biden support, should we add another question, like the odds of two people both being Biden supporters. One problem with using (just) \rho is that we already did that the last chapter with the beads. This is too repetitive. Counter-argument is that all of this material is so new that it can only help students to go through it all again, especially in a case with much more substantive issues to deal with in evaluating the assumptions. Also, it is not obvious how to calculate the uncertainty associated with the two voters odds problem?  --><p>In <a href="02-sat.html" class="quarto-xref"><span>Chapter 2</span></a>, we learned how to do inference. We created a joint distribution of the models under consideration and the data which might be observed. Once we observed the data, we went from the joint distribution to the conditional distribution of possible models given the data which we did, in fact, observe. That conditional distribution, suitably normalized, was our posterior probability distribution over the space of possible models. With that distribution, we can answer any question we might (reasonably) ask.</p>
+<!-- Need a gif here. Like Hunger Games in Sampling chapter. -->
+<p><em>But what a pain in the ass that whole process was!</em> Do professionals actually go through all those steps every time they work on a data science problem? No! That would be absurd. Instead, professionals use standard tools which, in an automated fashion, take care of those steps, taking us directly from assumptions and data to the posterior:</p>
+<p><span class="math display">\[\text{Prob}(\text{models} | \text{data} = \text{data we observed})\]</span></p>
+<p>Even then, however, the relative likelihood of different models is not that important. Models are invisible, mental entities with no more physical presence than unicorns or leprechauns. In the world itself, we make and test predictions. <em>People with better models make better predictions. That is what matters.</em></p>
+<p>In <a href="03-beads.html" class="quarto-xref"><span>Chapter 3</span></a>, we learned about sampling, the process of gathering data to answer our questions. In this chapter, we will learn about constructing <em>models</em>, creating the data generating mechanism (DGM) which we will use to answer our questions.</p>
+<p>We always use the Cardinal Virtues. Wisdom helps us to clarify the questions with which we begin. We build the Preceptor Table which, if no data were missing, would allow us to answer the question. We check for validity. Justice creates the Population Table and examines the assumptions of stability, representativeness, and unconfoundedness. With Courage, we create a data generating mechanism (DGM). Temperance helps us to use that DGM to answer the questions with which we began.</p>
+<p>As (almost) always, we start by loading the <strong>tidyverse</strong> package.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In <a href="03-beads.html" class="quarto-xref"><span>Chapter 3</span></a>, we estimated the proportion, <span class="math inline">\(\rho\)</span>, of red beans in an urn. In the real world, of course, we never mess with urns. But we are often interested in unknown proportions. For example, what proportion of US citizens support specific political candidates. Imagine that it is March 15, 2024 and we want to know <span class="math inline">\(\rho\)</span>, the percentage of people who will vote for President Joe Biden in the 2024 presidential election. <strong>How many beads are for Biden?</strong></p>
+<p>Use the Cardinal Virtues to guide your thinking.</p>
+<section id="wisdom" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="wisdom">
+<span class="header-section-number">4.1</span> Wisdom</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="other/images/Wisdom.jpg" class="img-fluid figure-img" width="1280"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Wisdom requires the creation of a Preceptor Table, an examination of our data, and a determination, using the concept of “validity,” as to whether or not we can (reasonably!) assume that the two come from the same <em>population</em>. We begin with a question:</p>
+<blockquote class="blockquote">
+<p><em>What proportion of all votes will be cast for Joe Biden in the 2024 election?</em></p>
+</blockquote>
+<p>For the purpose of this question, assume that it is April, 7 months before the election.</p>
+<section id="preceptor-table" class="level3" data-number="4.1.1"><h3 data-number="4.1.1" class="anchored" data-anchor-id="preceptor-table">
+<span class="header-section-number">4.1.1</span> Preceptor Table</h3>
+<p>A Preceptor Table is a table with rows and columns, such that, if no data is missing, we can easily answer our questions.</p>
+<p><em>Units</em>: The units are individual voters. Note that this is not all American adults or even all registered voters. To answer our question, we only need information about actual voters. Any other rows would be superfluous.</p>
+<p><em>Outcome</em>: The outcome is the candidate for whom the vote was cast. But, looking at the question, this formulation is too broad. We don’t actually need to know the name of the candidate. We just need to know if the vote was cast for Biden or not. The name of the candidate, if it was not Biden, is irrelevant to our question.</p>
+<p><em>Treatment</em>: There is no treatment.</p>
+<p><em>Causal or predictive model</em>: This is clearly a predictive model since there is only one outcome for each person: their vote. It would be a causal model if we were considering a treatment which might change the vote of person <span class="math inline">\(i\)</span> from one candidate to another. A causal model would require two</p>
+<p><em>Covariates</em>: There are no covariates. If the question referred to who will win the election, then we would at least have to add a column for state of residence in order to tabulate electoral votes.</p>
+<p><em>Moment in Time</em>: The moment in time is just after Election Day 2024.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="wnkrbxurxz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wnkrbxurxz table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#wnkrbxurxz thead, #wnkrbxurxz tbody, #wnkrbxurxz tfoot, #wnkrbxurxz tr, #wnkrbxurxz td, #wnkrbxurxz th {
+  border-style: none;
+}
+
+#wnkrbxurxz p {
+  margin: 0;
+  padding: 0;
+}
+
+#wnkrbxurxz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#wnkrbxurxz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#wnkrbxurxz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#wnkrbxurxz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#wnkrbxurxz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wnkrbxurxz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wnkrbxurxz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wnkrbxurxz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#wnkrbxurxz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#wnkrbxurxz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#wnkrbxurxz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#wnkrbxurxz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#wnkrbxurxz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#wnkrbxurxz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#wnkrbxurxz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wnkrbxurxz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#wnkrbxurxz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#wnkrbxurxz .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#wnkrbxurxz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wnkrbxurxz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#wnkrbxurxz .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#wnkrbxurxz .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#wnkrbxurxz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wnkrbxurxz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#wnkrbxurxz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#wnkrbxurxz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wnkrbxurxz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wnkrbxurxz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#wnkrbxurxz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wnkrbxurxz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#wnkrbxurxz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wnkrbxurxz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wnkrbxurxz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wnkrbxurxz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wnkrbxurxz .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wnkrbxurxz .gt_left {
+  text-align: left;
+}
+
+#wnkrbxurxz .gt_center {
+  text-align: center;
+}
+
+#wnkrbxurxz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#wnkrbxurxz .gt_font_normal {
+  font-weight: normal;
+}
+
+#wnkrbxurxz .gt_font_bold {
+  font-weight: bold;
+}
+
+#wnkrbxurxz .gt_font_italic {
+  font-style: italic;
+}
+
+#wnkrbxurxz .gt_super {
+  font-size: 65%;
+}
+
+#wnkrbxurxz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#wnkrbxurxz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#wnkrbxurxz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#wnkrbxurxz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#wnkrbxurxz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#wnkrbxurxz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#wnkrbxurxz .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#wnkrbxurxz .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#wnkrbxurxz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border">Preceptor Table</th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="voter_ID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Voter ID</th>
+<th id="biden" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Voted for Biden</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="voter_ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">1</td>
+<td class="gt_row gt_center" headers="biden">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="voter_ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">2</td>
+<td class="gt_row gt_center" headers="biden">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="voter_ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">...</td>
+<td class="gt_row gt_center" headers="biden">...</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="voter_ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">200</td>
+<td class="gt_row gt_center" headers="biden">1</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="voter_ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">201</td>
+<td class="gt_row gt_center" headers="biden">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="voter_ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">...</td>
+<td class="gt_row gt_center" headers="biden">...</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="voter_ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">2078</td>
+<td class="gt_row gt_center" headers="biden">1</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="voter_ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">2079</td>
+<td class="gt_row gt_center" headers="biden">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="voter_ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">...</td>
+<td class="gt_row gt_center" headers="biden">...</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Once we have all the information in the Preceptor Table, it is easy to calculate the proportion of all votes which were cast for Biden.</p>
+<p>Moreover, we could use the Preceptor Table to answer other related questions. For example, assume we wanted to know the odds that the next two people we meet, just after the election, both voted for Biden.</p>
+<p>With the data in the Preceptor Table, we could create a computer simulation which, for example, draws 1,000 pairs of voters at random from the table, checks to see if they both voted for Biden, and then report the percentage of the 1,000 which meet this criteria. Of course, we will need to construct such a simulation carefully. People don’t walk around at random! They walk with friends, and friends share the same politics more often than strangers do.</p>
+<p>The important point is that the Preceptor Table has the fewest rows and columns such that, if no data is missing, we can answer our question.</p>
+</section><section id="eda" class="level3" data-number="4.1.2"><h3 data-number="4.1.2" class="anchored" data-anchor-id="eda">
+<span class="header-section-number">4.1.2</span> EDA</h3>
+<p>The data we have come from a <a href="https://today.yougov.com/">YouGov</a> poll (<a href="https://github.com/PPBDS/primer/blob/master/sources/you-gov-2024-03-12.pdf">pdf</a>) of 1,559 US adult citizens, conducted March 10 - 12, 2024. There are many questions in the poll. For the purpose of answering our question, the most relevant one is:</p>
+<blockquote class="blockquote">
+<p>If an election for president were going to be held now and the Democratic nominee was oe Biden and the Republican nominee was Donald Trump, would you vote for…</p>
+</blockquote>
+<p>The allowed choice are “Joe Biden,” “Donald Trump,” “Other,” “Not Sure,” and “I would not vote.” 42% of those polled indicated Joe Biden. Although rounding makes it impossible to know for sure, we will assume that 655 of the 1,559 “US adult citizens” would vote for Biden. Our data looks like:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="bsklcxiada" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bsklcxiada table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#bsklcxiada thead, #bsklcxiada tbody, #bsklcxiada tfoot, #bsklcxiada tr, #bsklcxiada td, #bsklcxiada th {
+  border-style: none;
+}
+
+#bsklcxiada p {
+  margin: 0;
+  padding: 0;
+}
+
+#bsklcxiada .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bsklcxiada .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#bsklcxiada .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bsklcxiada .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bsklcxiada .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bsklcxiada .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bsklcxiada .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bsklcxiada .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bsklcxiada .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bsklcxiada .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bsklcxiada .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bsklcxiada .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bsklcxiada .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bsklcxiada .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#bsklcxiada .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bsklcxiada .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bsklcxiada .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bsklcxiada .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bsklcxiada .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bsklcxiada .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#bsklcxiada .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#bsklcxiada .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#bsklcxiada .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bsklcxiada .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#bsklcxiada .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#bsklcxiada .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bsklcxiada .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bsklcxiada .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bsklcxiada .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bsklcxiada .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bsklcxiada .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bsklcxiada .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bsklcxiada .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bsklcxiada .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bsklcxiada .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bsklcxiada .gt_left {
+  text-align: left;
+}
+
+#bsklcxiada .gt_center {
+  text-align: center;
+}
+
+#bsklcxiada .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bsklcxiada .gt_font_normal {
+  font-weight: normal;
+}
+
+#bsklcxiada .gt_font_bold {
+  font-weight: bold;
+}
+
+#bsklcxiada .gt_font_italic {
+  font-style: italic;
+}
+
+#bsklcxiada .gt_super {
+  font-size: 65%;
+}
+
+#bsklcxiada .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#bsklcxiada .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#bsklcxiada .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#bsklcxiada .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#bsklcxiada .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bsklcxiada .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bsklcxiada .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#bsklcxiada .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#bsklcxiada div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border">Polling Data</th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="poll_ID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Poll ID</th>
+<th id="biden" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Would Vote for Biden</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="poll_ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">1</td>
+<td class="gt_row gt_center" headers="biden">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="poll_ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">2</td>
+<td class="gt_row gt_center" headers="biden">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="poll_ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">...</td>
+<td class="gt_row gt_center" headers="biden">...</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="poll_ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">200</td>
+<td class="gt_row gt_center" headers="biden">1</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="poll_ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">201</td>
+<td class="gt_row gt_center" headers="biden">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="poll_ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">...</td>
+<td class="gt_row gt_center" headers="biden">...</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="poll_ID" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">1,559</td>
+<td class="gt_row gt_center" headers="biden">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>There are key differences between our data table and our Preceptor Table, despite their superficial similarities.</p>
+<ul>
+<li><p>Our Polling Data includes exactly 1,559 rows. We don’t know how many rows are in our Preceptor Table because we don’t know, today, how many people will vote in November 2024.</p></li>
+<li><p>The ID column is labeled “Voter ID” in the Preceptor Table and “Poll ID” in the Polling Data. In many ways, the ID doesn’t matter. The person labeled “2” in the first table, for example, has no necessary connection to the person labeled “2” in the second table. The numbers don’t mean anything. But, conceptually, having different labels helps to highlight the issue of sampling and concerns about <em>representativeness</em>, concerns which we will address under Justice.</p></li>
+<li><p>The variable labels differ. “Voted for Biden” is not the same thing as “Would Vote for Biden.” Indeed, the two columns represent very different things.</p></li>
+</ul></section><section id="validity" class="level3" data-number="4.1.3"><h3 data-number="4.1.3" class="anchored" data-anchor-id="validity">
+<span class="header-section-number">4.1.3</span> Validity</h3>
+<p><em>Validity</em> is the consistency, or lack thereof, in the columns of the data set and the corresponding columns in the Preceptor Table. In order to consider the two data sets to be drawn from the same population, the columns from one must have a <em>valid correspondence</em> with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the <em>Population Table</em>, which is the first step in Justice.</p>
+<p>Our key problem is that there is not a one-to-one correspondence between our data (which is about an <em>reported intention</em> to vote for Biden) and our Preceptor Table (which records an <em>actual</em> vote). What we tell other people we will do is often not what we actually do. Consider a voter who is embarrassed about her support for Biden. Perhaps she perceives the interviewer as a Republican and doesn’t care to admit to him, in March, her support for Biden. But, in November, in the privacy of the polling booth, she votes for Biden. In her case, the outcome from the data (what she told the pollster) did not have a <em>valid</em> correspondence with her behavior in the polling booth.</p>
+<p>When we “stack” our data on top of our Preceptor Table, we are assuming that intention is a <em>valid</em> measure of actual voting. There may be problem, as with our hypothetical example, but they are not numerous enough to matter.</p>
+<p>We conclude the Wisdom section by summarizing how we hope to use the data we have to answer the question we started with:</p>
+<blockquote class="blockquote">
+<p><em>Using data from a YouGov poll of 1,559 US adult citizens, conducted March 10 - 12, 2024, we seek to understand what proportion of voters will support Biden in the 2024 election.</em></p>
+</blockquote>
+</section></section><section id="justice" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="justice">
+<span class="header-section-number">4.2</span> Justice</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="other/images/Justice.jpg" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Justice</em> is the second <a href="https://en.wikipedia.org/wiki/Cardinal_virtues">Cardinal Virtue</a> in data science. Justice starts with the Population Table – the data we want to have, the data which we actually have, and all the other data from that same population. Each row of the Population Table is defined by a unique unit/time combination. We explore three key issues. First, does the relationship among the variables demonstrate <em>stability</em>, meaning is the model stable across different time periods? Second, are the rows associated with the data and, separately, the rows associated with the Preceptor Table <em>representative</em> of all the units from the population? Third, for causal models only, we consider <em>unconfoundedness</em>.</p>
+<section id="population-table" class="level3" data-number="4.2.1"><h3 data-number="4.2.1" class="anchored" data-anchor-id="population-table">
+<span class="header-section-number">4.2.1</span> Population Table</h3>
+<p>We use the <em>Population Table</em> to acknowledge the wider source from which we could have collected our data. It includes rows from three sources: the data for units we want to have (the Preceptor Table), the data for units which we have (our actual data), and the data for units we do not care about (the rest of the population, not included in the data or in the Preceptor Table). Consider:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="bksgubqfqt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bksgubqfqt table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#bksgubqfqt thead, #bksgubqfqt tbody, #bksgubqfqt tfoot, #bksgubqfqt tr, #bksgubqfqt td, #bksgubqfqt th {
+  border-style: none;
+}
+
+#bksgubqfqt p {
+  margin: 0;
+  padding: 0;
+}
+
+#bksgubqfqt .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bksgubqfqt .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#bksgubqfqt .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bksgubqfqt .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bksgubqfqt .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bksgubqfqt .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bksgubqfqt .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bksgubqfqt .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bksgubqfqt .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bksgubqfqt .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bksgubqfqt .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bksgubqfqt .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bksgubqfqt .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bksgubqfqt .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#bksgubqfqt .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bksgubqfqt .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bksgubqfqt .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bksgubqfqt .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bksgubqfqt .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bksgubqfqt .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#bksgubqfqt .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#bksgubqfqt .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#bksgubqfqt .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bksgubqfqt .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#bksgubqfqt .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#bksgubqfqt .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bksgubqfqt .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bksgubqfqt .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bksgubqfqt .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bksgubqfqt .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bksgubqfqt .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bksgubqfqt .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bksgubqfqt .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bksgubqfqt .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bksgubqfqt .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bksgubqfqt .gt_left {
+  text-align: left;
+}
+
+#bksgubqfqt .gt_center {
+  text-align: center;
+}
+
+#bksgubqfqt .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bksgubqfqt .gt_font_normal {
+  font-weight: normal;
+}
+
+#bksgubqfqt .gt_font_bold {
+  font-weight: bold;
+}
+
+#bksgubqfqt .gt_font_italic {
+  font-style: italic;
+}
+
+#bksgubqfqt .gt_super {
+  font-size: 65%;
+}
+
+#bksgubqfqt .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#bksgubqfqt .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#bksgubqfqt .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#bksgubqfqt .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#bksgubqfqt .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bksgubqfqt .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bksgubqfqt .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#bksgubqfqt .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#bksgubqfqt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
+<th id="source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="text-align: left; font-size: large; vertical-align: middle;" scope="col">Source</th>
+<th id="time" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Time</th>
+<th id="id" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">ID</th>
+<th id="biden" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Biden</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">February 2024</td>
+<td class="gt_row gt_center" headers="id">1</td>
+<td class="gt_row gt_center" headers="biden">?</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">February 2024</td>
+<td class="gt_row gt_center" headers="id">200</td>
+<td class="gt_row gt_center" headers="biden">?</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">February 2024</td>
+<td class="gt_row gt_center" headers="id">976</td>
+<td class="gt_row gt_center" headers="biden">?</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">…</td>
+<td class="gt_row gt_center" headers="id">…</td>
+<td class="gt_row gt_center" headers="biden">…</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Data</td>
+<td class="gt_row gt_center" headers="time">March 2024</td>
+<td class="gt_row gt_center" headers="id">1</td>
+<td class="gt_row gt_center" headers="biden">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Data</td>
+<td class="gt_row gt_center" headers="time">March 2024</td>
+<td class="gt_row gt_center" headers="id">200</td>
+<td class="gt_row gt_center" headers="biden">1</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Data</td>
+<td class="gt_row gt_center" headers="time">March 2024</td>
+<td class="gt_row gt_center" headers="id">…</td>
+<td class="gt_row gt_center" headers="biden">…</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Data</td>
+<td class="gt_row gt_center" headers="time">March 2024</td>
+<td class="gt_row gt_center" headers="id">1559</td>
+<td class="gt_row gt_center" headers="biden">1</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">…</td>
+<td class="gt_row gt_center" headers="id">…</td>
+<td class="gt_row gt_center" headers="biden">…</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">October 2024</td>
+<td class="gt_row gt_center" headers="id">1</td>
+<td class="gt_row gt_center" headers="biden">?</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">October 2024</td>
+<td class="gt_row gt_center" headers="id">200</td>
+<td class="gt_row gt_center" headers="biden">?</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">October 2024</td>
+<td class="gt_row gt_center" headers="id">2025</td>
+<td class="gt_row gt_center" headers="biden">?</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">…</td>
+<td class="gt_row gt_center" headers="id">…</td>
+<td class="gt_row gt_center" headers="biden">…</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Preceptor Table</td>
+<td class="gt_row gt_center" headers="time">November 2024</td>
+<td class="gt_row gt_center" headers="id">1</td>
+<td class="gt_row gt_center" headers="biden">1</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Preceptor Table</td>
+<td class="gt_row gt_center" headers="time">November 2024</td>
+<td class="gt_row gt_center" headers="id">200</td>
+<td class="gt_row gt_center" headers="biden">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">Preceptor Table</td>
+<td class="gt_row gt_center" headers="time">November 2024</td>
+<td class="gt_row gt_center" headers="id">2078</td>
+<td class="gt_row gt_center" headers="biden">1</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">…</td>
+<td class="gt_row gt_center" headers="id">…</td>
+<td class="gt_row gt_center" headers="biden">…</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">December 2024</td>
+<td class="gt_row gt_center" headers="id">1</td>
+<td class="gt_row gt_center" headers="biden">?</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">December 2024</td>
+<td class="gt_row gt_center" headers="id">200</td>
+<td class="gt_row gt_center" headers="biden">?</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000">…</td>
+<td class="gt_row gt_center" headers="time">December 2024</td>
+<td class="gt_row gt_center" headers="id">2300</td>
+<td class="gt_row gt_center" headers="biden">?</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Every row in a Population Table corresponds to a unit/time combination. This is different from the Preceptor Table and the data, in both of which each row is for a unit. The entire Preceptor Table and data each have a specific time associated with them, even if that moment corresponds to a few days or longer. Nothing in this imperfect world is ever instantaneous.</p>
+<p>A Population Table will usually have several types of columns: id, time, covariates, and outcome(s). There are no covariates in this simple example, but we will use them in later chapters.</p>
+<p>Now that we have created our Population Table, we can analyze the key assumptions of stability, representativeness and unconfoundedness.</p>
+</section><section id="stability" class="level3" data-number="4.2.2"><h3 data-number="4.2.2" class="anchored" data-anchor-id="stability">
+<span class="header-section-number">4.2.2</span> Stability</h3>
+<p><em>Stability</em> means that the relationship between the columns in the Population Table is the same for three categories of rows: the data, the Preceptor Table, and the larger population from which both are drawn.</p>
+<p>Our Population Table is so simple that stability is true almost automatically true. There is only one column! Stability might become important as we think about the actual process by which we might meet the two voters in our original question, but, in terms of the Population Table itself, there is no problem.</p>
+</section><section id="representativeness" class="level3" data-number="4.2.3"><h3 data-number="4.2.3" class="anchored" data-anchor-id="representativeness">
+<span class="header-section-number">4.2.3</span> Representativeness</h3>
+<p><em>Representativeness</em>, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows. The second is between our data and the other rows. Ideally, we would like both the Preceptor Table <em>and</em> our data to be random samples from the population. Sadly, this is almost never the case.</p>
+<p>The <em>sampling mechanism</em> is the technical term for the process by which some people were sampled and some were not. We hope that all members of the population have the same chance of being sampled, or else our data might be unrepresentative of the larger population. Another term for this would be having a “biased” sample. Almost all samples have some bias, but we must make a judgement call to see if the data we have is close enough to the data we want (i.e., the Preceptor Table) that we can consider both as coming from the same population.</p>
+<p>One concern might involve the process by which YouGov sampled potential voters in March. If that process were flawed, if the people it sampled were systematically different than the people it did not, then the assumption of representativeness would fail. Imagine that YouGov only polled residents in Washington DC. That would be bad, even if everyone polled answered truthfully. We would end up with data which was much more pro-Biden than the country as a whole.</p>
+<p>Representativeness might also be a problem with regard to the Preceptor Table, even if our data was perfectly representativeness of the US population. Recall that the set of voters is much smaller than the full set of all US adults. In fact, voters as a class are systematically different from all adults. They are richer, better educated and more knowledgeable about politics. To the extent that the Preceptor Table — which is only voters — is not representative of all adults, we might have a problem.</p>
+<p>The assumption of representativeness is <em>never</em> completely true. We can only hope/assume that it is true enough that the inferences we draw from our data can be roughly applied to our question. Let’s assume that is this case.</p>
+</section><section id="unconfoundedness" class="level3" data-number="4.2.4"><h3 data-number="4.2.4" class="anchored" data-anchor-id="unconfoundedness">
+<span class="header-section-number">4.2.4</span> Unconfoundedness</h3>
+<p><em>Unconfoundedness</em> means that the treatment assignment is independent of the potential outcomes, when we condition on pre-treatment covariates. This assumption is only relevant for causal models. We describe a model as “confounded” if this is not true. The easiest way to ensure unconfoundedness is to assign treatment randomly.</p>
+<p>Since this is a predictive model, we do not have to worry about unconfoundedness. There is no “treatment” which might be confounded with anything.</p>
+<blockquote class="blockquote">
+<p><em>Using data from a YouGov poll of 1,559 US adult citizens, conducted March 10 - 12, 2024, we seek to understand what proportion of voters will support Biden in the 2024 election. Biden’s popularity might change significantly over the course of the election campaign.</em></p>
+</blockquote>
+</section></section><section id="courage" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="courage">
+<span class="header-section-number">4.3</span> Courage</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="other/images/Courage.jpg" class="img-fluid figure-img" width="1024"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Justice verifies the Population Table. Courage creates a mathematical model which connects the outcome variable to the covariates, if any. Then, using code, we create a fitted model, including posterior probability distributions for all the unknown parameters.</p>
+<p>Given that the polling problem is conceptually similar to the beads-in-an-urn problem, it is useful to perform the same back-of-the-envelope calculation we did in <a href="03-beads.html" class="quarto-xref"><span>Chapter 3</span></a>. To do that, we first need to create the tibble:</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">poll_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>biden <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">655</span><span class="op">)</span>, </span>
+<span>                              <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">904</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span><span class="va">poll_data</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 1
+   biden
+   &lt;dbl&gt;
+ 1     0
+ 2     0
+ 3     0
+ 4     0
+ 5     1
+ 6     0
+ 7     1
+ 8     0
+ 9     0
+10     0</code></pre>
+</div>
+</div>
+<p>First, calculate the mean. This is our estimate of the center of the posterior distribution for <span class="math inline">\(\rho\)</span>, the unknown proportion of the voters who support Biden.</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">poll_data</span><span class="op">$</span><span class="va">biden</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4201411</code></pre>
+</div>
+</div>
+<p>42% of the sample support Biden. Second, calculate the standard error of this estimate, by taking the standard deviation of the data and dividing it by the square root of the number of observations.</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">poll_data</span><span class="op">$</span><span class="va">biden</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">poll_data</span><span class="op">$</span><span class="va">biden</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01250475</code></pre>
+</div>
+</div>
+<p>The standard error is about 1.25%. This suggests that a 95% confidence interval for the true value of <span class="math inline">\(\rho\)</span> would be:</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">poll_data</span><span class="op">$</span><span class="va">biden</span><span class="op">)</span> <span class="op">-</span> <span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">poll_data</span><span class="op">$</span><span class="va">biden</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">poll_data</span><span class="op">$</span><span class="va">biden</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">poll_data</span><span class="op">$</span><span class="va">biden</span><span class="op">)</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">poll_data</span><span class="op">$</span><span class="va">biden</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">poll_data</span><span class="op">$</span><span class="va">biden</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3951316 0.4451506</code></pre>
+</div>
+</div>
+<p>The margin of error, which is another term for two times the standard error, is about 2.5%. This is less than the value of 3.5% given in the pdf. The reason for the difference involves all the technical adjustments which YouGov needs to make to their estimate. We ignore those problems and so our value is probably too small.</p>
+<!-- DK: Discuss how sloppy we are with language. -->
+<p>The <em>data generating mechanism</em>, or DGM, is a mathematical formula which mimics the process by which the data comes to us. The DGM for sampling scenarios with only two possible values is called <em>Bernoulli</em>, usually denoted as:</p>
+<!-- DK: Should be y's and x's? -->
+<p><span class="math display">\[ biden_i  \sim Bernoulli(\rho) \]</span> Each voter <span class="math inline">\(i\)</span> might vote for Biden or vote for someone else. It is convenient to define the model in terms of whether or not the vote was for Biden. If the vote was for Biden, the value drawn is <code>1</code>, which is the standard way of representing <code>TRUE</code>. In other words, <span class="math inline">\(biden_i = 1\)</span> means that voter <span class="math inline">\(i\)</span> voted for Biden. Similarly, a vote for anyone else but Biden is indicated with <code>0</code>, meaning that it is <code>FALSE</code> that the the vote was for Biden. <span class="math inline">\(\rho\)</span> is the only parameter in a Bernoulli model. It is the probability that a <code>1</code>, instead of a <code>0</code>, is drawn. That is, <span class="math inline">\(\rho\)</span> is the probability of a Biden vote, which is the same thing as the proportion of all votes which were cast for Biden, assuming again that the sampling mechanism is not biased.</p>
+<p>We typical estimate the unknown parameter <span class="math inline">\(\rho\)</span> from the Bernoulli model by using a logit regression:</p>
+<p><span class="math display">\[
+\rho = \frac{e^{\beta_0}}{1 + e^{\beta_0}}
+\]</span></p>
+<p>There are generally two parts for a statistical model: <em>family</em> and <em>link function</em>. The family is the probability distribution which generates the randomness in our data. The link function is the mathematical formula which <em>links</em> our data to the unknown parameters in the probability distribution. We will be reviewing these concepts over and over again in the rest of the <em>Primer</em>, so don’t worry if things are a little unclear right now.</p>
+<!-- DK: Is the above correct? Could we explain it better? Maybe use multiple link functions in this chapter? Should we show the linear model math first? -->
+<section id="models" class="level3" data-number="4.3.1"><h3 data-number="4.3.1" class="anchored" data-anchor-id="models">
+<span class="header-section-number">4.3.1</span> Models</h3>
+<p>Load the <a href="https://paul-buerkner.github.io/brms/"><strong>brms</strong></a> package:</p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/paul-buerkner/brms">brms</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <strong>brms</strong> package provides a user-friendly interface to work with the statistical language <a href="https://mc-stan.org/">Stan</a>, the leading tool for Bayesian model building.</p>
+<section id="gaussian" class="level4" data-number="4.3.1.1"><h4 data-number="4.3.1.1" class="anchored" data-anchor-id="gaussian">
+<span class="header-section-number">4.3.1.1</span> Gaussian</h4>
+<p>The key function in the <strong>brms</strong> package is <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulbuerkner.com/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">biden</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>                data <span class="op">=</span> <span class="va">poll_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Compiling Stan program...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Start sampling</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
+Chain 1: 
+Chain 1: Gradient evaluation took 7.4e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.74 seconds.
+Chain 1: Adjust your expectations accordingly!
+Chain 1: 
+Chain 1: 
+Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 1: 
+Chain 1:  Elapsed Time: 0.106 seconds (Warm-up)
+Chain 1:                0.096 seconds (Sampling)
+Chain 1:                0.202 seconds (Total)
+Chain 1: 
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 2).
+Chain 2: 
+Chain 2: Gradient evaluation took 2.6e-05 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.26 seconds.
+Chain 2: Adjust your expectations accordingly!
+Chain 2: 
+Chain 2: 
+Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 2: 
+Chain 2:  Elapsed Time: 0.102 seconds (Warm-up)
+Chain 2:                0.109 seconds (Sampling)
+Chain 2:                0.211 seconds (Total)
+Chain 2: 
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 3).
+Chain 3: 
+Chain 3: Gradient evaluation took 2.8e-05 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.28 seconds.
+Chain 3: Adjust your expectations accordingly!
+Chain 3: 
+Chain 3: 
+Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 3: 
+Chain 3:  Elapsed Time: 0.105 seconds (Warm-up)
+Chain 3:                0.102 seconds (Sampling)
+Chain 3:                0.207 seconds (Total)
+Chain 3: 
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 4).
+Chain 4: 
+Chain 4: Gradient evaluation took 3.3e-05 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.33 seconds.
+Chain 4: Adjust your expectations accordingly!
+Chain 4: 
+Chain 4: 
+Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 4: 
+Chain 4:  Elapsed Time: 0.107 seconds (Warm-up)
+Chain 4:                0.109 seconds (Sampling)
+Chain 4:                0.216 seconds (Total)
+Chain 4: </code></pre>
+</div>
+</div>
+<p>Notes:</p>
+<ul>
+<li><p><code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code> produces a great deal of output, as you can see above. This is useful if there is some sort of problem. But, most of the time, we don’t care. So we suppress the output in the rest of the <em>Primer</em>, using <code>refresh = 0</code> and <code>silent = 2</code>.</p></li>
+<li><p>We almost always assign the result of a <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code> call to an object, as here. By convention, the name of that object begins with “fit” because it is a <strong>fit</strong>ted model object. This model was created quickly but larger models take longer. So, we assign the result to an object so we don’t need to recreate it.</p></li>
+<li><p>The first argument to <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code> is <code>formula</code>. This is provided using the R formula syntax in which the dependent variable, <code>red</code> is separated from the independent variables by a tilde: <code>~</code>. This is the standard approach in almost all R model estimating functions. In this case, the only independent variable is a constant, which is represented with a <code>1</code>.</p></li>
+<li><p>The second argument to <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code> is <code>data</code>, which is a tibble containing the data used to estimate the model parameters. The variables specified in the <code>formula</code> must match the variables in the tibble which is passed in, which is .</p></li>
+<li><p>Because the fitting process is random, if we run this code again we will get a (very slightly) different answer. In most applications, the differences are too small to matter. But, they are annoying! So, we use the <code>seed</code> argument so that your result will match ours.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulbuerkner.com/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">biden</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>                data <span class="op">=</span> <span class="va">poll_data</span>,</span>
+<span>                refresh <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>                silent <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>                seed <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!-- DK: Given the simple model we use first, maybe we can make the math above simpler first. -->
+<!-- DK: Need more details on the above! Maybe not use a family the first time, or a model?  -->
+<p>Print out the model object.</p>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: gaussian 
+  Links: mu = identity; sigma = identity 
+Formula: biden ~ 1 
+   Data: poll_data (Number of observations: 1559) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Regression Coefficients:
+          Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept     0.42      0.01     0.40     0.44 1.00     3949     2944
+
+Further Distributional Parameters:
+      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sigma     0.49      0.01     0.48     0.51 1.00     3816     2236
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<p>There are many details. We will take a first pass here, leaving out elements which we will return to in later chapters. Highlights:</p>
+<ul>
+<li><p>The “Family” is “gaussian,” which is the default value for the <code>family</code> argument in <code>brms()</code>. In the next example, we will provide the <code>family</code> argument explicitly. Gaussian is another term for the normal distribution. Using “gaussian” is almost certainly a mistake on our part, but “discovering” this mistake and then fixing it is a useful exercise.</p></li>
+<li><p>The “Links” are “identity” for both “mu” and “sigma.” Recall the the gaussian/normal distribution is specified as <span class="math inline">\(N(\mu, \sigma^2)\)</span> in which <span class="math inline">\(\mu\)</span>, or “mu,” is the parameter for the mean or center of the distribution and <span class="math inline">\(\sigma\)</span>, or “sigma,” is the parameter for the standard deviation or spread of the distribution.</p></li>
+</ul>
+<!-- DK: ? Identity links are ones in which the mathematical connection between the  --><ul>
+<li><p>The “Formula” is <code>biden ~ 1</code>, which is what we passed in to the <code>formula</code> argument when we called <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code>.</p></li>
+<li><p>The “Data” is <code>poll_data</code>, which is what we passed in to the <code>data</code> argument when we called <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code>. Note the reminder that there are 1,559 observations. Never hurts to check that the reported number of observations matches what you expect.</p></li>
+<li><p>Fitting Bayesian models is computationally complex. The information about “Draws,” and the values for “Rhat,” “Bulk_ESS,” and “Tail_ESS” refer to those complexities. The bottom message gives a basic explanation. Don’t worry about any of that now.</p></li>
+<li><p>The “Intercept” is the key part of the model. Because the family is (incorrectly!) Gaussian and the link function an identity, the actual model we are estimating looks like:</p></li>
+</ul>
+<p><span class="math display">\[ biden_i =  \mu + \epsilon_i \]</span></p>
+<p>with <span class="math inline">\(\epsilon_i \sim N(0, \sigma^2)\)</span>. <span class="math inline">\(y_i\)</span> is the height of male <span class="math inline">\(i\)</span>. <span class="math inline">\(\mu\)</span> is true proportion of Biden voters. <span class="math inline">\(\epsilon_i\)</span> is the “error term,” the difference between the vote of person <span class="math inline">\(i\)</span> and the true proportion of Biden voters. The obvious problem with this is that <span class="math inline">\(\mu\)</span>, also called the “Intercept,” is about 0.42. The value of <code>biden</code> is either <code>0</code> or <code>1</code>. So, the value of <span class="math inline">\(\epsilon\)</span> is either -0.42 or + 0.58. No other value is possible. But that makes no sense if <span class="math inline">\(\epsilon_i \sim N(0, \sigma^2)\)</span>! This will cause problems soon.</p>
+<ul>
+<li><p>Ignoring that Gaussian/Bernoulli issue for now, we have an “Intercept” (or <span class="math inline">\(\mu\)</span>) value of 0.42. Note the complexity involved in even this simple model. We have multiple ways of describing the same concept: the true proportion of Biden voters. First, we have <span class="math inline">\(\rho\)</span>, a mathematical symbol associated with Bernoulli models and to which we will return. Second, we have <code>1</code>, meaning the symbol in the formula: <code>biden ~ 1</code>. This is an “intercept only” model, one with no covariates. Third, we have <span class="math inline">\(\mu\)</span>, the standard symbol for the intercept in a intercept-only linear or Gaussian model. Fourth, we have the word “Intercept,” as in the printout from the fitted model object. In other words, <span class="math inline">\(\rho\)</span>, <span class="math inline">\(1\)</span>, <span class="math inline">\(\mu\)</span>, and Intercept all refer to the same thing!</p></li>
+<li><p>The “Est.Error” is, more or less, the same thing as the standard error of our 0.42 estimate for the intercept. The full value is 0.0123, which is very close to the value we calculated by hand above.</p></li>
+<li><p>The <strong>l</strong>ower and <strong>u</strong>pper bounds of the 95% <strong>c</strong>onfidence <strong>i</strong>nterval are indicated by “l-95% CI” and “u-95% CI.” The number also match, subject to rounding, our calculations. (We can’t use the by-hand calculations with more complex models, otherwise we would have no need for <strong>brms</strong>!)</p></li>
+<li><p>The “sigma” variable in the “Family Specific Parameters” section refers to out estimate of <span class="math inline">\(\sigma\)</span>, given the assumed truth of a gaussian error term. Since that assumption is clearly false, we won’t waste time interpreting the results here.</p></li>
+</ul>
+<p>Once we have a fitted model, we can use that model, along with the R packages <a href="https://mjskay.github.io/tidybayes/"><strong>tidybayes</strong></a> and <a href="https://mc-stan.org/bayesplot/"><strong>bayesplots</strong></a>, to answer various questions.</p>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mjskay.github.io/tidybayes/">tidybayes</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/bayesplot/">bayesplot</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!-- DK: At some point, we should deal with the unique theme of which bayesplot uses. I want a consistent theme throughout the book. -->
+<p>We can generate a posterior distribution for <span class="math inline">\(\rho\)</span> with:</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4,000 × 5
+# Groups:   .row [1]
+    .row .chain .iteration .draw .epred
+   &lt;int&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;
+ 1     1     NA         NA     1  0.439
+ 2     1     NA         NA     2  0.398
+ 3     1     NA         NA     3  0.404
+ 4     1     NA         NA     4  0.417
+ 5     1     NA         NA     5  0.427
+ 6     1     NA         NA     6  0.431
+ 7     1     NA         NA     7  0.426
+ 8     1     NA         NA     8  0.408
+ 9     1     NA         NA     9  0.402
+10     1     NA         NA    10  0.438
+# ℹ 3,990 more rows</code></pre>
+</div>
+</div>
+<p>The first argument to the key function, <code><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code>, is <code>newdata</code>. We often want to examine the behavior of the model with new data sets, data which was not used in model estimation. The object passed as <code>newdata</code> is generally a tibble, with a row corresponding to each set of values for the independet variables. In this case, we have an intercept-only model, which means that there are no independent variables, other than the intercept, which does not need to be explicitly passed in. So, <code>newdata</code> is a tibble with no variables and one row.</p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 0</code></pre>
+</div>
+</div>
+<p>The resulting tibble includes 4,000 rows, each of which is a draw from the posterior distribution of <span class="math inline">\(\rho\)</span>. (Recall that <span class="math inline">\(\rho\)</span> and <span class="math inline">\(\mu\)</span> refer to the same thing.) You can ignore that columns named <code>.row</code>, <code>.chain</code>, and <code>.iteration</code>. The <code>.draw</code> variable just keeps count of the draws. The key variable is <code>.epred</code>, which us a draw from the posterior distribution of <span class="math inline">\(\rho\)</span>. The “e” in <code>.epred</code> stands for expected value. Grahically, we have:</p>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.epred</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">count</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                   bins <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Posterior Probability Distribution of "</span>, <span class="va">rho</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>         subtitle <span class="op">=</span> <span class="st">"Distribution is centered at 42%"</span>,</span>
+<span>         x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Proportion, "</span>, <span class="va">rho</span>, <span class="st">", of Biden Voters"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>         y <span class="op">=</span> <span class="st">"Probability"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04-elections_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Even more useful than posteriors of the parameters in the model are predictions we can make with the model. The key function for exploring those predictions is <code><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws()</a></code>. This function behaves similarly to <code><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code>. In both cases, we need to provide the value for the <code>newdata</code> argument, generally a tibble with a column for all the variables used in the fitted model. Again, because this is an intercept-only model, there is no need for columns in the <code>newdata</code> tibble. No variables are used in <code>fit_gauss</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4,000 × 5
+# Groups:   .row [1]
+    .row .chain .iteration .draw .prediction
+   &lt;int&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt;       &lt;dbl&gt;
+ 1     1     NA         NA     1      -0.367
+ 2     1     NA         NA     2       0.754
+ 3     1     NA         NA     3       0.823
+ 4     1     NA         NA     4       1.50 
+ 5     1     NA         NA     5       0.502
+ 6     1     NA         NA     6      -0.320
+ 7     1     NA         NA     7       0.572
+ 8     1     NA         NA     8       0.948
+ 9     1     NA         NA     9       0.437
+10     1     NA         NA    10       0.255
+# ℹ 3,990 more rows</code></pre>
+</div>
+</div>
+<p>The columns which result are the same as with <code><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code> except that <code>.epred</code> is replaced with <code>.prediction</code>. (The reason that all the variable names have a leading <code>.</code> is that this convention makes it less likely, but not impossible, that they will conflict with any variable names in the <code>newdata</code> tibble.)</p>
+</section></section><section id="tests" class="level3" data-number="4.3.2"><h3 data-number="4.3.2" class="anchored" data-anchor-id="tests">
+<span class="header-section-number">4.3.2</span> Tests</h3>
+<p>A glance at the result shows the problem: <code>.prediction</code> takes on a variety of values. But that is impossible! By definition, the only possible values are 0/1. We must have made a mistake in specifying the model. Another way to see the model is to perform a “posterior predictive check,” a comparison of model predictions with your actual data. The <strong>bayesplot</strong> package includes the <code><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check()</a></code> function for that purpose.</p>
+<div class="cell">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">fit_gauss</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using 10 posterior draws for ppc type 'dens_overlay' by default.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04-elections_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math inline">\(y\)</span> is the original data. <span class="math inline">\(y_rep\)</span> is a replication of the data, using the <code>fit_gauss</code> model. In other words, we “pretend” that <code>fit_gauss</code> is the true model. We then create 10 versions of the output data, as created by <code>add_predictive_draws()</code>, each the same size are our original data, which is 1,559 observations in this case. We then graph both <span class="math inline">\(y\)</span> and the 10 versions of <span class="math inline">\(y_rep\)</span>.</p>
+<p>As the graphic makes clear, we have a serious problem. The data, meaning the variable <code>biden</code>, which is referred to as <span class="math inline">\(y\)</span> in the plot, is always either 0 or 1, hence the two spikes in the plot. <span class="math inline">\(y_rep\)</span>, on the other hand, is a continuous variable with a range of -0.8 to about 1.8. That is a contradiction! If our model were true, then the replicated values — the posterior predictions — would look a lot like our original data.</p>
+<p>Sadly, most usage of <code><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check()</a></code> does not produce such a clear cut conclusion. We need to decide if <span class="math inline">\(y\)</span> and <span class="math inline">\(y_rep\)</span> are “close enough” that our model can be used as if it were true.</p>
+<section id="bernoulli" class="level4" data-number="4.3.2.1"><h4 data-number="4.3.2.1" class="anchored" data-anchor-id="bernoulli">
+<span class="header-section-number">4.3.2.1</span> Bernoulli</h4>
+<p>We have discovered that our initial assumption about the correct mathematical formula for the data generating mechanism was mistaken. Instead of a gaussion (or Normal) probability model, we should use a Bernoulli model. We must modify our call to <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code> as follows:</p>
+<div class="cell">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_bern</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paulbuerkner.com/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">biden</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>                data <span class="op">=</span> <span class="va">poll_data</span>,</span>
+<span>                family <span class="op">=</span> <span class="fu"><a href="https://paulbuerkner.com/brms/reference/brmsfamily.html">bernoulli</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                refresh <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>                silent <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>                seed <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This call to <code><a href="https://paulbuerkner.com/brms/reference/brm.html">brm()</a></code> is the same as the previous one, except that we have specified the value of the <code>family</code> argument as <code><a href="https://paulbuerkner.com/brms/reference/brmsfamily.html">bernoulli()</a></code>. (Note that we can give just the name of the family, which is itself a function, or include the parentheses as in <code><a href="https://paulbuerkner.com/brms/reference/brmsfamily.html">bernoulli()</a></code>. The results are the same.) Recall that the default value of <code>family</code> is <code><a href="https://rdrr.io/r/stats/family.html">gaussian()</a></code> or, equivalently, <code>guassian</code>. In a Bernoulli data generating mechanism, we have:</p>
+<p><span class="math display">\[ biden_i  \sim Bernoulli(\rho) \]</span></p>
+<p>Each voter <span class="math inline">\(i\)</span> which we sample either supports Biden or they do not. If person <span class="math inline">\(i\)</span> supports Biden, the value drawn is <code>1</code>, which is the standard way of representing <code>TRUE</code>. In other words, <span class="math inline">\(biden_i = 1\)</span> means that person <span class="math inline">\(i\)</span> supports Biden. Similarly, a person not supporting Biden is indicated with <code>0</code>, meaning that it is <code>FALSE</code> that the person <span class="math inline">\(i\)</span> supports Biden. <span class="math inline">\(\rho\)</span> is the only parameter in a Bernoulli model. It is the probability that a <code>1</code>, instead of a <code>0</code>, is drawn. That is, <span class="math inline">\(\rho\)</span> is the probability that a person supports Biden or, equivalently, the proportion of all voters who support Biden.</p>
+<p>Consider the fitted object:</p>
+<div class="cell">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_bern</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: bernoulli 
+  Links: mu = logit 
+Formula: biden ~ 1 
+   Data: poll_data (Number of observations: 1559) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Regression Coefficients:
+          Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept    -0.32      0.05    -0.42    -0.22 1.00     1451     1785
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<p>The output is, of course, very similar to that for <code>fit_gauss</code>. The “Family” is “bernoulli” rather than “gaussian.” The “Links” are “mu = logit” instead of “mu = identity.” There is no link for “sigma” because a Bernoulli model has only one parameter. The “Formula,” “Data,” and “Draws” are the same as before. In order to interpret the Intercept value of -0.32, we need to revisit the concept of a link function.</p>
+<p>Via my friend Claude, we have:</p>
+<blockquote class="blockquote">
+<p>In statistical modeling, a link function is a mathematical function that relates the linear predictor (the linear combination of the predictors and their coefficients) to the expected value of the response variable. The link function is a key component of generalized linear models (GLMs) and is used to account for the relationship between the predictors and the response variable when the response variable follows a non-normal distribution or has a restricted range.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>The purpose of the link function is to transform the expected value of the response variable to a scale that is unbounded and continuous, allowing it to be modeled as a linear combination of the predictors. The choice of the link function depends on the distribution of the response variable and the assumptions made about the relationship between the predictors and the response.</p>
+</blockquote>
+<p>Don’t worry if this is difficult to understand, we will revisit in future chapters.</p>
+<p>The default link function for a Bernoulli model is logit, as in:</p>
+<p><span class="math display">\[
+\rho = \frac{e^{\beta_0}}{1 + e^{\beta_0}}
+\]</span> By definition, the parameter <span class="math inline">\(\rho\)</span> is only allowed to take values between 0 and 1. We want to constrain the model so that only these values are even possible. Using the Gaussian model was a bad choice because it allows for values anywhere from positive to negative infinity. The magic of the link function, as you can see, is that it can only ever produce a number close to zero, if <span class="math inline">\(\beta_0\)</span> is very small, or close to one, if <span class="math inline">\(\beta_0\)</span> is very large. In other words, the model structure (which is a “logit” function) “bakes in” the restrictions on <span class="math inline">\(\rho\)</span> from the very start. We call this a “link” function because it <em>links</em> the unknown parameters we are estimating (<span class="math inline">\(\beta_0\)</span> in this case) to the paramter(s) (just one parameter, <span class="math inline">\(\rho\)</span>, in this case, ) which are part of the data generating mechanism. Once we have <span class="math inline">\(\rho\)</span> (or, more precisely, the posterior distribution of <span class="math inline">\(\rho\)</span>) we no longer care about <span class="math inline">\(\beta_0\)</span>.</p>
+<p>We can now interpret the value of the Intercept (which is the same thing as <span class="math inline">\(\mu\)</span> in this case, but not the same thing as <span class="math inline">\(\rho\)</span>) as the value of <span class="math inline">\(\beta_0\)</span>. In fact, the most common mathematical symbol for the intercept of a statistical model is <span class="math inline">\(\beta_0\)</span>.</p>
+<!-- DK: Get each equation to appear on its own line. -->
+<p><span class="math display">\[
+\begin{eqnarray}
+\rho &amp;=&amp; \frac{e^{\beta_0}}{1 + e^{\beta_0}}\
+\rho &amp;=&amp; \frac{e^{-0.32}}{1 + e^{-0.32}}\
+\rho &amp;\approx&amp; 0.42
+\end{eqnarray}
+\]</span> <!-- DK: maybe replace the above with. But it doesn't work --></p>
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- \rho &= \frac{e^{\beta_0}}{1 + e^{\beta_0}}\ -->
+<!-- \rho &= \frac{e^{-0.7}}{1 + e^{-0.7}}\ -->
+<!-- \rho &\approx 0.33 -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+<!-- Maybe we need amsmath package? -->
+<p>0.42 is the same number we calculated by hand and the same result when we used <code>family = gaussian()</code>. We can calculate the values for the upper and lower 95% confidence intervals by plugging -0.22 and -0.42 into the same formula.</p>
+<p>We can create the entire posterior distribution for <span class="math inline">\(\rho\)</span> using similar code as before:</p>
+<div class="cell">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_bern</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.epred</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">count</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                   bins <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Posterior Probability Distribution of "</span>, <span class="va">rho</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>         subtitle <span class="op">=</span> <span class="st">"Distribution is centered at 42%"</span>,</span>
+<span>         x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Proportion, "</span>, <span class="va">rho</span>, <span class="st">", of Biden Voters"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>         y <span class="op">=</span> <span class="st">"Probability"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04-elections_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If both <code>fit_gauss</code> and <code>fit_bern</code> produce the same posterior distribution for <span class="math inline">\(\rho\)</span>, then who cares which one we use? The answer is that <code>fit_bern</code> produces reasonable posterior predictions:</p>
+<div class="cell">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_bern</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_predicted_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4,000 × 5
+# Groups:   .row [1]
+    .row .chain .iteration .draw .prediction
+   &lt;int&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt;       &lt;int&gt;
+ 1     1     NA         NA     1           1
+ 2     1     NA         NA     2           1
+ 3     1     NA         NA     3           0
+ 4     1     NA         NA     4           1
+ 5     1     NA         NA     5           1
+ 6     1     NA         NA     6           1
+ 7     1     NA         NA     7           1
+ 8     1     NA         NA     8           1
+ 9     1     NA         NA     9           0
+10     1     NA         NA    10           1
+# ℹ 3,990 more rows</code></pre>
+</div>
+</div>
+<p>All the values of <code>.prediction</code> are either zero or one, as we expect. Consider:</p>
+<div class="cell">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">fit_bern</span>, type <span class="op">=</span> <span class="st">"bars"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using 10 posterior draws for ppc type 'bars' by default.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04-elections_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Using <code>type = "bars"</code> is a good choice for <code><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check()</a></code> when <code>family</code> is <code><a href="https://paulbuerkner.com/brms/reference/brmsfamily.html">bernoulli()</a></code>. Note how the 10 replications of <span class="math inline">\(y_rep\)</span> are indistinguishable from the true output values <span class="math inline">\(y\)</span>. A good model produces replications, sometimes termed “fake data,” which is indistinguishable for the actual data.</p>
+</section></section><section id="data-generating-mechanism" class="level3" data-number="4.3.3"><h3 data-number="4.3.3" class="anchored" data-anchor-id="data-generating-mechanism">
+<span class="header-section-number">4.3.3</span> Data Generating Mechanism</h3>
+<p>We now have our data generating mechansim:</p>
+<p><span class="math display">\[ biden_i  \sim Bernoulli(\rho = 0.42) \]</span></p>
+<!-- broom.mixed::tidy(fit_bern) produces ugly stuff here, so maybe don't introduce it now. -->
+<blockquote class="blockquote">
+<p><em>Using data from a YouGov poll of 1,559 US adult citizens, conducted March 10 - 12, 2024, we seek to understand what proportion of voters will support Biden in the 2024 election. Biden’s popularity might change significantly over the course of the election campaign. In the poll, Biden’s support was much less than 50%.</em></p>
+</blockquote>
+<p>We have not yet used our DGM to answer our question. But, the DGM itself, prior to us asking any specific question, includes all sorts of interesting information. It is sensible for us to add one aspect of that information to our summary of the work done so far.</p>
+</section></section><section id="temperance" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="temperance">
+<span class="header-section-number">4.4</span> Temperance</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="other/images/Temperance.jpg" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Courage produced the data generating mechanism. Temperance guides us in the use of the DGM — or the “model” — we have created to answer the questions with which we began. We create posteriors for the quantities of interest. We should be modest in the claims we make. The posteriors we create are never the “truth.” The assumptions we made to create the model are never perfect. Yet decisions made with flawed posteriors are almost always better than decisions made without them.</p>
+<section id="questions-and-answers" class="level3" data-number="4.4.1"><h3 data-number="4.4.1" class="anchored" data-anchor-id="questions-and-answers">
+<span class="header-section-number">4.4.1</span> Questions and Answers</h3>
+<p>Recall the question with which we began:</p>
+<blockquote class="blockquote">
+<p><em>What proportion of all votes will be cast for Joe Biden in the 2024 election?</em></p>
+</blockquote>
+<p>Let’s use <code>fit_bern</code> to answer this question with the help of <code><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_bern</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>.rows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    lower_95 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">.epred</span>, <span class="fl">0.025</span><span class="op">)</span>,</span>
+<span>    median <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">.epred</span>, <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>    upper_95 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">.epred</span>, <span class="fl">0.975</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+   .row lower_95 median upper_95
+  &lt;int&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+1     1    0.397  0.420    0.445</code></pre>
+</div>
+</div>
+<p>We can also refer to the figure we created above of the posterior probability distribution for <span class="math inline">\(\rho\)</span>. Of course, if we want (mostly) precise numbers, we need to do more than just stare at a graphic. We should calculate precise quantiles from the posterior distribution.</p>
+<blockquote class="blockquote">
+<p><em>Using data from a YouGov poll of 1,559 US adult citizens, conducted March 10 - 12, 2024, we seek to understand what proportion of voters will support Biden in the 2024 election. Biden’s popularity might change significantly over the course of the election campaign. In the poll, Biden’s support was much less than 50%. We estimate that Biden’s percentage of the vote in Election Day will be about 42%, plus or minus 2.5%.</em></p>
+</blockquote>
+</section><section id="humility" class="level3" data-number="4.4.2"><h3 data-number="4.4.2" class="anchored" data-anchor-id="humility">
+<span class="header-section-number">4.4.2</span> Humility</h3>
+<p><em>We can never know the truth.</em></p>
+<p>Recall all the ways in which are DGM is a poor description of reality. We assume <em>representativeness</em>. But that is false! We know that our sample is not perfectly representative of the people who will be voting in the election. No poll is ever perfect. The sort of people who answer polling questions are systematically different from those who do not. Professionals will do their best to “control” for those differences, a topic beyond the scope of this <em>Primer</em>, but those controls will never be perfect.</p>
+<p>We also assume <em>stability</em> in constructing our DGM. This is certainly false. The 0.42 estimate is highly unlikely to stay stable throughout the election campaign.</p>
+<p>Life is not a textbook. We first calculate the textbook answer, with all of its absurd assumptions. We then use that answer, along with our other knowledge, to produce the best possible estimate for our quantity of interest along with our uncertainty about that estimate.</p>
+<p>Our initial answer to the question has two major problems. First, it does not use information about other US presidential elections. Second, it is over-confident because it assumes that the model’s assumptions are correct.</p>
+<p>A better answer would be:</p>
+<blockquote class="blockquote">
+<p><em>Using data from a YouGov poll of 1,559 US adult citizens, conducted March 10 - 12, 2024, we seek to understand what proportion of voters will support Biden in the 2024 election. Biden’s popularity might change significantly over the course of the election campaign. In the poll, Biden’s support was much less than 50%. We estimate that Biden’s percentage of the vote in Election Day will be about 44%, plus or minus 5%.</em></p>
+</blockquote>
+<p>Wait!?! This is not what the model reported!</p>
+<p>Where did that 44% come from? The model estimated 42%. But, the problem, as always, is that our models are always flawed. They always assume things that are false. They always leave out lots of information. For example, no Democrat has won less than 43% of the votes for president since Walter Mondale in 1980. Is Biden really a worse candidate then every other Democrat in almost 50 years? Probably not.</p>
+<p>Does that history “prove” anything? No! History suggests. It does not construct proofs. Your job as a data scientist is not simply to <strong>read</strong> the numbers from your R Console. Your job is to <strong>combine</strong> those numbers with other sources of information and then offer your best estimate for the quantity of interest.</p>
+<p>Where did that “plus or minus 5%” come from? The 95% confidence (or uncertainty or whatever) intervals provided by <strong>brms</strong> run from about 39.7% to 44.5%. That would suggest a plus/minus range of somewhere between 2.3% and 2.5%.</p>
+<p>You always need to be prepared to give two ranges of uncertainty related to your quantity of interest. First, is the range provided by the model, the one which assumes that every aspect of the model is perfectly true. For this range to be correct, every assumption must be true.</p>
+<p>But, in addition to the computer output, you bring your experience to bear. You know that polls are volatile. You know that polling is hard. In general, the uncertainty interval provided by the model is a <strong>floor</strong> for the true uncertainty.</p>
+<p><em>The world is always more uncertain than our models would have us believe.</em></p>
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./03-beads.html" class="pagination-link" aria-label="Sampling">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sampling</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05-height.html" class="pagination-link" aria-label="Height">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Height</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/PPBDS/primer/edit/main/04-elections.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
